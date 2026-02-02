@@ -62,6 +62,13 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 
 ## Group Chats
 
+### Proactive status updates (rule)
+
+When working on a multi-epic task in a shared chat (e.g., Discord):
+- Post progress updates **without being asked**.
+- Update cadence: at minimum **(a)** when starting an epic, **(b)** when an epic ships (include commit hash + deploy status), **(c)** when blocked and what you’re waiting on.
+- Keep it short; don’t spam.
+
 ## Reliability Rule: model failures
 
 If a coding-agent run fails due to provider cooldown, timeout, or transient auth glitches, do **not** stop the overall workflow.
