@@ -1,0 +1,13 @@
+{
+  "run_id": "finasteride_study_v1_2026-02-03T19-50-36-222Z",
+  "request_log": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/logs/finasteride_study_v1_2026-02-03T19-50-36-222Z.kling.request.json",
+  "response_log": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/logs/finasteride_study_v1_2026-02-03T19-50-36-222Z.kling.response.json",
+  "stub": {
+    "stub": true,
+    "reason": "No KLING integration configured (USEAPI_TOKEN not set)",
+    "next_steps": [
+      "Upload generated mp4/mp3 to a public URL (S3/R2/Supabase Storage) and set HOOK_VIDEO_URL + VO_AUDIO_URL",
+      "Set USEAPI_TOKEN (or implement a direct Kling provider)"
+    ]
+  }
+}

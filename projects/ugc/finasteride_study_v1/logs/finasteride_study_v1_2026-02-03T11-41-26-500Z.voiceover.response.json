@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "bytes": 127521,
+  "saved_file": "assets/voiceover/vo_finasteride_study_v1_2026-02-03T11-41-26-500Z.mp3",
+  "request": {
+    "url": "https://api.elevenlabs.io/v1/text-to-speech/tD3yBvefPT0tKJzgLzPf",
+    "body": {
+      "text": "Quick update: I joined a 90-day finasteride study. I tracked shedding, photos, and side effects weekly. Here's what changed—and what didn't.",
+      "model_id": "eleven_monolingual_v1",
+      "voice_settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.8
+      }
+    }
+  }
+}

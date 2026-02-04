@@ -7,7 +7,7 @@ export async function GET(req: Request) {
   const next = searchParams.get("next") ?? "/tasks";
 
   if (code) {
-    const supabase = createSupabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     await supabase.auth.exchangeCodeForSession(code);
   }
 

@@ -1,0 +1,4 @@
+Okay, we will do API key for both Gemini and Grok, so tell me how to set that up. I'll prompt me to send you the API key.
+And the second thing is, when I say go through, I mean, you don't necessarily need to read all of them, but read like 15% of each article in terms of content to see like the writing style.
+That's one thing. And the second thing is, yeah, go through hooks, subject line, preview, images, anything of importance, like topics, anything of importance to like just general understanding.
+But then in terms of like reading, just go through the first 15 to 10% of the first article to just get the gist of like the writing style and all of that.

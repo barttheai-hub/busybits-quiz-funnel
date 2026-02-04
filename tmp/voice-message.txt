@@ -1,0 +1,33 @@
+I'll change the, because the script is still wrong, but basically in terms of services,
+we'll be using none of banana probe and you should already have credentials, API credentials
+for none of banana probe access, so you can access it. Then we will use cling to point six,
+and you need to check it cling actual cling site, allows for API access.
+So I can give you API access, then 11 loves for voice, and I need to decide which voice we're going to use,
+and again, you already have access to 11 loves to API, so I'll just need to give you the voice ID,
+when I decide on the voice, and then source to videos.
+And I'll just see which service we'll use to source to either for AI or any other API service,
+but again, it's going to be an API, and then potentially page in with the avatar,
+but probably not, probably for AI, you just see arts, it's going to be a source to cook video,
+then cling for avatar, lip syncing, and talking, and animating an image,
+and then we'll just do like none of the other image scene, and then animates it with cling,
+and generate voice for that scene with 11 loves.
+Now, the only thing is a post-production, like editing, and putting it all together,
+not in captions, not in sound effects, how can we do that?
+So I can give you API access to do all of that.
+Now, this is a task here, but you need to save to memory.
+This is one of the tasks, and you will save it into our dashboard, do we just build?
+You need to brainstorm on how to do all of this, how what AI access,
+as an API access, I can give you.
+Use Cloud Office to write August 4.5 to write any scripts,
+but I'll give you the script for now, like the screen writing,
+and then we'll decide on how to do the scripts in the future.
+But anyway, you need to do all of that brainstorm and come up with the plan,
+and then come back here.
+It needs to be something where I can give you API access for all of these things,
+and then you, I don't need to give you API access all the time.
+You just have that key save somewhere, either in a working file,
+in that ENV environment files, I don't know.
+Maybe we can create a file on this.
+So this is how you just see and you create that ENV file there,
+and it saved that as an environmental variable.
+But brainstorm on the whole setup.

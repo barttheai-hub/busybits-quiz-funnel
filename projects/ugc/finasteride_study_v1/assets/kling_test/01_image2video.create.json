@@ -1,0 +1,12 @@
+{
+  "code": 0,
+  "message": "SUCCEED",
+  "request_id": "75273de0-2c6b-48a6-9b6c-e0409d96eab7",
+  "data": {
+    "task_id": "847707378715459676",
+    "task_status": "submitted",
+    "task_info": {},
+    "created_at": 1770137707511,
+    "updated_at": 1770137707511
+  }
+}

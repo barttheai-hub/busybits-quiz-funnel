@@ -1,0 +1,9 @@
+{
+  "run_id": "finasteride_study_v1_2026-02-03T19-50-36-222Z",
+  "scriptText": "Quick update: I joined a 90-day finasteride study. I tracked shedding, photos, and side effects weekly. Here's what changed—and what didn't.",
+  "voiceId": "tD3yBvefPT0tKJzgLzPf",
+  "modelId": "eleven_monolingual_v1",
+  "request_log": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/logs/finasteride_study_v1_2026-02-03T19-50-36-222Z.voiceover.request.json",
+  "response_log": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/logs/finasteride_study_v1_2026-02-03T19-50-36-222Z.voiceover.response.json",
+  "audio_file": "assets/voiceover/vo_finasteride_study_v1_2026-02-03T19-50-36-222Z.mp3"
+}

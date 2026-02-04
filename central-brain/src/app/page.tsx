@@ -1,18 +1,11 @@
-import Link from "next/link";
+import { redirect } from "next/navigation";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-export default function Home() {
-  return (
-    <main style={{ padding: 24, fontFamily: "system-ui" }}>
-      <h1>Central Brain</h1>
-      <p>Source of truth + tasks (you vs me). MVP in progress.</p>
-      <ul>
-        <li>
-          <Link href="/login">Login</Link>
-        </li>
-        <li>
-          <Link href="/tasks">Tasks</Link>
-        </li>
-      </ul>
-    </main>
-  );
+export default async function Home() {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  redirect(session ? "/tasks" : "/login");
 }

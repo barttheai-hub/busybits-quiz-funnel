@@ -1,0 +1,11 @@
+{
+  "step": "kling_lipsync",
+  "input": {
+    "provider": "stub",
+    "notes": "Provide HOOK_VIDEO_URL and VO_AUDIO_URL (publicly accessible) or use an uploader to a CDN/bucket.",
+    "hook_video_url": null,
+    "vo_audio_url": null,
+    "mode": "audio_to_video",
+    "version": "2.6"
+  }
+}

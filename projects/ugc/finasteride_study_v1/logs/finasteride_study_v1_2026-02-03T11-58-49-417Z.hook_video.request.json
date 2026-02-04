@@ -1,0 +1,11 @@
+{
+  "step": "hook_video",
+  "endpoint": "https://fal.run/fal-ai/sora-2/text-to-video",
+  "input": {
+    "prompt": "Extreme close-up of a real finasteride prescription bottle on a bathroom counter, label readable. A male hand enters frame, picks it up, then quickly flicks it into a small trash can. Fast whip pan follows the motion. The bottle lands in the trash with a thud and the camera holds for 1 second. No talking, just room tone. Raw handheld iPhone video, realistic, slight shake, ungraded.",
+    "aspect_ratio": "9:16",
+    "duration": 5,
+    "resolution": "720p",
+    "delete_video": false
+  }
+}

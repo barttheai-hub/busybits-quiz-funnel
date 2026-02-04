@@ -1,0 +1,9 @@
+{
+  "step": "avatar_reference_pack",
+  "endpoint": "https://fal.run/fal-ai/nano-banana-pro",
+  "input": {
+    "prompt": "Photorealistic UGC iPhone selfie reference pack, same man in all images, male 32-38, visibly balding (receding hairline and thinning crown), normal average-looking guy, natural skin texture, slight under-eye circles, not model, not polished, plain t-shirt, warm indoor home background, handheld iPhone feel, ungraded, realistic. Avoid studio lighting, avoid perfect hair, avoid AI look.",
+    "num_images": 4,
+    "aspect_ratio": "1:1"
+  }
+}

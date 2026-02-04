@@ -1,0 +1,11 @@
+{
+  "step": "hook_video",
+  "endpoint": "https://fal.run/fal-ai/sora-2/text-to-video",
+  "input": {
+    "prompt": "Vertical UGC selfie video. A friendly man in his early 30s looks into the camera in a bathroom. He says: 'I joined a finasteride study for 90 days—here's what actually happened.' Natural lighting, slight handheld movement, realistic mouth movement, clean audio.",
+    "aspect_ratio": "9:16",
+    "duration": 4,
+    "resolution": "720p",
+    "delete_video": false
+  }
+}

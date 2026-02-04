@@ -1,0 +1,59 @@
+{
+  "run_id": "finasteride_study_v1_2026-02-03T19-50-36-222Z",
+  "project": "finasteride_study_v1",
+  "env_loaded": [
+    {
+      "path": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/.env",
+      "keys": 6
+    },
+    {
+      "path": "/Users/Ziga/Desktop/ugc-pipeline/.env",
+      "keys": 11
+    },
+    {
+      "path": "/Users/Ziga/.openclaw/workspace/central-brain/.env.local",
+      "keys": 4
+    }
+  ],
+  "steps": {
+    "avatar_reference_pack": {
+      "ok": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/avatar_reference_pack",
+      "count": 4
+    },
+    "hook_video": {
+      "ok": false,
+      "error": "Error: fal.run error 422 Unprocessable Entity",
+      "response": {
+        "detail": [
+          {
+            "loc": [
+              "body",
+              "duration"
+            ],
+            "msg": "unexpected value; permitted: 4, 8, 12",
+            "type": "value_error.const",
+            "ctx": {
+              "given": 5,
+              "permitted": [
+                4,
+                8,
+                12
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "voiceover": {
+      "ok": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/voiceover",
+      "audioFile": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/voiceover/vo_finasteride_study_v1_2026-02-03T19-50-36-222Z.mp3"
+    },
+    "kling_lipsync": {
+      "ok": false,
+      "stub": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/kling"
+    }
+  }
+}

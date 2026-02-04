@@ -1,0 +1,37 @@
+{
+  "run_id": "finasteride_study_v1_2026-02-03T12-09-17-206Z",
+  "project": "finasteride_study_v1",
+  "env_loaded": [
+    {
+      "path": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/.env",
+      "keys": 6
+    },
+    {
+      "path": "/Users/Ziga/Desktop/ugc-pipeline/.env",
+      "keys": 11
+    },
+    {
+      "path": "/Users/Ziga/.openclaw/workspace/central-brain/.env.local",
+      "keys": 4
+    }
+  ],
+  "steps": {
+    "avatar_reference_pack": {
+      "ok": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/avatar_reference_pack",
+      "count": 4
+    },
+    "hook_video": {
+      "ok": false,
+      "skipped": true
+    },
+    "voiceover": {
+      "ok": false,
+      "skipped": true
+    },
+    "kling_lipsync": {
+      "ok": false,
+      "skipped": true
+    }
+  }
+}

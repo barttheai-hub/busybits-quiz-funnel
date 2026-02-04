@@ -1,0 +1,53 @@
+{
+  "run_id": "finasteride_study_v1_2026-02-03T19-50-36-222Z",
+  "prompt": "Photorealistic UGC iPhone selfie reference pack, same man in all images, male 32-38, male pattern hair loss with noticeably sparse thinning hair across the top and crown (not fully bald), receding hairline, some hair remaining but clearly thinning, normal average-looking guy, natural skin texture, slight under-eye circles, not model, not polished, plain t-shirt, warm indoor home background, handheld iPhone feel, ungraded, realistic. Avoid studio lighting, avoid perfect hair, avoid AI look.",
+  "input": {
+    "prompt": "Photorealistic UGC iPhone selfie reference pack, same man in all images, male 32-38, male pattern hair loss with noticeably sparse thinning hair across the top and crown (not fully bald), receding hairline, some hair remaining but clearly thinning, normal average-looking guy, natural skin texture, slight under-eye circles, not model, not polished, plain t-shirt, warm indoor home background, handheld iPhone feel, ungraded, realistic. Avoid studio lighting, avoid perfect hair, avoid AI look.",
+    "num_images": 4,
+    "aspect_ratio": "1:1"
+  },
+  "request_log": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/logs/finasteride_study_v1_2026-02-03T19-50-36-222Z.avatar_reference_pack.request.json",
+  "response_log": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/logs/finasteride_study_v1_2026-02-03T19-50-36-222Z.avatar_reference_pack.response.json",
+  "downloaded": [
+    {
+      "url": "https://v3b.fal.media/files/b/0a8d0827/qxe5xs3gHyptkGyaYcYws_ewhvYUEs.png",
+      "content_type": "image/png",
+      "file_name": "qxe5xs3gHyptkGyaYcYws_ewhvYUEs.png",
+      "file_size": null,
+      "width": null,
+      "height": null,
+      "file": "assets/avatar_reference_pack/ref_01.png",
+      "bytes": 1867962
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0a8d0827/XqiCDGS7kCdbdGgMfbetB_8wrJuYOs.png",
+      "content_type": "image/png",
+      "file_name": "XqiCDGS7kCdbdGgMfbetB_8wrJuYOs.png",
+      "file_size": null,
+      "width": null,
+      "height": null,
+      "file": "assets/avatar_reference_pack/ref_02.png",
+      "bytes": 1538170
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0a8d0827/ckYaMz6Hi7_Fadd-fB6Tx_r8nno45D.png",
+      "content_type": "image/png",
+      "file_name": "ckYaMz6Hi7_Fadd-fB6Tx_r8nno45D.png",
+      "file_size": null,
+      "width": null,
+      "height": null,
+      "file": "assets/avatar_reference_pack/ref_03.png",
+      "bytes": 1494239
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0a8d0827/YB6q84pkPtdeq59n1iEF4_ElBzoAAI.png",
+      "content_type": "image/png",
+      "file_name": "YB6q84pkPtdeq59n1iEF4_ElBzoAAI.png",
+      "file_size": null,
+      "width": null,
+      "height": null,
+      "file": "assets/avatar_reference_pack/ref_04.png",
+      "bytes": 1563641
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "code": 0,
+  "message": "SUCCEED",
+  "request_id": "5ae928a1-3798-4f5f-b02d-ba50c9aba3e9",
+  "data": {
+    "session_id": "847708093043179602",
+    "face_data": [
+      {
+        "face_id": "0",
+        "face_image": "https://s16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/se/stream_lake_m2v_video_lip_precheck_v2/3fd60093-29de-44ca-bf39-62f3aa9f220e/0.jpg?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSkAHS39h4ve76t9VNxpmMdRZ9wR04U6hlKnhH2HyfsyEUpgrtBg53gkUupeKfBuwSowrepm_c9FnnxLyZKiFS_u_yVeCtuGzL2eHPNBgh7qDdMp-zi_fkR6y83c8G7h5wT8J10N34psF14rFfYvT72wZTUMbe7JkW0k9opEwTexTD2mT6cALjxZ_PIfzQ1i9_Eh4aEpPEPcBeYi2txRw_muMkC7_EaSIgOOZKgO7uXRy9ArWogLr4F5mriZJUAoDDBjgSDy7Z_O0oBTAB&x-kcdn-pid=112781&ksSecret=603218c9132f578b4919f24e280f3784&ksTime=69a9b61b",
+        "start_time": 0,
+        "end_time": 5300
+      },
+      {
+        "face_id": "1",
+        "face_image": "https://s16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/se/stream_lake_m2v_video_lip_precheck_v2/3fd60093-29de-44ca-bf39-62f3aa9f220e/1.jpg?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSkAEBKCfZumM5oMRf55oqzPTHYQz040R_M7e7sYMUEee3QJooj2Zyqqgql7Do0U0nJxQNKsKSdT6w_MeUUIgafHniCb8MkG730OsoQDFrL9PSJPjYnHqNJrVsuJK4K5ch0qLPDqQaun_M9czeAnHQ61QtFM1qIYXQWQWNxxwM0we0ACT2_JK9HPkiTv99B1SCPtIaEivQw0d2bbNADt_QQc1aqHm78iIgnPrvLAmjxBn8aqEKxK65IT7hsenhao7gHAXsgaE3nZooBTAB&x-kcdn-pid=112781&ksSecret=aeb366ab07542ec55960e73d2c0f29ee&ksTime=69a9b61b",
+        "start_time": 0,
+        "end_time": 4200
+      },
+      {
+        "face_id": "2",
+        "face_image": "https://s16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/se/stream_lake_m2v_video_lip_precheck_v2/3fd60093-29de-44ca-bf39-62f3aa9f220e/2.jpg?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSkAEUuxCGPxMHRVj1S1incRtV5L4tFb872TBl5Zc-tQlCe56eaCu4U7Gc-aE8Atz4sKVGP9eq6aY7ZbCw-pTgPdy1DZ-F2Hy-2KdOMIZuV6-FfuxKI6hGrW6YK_Y3xuuJP0ka-OkID7TuWB2WlxqLEJZ51Gjiu76S5Qnn2R-Rv5BdP5CSMyL7eFBdIYwQ11iNg3kaErHRIx9zeQhboH1dTpkm3grrAyIgtj9a90otM4QvMCDnX9Y0Yjz2TLNza-OLx6MZ-HsebtgoBTAB&x-kcdn-pid=112781&ksSecret=b7028729bbb7e468eaba6f5eba84c1d8&ksTime=69a9b61b",
+        "start_time": 0,
+        "end_time": 5300
+      },
+      {
+        "face_id": "3",
+        "face_image": "https://s16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/se/stream_lake_m2v_video_lip_precheck_v2/3fd60093-29de-44ca-bf39-62f3aa9f220e/3.jpg?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSkAENVdyYUJN-kaGuxDnbhlUtyG2tWmg4wwFZfCTvw3mD9GelWjtCh0fHMqRoCy5gV5spttWWYdMF0ABy6-olf-lN8hUhvMVtFTLg59jXRNuRmiF6Yu1Uip5KSX0vYdknfmsW5769eJO7BzKDY0dVP52v9Gj-hvP4DitV8FoaKnMcCScjhgPMmuiqwMZ_wzYbbPYaEiN_eM8zyWf7oVko5AclOAmMtSIg-3ybPs-1hWcuCyOVhwEblSXOZ8JLkHzMDxyMwhWfwdQoBTAB&x-kcdn-pid=112781&ksSecret=9dfc97ab88aa2c91f588b2d7899fdf60&ksTime=69a9b61b",
+        "start_time": 0,
+        "end_time": 5300
+      }
+    ],
+    "final_unit_deduction": "0.05"
+  }
+}

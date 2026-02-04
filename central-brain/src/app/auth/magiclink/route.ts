@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     return new NextResponse("Email not allowed.", { status: 403 });
   }
 
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
   const origin = new URL(req.url).origin;
 
   const { error } = await supabase.auth.signInWithOtp({

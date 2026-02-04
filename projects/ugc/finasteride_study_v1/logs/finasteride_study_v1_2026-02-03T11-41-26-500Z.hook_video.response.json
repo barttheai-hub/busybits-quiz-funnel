@@ -1,0 +1,30 @@
+{
+  "video": {
+    "url": "https://v3b.fal.media/files/b/0a8cfcb5/k6KwW4kvoQHs4IyG4qwqW_ccW4inpC.mp4",
+    "content_type": "video/mp4",
+    "file_name": "k6KwW4kvoQHs4IyG4qwqW_ccW4inpC.mp4",
+    "file_size": null,
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "duration": 4.1,
+    "num_frames": 120
+  },
+  "video_id": "video_6981df12f73c8191927e69e076d0b03c095b059322adf0fa",
+  "thumbnail": {
+    "url": "https://v3b.fal.media/files/b/0a8cfcba/-UtLKYyR5uMy8xOHRuxpx.webp",
+    "content_type": "image/webp",
+    "file_name": "-UtLKYyR5uMy8xOHRuxpx.webp",
+    "file_size": null,
+    "width": null,
+    "height": null
+  },
+  "spritesheet": {
+    "url": "https://v3b.fal.media/files/b/0a8cfcba/9i0kz_AFtsCZmZCJt4W-4.bin",
+    "content_type": "image/jpg",
+    "file_name": "9i0kz_AFtsCZmZCJt4W-4.bin",
+    "file_size": null,
+    "width": null,
+    "height": null
+  }
+}

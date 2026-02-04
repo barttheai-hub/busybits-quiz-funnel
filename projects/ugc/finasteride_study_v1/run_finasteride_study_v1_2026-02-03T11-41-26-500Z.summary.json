@@ -1,0 +1,48 @@
+{
+  "run_id": "finasteride_study_v1_2026-02-03T11-41-26-500Z",
+  "project": "finasteride_study_v1",
+  "env_loaded": [
+    {
+      "path": "/Users/Ziga/Desktop/ugc-pipeline/.env",
+      "keys": 11
+    },
+    {
+      "path": "/Users/Ziga/.openclaw/workspace/central-brain/.env.local",
+      "keys": 4
+    }
+  ],
+  "steps": {
+    "avatar_reference_pack": {
+      "ok": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/avatar_reference_pack",
+      "count": 4
+    },
+    "hook_video": {
+      "ok": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/hook_video",
+      "saved": {
+        "url": "https://v3b.fal.media/files/b/0a8cfcb5/k6KwW4kvoQHs4IyG4qwqW_ccW4inpC.mp4",
+        "content_type": "video/mp4",
+        "file_name": "k6KwW4kvoQHs4IyG4qwqW_ccW4inpC.mp4",
+        "file_size": null,
+        "width": 720,
+        "height": 1280,
+        "fps": 30,
+        "duration": 4.1,
+        "num_frames": 120,
+        "file": "assets/hook_video/hook_finasteride_study_v1_2026-02-03T11-41-26-500Z.mp4",
+        "bytes": 650265
+      }
+    },
+    "voiceover": {
+      "ok": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/voiceover",
+      "audioFile": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/voiceover/vo_finasteride_study_v1_2026-02-03T11-41-26-500Z.mp3"
+    },
+    "kling_lipsync": {
+      "ok": false,
+      "stub": true,
+      "outDir": "/Users/Ziga/.openclaw/workspace/projects/ugc/finasteride_study_v1/assets/kling"
+    }
+  }
+}

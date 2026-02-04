@@ -1,0 +1,29 @@
+{
+  "code": 0,
+  "message": "SUCCEED",
+  "request_id": "ce345b61-d131-48af-9ecc-975479fe0ef1",
+  "data": {
+    "task_id": "847708123883913309",
+    "task_status": "succeed",
+    "task_info": {
+      "parent_video": {
+        "id": "847707378795151453",
+        "url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/847606815617204274/VIDEO/20260204/a2f0beecad40ccd29a7750f2df1c1068-3ac3ee91-0d0c-4a20-8040-540c2626a804.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAEl6Cav1Ehvefkhl2So8jotzHSXNLFJwRWFmCD253Nz1fUI3qoQWncXIjc0Xbuz0bNKYi0_nH8gt4s4zw7WdMQ-TguohQQFis8yAoaREhnBD9K9hWXQb6r2E0qvRw4fyh1hQTrgWgrxbcOwg4pPWuMqqjOXJvCoJ74nyYzw4DkyMNMYjx7FYiY1hxdfd4Tfmi_SEIeBH2LbF5gyWg1M5jm0cgBuRTiflexlVvU1jV9GMBoS49Uq9aOrf5yDPqUQkY5LD-iDIiBEl8nAIO6Wuw4vxB_IuiDxw6uyumASke5ntkeG8SfjaSgFMAE&x-kcdn-pid=112781&ksSecret=58fc3051960338897ca2c38636b4e4d7&ksTime=69a9b5a6",
+        "duration": "5.041"
+      }
+    },
+    "task_result": {
+      "videos": [
+        {
+          "id": "847708123997159447",
+          "url": "https://v16-kling-fdl.klingai.com/bs2/upload-ylab-stunt-sgp/muse/847606815617204274/VIDEO/20260204/d727c1231c509c5f9bd208bfe0fa6b56-f704d0ef-8f99-41e6-95bd-e64fdd475148.mp4?cacheKey=ChtzZWN1cml0eS5rbGluZy5tZXRhX2VuY3J5cHQSsAEgWaGyBUZF-4Ka1-qV4au5eqsfSp2KzMiA7chKmXAH6L65FcFGEWQq3XlVt6E1jv5XJvQ2BB0SPphOSSvKiS3pYIDhofS5f_zLV_Egg9Qk6nZL8kf7iUgCM5wCStG2NzQvxeAFO2rwGE-_WPautuWKFGZiCxdF4EDY4YfbEKpOTKlbmthk75c5NEce4f6G1mxxgEE0jbeq5oGF6pXzwf8CjT1ly8cdVpjLIFHD1pHQPRoSoUWhYgsuBTfVWszBdm10UXP1IiCr2QjWQo4bmp0PNWsu4WVO8Bv01X9arDK4LuAeshIlSSgFMAE&x-kcdn-pid=112781&ksSecret=6c385e47f465262597233fb35582c01e&ksTime=69a9b6a4",
+          "duration": "4.966"
+        }
+      ]
+    },
+    "task_status_msg": "",
+    "created_at": 1770137885168,
+    "updated_at": 1770138021010,
+    "final_unit_deduction": "0.5"
+  }
+}

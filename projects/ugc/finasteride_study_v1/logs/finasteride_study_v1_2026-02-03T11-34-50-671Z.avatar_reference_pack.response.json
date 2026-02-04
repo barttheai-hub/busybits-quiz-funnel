@@ -1,0 +1,5 @@
+{
+  "stub": true,
+  "reason": "FAL_KEY not set",
+  "expected_output": "fal returns { images: [{ url, content_type, width, height }, ...] }"
+}

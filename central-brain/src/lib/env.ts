@@ -8,6 +8,8 @@ const schema = z.object({
   GMAIL_CLIENT_SECRET: z.string().optional(),
   GMAIL_REDIRECT_URI: z.string().url().optional(),
   APP_ALLOWED_EMAILS: z.string().optional(),
+  ADMIN_EMAILS: z.string().optional(),
+  AGENT_API_KEY: z.string().min(20).optional(),
 });
 
 export const env = schema.parse({
@@ -18,4 +20,6 @@ export const env = schema.parse({
   GMAIL_CLIENT_SECRET: process.env.GMAIL_CLIENT_SECRET,
   GMAIL_REDIRECT_URI: process.env.GMAIL_REDIRECT_URI,
   APP_ALLOWED_EMAILS: process.env.APP_ALLOWED_EMAILS,
+  ADMIN_EMAILS: process.env.ADMIN_EMAILS,
+  AGENT_API_KEY: process.env.AGENT_API_KEY,
 });

@@ -1,0 +1,9 @@
+{
+  "step": "avatar_reference_pack",
+  "endpoint": "https://fal.run/fal-ai/nano-banana-pro",
+  "input": {
+    "prompt": "Photorealistic UGC creator headshot reference pack of a friendly man in his early 30s with short brown hair and subtle temples thinning. Neutral background, soft window light, crisp skin detail. Consistent identity across images. 35mm lens look.",
+    "num_images": 4,
+    "aspect_ratio": "1:1"
+  }
+}
