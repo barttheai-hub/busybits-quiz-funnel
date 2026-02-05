@@ -1,0 +1,17 @@
+{
+  "noteTitle": "Bart – Work Log",
+  "boardTitle": "Default board",
+  "columnTitle": "Done",
+  "assignee": "bart",
+  "status": "done",
+  "items": [
+    {
+      "title": "SEO punchlist — calorieapi.com canonical alignment",
+      "notes": "Align robots.txt sitemap, sitemap URLs, canonical tags, and on-page mentions to calorieapi.com."
+    },
+    {
+      "title": "NanoBanana starting frames run (finasteride study v1)",
+      "notes": "Generated starting frames v2 via Gemini NanoBanana Pro. Output: projects/ugc/finasteride_study_v1/assets/tmp/starting_frames_v2_gemini/."
+    }
+  ]
+}
