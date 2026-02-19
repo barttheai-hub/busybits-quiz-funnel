@@ -56,6 +56,9 @@ Then answer using retrieved context.
 ## Recent shipped assets (ready to run)
 - BusyBits newsletter execution pack (“Send Kit”) saved in workspace: `tmp/busybits_send_kit.md` (references Beehiiv-ready reactivation ladder + next-5-sends copy + subject bank).
 
+- 2026-02-19: **BusyBits Newsletter (Welcome Sequence):**
+  - **Flows:** `memory/projects/busybits-welcome-sequence.md` (5-Email Nurture Flow).
+  - **Status:** Retention Stack Complete.
 - 2026-02-19: **BusyBits Newsletter (Lead Magnet):**
   - **Asset:** `builds/busybits-growth/assets/High_Performance_OS.html` (PDF/HTML Guide).
   - **Status:** Asset Generated.
