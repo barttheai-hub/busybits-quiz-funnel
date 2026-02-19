@@ -20,4 +20,5 @@
 
 ## Assets
 -   **Bonuses:** `memory/projects/hairloss-bonus-content.md`
+-   **Lead Magnet:** `builds/hairloss-funnel/assets/The_Hair_Hackers_Bible.html` (The "Bible" PDF Asset)
 -   **Social AI Character:** `memory/projects/social-ai-char.md`

@@ -59,6 +59,12 @@ Then answer using retrieved context.
 - 2026-02-19: **BusyBits Newsletter (Paid Growth Assets):**
   - **Creative Pack:** `builds/busybits-growth/ad_creative_pack.md` (3 Ad Sets: CEO Routine, Tech Stack, The Graph).
   - **Status:** Campaign Launch Ready.
+- 2026-02-19: **Hair Loss Funnel (Lead Magnet):**
+  - **Asset:** `builds/hairloss-funnel/assets/The_Hair_Hackers_Bible.html` (15-page PDF Guide).
+  - **Status:** Asset Generated.
+- 2026-02-19: **Hair Loss Funnel (CRO & Retention):**
+  - **Exit Intent:** Added "Hair Hacker's Bible" popup to `advertorial.html` (Captures bounced traffic).
+  - **Status:** CRO Mechanism Live.
 - 2026-02-19: **Hair Loss Funnel (Paid Acquisition Strategy):**
   - **Strategy Doc:** `builds/hairloss-funnel/paid_acquisition_strategy.md` (3 Ad Sets + Creative Matrix + Copy).
   - **Master Index:** `memory/projects/hairloss-funnel.md`.
