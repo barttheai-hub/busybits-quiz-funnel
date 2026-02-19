@@ -19,6 +19,7 @@
 -   **Compliance:** `tmp/hairloss_claims_compliance_checklist.md`
 
 ## Assets
+-   **Tracking:** `builds/hairloss-funnel/pixel_tracking.js` (Meta Pixel Standard Events)
 -   **Bonuses:** `memory/projects/hairloss-bonus-content.md`
 -   **Lead Magnet:** `builds/hairloss-funnel/assets/The_Hair_Hackers_Bible.html` (The "Bible" PDF Asset)
 -   **Social AI Character:** `memory/projects/social-ai-char.md`
