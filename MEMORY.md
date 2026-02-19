@@ -58,7 +58,8 @@ Then answer using retrieved context.
 
 - 2026-02-19: **BusyBits Newsletter (Quiz Funnel):**
   - **Strategy:** `memory/projects/busybits-quiz-strategy.md` (Segments: Time/Energy/Focus).
-  - **Protocols:** `builds/busybits-growth/assets/quiz-protocols/*.md` (3 PDF assets).
+  - **Protocols:** `builds/busybits-growth/assets/quiz-protocols/*.html` (3 PDF/HTML Assets).
+  - **Frontend:** `builds/busybits-newsletter/quiz.html` (Interactive JS Quiz).
   - **Status:** Quiz Ready for Build.
 - 2026-02-19: **BusyBits Newsletter (Welcome Sequence):**
   - **Flows:** `memory/projects/busybits-welcome-sequence.md` (5-Email Nurture Flow).

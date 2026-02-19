@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Performance Bottleneck Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .slide-enter {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.4s ease-out forwards;
+        }
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-xl w-full bg-white rounded-2xl shadow-xl overflow-hidden min-h-[400px] flex flex-col relative">
+        
+        <!-- Progress Bar -->
+        <div class="h-1 bg-slate-100 w-full">
+            <div id="progress" class="h-full bg-blue-600 w-0 transition-all duration-300"></div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="screen-start" class="p-8 md:p-12 flex-1 flex flex-col justify-center text-center slide-enter">
+            <div class="uppercase tracking-widest text-xs font-bold text-blue-600 mb-4">BusyBits Diagnostic</div>
+            <h1 class="text-3xl font-black mb-4 leading-tight">Why aren't you hitting your goals yet?</h1>
+            <p class="text-slate-600 mb-8 text-lg">It's not willpower. It's a system bottleneck. Find yours in 60 seconds.</p>
+            <button onclick="nextScreen('q1')" class="bg-blue-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-blue-700 transition transform hover:scale-105">
+                Start Diagnostic &rarr;
+            </button>
+        </div>
+
+        <!-- Question 1 -->
+        <div id="screen-q1" class="hidden p-8 md:p-12 flex-1 flex flex-col justify-center">
+            <h2 class="text-2xl font-bold mb-8">1. What's the first thing you feel when you wake up?</h2>
+            <div class="space-y-4">
+                <button onclick="recordAnswer('time', 'q2')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    A. "Already behind schedule."
+                </button>
+                <button onclick="recordAnswer('energy', 'q2')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    B. "Groggy and slow."
+                </button>
+                <button onclick="recordAnswer('focus', 'q2')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    C. "Distracted by 50 thoughts."
+                </button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div id="screen-q2" class="hidden p-8 md:p-12 flex-1 flex flex-col justify-center">
+            <h2 class="text-2xl font-bold mb-8">2. What kills your productivity the most?</h2>
+            <div class="space-y-4">
+                <button onclick="recordAnswer('time', 'q3')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    A. Too many meetings.
+                </button>
+                <button onclick="recordAnswer('energy', 'q3')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    B. 3 PM crash.
+                </button>
+                <button onclick="recordAnswer('focus', 'q3')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    C. Social media / Slack pings.
+                </button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div id="screen-q3" class="hidden p-8 md:p-12 flex-1 flex flex-col justify-center">
+            <h2 class="text-2xl font-bold mb-8">3. If you had a magic wand, what would you ask for?</h2>
+            <div class="space-y-4">
+                <button onclick="recordAnswer('time', 'email')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    A. A 30-hour day.
+                </button>
+                <button onclick="recordAnswer('energy', 'email')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    B. Endless stamina.
+                </button>
+                <button onclick="recordAnswer('focus', 'email')" class="w-full text-left p-4 border-2 border-slate-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-medium text-slate-700">
+                    C. Laser vision.
+                </button>
+            </div>
+        </div>
+
+        <!-- Email Capture -->
+        <div id="screen-email" class="hidden p-8 md:p-12 flex-1 flex flex-col justify-center text-center">
+            <div class="mb-6">
+                <span class="text-4xl">🎉</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Analyzing your data...</h2>
+            <p class="text-slate-600 mb-8">We've identified your #1 bottleneck. Enter your email to get your custom Fix Protocol.</p>
+            
+            <form onsubmit="submitQuiz(event)" class="space-y-4">
+                <input type="email" id="email" required placeholder="Enter your best email" class="w-full px-4 py-3 border-2 border-slate-200 rounded-xl focus:border-blue-600 focus:outline-none text-center">
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-700 transition">
+                    Get My Results &rarr;
+                </button>
+            </form>
+            <p class="mt-4 text-xs text-slate-400">Join 100k+ high-performers on BusyBits. Unsubscribe anytime.</p>
+        </div>
+
+        <!-- Result Screen (Dynamic) -->
+        <div id="screen-result" class="hidden p-8 md:p-12 flex-1 flex flex-col justify-center text-center">
+            <div class="uppercase tracking-widest text-xs font-bold text-slate-400 mb-4">Your Primary Bottleneck</div>
+            <h2 id="result-title" class="text-4xl font-black mb-4 text-blue-600"></h2>
+            <p id="result-desc" class="text-slate-600 mb-8 text-lg"></p>
+            <a id="result-link" href="#" class="inline-block bg-slate-900 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-slate-800 transition">
+                Download Your Protocol &rarr;
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        let scores = { time: 0, energy: 0, focus: 0 };
+        let currentStep = 0;
+        const totalSteps = 4; // Start + 3 Qs
+
+        function nextScreen(id) {
+            document.querySelectorAll('div[id^="screen-"]').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('slide-enter');
+            });
+            const next = document.getElementById('screen-' + id);
+            next.classList.remove('hidden');
+            next.classList.add('slide-enter');
+            
+            currentStep++;
+            updateProgress();
+        }
+
+        function recordAnswer(type, nextId) {
+            scores[type]++;
+            nextScreen(nextId);
+        }
+
+        function updateProgress() {
+            const pct = (currentStep / totalSteps) * 100;
+            document.getElementById('progress').style.width = `${pct}%`;
+        }
+
+        function getWinner() {
+            return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        }
+
+        function submitQuiz(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const winner = getWinner();
+            
+            // In production: Send email + winner tag to ESP via API
+            console.log(`Subscribing ${email} with tag: segment:${winner}`);
+
+            // Show Result
+            showResult(winner);
+        }
+
+        function showResult(winner) {
+            nextScreen('result');
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+            const link = document.getElementById('result-link');
+
+            if (winner === 'time') {
+                title.innerText = "The Time Starved Founder";
+                desc.innerText = "You have high output but low leverage. You need to delete, delegate, and automate.";
+                link.href = "assets/quiz-protocols/Time_Protocol.html";
+            } else if (winner === 'energy') {
+                title.innerText = "The Energy Crasher";
+                desc.innerText = "You suffer from burnout cycles. You need to fix your circadian rhythm and nutrition.";
+                link.href = "assets/quiz-protocols/Energy_Protocol.html";
+            } else {
+                title.innerText = "The Monkey Mind";
+                desc.innerText = "You start 10 things and finish 0. You need environment design and deep work.";
+                link.href = "assets/quiz-protocols/Focus_Protocol.html";
+            }
+        }
+    </script>
+</body>
+</html>

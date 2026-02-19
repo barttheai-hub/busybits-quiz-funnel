@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Monkey Mind Protocol (Type C)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        
+        @media print {
+            .no-print { display: none; }
+            body { font-size: 11pt; }
+            a { text-decoration: none; color: black; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 max-w-3xl mx-auto px-8 py-12 md:py-20 antialiased leading-relaxed">
+
+    <!-- Header -->
+    <div class="mb-12 border-b-2 border-slate-900 pb-8">
+        <div class="uppercase tracking-widest text-xs font-bold text-indigo-600 mb-2">BusyBits • Custom Protocol</div>
+        <h1 class="text-4xl md:text-5xl font-black mb-4">The Monkey Mind</h1>
+        <p class="text-xl text-slate-600 font-light">
+            **Your Bottleneck:** Focus. <br>
+            **Your Fix:** Environment Design, Dopamine Detox, Deep Work.
+        </p>
+    </div>
+
+    <!-- Section 1 -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">1. The Environment Design Rule</h2>
+        <p class="mb-6 text-slate-700">Willpower is a finite resource. If you rely on willpower to ignore your phone, you will fail by 3 PM. Design your environment so focus is the default.</p>
+        
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <ul class="space-y-4">
+                <li class="flex items-center gap-4">
+                    <span class="text-2xl">📱</span>
+                    <div>
+                        <strong class="block text-slate-900">Phone</strong>
+                        <span class="text-slate-500 text-sm">Charge it in another room (Kitchen/Hallway).</span>
+                    </div>
+                </li>
+                <li class="flex items-center gap-4">
+                    <span class="text-2xl">💬</span>
+                    <div>
+                        <strong class="block text-slate-900">Slack / Email</strong>
+                        <span class="text-slate-500 text-sm">Turn off notifications. Batch check 2x per day (11am & 4pm).</span>
+                    </div>
+                </li>
+                <li class="flex items-center gap-4">
+                    <span class="text-2xl">🖥️</span>
+                    <div>
+                        <strong class="block text-slate-900">Browser</strong>
+                        <span class="text-slate-500 text-sm">Close all tabs except the one you are working on.</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">2. The Dopamine Detox</h2>
+        <p class="mb-6 text-slate-700">Your brain is addicted to "cheap dopamine" (Likes, retweets, endless scroll). This makes "boring" work (like writing) feel painful.</p>
+        
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
+            <h3 class="font-bold text-indigo-900 mb-2">The Rule</h3>
+            <p class="text-indigo-800">
+                <strong>No social media for the first 4 hours of the day.</strong><br>
+                Make your brain "bored" enough to actually crave doing difficult work.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">3. The Tech Stack for Focus</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
+                <div class="font-bold text-lg mb-2">Opal</div>
+                <p class="text-sm text-slate-500">Hard-blocks distracting apps (IG, TikTok) from 9-5.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
+                <div class="font-bold text-lg mb-2">Superhuman</div>
+                <p class="text-sm text-slate-500">Batch process email so you aren't living in your inbox.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-200 text-center">
+                <div class="font-bold text-lg mb-2">Notion</div>
+                <p class="text-sm text-slate-500">Capture ideas instantly so they stop looping in your head.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-200 pt-8 text-center text-sm text-slate-400">
+        <p>&copy; 2026 BusyBits Newsletter. All rights reserved.</p>
+    </footer>
+
+    <div class="fixed bottom-8 right-8 no-print">
+        <button onclick="window.print()" class="bg-slate-900 text-white px-6 py-3 rounded-full shadow-lg font-bold hover:bg-slate-800 transition flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" />
+            </svg>
+            Print Protocol
+        </button>
+    </div>
+
+</body>
+</html>
