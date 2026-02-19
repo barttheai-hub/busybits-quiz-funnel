@@ -66,6 +66,9 @@ Then answer using retrieved context.
 - 2026-02-19: **Hair Loss Funnel (Ad Creative Pack):**
   - **Creative Pack:** `builds/hairloss-funnel/ad_creative_pack.md` (3 ads + scripts + prompts + copy).
   - **Status:** Creative specs ready for production.
+- 2026-02-19: **Hair Loss Funnel (Email Flows):**
+  - **Flows:** `memory/projects/hairloss-email-flows.md` (Abandoned Cart, Post-Purchase, Lead Nurture).
+  - **Status:** Retention Stack Complete.
 - 2026-02-16: Created Hair Loss AI UGC Hook Pack (5 concepts) for ad testing. See: `memory/projects/hairloss-aiugc-hook-pack.md`.
 - 2026-02-18: **BusyBits Newsletter (Code-Complete):**
   - **Squeeze Page:** `builds/busybits-newsletter/index.html` (Minimalist, "High-Performance OS" hook).

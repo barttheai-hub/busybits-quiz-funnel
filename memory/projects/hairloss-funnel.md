@@ -9,7 +9,7 @@
 -   **Bridge Page (Advertorial):** `memory/projects/hairloss-advertorial.md`
 -   **VSL Page:** `memory/projects/hairloss-vsl.md`
 -   **Checkout:** `builds/hairloss-funnel/checkout.html`
--   **Email Flows (Retention):** `memory/projects/hairloss-email-flows.md`
+-   **Email Flows (Retention):** `memory/projects/hairloss-email-flows.md` (Includes: Abandoned Cart, Post-Purchase, Lead Nurture)
 
 ## Strategy & Experiments
 -   **Paid Acquisition Strategy:** `builds/hairloss-funnel/paid_acquisition_strategy.md` (New!)
