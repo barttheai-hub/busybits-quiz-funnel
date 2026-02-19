@@ -13,6 +13,7 @@
 
 ## Strategy & Experiments
 -   **Paid Acquisition Strategy:** `builds/hairloss-funnel/paid_acquisition_strategy.md` (New!)
+-   **Ad Creative Pack:** `builds/hairloss-funnel/ad_creative_pack.md` (New!)
 -   **CRO Plan:** `memory/projects/hairloss-funnel-cro.md`
 -   **AI UGC Hooks:** `memory/projects/hairloss-aiugc-hook-pack.md`
 -   **Compliance:** `tmp/hairloss_claims_compliance_checklist.md`
