@@ -56,6 +56,10 @@ Then answer using retrieved context.
 ## Recent shipped assets (ready to run)
 - BusyBits newsletter execution pack (“Send Kit”) saved in workspace: `tmp/busybits_send_kit.md` (references Beehiiv-ready reactivation ladder + next-5-sends copy + subject bank).
 
+- 2026-02-19: **BusyBits Newsletter (Quiz Funnel):**
+  - **Strategy:** `memory/projects/busybits-quiz-strategy.md` (Segments: Time/Energy/Focus).
+  - **Protocols:** `builds/busybits-growth/assets/quiz-protocols/*.md` (3 PDF assets).
+  - **Status:** Quiz Ready for Build.
 - 2026-02-19: **BusyBits Newsletter (Welcome Sequence):**
   - **Flows:** `memory/projects/busybits-welcome-sequence.md` (5-Email Nurture Flow).
   - **Status:** Retention Stack Complete.
