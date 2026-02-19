@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The High-Performance OS (CEO Edition)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        @media print {
+            .no-print { display: none; }
+            body { font-size: 11pt; }
+            a { text-decoration: none; color: black; }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 max-w-4xl mx-auto px-8 py-12 md:py-20 antialiased leading-relaxed">
+
+    <!-- Cover Page -->
+    <div class="min-h-screen flex flex-col justify-center items-start border-b-4 border-slate-900 mb-20 pb-20 page-break">
+        <div class="uppercase tracking-widest text-xs font-bold text-slate-500 mb-6 bg-slate-200 px-3 py-1 rounded-full">v2.4 (2026)</div>
+        <h1 class="text-6xl md:text-8xl font-black mb-6 leading-tight tracking-tighter">
+            High<br>Performance<br><span class="text-blue-600">OS</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-600 max-w-2xl mb-12 font-light">
+            The exact protocols used by 50+ Unicorn Founders to optimize Time, Energy, and Focus.
+        </p>
+        
+        <div class="mt-auto grid grid-cols-2 gap-12 w-full border-t border-slate-200 pt-8 text-sm">
+            <div>
+                <span class="block text-slate-400 uppercase text-xs font-bold mb-1">Author</span>
+                <span class="font-bold">Ziga</span>
+            </div>
+            <div>
+                <span class="block text-slate-400 uppercase text-xs font-bold mb-1">Source</span>
+                <span class="font-bold">BusyBits Newsletter</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Intro -->
+    <section class="mb-20">
+        <h2 class="text-3xl font-bold mb-6 tracking-tight">👋 Start Here: The Philosophy</h2>
+        <div class="prose prose-lg text-slate-700 max-w-none">
+            <p>Most people run their lives on <strong>Default Mode</strong> (Reactive: Email, Slack, News).</p>
+            <p>Top performers run on <strong>Designed Mode</strong> (Proactive: Deep Work, Recovery, Systems).</p>
+            <p>This Operating System is not about working harder. It is about resource allocation. We treat your <strong>Time</strong>, <strong>Energy</strong>, and <strong>Focus</strong> as finite capital to be invested, not spent.</p>
+        </div>
+    </section>
+
+    <!-- Module 1 -->
+    <section class="mb-20 page-break">
+        <div class="flex items-center gap-4 mb-8">
+            <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded font-bold text-sm uppercase tracking-wide">Module 1</span>
+            <h2 class="text-4xl font-bold tracking-tight">The Morning Protocol</h2>
+        </div>
+        
+        <div class="bg-white border border-slate-200 rounded-xl p-8 shadow-sm mb-8">
+            <div class="grid md:grid-cols-[100px_1fr] gap-6 mb-8 pb-8 border-b border-slate-100">
+                <div class="mono text-slate-400 font-bold">07:05</div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">The "Hydration Bomb"</h3>
+                    <p class="text-slate-600 mb-2"><strong>Protocol:</strong> 500ml Water + 1/4 tsp Himalayan Salt + 1/2 Lemon.</p>
+                    <p class="text-sm text-slate-500"><strong>Why:</strong> Rehydrates the brain after 8h of sleep. Salt supports adrenal function.</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-[100px_1fr] gap-6 mb-8 pb-8 border-b border-slate-100">
+                <div class="mono text-slate-400 font-bold">07:15</div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Forward Ambulation</h3>
+                    <p class="text-slate-600 mb-2"><strong>Protocol:</strong> 10-20 minute walk outside (No sunglasses).</p>
+                    <p class="text-sm text-slate-500"><strong>Why:</strong> Optic flow suppresses amygdala activity (anxiety). Sunlight sets the circadian clock for better sleep tonight.</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-[100px_1fr] gap-6">
+                <div class="mono text-slate-400 font-bold">07:45</div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">The "90-Minute Block"</h3>
+                    <p class="text-slate-600 mb-2"><strong>Rule:</strong> Phone in another room (Airplane Mode). No Email. No Slack.</p>
+                    <p class="text-slate-600 mb-2"><strong>Task:</strong> The #1 most important task of the day (Eat The Frog).</p>
+                    <p class="text-sm text-slate-500"><strong>Why:</strong> Your brain's decision fatigue is lowest. Do the hard thing first.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module 2 -->
+    <section class="mb-20 page-break">
+        <div class="flex items-center gap-4 mb-8">
+            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded font-bold text-sm uppercase tracking-wide">Module 2</span>
+            <h2 class="text-4xl font-bold tracking-tight">The "Deep Work" Algorithm</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-slate-900 text-white p-8 rounded-xl">
+                <h3 class="text-xl font-bold mb-4 text-purple-400">The 90/20 Rule</h3>
+                <p class="text-slate-300 mb-4">Based on Ultradian Rhythms.</p>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex gap-2"><span class="text-purple-400">●</span> <strong>Focus:</strong> 90 Minutes intense work.</li>
+                    <li class="flex gap-2"><span class="text-purple-400">●</span> <strong>Rest:</strong> 20 Minutes detached rest.</li>
+                    <li class="flex gap-2"><span class="text-purple-400">●</span> <strong>Limit:</strong> Max 3 cycles per day.</li>
+                </ul>
+            </div>
+            
+            <div class="bg-white border border-slate-200 p-8 rounded-xl">
+                <h3 class="text-xl font-bold mb-4 text-slate-900">NSDR (Non-Sleep Deep Rest)</h3>
+                <p class="text-slate-600 mb-4">Use when you hit a wall at 2pm. Replaces caffeine.</p>
+                <ul class="space-y-3 text-sm text-slate-600">
+                    <li class="flex gap-2"><strong>Protocol:</strong> 10-20 minute guided relaxation (Yoga Nidra).</li>
+                    <li class="flex gap-2"><strong>Effect:</strong> Restores dopamine reserves by 40%.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module 3 -->
+    <section class="mb-20 page-break">
+        <div class="flex items-center gap-4 mb-8">
+            <span class="bg-green-100 text-green-700 px-3 py-1 rounded font-bold text-sm uppercase tracking-wide">Module 3</span>
+            <h2 class="text-4xl font-bold tracking-tight">The Tech Stack</h2>
+        </div>
+        
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+                        <th class="p-6 font-bold">Category</th>
+                        <th class="p-6 font-bold">Tool</th>
+                        <th class="p-6 font-bold">Purpose</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                    <tr>
+                        <td class="p-6 font-bold text-slate-900">Sleep</td>
+                        <td class="p-6 text-slate-700">Oura Ring / Whoop</td>
+                        <td class="p-6 text-slate-500">Track HRV & Deep Sleep (>90m target).</td>
+                    </tr>
+                    <tr>
+                        <td class="p-6 font-bold text-slate-900">Recovery</td>
+                        <td class="p-6 text-slate-700">Eight Sleep Pod</td>
+                        <td class="p-6 text-slate-500">Thermal regulation during sleep.</td>
+                    </tr>
+                    <tr class="bg-blue-50/50">
+                        <td class="p-6 font-bold text-blue-900">Nutrition</td>
+                        <td class="p-6 font-bold text-blue-700">BusyBody App</td>
+                        <td class="p-6 text-blue-600">The fastest way to track macros without wasting time.</td>
+                    </tr>
+                    <tr>
+                        <td class="p-6 font-bold text-slate-900">Knowledge</td>
+                        <td class="p-6 text-slate-700">Notion</td>
+                        <td class="p-6 text-slate-500">Second Brain (Project Management).</td>
+                    </tr>
+                    <tr>
+                        <td class="p-6 font-bold text-slate-900">Focus</td>
+                        <td class="p-6 text-slate-700">Opal</td>
+                        <td class="p-6 text-slate-500">App blocker (Forces Deep Work).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Module 4 -->
+    <section class="mb-20 page-break">
+        <div class="flex items-center gap-4 mb-8">
+            <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded font-bold text-sm uppercase tracking-wide">Module 4</span>
+            <h2 class="text-4xl font-bold tracking-tight">The Evening Wind Down</h2>
+        </div>
+        
+        <div class="bg-slate-900 text-white rounded-xl p-8 md:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-32 bg-indigo-500/20 blur-3xl rounded-full"></div>
+            
+            <h3 class="text-3xl font-black mb-8 relative z-10">The "3-2-1" Rule</h3>
+            
+            <div class="space-y-6 relative z-10">
+                <div class="flex items-start gap-6">
+                    <div class="text-4xl font-black text-indigo-400">3</div>
+                    <div>
+                        <p class="font-bold text-lg">Hours before bed: Stop Eating.</p>
+                        <p class="text-slate-400 text-sm">Digestion keeps core temperature high, ruining Deep Sleep.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-6">
+                    <div class="text-4xl font-black text-indigo-400">2</div>
+                    <div>
+                        <p class="font-bold text-lg">Hours before bed: Stop Working.</p>
+                        <p class="text-slate-400 text-sm">Cortisol drop is necessary for Melatonin onset.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-6">
+                    <div class="text-4xl font-black text-indigo-400">1</div>
+                    <div>
+                        <p class="font-bold text-lg">Hour before bed: No Screens.</p>
+                        <p class="text-slate-400 text-sm">Blue light suppresses Melatonin. Read a book.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Kill List -->
+    <section class="mb-20">
+        <h2 class="text-3xl font-bold mb-6 tracking-tight text-red-600">🗑️ The "Kill List" (Remove These)</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-red-50 border border-red-100 p-6 rounded-lg text-center">
+                <div class="text-4xl mb-4">📱</div>
+                <h3 class="font-bold text-red-900 mb-2">Phone in Bedroom</h3>
+                <p class="text-sm text-red-700">Buy an analog alarm clock. Just do it.</p>
+            </div>
+            <div class="bg-red-50 border border-red-100 p-6 rounded-lg text-center">
+                <div class="text-4xl mb-4">🔔</div>
+                <h3 class="font-bold text-red-900 mb-2">Notifications</h3>
+                <p class="text-sm text-red-700">Turn off ALL non-human notifications.</p>
+            </div>
+            <div class="bg-red-50 border border-red-100 p-6 rounded-lg text-center">
+                <div class="text-4xl mb-4">📺</div>
+                <h3 class="font-bold text-red-900 mb-2">Daily News</h3>
+                <p class="text-sm text-red-700">Read weekly summaries, not daily feeds.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-200 pt-10 text-center text-sm text-slate-400">
+        <p class="mb-4">&copy; 2026 BusyBits Newsletter. All rights reserved.</p>
+        <p>This document is for educational purposes only.</p>
+    </footer>
+
+    <!-- Print Button (Hidden in Print) -->
+    <div class="fixed bottom-8 right-8 no-print">
+        <button onclick="window.print()" class="bg-slate-900 text-white px-6 py-3 rounded-full shadow-lg font-bold hover:bg-slate-800 transition flex items-center gap-2 border border-slate-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clip-rule="evenodd" />
+            </svg>
+            Print to PDF
+        </button>
+    </div>
+
+</body>
+</html>
