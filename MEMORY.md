@@ -79,6 +79,10 @@ Then answer using retrieved context.
 - 2026-02-19: **AI UGC Funnel (Nurture):**
   - **Email:** `memory/projects/ai-ugc-email-sequence.md` (3-Email Sequence to sell the $7 pack).
   - **Status:** Sequence Drafted.
+- 2026-02-20: **AI UGC Funnel (Delivery):**
+  - **Delivery Page:** `memory/projects/ai-ugc-product-delivery.md` (Access page + onboarding).
+  - **Automation:** `memory/projects/ai-ugc-n8n-blueprint.md` (Workflow blueprint).
+  - **Status:** Delivery assets ready.
 - 2026-02-20: **BusyBits Sponsorships:**
   - **Outreach List:** `memory/projects/busybits-sponsorship-outreach.md` (20 targets).
   - **Media Kit:** `memory/projects/busybits-media-kit.md` (One-pager).
