@@ -61,6 +61,21 @@ Then answer using retrieved context.
   - **Protocols:** `builds/busybits-growth/assets/quiz-protocols/*.html` (3 PDF/HTML Assets).
   - **Frontend:** `builds/busybits-newsletter/quiz.html` (Interactive JS Quiz).
   - **Status:** Quiz Ready for Build.
+- 2026-02-19: **Social AI Character ("Mark" - Hair Loss):**
+  - **Strategy:** `memory/projects/social-ai-char.md` (Persona, Tech Stack, Launch Plan).
+  - **Scripts:** `memory/projects/social-ai-char-scripts.md` (5 Launch Scripts: Intro, Hatfish, Routine, Rant, Barber).
+  - **Status:** Creative Ready for Generation.
+- 2026-02-19: **Social AI Character ("Mark" - Hair Loss):**
+  - **Strategy:** `memory/projects/social-ai-char.md` (Persona, Tech Stack, Launch Plan).
+  - **Scripts:** `memory/projects/social-ai-char-scripts.md` (5 Launch Scripts: Intro, Hatfish, Routine, Rant, Barber).
+  - **Status:** Creative Ready for Generation.
+- 2026-02-19: **Social AI Character ("Mark" - Hair Loss):**
+  - **Strategy:** `memory/projects/social-ai-char.md` (Persona, Tech Stack, Launch Plan).
+  - **Scripts:** `memory/projects/social-ai-char-scripts.md` (5 Launch Scripts: Intro, Hatfish, Routine, Rant, Barber).
+  - **Status:** Creative Ready for Generation.
+- 2026-02-19: **BusyBody App (ASO & Launch Ready):**
+  - **Launch Emails:** Sequence (Teaser, Launch, Review Request) drafted in `memory/projects/busybody-launch-emails.md`.
+  - **Status:** Launch Sequence Ready.
 - 2026-02-19: **AI UGC Funnel (Nurture):**
   - **Email:** `memory/projects/ai-ugc-email-sequence.md` (3-Email Sequence to sell the $7 pack).
   - **Status:** Sequence Drafted.
