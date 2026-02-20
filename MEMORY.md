@@ -79,6 +79,9 @@ Then answer using retrieved context.
 - 2026-02-19: **AI UGC Funnel (Nurture):**
   - **Email:** `memory/projects/ai-ugc-email-sequence.md` (3-Email Sequence to sell the $7 pack).
   - **Status:** Sequence Drafted.
+- 2026-02-20: **Hair Loss Funnel (Ad Ops):**
+  - **Meta SOP:** `builds/hairloss-funnel/ad_setup_sop.md` (Campaign setup + kill/scale rules).
+  - **Status:** Ready for Launch.
 - 2026-02-19: **Deployment:**
   - **Checklist:** `memory/projects/deployment-checklist.md` (Final Status: Ready).
   - **Status:** All Funnels Live & Tracking Active.
