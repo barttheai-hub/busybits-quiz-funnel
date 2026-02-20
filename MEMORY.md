@@ -79,6 +79,9 @@ Then answer using retrieved context.
 - 2026-02-19: **AI UGC Funnel (Nurture):**
   - **Email:** `memory/projects/ai-ugc-email-sequence.md` (3-Email Sequence to sell the $7 pack).
   - **Status:** Sequence Drafted.
+- 2026-02-20: **BusyBits Newsletter (Launch Blast):**
+  - **Email:** `memory/projects/busybits-launch-email.md` (High Performance OS broadcast).
+  - **Status:** Ready to send.
 - 2026-02-20: **Social AI Character ("Mark" - Hair Loss):**
   - **Scripts:** `memory/projects/social-ai-char-scripts.md` (5 Launch Scripts).
   - **Batch 1:** `builds/social-ai-char/video_batch_1.md` (First 3 videos).
