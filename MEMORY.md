@@ -96,7 +96,10 @@ Then answer using retrieved context.
 - 2026-02-20: **Social AI Character ("Mark" - Hair Loss):**
   - **Scripts:** `memory/projects/social-ai-char-scripts.md` (5 Launch Scripts).
   - **Batch 1:** `builds/social-ai-char/video_batch_1.md` (First 3 videos).
-  - **Status:** Ready for Generation.
+  - **Assets Batch 1:** `builds/social-ai-char/assets_batch_1.md` (Images + Audio).
+  - **Batch 2:** `builds/social-ai-char/video_batch_2.md` (Scripts + Prompts).
+  - **Assets Batch 2:** `builds/social-ai-char/assets_batch_2.md` (Images + Audio; 1 image pending).
+  - **Status:** Ready for Lip Sync & Editing.
 - 2026-02-20: **Hair Loss Funnel (Ad Ops):**
   - **Meta SOP:** `builds/hairloss-funnel/ad_setup_sop.md` (Campaign setup + kill/scale rules).
   - **Status:** Ready for Launch.
