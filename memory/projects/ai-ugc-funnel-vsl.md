@@ -3,6 +3,8 @@
 ## Core Concept
 - **Product:** "The AI UGC Generator Pack" ($7)
 - **Asset:** `builds/ai-ugc-funnel/AI_UGC_Resource_Pack.md` (Product Content).
+- **Sales Page:** `builds/ai-ugc-funnel/index.html` (Landing Page).
+- **Email Sequence:** `memory/projects/ai-ugc-email-sequence.md` (Nurture Flow).
 - **Promise:** Generate high-performing Meta video ads in minutes without actors, cameras, or creative block.
 - **Demo:** Watch me build a full Hair Loss ad from scratch live on this video.
 - **Target:** Media buyers spending $10k+/mo who are tired of creative fatigue.

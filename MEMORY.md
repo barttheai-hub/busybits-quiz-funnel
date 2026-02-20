@@ -61,6 +61,9 @@ Then answer using retrieved context.
   - **Protocols:** `builds/busybits-growth/assets/quiz-protocols/*.html` (3 PDF/HTML Assets).
   - **Frontend:** `builds/busybits-newsletter/quiz.html` (Interactive JS Quiz).
   - **Status:** Quiz Ready for Build.
+- 2026-02-19: **AI UGC Funnel (Nurture):**
+  - **Email:** `memory/projects/ai-ugc-email-sequence.md` (3-Email Sequence to sell the $7 pack).
+  - **Status:** Sequence Drafted.
 - 2026-02-19: **Deployment:**
   - **Checklist:** `memory/projects/deployment-checklist.md` (Final Status: Ready).
   - **Status:** All Funnels Live & Tracking Active.
