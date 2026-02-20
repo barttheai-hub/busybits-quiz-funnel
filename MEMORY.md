@@ -90,6 +90,9 @@ Then answer using retrieved context.
 - 2026-02-20: **BusyBits Newsletter (Launch Blast):**
   - **Email:** `memory/projects/busybits-launch-email.md` (High Performance OS broadcast).
   - **Status:** Ready to send.
+- 2026-02-20: **BusyBits Newsletter (Paid Growth):**
+  - **Ad Copy Pack v2:** `builds/busybits-growth/ad_copy_pack_v2.md` (8 Meta/IG + 6 X variants).
+  - **Status:** Ready for Testing.
 - 2026-02-20: **Social AI Character ("Mark" - Hair Loss):**
   - **Scripts:** `memory/projects/social-ai-char-scripts.md` (5 Launch Scripts).
   - **Batch 1:** `builds/social-ai-char/video_batch_1.md` (First 3 videos).
@@ -97,6 +100,10 @@ Then answer using retrieved context.
 - 2026-02-20: **Hair Loss Funnel (Ad Ops):**
   - **Meta SOP:** `builds/hairloss-funnel/ad_setup_sop.md` (Campaign setup + kill/scale rules).
   - **Status:** Ready for Launch.
+- 2026-02-20: **Social AI Character ("Mark" - Hair Loss):**
+  - **Assets:** Generated Batch 1 (3 Videos: Hatfish, Rosemary Rant, Barber Story).
+  - **Files:** `builds/social-ai-char/assets_batch_1.md` (Images + Audio).
+  - **Status:** Ready for Lip Sync & Editing.
 - 2026-02-19: **Deployment:**
   - **Checklist:** `memory/projects/deployment-checklist.md` (Final Status: Ready).
   - **Status:** All Funnels Live & Tracking Active.
