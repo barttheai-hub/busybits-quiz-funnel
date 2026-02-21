@@ -98,7 +98,7 @@ Then answer using retrieved context.
   - **Batch 1:** `builds/social-ai-char/video_batch_1.md` (First 3 videos).
   - **Assets Batch 1:** `builds/social-ai-char/assets_batch_1.md` (Images + Audio).
   - **Batch 2:** `builds/social-ai-char/video_batch_2.md` (Scripts + Prompts).
-  - **Assets Batch 2:** `builds/social-ai-char/assets_batch_2.md` (Images + Audio; 1 image pending).
+  - **Assets Batch 2:** `builds/social-ai-char/assets_batch_2.md` (Images + Audio complete).
   - **Status:** Ready for Lip Sync & Editing.
 - 2026-02-20: **Hair Loss Funnel (Ad Ops):**
   - **Meta SOP:** `builds/hairloss-funnel/ad_setup_sop.md` (Campaign setup + kill/scale rules).

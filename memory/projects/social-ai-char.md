@@ -98,5 +98,5 @@ Now he documents his "journey" (even though he's AI, the story is based on real 
 ## 6. Batch 2 (2026-02-20)
 **Scripts + Prompts:** `builds/social-ai-char/video_batch_2.md`
 **Assets:** `builds/social-ai-char/assets_batch_2.md`
-**Status:** Images + Audio generated (1 image pending due to quota).
-**Next:** Generate missing clean image for Video 4; lip sync + edit.
+**Status:** Images + Audio generated (Batch 2 complete).
+**Next:** Lip sync + edit.

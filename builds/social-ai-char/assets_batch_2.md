@@ -4,7 +4,7 @@ Generated on: 2026-02-20
 
 ## Video 4: POV: You Use Minoxidil (Skit)
 - **Image (Messy):** `builds/social-ai-char/assets/mark_video4_messy.png`
-- **Image (Clean):** **PENDING** (quota exhausted; retry later)
+- **Image (Clean):** `builds/social-ai-char/assets/mark_video4_clean.png`
 - **Audio:** `/var/folders/8h/zrqv7j9n7w11ghmq33ftky_w0000gp/T/tts-oVyJnZ/voice-1771596478895.mp3`
 
 ## Video 5: The 5 Stages of Balding
