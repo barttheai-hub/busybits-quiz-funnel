@@ -6,7 +6,7 @@
 - **What to call them:** Ziga
 - **Pronouns:** he/him (doesn’t care much)
 - **Timezone:** Europe/London (UK)
-- **Notes:** Speed, creativity, helpfulness, resourcefulness; wants proactive progress toward goals.
+- **Notes:** Speed, creativity, helpfulness, resourcefulness; wants proactive progress toward goals. Non-negotiable preference: when blockers/errors happen, autonomously troubleshoot and resolve end-to-end without punting back; only escalate when truly blocked by missing permissions/payment.
 
 ## Context
 
