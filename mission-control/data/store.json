@@ -1,0 +1,11 @@
+{
+  "users": [
+    { "id": "u_me", "name": "Me" },
+    { "id": "u_openclaw", "name": "OpenClaw" }
+  ],
+  "projects": [],
+  "notes": [],
+  "tasks": [],
+  "resources": [],
+  "activity": []
+}

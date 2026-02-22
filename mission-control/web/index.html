@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mission Control</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">Mission Control</div>
+        <button data-view="dashboard">Executive Dashboard</button>
+        <button data-view="notes">Notes</button>
+        <button data-view="tasks">Tasks</button>
+        <button data-view="resources">Resources</button>
+        <button data-view="projects">Projects</button>
+        <button data-view="activity">Activity Feed</button>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="menuBtn">☰</button>
+          <input id="token" placeholder="API token" />
+          <button id="saveToken">Save</button>
+        </header>
+        <section id="view"></section>
+      </main>
+    </div>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

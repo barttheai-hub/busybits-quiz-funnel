@@ -1,0 +1,22 @@
+:root{--bg:#0f1115;--card:#171a21;--muted:#8e96a3;--text:#edf1f7;--line:#2a3040;--accent:#5f8dff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,sans-serif}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}.sidebar{border-right:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:8px;background:#11141b}
+.sidebar .brand{font-weight:700;margin-bottom:8px}.sidebar button{background:transparent;border:1px solid var(--line);color:var(--text);padding:10px;border-radius:10px;text-align:left;cursor:pointer}
+.sidebar button:hover{border-color:var(--accent)}.main{display:flex;flex-direction:column}.topbar{padding:12px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center}
+#view{padding:16px;display:grid;gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}.row{display:flex;gap:8px;flex-wrap:wrap}.kpi{font-size:28px;font-weight:700}.muted{color:var(--muted)}
+input,textarea,select{background:#10131a;border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:10px;width:100%}button.primary{background:var(--accent);border:none;color:white;padding:9px 12px;border-radius:10px;cursor:pointer}
+.list{display:grid;gap:8px}.item{border:1px solid var(--line);border-radius:10px;padding:10px;background:#121620}
+.stack{display:grid;gap:8px}.between{justify-content:space-between;align-items:center}
+button{background:#121722;border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:10px;cursor:pointer}
+button:hover{border-color:var(--accent)}button.danger{border-color:#6a2c36;color:#ffb8c2}
+a{color:#9db8ff}.hidden{display:none}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none;position:fixed;z-index:20;left:0;top:0;bottom:0;width:260px}
+  .sidebar.open{display:flex}
+  .topbar{position:sticky;top:0;background:var(--bg);z-index:10}
+  .row{flex-direction:column;align-items:stretch}
+  .between{flex-direction:column;align-items:stretch}
+  #view{padding:12px}
+  .card{padding:12px}
+}
