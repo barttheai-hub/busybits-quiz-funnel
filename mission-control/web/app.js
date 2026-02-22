@@ -1,10 +1,24 @@
 const view = document.getElementById('view');
 const sidebar = document.getElementById('sidebar');
 const tokenInput = document.getElementById('token');
+const tokenStatus = document.getElementById('tokenStatus');
+const themeBtn = document.getElementById('themeBtn');
+
+const savedTheme = localStorage.getItem('mc_theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
 
 tokenInput.value = localStorage.getItem('mc_token') || '';
-document.getElementById('saveToken').onclick = () => localStorage.setItem('mc_token', tokenInput.value.trim());
+document.getElementById('saveToken').onclick = () => {
+  localStorage.setItem('mc_token', tokenInput.value.trim());
+  tokenStatus.textContent = 'Saved';
+  setTimeout(() => { tokenStatus.textContent = ''; }, 1200);
+};
 document.getElementById('menuBtn').onclick = () => sidebar.classList.toggle('open');
+themeBtn.onclick = () => {
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', current);
+  localStorage.setItem('mc_theme', current);
+};
 
 let state = { projects: [] };
 
@@ -58,7 +72,11 @@ function bindSubmit(formId, handler) {
 }
 
 function renderError(e) {
-  view.innerHTML = `<div class='card'>Error: ${esc(e.message)}</div>`;
+  view.innerHTML = `<div class='card'><h3>Something went wrong</h3><p class='muted'>${esc(e.message)}</p><p class='muted'>Check API token, then retry.</p></div>`;
+}
+
+function renderLoading(title = 'Loading...') {
+  view.innerHTML = `<div class='card'><h3>${esc(title)}</h3><p class='muted'>Fetching latest data...</p></div>`;
 }
 
 async function loadProjectsCache() {
@@ -80,7 +98,7 @@ async function loadDashboard() {
       <div class="card"><div class="muted">Projects</div><div class="kpi">${d.metrics.projectsCount}</div></div>
     </div>
     <div class="card"><h3>Workload by Owner</h3><div>Me: ${d.byOwner.Me} · OpenClaw: ${d.byOwner.OpenClaw}</div></div>
-    <div class="card"><h3>Today Queue</h3><div class="list">${d.todayTasks.map(t => `<div class='item'><strong>${esc(t.title)}</strong><div class='muted'>${esc(t.owner)} · ${esc(t.status)}${t.dueDate ? ` · due ${esc(t.dueDate)}` : ''}</div></div>`).join('') || '<div class="muted">No tasks</div>'}</div></div>
+    <div class="card"><h3>Today Queue</h3><div class="list">${d.todayTasks.map(t => `<div class='item'><strong>${esc(t.title)}</strong><div class='muted'>${esc(t.owner)} · ${esc(t.status)}${t.dueDate ? ` · due ${esc(t.dueDate)}` : ''}</div></div>`).join('') || '<div class="muted">No tasks yet. Add one in Tasks.</div>'}</div></div>
   `;
 }
 
@@ -387,7 +405,10 @@ const handlers = { dashboard: loadDashboard, notes: loadNotes, tasks: loadTasks,
 
 document.querySelectorAll('[data-view]').forEach(btn => {
   btn.onclick = () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
     if (window.innerWidth < 900) sidebar.classList.remove('open');
+    renderLoading(`Opening ${btn.textContent.trim()}...`);
     handlers[btn.dataset.view]().catch(renderError);
   };
 });

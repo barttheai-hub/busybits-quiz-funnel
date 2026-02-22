@@ -10,18 +10,22 @@
     <div class="app">
       <aside class="sidebar" id="sidebar">
         <div class="brand">Mission Control</div>
-        <button data-view="dashboard">Executive Dashboard</button>
-        <button data-view="notes">Notes</button>
-        <button data-view="tasks">Tasks</button>
-        <button data-view="resources">Resources</button>
-        <button data-view="projects">Projects</button>
-        <button data-view="activity">Activity Feed</button>
+        <button class="nav-btn active" data-view="dashboard">Executive Dashboard</button>
+        <button class="nav-btn" data-view="notes">Notes</button>
+        <button class="nav-btn" data-view="tasks">Tasks</button>
+        <button class="nav-btn" data-view="resources">Resources</button>
+        <button class="nav-btn" data-view="projects">Projects</button>
+        <button class="nav-btn" data-view="activity">Activity Feed</button>
       </aside>
       <main class="main">
         <header class="topbar">
-          <button id="menuBtn">☰</button>
-          <input id="token" placeholder="API token" />
-          <button id="saveToken">Save</button>
+          <button id="menuBtn" aria-label="Open menu">☰</button>
+          <div class="token-wrap">
+            <input id="token" placeholder="API token" />
+            <button id="saveToken" class="primary">Save</button>
+          </div>
+          <button id="themeBtn" title="Toggle theme">◐</button>
+          <span id="tokenStatus" class="muted token-status" aria-live="polite"></span>
         </header>
         <section id="view"></section>
       </main>
