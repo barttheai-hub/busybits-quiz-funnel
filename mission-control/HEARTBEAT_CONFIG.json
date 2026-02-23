@@ -1,6 +1,6 @@
 {
   "mission": "Mission Control only",
-  "phase": "phase1",
+  "phase": "phase2",
   "heartbeat": {
     "enabled": true,
     "intervalMinutes": 30,
@@ -26,9 +26,9 @@
       },
       {
         "id": "dc9aea50-c7a7-4c66-a7df-7e349ff77d52",
-        "name": "Mission Control Phase 2 autonomous loop (armed, disabled)",
+        "name": "Mission Control Phase 2 autonomous loop (armed)",
         "schedule": "every 30m",
-        "enabled": false
+        "enabled": true
       }
     ]
   },
