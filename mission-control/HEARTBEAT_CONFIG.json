@@ -13,12 +13,22 @@
     "sourceOfTruth": true,
     "jobs": [
       {
-        "name": "Mission Control heartbeat every 30m (hard lock)",
-        "schedule": "every 30m"
+        "id": "b5e32f2a-5afd-48af-9712-867c20edf245",
+        "name": "Mission Control Phase 1 heartbeat (main enforcer)",
+        "schedule": "*/30 * * * * America/Denver",
+        "enabled": true
       },
       {
-        "name": "Mission Control heartbeat watchdog (offset +15m)",
-        "schedule": "every 30m (+15m offset)"
+        "id": "ad3c5d86-11e7-4dc4-9cb1-2024dd4d820c",
+        "name": "Mission Control Phase 1 heartbeat (discord visibility)",
+        "schedule": "5,35 * * * * America/Denver",
+        "enabled": true
+      },
+      {
+        "id": "dc9aea50-c7a7-4c66-a7df-7e349ff77d52",
+        "name": "Mission Control Phase 2 autonomous loop (armed, disabled)",
+        "schedule": "every 30m",
+        "enabled": false
       }
     ]
   },
