@@ -5,6 +5,8 @@ const menuBtn = document.getElementById('menuBtn');
 const tokenInput = document.getElementById('token');
 const tokenStatus = document.getElementById('tokenStatus');
 const themeBtn = document.getElementById('themeBtn');
+const quickTaskForm = document.getElementById('quickTaskForm');
+const quickTaskInput = document.getElementById('quickTaskInput');
 
 const savedTheme = localStorage.getItem('mc_theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
@@ -51,6 +53,30 @@ const api = async (path, opts = {}) => {
 
 const esc = (s = '') => s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 const badge = (text, tone = 'neutral') => `<span class="badge ${tone}">${esc(String(text || ''))}</span>`;
+
+quickTaskForm?.addEventListener('submit', async e => {
+  e.preventDefault();
+  const title = String(quickTaskInput?.value || '').trim();
+  if (!title) return;
+  try {
+    await api('/api/tasks', {
+      method: 'POST',
+      body: JSON.stringify({ title, owner: 'OpenClaw', status: 'To Do', priority: 'High' })
+    });
+    if (quickTaskInput) quickTaskInput.value = '';
+    tokenStatus.textContent = 'Quick task added';
+    setTimeout(() => {
+      if (tokenStatus.textContent === 'Quick task added') tokenStatus.textContent = '';
+    }, 1600);
+    const isTasksActive = document.querySelector('[data-view="tasks"].active');
+    if (isTasksActive) loadTasks().catch(renderError);
+  } catch (err) {
+    tokenStatus.textContent = 'Quick add failed';
+    setTimeout(() => {
+      if (tokenStatus.textContent === 'Quick add failed') tokenStatus.textContent = '';
+    }, 1800);
+  }
+});
 
 function sortByMode(items, mode, type) {
   const arr = [...items];

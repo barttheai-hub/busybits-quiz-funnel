@@ -25,6 +25,10 @@
             <input id="token" placeholder="API token" />
             <button id="saveToken" class="primary">Save</button>
           </div>
+          <form id="quickTaskForm" class="quick-task-wrap" autocomplete="off">
+            <input id="quickTaskInput" name="title" placeholder="Quick add task…" maxlength="120" required />
+            <button type="submit" class="primary">+ Task</button>
+          </form>
           <button id="themeBtn" title="Toggle theme">◐</button>
           <span id="tokenStatus" class="muted token-status" aria-live="polite"></span>
         </header>
