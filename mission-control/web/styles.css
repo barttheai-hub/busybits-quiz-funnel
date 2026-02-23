@@ -50,7 +50,13 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-s
 .list{display:grid;gap:8px}
 .item{border:1px solid var(--line);border-radius:12px;padding:10px;background:color-mix(in oklab,var(--card) 93%, var(--bg) 7%)}
 .between{justify-content:space-between;align-items:center}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
 .kpi{font-size:30px;font-weight:700;letter-spacing:.2px}
+.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:12px;line-height:1.6;color:var(--muted);background:var(--bg-elev)}
+.badge.ok{color:#0a7a37;background:color-mix(in oklab,#16a34a 12%, var(--bg-elev));border-color:color-mix(in oklab,#16a34a 30%, var(--line))}
+.badge.warn{color:#9a6700;background:color-mix(in oklab,#f59e0b 12%, var(--bg-elev));border-color:color-mix(in oklab,#f59e0b 30%, var(--line))}
+.badge.danger{color:#b4233a;background:color-mix(in oklab,#ef4444 12%, var(--bg-elev));border-color:color-mix(in oklab,#ef4444 30%, var(--line))}
+.badge.info{color:#1d4ed8;background:color-mix(in oklab,#3b82f6 12%, var(--bg-elev));border-color:color-mix(in oklab,#3b82f6 30%, var(--line))}
 .muted{color:var(--muted)}
 h3{margin:0 0 10px 0;font-size:15px}
 p{margin:8px 0}

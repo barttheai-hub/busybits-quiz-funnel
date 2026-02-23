@@ -38,6 +38,7 @@ const api = async (path, opts = {}) => {
 };
 
 const esc = (s = '') => s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+const badge = (text, tone = 'neutral') => `<span class="badge ${tone}">${esc(String(text || ''))}</span>`;
 
 function sortByMode(items, mode, type) {
   const arr = [...items];
@@ -90,7 +91,7 @@ function projectOptions(selected) {
 async function loadDashboard() {
   const d = await api('/api/dashboard');
   view.innerHTML = `
-    <div class="row">
+    <div class="kpi-grid">
       <div class="card"><div class="muted">Active Tasks</div><div class="kpi">${d.metrics.activeTasks}</div></div>
       <div class="card"><div class="muted">Overdue</div><div class="kpi">${d.metrics.overdueTasks}</div></div>
       <div class="card"><div class="muted">Notes</div><div class="kpi">${d.metrics.notesCount}</div></div>
@@ -201,8 +202,8 @@ async function loadTasks() {
     </div>
     <div class='list'>${tasks.map(t => `
       <div class='item'>
-        <div class='row between'><strong>${esc(t.title)}</strong><span class='muted'>${esc(t.priority)}</span></div>
-        <div class='muted'>${esc(t.owner)} · ${esc(t.status)}${t.dueDate ? ` · due ${esc(t.dueDate)}` : ''}</div>
+        <div class='row between'><strong>${esc(t.title)}</strong>${badge(t.priority, t.priority === 'High' ? 'danger' : t.priority === 'Medium' ? 'warn' : 'ok')}</div>
+        <div class='muted'>${badge(t.owner, 'neutral')} ${badge(t.status, t.status === 'Done' ? 'ok' : t.status === 'In Progress' ? 'info' : 'neutral')}${t.dueDate ? ` ${badge(`due ${t.dueDate}`, 'neutral')}` : ''}</div>
         ${t.description ? `<p>${esc(t.description)}</p>` : ''}
         <div class='row'>
           <button data-status-task='${t.id}' data-next='To Do'>To Do</button>
@@ -287,7 +288,7 @@ async function loadResources() {
     <div class='row between'><h3>Resources Library</h3><div class='row'><input id='res_q' placeholder='Search resources' value='${esc(q)}'><select id='res_sort'><option value='created' ${sort==='created'?'selected':''}>Sort: Created</option><option value='title' ${sort==='title'?'selected':''}>Sort: Title</option></select></div></div>
     <div class='list'>${resources.map(r => `
       <div class='item'>
-        <div class='row between'><strong>${esc(r.title)}</strong><span class='muted'>${esc(r.type)}</span></div>
+        <div class='row between'><strong>${esc(r.title)}</strong>${badge(r.type || 'resource', 'info')}</div>
         <p>${esc(r.preview || '')}</p>
         ${r.url ? `<a href='${esc(r.url)}' target='_blank' rel='noreferrer'>${esc(r.url)}</a>` : ''}
         <div class='row'><button data-toggle-res-edit='${r.id}'>Edit</button><button data-del-res='${r.id}' class='danger'>Delete</button></div>
@@ -351,7 +352,7 @@ async function loadProjects() {
   </div>
   <div class='card'><h3>Projects Overview</h3><div class='list'>${projects.map(p => `
     <div class='item'>
-      <div class='row between'><strong>${esc(p.name)}</strong><span class='muted'>${esc(p.status)} · ${esc(p.health)}</span></div>
+      <div class='row between'><strong>${esc(p.name)}</strong><span>${badge(p.status, p.status === 'Done' ? 'ok' : p.status === 'Paused' ? 'warn' : 'info')} ${badge(p.health, p.health === 'Green' ? 'ok' : p.health === 'Yellow' ? 'warn' : 'danger')}</span></div>
       <div class='muted'>Tasks ${p.taskCount} · Notes ${p.noteCount} · Resources ${p.resourceCount}</div>
       ${p.description ? `<p>${esc(p.description)}</p>` : ''}
       <div class='row'>
