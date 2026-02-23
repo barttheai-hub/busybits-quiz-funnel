@@ -58,3 +58,32 @@ Error generating image: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message
 - Tags: gemini, image, quota
 
 ---
+
+## [ERR-20260223-001] mission-control-api-task-owner-validation
+
+**Logged**: 2026-02-23T11:22:30Z
+**Priority**: medium
+**Status**: pending
+**Area**: config
+
+### Summary
+Mission Control task creation failed because `owner` was set to unsupported value `Ziga`.
+
+### Error
+```
+{"error":{"code":"REQUEST_ERROR","message":"owner must be one of: Me, OpenClaw"}}
+```
+
+### Context
+- Operation: `POST /api/tasks`
+- Payload used `owner: "Ziga"`
+- API enforces owner enum values only
+
+### Suggested Fix
+Use `owner: "Me"` or `owner: "OpenClaw"` when creating tasks.
+
+### Metadata
+- Reproducible: yes
+- Related Files: mission-control/API.md
+
+---
