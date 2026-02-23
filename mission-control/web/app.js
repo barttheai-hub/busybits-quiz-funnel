@@ -54,14 +54,66 @@ const api = async (path, opts = {}) => {
 const esc = (s = '') => s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 const badge = (text, tone = 'neutral') => `<span class="badge ${tone}">${esc(String(text || ''))}</span>`;
 
+function parseQuickTask(raw = '') {
+  let text = String(raw || '').trim();
+  let owner = 'OpenClaw';
+  let priority = 'High';
+  let dueDate = null;
+
+  if (!text) return { title: '', owner, priority, dueDate };
+
+  text = text.replace(/\s@me\b/gi, () => {
+    owner = 'Me';
+    return '';
+  });
+  text = text.replace(/\s@(ai|openclaw)\b/gi, () => {
+    owner = 'OpenClaw';
+    return '';
+  });
+
+  text = text.replace(/\s#(high|h)\b/gi, () => {
+    priority = 'High';
+    return '';
+  });
+  text = text.replace(/\s#(med|medium|m)\b/gi, () => {
+    priority = 'Medium';
+    return '';
+  });
+  text = text.replace(/\s#(low|l)\b/gi, () => {
+    priority = 'Low';
+    return '';
+  });
+
+  text = text.replace(/\s\/(today|tomorrow)\b/gi, (_, when) => {
+    const d = new Date();
+    if (when.toLowerCase() === 'tomorrow') d.setDate(d.getDate() + 1);
+    dueDate = d.toISOString().slice(0, 10);
+    return '';
+  });
+
+  text = text.replace(/\sdue:(\d{4}-\d{2}-\d{2})\b/gi, (_, iso) => {
+    dueDate = iso;
+    return '';
+  });
+
+  const title = text.replace(/\s{2,}/g, ' ').trim();
+  return { title, owner, priority, dueDate };
+}
+
 quickTaskForm?.addEventListener('submit', async e => {
   e.preventDefault();
-  const title = String(quickTaskInput?.value || '').trim();
-  if (!title) return;
+  const parsed = parseQuickTask(quickTaskInput?.value || '');
+  if (!parsed.title) return;
   try {
     await api('/api/tasks', {
       method: 'POST',
-      body: JSON.stringify({ title, owner: 'OpenClaw', status: 'To Do', priority: 'High' })
+      body: JSON.stringify({
+        title: parsed.title,
+        owner: parsed.owner,
+        status: 'To Do',
+        priority: parsed.priority,
+        dueDate: parsed.dueDate
+      })
     });
     if (quickTaskInput) quickTaskInput.value = '';
     tokenStatus.textContent = 'Quick task added';
