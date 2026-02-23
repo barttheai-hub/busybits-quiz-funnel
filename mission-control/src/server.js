@@ -8,6 +8,7 @@ import projectsRouter from './routes/projects.js';
 import resourcesRouter from './routes/resources.js';
 import activityRouter from './routes/activity.js';
 import dashboardRouter from './routes/dashboard.js';
+import focusRouter from './routes/focus.js';
 import { migrate } from './lib/db.js';
 
 const app = express();
@@ -58,6 +59,7 @@ app.use('/api/projects', projectsRouter);
 app.use('/api/resources', resourcesRouter);
 app.use('/api/activity', activityRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/focus', focusRouter);
 
 app.use('/', express.static(path.resolve(process.cwd(), 'web')));
 

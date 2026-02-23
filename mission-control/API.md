@@ -12,6 +12,9 @@ Supports token map via `API_TOKENS_JSON` in `.env` for role-based identities.
 ## Dashboard
 - `GET /api/dashboard`
 
+## Focus (Autonomous Prioritization)
+- `GET /api/focus` → returns top recommended task + ranked queue (uses task priority/status/due date and linked project health)
+
 ## Notes
 - `GET /api/notes?q=&projectId=`
 - `POST /api/notes` `{ title, content, tags?, projectId? }`

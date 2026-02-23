@@ -9,6 +9,7 @@ Mission Control is a practical executive workspace for Ziga + OpenClaw.
 - Resources Library
 - Projects Overview
 - Activity Feed
+- Focus endpoint for autonomous prioritization (`GET /api/focus`)
 - REST API with token auth
 
 ## Run
