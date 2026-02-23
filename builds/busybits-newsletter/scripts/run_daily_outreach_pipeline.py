@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Run BusyBits sponsor outreach pipeline end-to-end.
 
-This orchestrates all existing queue/send/follow-up generators in one command.
+This orchestrates all existing queue/send/follow-up generators in one command,
+and can also log progress directly to Mission Control.
 
 Usage:
   python3 builds/busybits-newsletter/scripts/run_daily_outreach_pipeline.py
   python3 builds/busybits-newsletter/scripts/run_daily_outreach_pipeline.py --date 2026-02-24 --limit 15
+  python3 builds/busybits-newsletter/scripts/run_daily_outreach_pipeline.py --log-progress
 """
 
 from __future__ import annotations
@@ -21,11 +23,54 @@ def run(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True)
 
 
+def maybe_log_progress(root: Path, generated_files: list[Path], run_date: str, should_log: bool) -> None:
+    if not should_log:
+        return
+
+    repo_root = Path(__file__).resolve().parents[3]
+    logger = repo_root / "mission-control" / "scripts" / "log_progress.sh"
+
+    if not logger.exists():
+        print(f"⚠ Mission Control logger not found: {logger}")
+        return
+
+    changed = ", ".join(str(p.as_posix()) for p in generated_files)
+
+    cmd = [
+        str(logger),
+        "--task",
+        "BusyBits sponsor outreach daily pipeline",
+        "--files",
+        changed,
+        "--what",
+        f"Ran end-to-end queue→send-pack→execution-board→follow-up generation for {run_date}.",
+        "--why",
+        "Turns sponsor outreach prep into one repeatable command, cutting daily execution overhead and reducing dropped follow-ups.",
+        "--next",
+        "Send top queued outreach emails, then update tracker statuses after each send.",
+        "--resource-title",
+        f"BusyBits Sponsor Outreach Actions ({run_date})",
+        "--resource-type",
+        "doc",
+        "--resource-url",
+        f"file://{(root / f'sponsor_outreach_actions_{run_date}.md').resolve()}",
+        "--task-status",
+        "In Progress",
+    ]
+
+    run(cmd)
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--root", default="builds/busybits-newsletter")
     p.add_argument("--limit", type=int, default=15)
     p.add_argument("--date", help="YYYY-MM-DD for action queue output (default: today)")
+    p.add_argument(
+        "--log-progress",
+        action="store_true",
+        help="Log a progress note/task/resource to Mission Control after successful pipeline run.",
+    )
     args = p.parse_args()
 
     root = Path(args.root)
@@ -88,6 +133,13 @@ def main() -> None:
         "--output-md",
         str(actions_md),
     ])
+
+    maybe_log_progress(
+        root=root,
+        generated_files=[day_queue_csv, day_queue_md, send_pack_md, board_csv, board_md, actions_csv, actions_md],
+        run_date=run_date,
+        should_log=args.log_progress,
+    )
 
     print("\nPIPELINE_OK")
     print(f"Generated day queue: {day_queue_csv}")
