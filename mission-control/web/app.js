@@ -12,6 +12,12 @@ const quickTaskInput = document.getElementById('quickTaskInput');
 const quickInsertButtons = Array.from(document.querySelectorAll('[data-quick-insert]'));
 
 const QUICK_TASK_DRAFT_KEY = 'mc_quick_task_draft';
+const FORM_DRAFT_KEYS = {
+  create_note: 'mc_draft_create_note',
+  create_task: 'mc_draft_create_task',
+  create_res: 'mc_draft_create_res',
+  create_proj: 'mc_draft_create_proj'
+};
 
 function autosizeQuickTaskInput() {
   if (!quickTaskInput) return;
@@ -24,6 +30,39 @@ function setTokenWrapOpen(isOpen) {
   if (!tokenWrap || !tokenToggle) return;
   tokenWrap.classList.toggle('open', isOpen);
   tokenToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
+function getFormDraft(form) {
+  const data = {};
+  Array.from(form.elements || []).forEach(el => {
+    if (!el.name || el.disabled) return;
+    data[el.name] = el.value;
+  });
+  return data;
+}
+
+function bindFormDraft(formId, storageKey) {
+  const form = document.getElementById(formId);
+  if (!form || !storageKey) return;
+  const persist = () => localStorage.setItem(storageKey, JSON.stringify(getFormDraft(form)));
+  form.addEventListener('input', persist);
+  form.addEventListener('change', persist);
+}
+
+function restoreFormDraft(formId, storageKey) {
+  const form = document.getElementById(formId);
+  if (!form || !storageKey) return;
+  const raw = localStorage.getItem(storageKey);
+  if (!raw) return;
+  try {
+    const data = JSON.parse(raw);
+    Object.entries(data || {}).forEach(([name, value]) => {
+      const el = form.elements.namedItem(name);
+      if (el && typeof el.value !== 'undefined') el.value = value ?? '';
+    });
+  } catch {
+    localStorage.removeItem(storageKey);
+  }
 }
 
 const savedTheme = localStorage.getItem('mc_theme') || 'dark';
@@ -302,6 +341,9 @@ async function loadNotes() {
     </div>
   </div>`;
 
+  restoreFormDraft('create_note', FORM_DRAFT_KEYS.create_note);
+  bindFormDraft('create_note', FORM_DRAFT_KEYS.create_note);
+
   bindSubmit('create_note', async fd => {
     await api('/api/notes', { method: 'POST', body: JSON.stringify({
       title: fd.get('title'),
@@ -309,6 +351,7 @@ async function loadNotes() {
       tags: String(fd.get('tags') || '').split(',').map(s => s.trim()).filter(Boolean),
       projectId: fd.get('projectId') || null
     })});
+    localStorage.removeItem(FORM_DRAFT_KEYS.create_note);
     loadNotes().catch(renderError);
   });
 
@@ -390,11 +433,15 @@ async function loadTasks() {
     </div>
   </div>`;
 
+  restoreFormDraft('create_task', FORM_DRAFT_KEYS.create_task);
+  bindFormDraft('create_task', FORM_DRAFT_KEYS.create_task);
+
   bindSubmit('create_task', async fd => {
     await api('/api/tasks', { method: 'POST', body: JSON.stringify({
       title: fd.get('title'), description: fd.get('description'), owner: fd.get('owner'), status: fd.get('status'),
       priority: fd.get('priority'), dueDate: fd.get('dueDate') || null, projectId: fd.get('projectId') || null
     })});
+    localStorage.removeItem(FORM_DRAFT_KEYS.create_task);
     loadTasks().catch(renderError);
   });
 
@@ -466,10 +513,14 @@ async function loadResources() {
     </div>
   </div>`;
 
+  restoreFormDraft('create_res', FORM_DRAFT_KEYS.create_res);
+  bindFormDraft('create_res', FORM_DRAFT_KEYS.create_res);
+
   bindSubmit('create_res', async fd => {
     await api('/api/resources', { method: 'POST', body: JSON.stringify({
       title: fd.get('title'), type: fd.get('type'), url: fd.get('url'), preview: fd.get('preview'), projectId: fd.get('projectId') || null
     })});
+    localStorage.removeItem(FORM_DRAFT_KEYS.create_res);
     loadResources().catch(renderError);
   });
 
@@ -533,10 +584,14 @@ async function loadProjects() {
       </form>
     </div>`).join('') || '<div class="muted">No projects yet.</div>'}</div></div>`;
 
+  restoreFormDraft('create_proj', FORM_DRAFT_KEYS.create_proj);
+  bindFormDraft('create_proj', FORM_DRAFT_KEYS.create_proj);
+
   bindSubmit('create_proj', async fd => {
     await api('/api/projects', { method: 'POST', body: JSON.stringify({
       name: fd.get('name'), status: fd.get('status'), health: fd.get('health'), description: fd.get('description')
     })});
+    localStorage.removeItem(FORM_DRAFT_KEYS.create_proj);
     loadProjects().catch(renderError);
   });
 
