@@ -4,16 +4,26 @@ const mobileBackdrop = document.getElementById('mobileBackdrop');
 const menuBtn = document.getElementById('menuBtn');
 const tokenInput = document.getElementById('token');
 const tokenStatus = document.getElementById('tokenStatus');
+const tokenToggle = document.getElementById('tokenToggle');
+const tokenWrap = document.getElementById('tokenWrap');
 const themeBtn = document.getElementById('themeBtn');
 const quickTaskForm = document.getElementById('quickTaskForm');
 const quickTaskInput = document.getElementById('quickTaskInput');
 const quickInsertButtons = Array.from(document.querySelectorAll('[data-quick-insert]'));
+
+const QUICK_TASK_DRAFT_KEY = 'mc_quick_task_draft';
 
 function autosizeQuickTaskInput() {
   if (!quickTaskInput) return;
   quickTaskInput.style.height = 'auto';
   const next = Math.min(140, Math.max(40, quickTaskInput.scrollHeight));
   quickTaskInput.style.height = `${next}px`;
+}
+
+function setTokenWrapOpen(isOpen) {
+  if (!tokenWrap || !tokenToggle) return;
+  tokenWrap.classList.toggle('open', isOpen);
+  tokenToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 }
 
 const savedTheme = localStorage.getItem('mc_theme') || 'dark';
@@ -25,6 +35,11 @@ document.getElementById('saveToken').onclick = () => {
   tokenStatus.textContent = 'Saved';
   setTimeout(() => { tokenStatus.textContent = ''; }, 1200);
 };
+
+tokenToggle?.addEventListener('click', () => {
+  const isOpen = tokenWrap?.classList.contains('open');
+  setTokenWrapOpen(!isOpen);
+});
 const toggleMobileMenu = (open) => {
   const shouldOpen = typeof open === 'boolean' ? open : !sidebar.classList.contains('open');
   sidebar.classList.toggle('open', shouldOpen);
@@ -108,7 +123,10 @@ function parseQuickTask(raw = '') {
   return { title, owner, priority, dueDate };
 }
 
-quickTaskInput?.addEventListener('input', autosizeQuickTaskInput);
+quickTaskInput?.addEventListener('input', () => {
+  autosizeQuickTaskInput();
+  localStorage.setItem(QUICK_TASK_DRAFT_KEY, quickTaskInput.value || '');
+});
 quickTaskInput?.addEventListener('keydown', e => {
   if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
     e.preventDefault();
@@ -122,10 +140,16 @@ quickInsertButtons.forEach(btn => {
     const current = quickTaskInput.value || '';
     const needsSpace = current.length > 0 && !/[\s\n]$/.test(current);
     quickTaskInput.value = `${current}${needsSpace ? ' ' : ''}${token}`;
+    localStorage.setItem(QUICK_TASK_DRAFT_KEY, quickTaskInput.value || '');
     quickTaskInput.focus();
     autosizeQuickTaskInput();
   });
 });
+
+if (quickTaskInput) {
+  const savedDraft = localStorage.getItem(QUICK_TASK_DRAFT_KEY);
+  if (savedDraft) quickTaskInput.value = savedDraft;
+}
 autosizeQuickTaskInput();
 
 quickTaskForm?.addEventListener('submit', async e => {
@@ -159,6 +183,7 @@ quickTaskForm?.addEventListener('submit', async e => {
 
     if (quickTaskInput) {
       quickTaskInput.value = '';
+      localStorage.removeItem(QUICK_TASK_DRAFT_KEY);
       autosizeQuickTaskInput();
       quickTaskInput.focus();
     }
@@ -561,6 +586,7 @@ document.querySelectorAll('[data-view]').forEach(btn => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     toggleMobileMenu(false);
+    setTokenWrapOpen(false);
   }
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault();
@@ -572,6 +598,7 @@ document.addEventListener('keydown', e => {
 window.addEventListener('resize', () => {
   if (window.innerWidth >= 901) {
     toggleMobileMenu(false);
+    setTokenWrapOpen(false);
     document.body.style.overflow = '';
   }
 });
