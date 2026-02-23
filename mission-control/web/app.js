@@ -1,5 +1,7 @@
 const view = document.getElementById('view');
 const sidebar = document.getElementById('sidebar');
+const mobileBackdrop = document.getElementById('mobileBackdrop');
+const menuBtn = document.getElementById('menuBtn');
 const tokenInput = document.getElementById('token');
 const tokenStatus = document.getElementById('tokenStatus');
 const themeBtn = document.getElementById('themeBtn');
@@ -13,7 +15,17 @@ document.getElementById('saveToken').onclick = () => {
   tokenStatus.textContent = 'Saved';
   setTimeout(() => { tokenStatus.textContent = ''; }, 1200);
 };
-document.getElementById('menuBtn').onclick = () => sidebar.classList.toggle('open');
+const toggleMobileMenu = (open) => {
+  const shouldOpen = typeof open === 'boolean' ? open : !sidebar.classList.contains('open');
+  sidebar.classList.toggle('open', shouldOpen);
+  mobileBackdrop?.classList.toggle('open', shouldOpen);
+  menuBtn?.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+  document.body.style.overflow = shouldOpen && window.innerWidth < 901 ? 'hidden' : '';
+};
+
+menuBtn.onclick = () => toggleMobileMenu();
+mobileBackdrop?.addEventListener('click', () => toggleMobileMenu(false));
+
 themeBtn.onclick = () => {
   const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', current);
@@ -408,17 +420,27 @@ document.querySelectorAll('[data-view]').forEach(btn => {
   btn.onclick = () => {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    if (window.innerWidth < 900) sidebar.classList.remove('open');
+    if (window.innerWidth < 900) toggleMobileMenu(false);
     renderLoading(`Opening ${btn.textContent.trim()}...`);
     handlers[btn.dataset.view]().catch(renderError);
   };
 });
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    toggleMobileMenu(false);
+  }
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault();
     const input = document.querySelector('input[placeholder*="Search"], #notes_q, #res_q');
     if (input) input.focus();
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 901) {
+    toggleMobileMenu(false);
+    document.body.style.overflow = '';
   }
 });
 

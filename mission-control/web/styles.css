@@ -39,6 +39,8 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-s
 
 .main{display:flex;flex-direction:column}
 .topbar{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;background:color-mix(in oklab,var(--bg) 85%, transparent);backdrop-filter: blur(8px)}
+.menu-btn{display:none}
+.mobile-backdrop{display:none}
 .token-wrap{display:flex;gap:8px;align-items:center;flex:1}
 .token-status{font-size:12px;min-width:84px}
 #view{padding:18px;display:grid;gap:14px}
@@ -75,11 +77,18 @@ button.danger{border-color:color-mix(in oklab,var(--danger) 50%, var(--line));co
 
 @media (max-width:900px){
   .app{grid-template-columns:1fr}
-  .sidebar{display:none;position:fixed;z-index:30;left:0;top:0;bottom:0;width:270px}
-  .sidebar.open{display:flex}
-  .topbar{position:sticky;top:0;z-index:20}
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center;min-width:42px}
+  .sidebar{display:flex;position:fixed;z-index:30;left:0;top:0;bottom:0;width:min(84vw,300px);transform:translateX(-105%);transition:transform .2s ease}
+  .sidebar.open{transform:translateX(0)}
+  .mobile-backdrop{display:block;position:fixed;inset:0;background:rgba(2,6,23,.55);z-index:25;opacity:0;pointer-events:none;transition:opacity .2s ease}
+  .mobile-backdrop.open{opacity:1;pointer-events:auto}
+  .topbar{position:sticky;top:0;z-index:20;padding-top:max(10px, env(safe-area-inset-top))}
   .row,.between{flex-direction:column;align-items:stretch}
   #view{padding:12px}
   .card{padding:12px}
   .token-wrap{min-width:0}
+}
+
+@media (min-width:901px){
+  #menuBtn{display:none}
 }

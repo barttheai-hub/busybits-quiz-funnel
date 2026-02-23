@@ -17,9 +17,10 @@
         <button class="nav-btn" data-view="projects">Projects</button>
         <button class="nav-btn" data-view="activity">Activity Feed</button>
       </aside>
+      <div id="mobileBackdrop" class="mobile-backdrop" aria-hidden="true"></div>
       <main class="main">
         <header class="topbar">
-          <button id="menuBtn" aria-label="Open menu">☰</button>
+          <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
           <div class="token-wrap">
             <input id="token" placeholder="API token" />
             <button id="saveToken" class="primary">Save</button>
