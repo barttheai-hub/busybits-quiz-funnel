@@ -416,13 +416,19 @@ async function loadActivity() {
 
 const handlers = { dashboard: loadDashboard, notes: loadNotes, tasks: loadTasks, resources: loadResources, projects: loadProjects, activity: loadActivity };
 
+function setActiveView(viewName) {
+  document.querySelectorAll('[data-view]').forEach(el => {
+    el.classList.toggle('active', el.dataset.view === viewName);
+  });
+}
+
 document.querySelectorAll('[data-view]').forEach(btn => {
   btn.onclick = () => {
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    const nextView = btn.dataset.view;
+    setActiveView(nextView);
     if (window.innerWidth < 900) toggleMobileMenu(false);
     renderLoading(`Opening ${btn.textContent.trim()}...`);
-    handlers[btn.dataset.view]().catch(renderError);
+    handlers[nextView]().catch(renderError);
   };
 });
 
@@ -444,4 +450,5 @@ window.addEventListener('resize', () => {
   }
 });
 
+setActiveView('dashboard');
 loadDashboard().catch(renderError);

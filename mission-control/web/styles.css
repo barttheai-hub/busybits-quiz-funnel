@@ -41,6 +41,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-s
 .topbar{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;background:color-mix(in oklab,var(--bg) 85%, transparent);backdrop-filter: blur(8px)}
 .menu-btn{display:none}
 .mobile-backdrop{display:none}
+.mobile-tabs{display:none}
 .token-wrap{display:flex;gap:8px;align-items:center;flex:1}
 .token-status{font-size:12px;min-width:84px}
 #view{padding:18px;display:grid;gap:14px}
@@ -75,6 +76,9 @@ button.primary:hover{filter:brightness(1.05)}
 button.danger{border-color:color-mix(in oklab,var(--danger) 50%, var(--line));color:var(--danger)}
 .hidden{display:none}
 
+.tab-btn{background:transparent;border:1px solid transparent;color:var(--muted);padding:10px 8px;border-radius:10px;min-width:0;font-size:12px}
+.tab-btn.active{color:var(--text);background:var(--accent-soft);border-color:color-mix(in oklab,var(--accent) 30%, var(--line))}
+
 @media (max-width:900px){
   .app{grid-template-columns:1fr}
   .menu-btn{display:inline-flex;align-items:center;justify-content:center;min-width:42px}
@@ -84,9 +88,10 @@ button.danger{border-color:color-mix(in oklab,var(--danger) 50%, var(--line));co
   .mobile-backdrop.open{opacity:1;pointer-events:auto}
   .topbar{position:sticky;top:0;z-index:20;padding-top:max(10px, env(safe-area-inset-top))}
   .row,.between{flex-direction:column;align-items:stretch}
-  #view{padding:12px}
+  #view{padding:12px;padding-bottom:92px}
   .card{padding:12px}
   .token-wrap{min-width:0}
+  .mobile-tabs{display:grid;position:fixed;left:0;right:0;bottom:0;z-index:22;grid-template-columns:repeat(5,1fr);gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:color-mix(in oklab,var(--bg-elev) 88%, transparent);backdrop-filter:blur(10px)}
 }
 
 @media (min-width:901px){
