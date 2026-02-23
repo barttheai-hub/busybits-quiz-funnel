@@ -30,9 +30,10 @@ function dueDateScore(dueDate) {
 }
 
 function healthScore(health) {
-  if (health === 'At Risk') return 3;
-  if (health === 'Watch') return 2;
-  if (health === 'Healthy') return 1;
+  // Current projects schema uses Green/Yellow/Red; keep legacy aliases for compatibility.
+  if (health === 'Red' || health === 'At Risk') return 3;
+  if (health === 'Yellow' || health === 'Watch') return 2;
+  if (health === 'Green' || health === 'Healthy') return 1;
   return 0;
 }
 
