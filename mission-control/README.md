@@ -28,6 +28,11 @@ Background control:
 - `npm run stop:bg`
 - `npm run restart:bg`
 
+Heartbeat logging helper:
+- `./scripts/log_progress.sh --task "..." --what "..." --why "..." --next "..." --files "a,b"`
+- Optional: `--resource-title`, `--resource-type`, `--resource-url`
+- Uses `API_TOKEN` from `mission-control/.env` automatically (or `MISSION_CONTROL_API_TOKEN`).
+
 Use a token from `.env` in the web UI top bar.
 
 Recommended auth config:
