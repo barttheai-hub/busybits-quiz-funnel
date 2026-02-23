@@ -102,24 +102,40 @@ function parseQuickTask(raw = '') {
 
 quickTaskForm?.addEventListener('submit', async e => {
   e.preventDefault();
-  const parsed = parseQuickTask(quickTaskInput?.value || '');
-  if (!parsed.title) return;
+  const raw = quickTaskInput?.value || '';
+  const lines = raw
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean)
+    .slice(0, 12);
+
+  if (!lines.length) return;
+
+  const parsedTasks = lines
+    .map(parseQuickTask)
+    .filter(task => task.title);
+
+  if (!parsedTasks.length) return;
+
   try {
-    await api('/api/tasks', {
+    await Promise.all(parsedTasks.map(task => api('/api/tasks', {
       method: 'POST',
       body: JSON.stringify({
-        title: parsed.title,
-        owner: parsed.owner,
+        title: task.title,
+        owner: task.owner,
         status: 'To Do',
-        priority: parsed.priority,
-        dueDate: parsed.dueDate
+        priority: task.priority,
+        dueDate: task.dueDate
       })
-    });
+    })));
+
     if (quickTaskInput) quickTaskInput.value = '';
-    tokenStatus.textContent = 'Quick task added';
+    const addedCount = parsedTasks.length;
+    tokenStatus.textContent = addedCount === 1 ? 'Quick task added' : `${addedCount} tasks added`;
     setTimeout(() => {
-      if (tokenStatus.textContent === 'Quick task added') tokenStatus.textContent = '';
-    }, 1600);
+      if (tokenStatus.textContent === 'Quick task added' || tokenStatus.textContent === `${addedCount} tasks added`) tokenStatus.textContent = '';
+    }, 1800);
+
     const isTasksActive = document.querySelector('[data-view="tasks"].active');
     if (isTasksActive) loadTasks().catch(renderError);
   } catch (err) {
