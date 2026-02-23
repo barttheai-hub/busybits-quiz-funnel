@@ -17,9 +17,16 @@ Mission Control is a practical executive workspace for Ziga + OpenClaw.
 2. Install deps:
    - `npm install`
 3. Start:
-   - `npm run dev`
+   - Dev: `npm run dev`
+   - Normal: `npm start`
+   - Background (survives tool session SIGKILL): `npm run start:bg`
 4. Open:
    - `http://localhost:8787`
+
+Background control:
+- `npm run status:bg`
+- `npm run stop:bg`
+- `npm run restart:bg`
 
 Use a token from `.env` in the web UI top bar.
 

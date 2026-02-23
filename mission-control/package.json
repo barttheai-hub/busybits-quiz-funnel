@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "dev": "node --watch src/server.js",
+    "smoke": "bash scripts/smoke.sh",
+    "start:bg": "bash scripts/service.sh start",
+    "stop:bg": "bash scripts/service.sh stop",
+    "restart:bg": "bash scripts/service.sh restart",
+    "status:bg": "bash scripts/service.sh status"
   },
   "dependencies": {
     "better-sqlite3": "^11.7.0",
