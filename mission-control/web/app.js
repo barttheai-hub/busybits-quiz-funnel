@@ -7,6 +7,14 @@ const tokenStatus = document.getElementById('tokenStatus');
 const themeBtn = document.getElementById('themeBtn');
 const quickTaskForm = document.getElementById('quickTaskForm');
 const quickTaskInput = document.getElementById('quickTaskInput');
+const quickInsertButtons = Array.from(document.querySelectorAll('[data-quick-insert]'));
+
+function autosizeQuickTaskInput() {
+  if (!quickTaskInput) return;
+  quickTaskInput.style.height = 'auto';
+  const next = Math.min(140, Math.max(40, quickTaskInput.scrollHeight));
+  quickTaskInput.style.height = `${next}px`;
+}
 
 const savedTheme = localStorage.getItem('mc_theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
@@ -100,6 +108,26 @@ function parseQuickTask(raw = '') {
   return { title, owner, priority, dueDate };
 }
 
+quickTaskInput?.addEventListener('input', autosizeQuickTaskInput);
+quickTaskInput?.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    e.preventDefault();
+    quickTaskForm?.requestSubmit();
+  }
+});
+quickInsertButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (!quickTaskInput) return;
+    const token = btn.dataset.quickInsert;
+    const current = quickTaskInput.value || '';
+    const needsSpace = current.length > 0 && !/[\s\n]$/.test(current);
+    quickTaskInput.value = `${current}${needsSpace ? ' ' : ''}${token}`;
+    quickTaskInput.focus();
+    autosizeQuickTaskInput();
+  });
+});
+autosizeQuickTaskInput();
+
 quickTaskForm?.addEventListener('submit', async e => {
   e.preventDefault();
   const raw = quickTaskInput?.value || '';
@@ -129,7 +157,11 @@ quickTaskForm?.addEventListener('submit', async e => {
       })
     })));
 
-    if (quickTaskInput) quickTaskInput.value = '';
+    if (quickTaskInput) {
+      quickTaskInput.value = '';
+      autosizeQuickTaskInput();
+      quickTaskInput.focus();
+    }
     const addedCount = parsedTasks.length;
     tokenStatus.textContent = addedCount === 1 ? 'Quick task added' : `${addedCount} tasks added`;
     setTimeout(() => {

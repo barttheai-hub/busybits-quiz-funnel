@@ -26,8 +26,16 @@
             <button id="saveToken" class="primary">Save</button>
           </div>
           <form id="quickTaskForm" class="quick-task-wrap" autocomplete="off">
-            <input id="quickTaskInput" name="title" placeholder="Quick add (1 per line)… (@me #med /tomorrow due:YYYY-MM-DD)" maxlength="1000" required />
+            <textarea id="quickTaskInput" name="title" placeholder="Quick add (1 per line)… (@me #med /tomorrow due:YYYY-MM-DD)" maxlength="1000" rows="1" required></textarea>
             <button type="submit" class="primary">+ Task</button>
+            <div class="quick-chip-row" aria-label="Quick add shortcuts">
+              <button type="button" class="quick-chip" data-quick-insert="@me">@me</button>
+              <button type="button" class="quick-chip" data-quick-insert="@openclaw">@openclaw</button>
+              <button type="button" class="quick-chip" data-quick-insert="#high">#high</button>
+              <button type="button" class="quick-chip" data-quick-insert="#med">#med</button>
+              <button type="button" class="quick-chip" data-quick-insert="/today">/today</button>
+              <button type="button" class="quick-chip" data-quick-insert="/tomorrow">/tomorrow</button>
+            </div>
           </form>
           <button id="themeBtn" title="Toggle theme">◐</button>
           <span id="tokenStatus" class="muted token-status" aria-live="polite"></span>
