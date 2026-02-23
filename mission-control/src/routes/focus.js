@@ -36,9 +36,14 @@ function healthScore(health) {
   return 0;
 }
 
-router.get('/', (_req, res) => {
+router.get('/', (req, res) => {
+  const owner = typeof req.query.owner === 'string' ? req.query.owner.trim() : '';
+  const includeDone = req.query.includeDone === 'true';
+  const limit = Number.isFinite(Number(req.query.limit)) ? Math.min(Math.max(Number(req.query.limit), 1), 50) : 10;
+
   const tasks = parseRows(db.prepare(`SELECT * FROM tasks ORDER BY updated_at DESC`).all())
-    .filter(t => t.status !== 'Done');
+    .filter(t => includeDone || t.status !== 'Done')
+    .filter(t => !owner || t.owner === owner);
   const projects = parseRows(db.prepare(`SELECT * FROM projects`).all());
 
   const projectMap = new Map(projects.map(p => [p.id, p]));
@@ -65,12 +70,19 @@ router.get('/', (_req, res) => {
             : 'Schedule'
       };
     })
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      if (a.dueDate && b.dueDate) return String(a.dueDate).localeCompare(String(b.dueDate));
+      if (a.dueDate) return -1;
+      if (b.dueDate) return 1;
+      return String(b.updatedAt || '').localeCompare(String(a.updatedAt || ''));
+    });
 
   res.json({
     generatedAt: new Date().toISOString(),
+    filters: { owner: owner || null, includeDone, limit },
     top: ranked[0] || null,
-    queue: ranked.slice(0, 10)
+    queue: ranked.slice(0, limit)
   });
 });
 

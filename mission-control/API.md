@@ -14,6 +14,10 @@ Supports token map via `API_TOKENS_JSON` in `.env` for role-based identities.
 
 ## Focus (Autonomous Prioritization)
 - `GET /api/focus` → returns top recommended task + ranked queue (uses task priority/status/due date and linked project health)
+- Query params:
+  - `owner=<name>` (optional): only rank tasks for a specific owner (e.g., `OpenClaw`)
+  - `includeDone=true|false` (optional, default false)
+  - `limit=1..50` (optional, default 10)
 
 ## Notes
 - `GET /api/notes?q=&projectId=`
