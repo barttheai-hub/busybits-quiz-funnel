@@ -36,6 +36,17 @@ function healthScore(health) {
   return 0;
 }
 
+function stalenessScore(updatedAt, status) {
+  if (!updatedAt || status === 'Done') return 0;
+  const updated = new Date(updatedAt);
+  if (Number.isNaN(updated.getTime())) return 0;
+  const hours = (Date.now() - updated.getTime()) / (1000 * 60 * 60);
+  if (hours >= 72) return 3;
+  if (hours >= 48) return 2;
+  if (hours >= 24) return 1;
+  return 0;
+}
+
 router.get('/', (req, res) => {
   const owner = typeof req.query.owner === 'string' ? req.query.owner.trim() : '';
   const includeDone = req.query.includeDone === 'true';
@@ -51,15 +62,24 @@ router.get('/', (req, res) => {
   const ranked = tasks
     .map(task => {
       const project = task.projectId ? projectMap.get(task.projectId) : null;
+      const stale = stalenessScore(task.updatedAt, task.status);
       const score =
         priorityScore(task.priority) * 4 +
         statusScore(task.status) * 2 +
         dueDateScore(task.dueDate) * 3 +
-        healthScore(project?.health);
+        healthScore(project?.health) +
+        stale * 2;
 
       return {
         ...task,
         score,
+        scoreBreakdown: {
+          priority: priorityScore(task.priority) * 4,
+          status: statusScore(task.status) * 2,
+          dueDate: dueDateScore(task.dueDate) * 3,
+          projectHealth: healthScore(project?.health),
+          stale: stale * 2
+        },
         project: project
           ? { id: project.id, name: project.name, status: project.status, health: project.health }
           : null,
