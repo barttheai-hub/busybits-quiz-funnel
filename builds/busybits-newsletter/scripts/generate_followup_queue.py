@@ -25,6 +25,39 @@ def parse_date(raw: str | None) -> date | None:
     return datetime.strptime(raw, "%Y-%m-%d").date()
 
 
+def build_email_draft(row: dict[str, str]) -> str:
+    company = row["company"]
+    angle = row["angle"]
+    action_type = row["action_type"]
+
+    if action_type == "send_initial":
+        return (
+            f"Hey {company} team —\n\n"
+            "I run BusyBits, a high-performance newsletter for founders/operators.\n\n"
+            f"I think there’s a clean pilot sponsor fit around this angle: {angle}.\n"
+            "If useful, I can send one short pilot option (placement + timing + rate).\n\n"
+            "Open to a quick test?\n\n"
+            "— Ziga"
+        )
+
+    if action_type == "followup_1":
+        return (
+            f"Hey {company} team — quick bump on this.\n\n"
+            f"Still think {angle} is a strong fit for a BusyBits pilot sponsor slot. "
+            "Happy to send the simple one-issue option if useful.\n\n"
+            "Open to a quick test?\n\n"
+            "— Ziga"
+        )
+
+    return (
+        f"Hey {company} team — final nudge from me.\n\n"
+        "If sponsorship planning is full right now, no worries. "
+        f"If there’s still room, {angle} is the angle I’d test first with BusyBits.\n\n"
+        "Should I send the 1-issue pilot details?\n\n"
+        "— Ziga"
+    )
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--input", required=True)
@@ -126,22 +159,29 @@ def main() -> None:
         f"# Sponsor Outreach Actions — {action_date.isoformat()}",
         "",
         f"Generated from: `{args.input}`",
-        f"Actions due today: **{total}** (with contact ready: **{with_contact}**) ",
+        f"Actions due: **{total}** (with contact ready: **{with_contact}**) ",
         "",
-        "## Queue",
+        "## Queue + Drafts",
         "",
     ]
 
     if not actions:
-        lines.append("No outreach actions due today.")
+        lines.append("No outreach actions due for this date.")
     else:
         for i, r in enumerate(actions, 1):
+            draft = build_email_draft(r)
             lines.extend(
                 [
                     f"{i}. **{r['company']}** — {r['action_type']} ({r['priority']})",
                     f"   - Contact ready: {r['has_contact']} | Email: {r['contact_email'] or 'n/a'}",
                     f"   - Subject: {r['subject']}",
                     f"   - Next: {r['next_action']}",
+                    "",
+                    "   Draft:",
+                    "",
+                    "```",
+                    draft,
+                    "```",
                     "",
                 ]
             )
