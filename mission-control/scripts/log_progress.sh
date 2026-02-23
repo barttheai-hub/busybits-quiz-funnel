@@ -9,7 +9,8 @@ set -euo pipefail
 #     --why "Saves time" \
 #     --next "Do Z" \
 #     [--files "a.md, b.md"] \
-#     [--resource-title "Doc"] [--resource-type "doc"] [--resource-url "file://..."]
+#     [--resource-title "Doc"] [--resource-type "doc"] [--resource-url "file://..."] \
+#     [--task-status "In Progress|Blocked|Done"]
 
 BASE_URL="${MISSION_CONTROL_BASE_URL:-http://localhost:8787}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -26,6 +27,7 @@ FILES=""
 RESOURCE_TITLE=""
 RESOURCE_TYPE="doc"
 RESOURCE_URL=""
+TASK_STATUS="In Progress"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -37,6 +39,7 @@ while [[ $# -gt 0 ]]; do
     --resource-title) RESOURCE_TITLE="$2"; shift 2;;
     --resource-type) RESOURCE_TYPE="$2"; shift 2;;
     --resource-url) RESOURCE_URL="$2"; shift 2;;
+    --task-status) TASK_STATUS="$2"; shift 2;;
     *) echo "Unknown arg: $1" >&2; exit 1;;
   esac
 done
@@ -46,10 +49,8 @@ if [[ -z "$TASK" || -z "$WHAT" || -z "$WHY" || -z "$NEXT" ]]; then
   exit 1
 fi
 
-if [[ -z "$TOKEN" ]]; then
-  if [[ -f "$ENV_FILE" ]]; then
-    TOKEN="$(grep '^API_TOKEN=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
-  fi
+if [[ -z "$TOKEN" && -f "$ENV_FILE" ]]; then
+  TOKEN="$(grep '^API_TOKEN=' "$ENV_FILE" | head -n1 | cut -d= -f2-)"
 fi
 
 if [[ -z "$TOKEN" ]]; then
@@ -59,12 +60,12 @@ fi
 
 CONTENT="Task: ${TASK}\nChanged files: ${FILES:-n/a}\nWhat changed: ${WHAT}\nWhy it helps: ${WHY}\nNext: ${NEXT}"
 
-NOTE_PAYLOAD=$(python3 - <<PY
-import json
+NOTE_PAYLOAD=$(TASK="$TASK" CONTENT="$CONTENT" PROJECT_ID="$PROJECT_ID" python3 - <<'PY'
+import json, os
 print(json.dumps({
-  "title": f"Progress — {"""$TASK"""}",
-  "content": """$CONTENT""",
-  "projectId": """$PROJECT_ID""",
+  "title": f"Progress — {os.environ['TASK']}",
+  "content": os.environ["CONTENT"],
+  "projectId": os.environ["PROJECT_ID"],
   "tags": ["heartbeat", "autonomous", "progress"]
 }))
 PY
@@ -80,14 +81,14 @@ NOTE_ID=$(printf '%s' "$NOTE_JSON" | python3 -c 'import sys,json; obj=json.load(
 
 RESOURCE_ID=""
 if [[ -n "$RESOURCE_TITLE" ]]; then
-  RES_PAYLOAD=$(python3 - <<PY
-import json
+  RES_PAYLOAD=$(RESOURCE_TITLE="$RESOURCE_TITLE" RESOURCE_TYPE="$RESOURCE_TYPE" RESOURCE_URL="$RESOURCE_URL" PROJECT_ID="$PROJECT_ID" python3 - <<'PY'
+import json, os
 print(json.dumps({
-  "title": """$RESOURCE_TITLE""",
-  "type": """$RESOURCE_TYPE""",
-  "url": """$RESOURCE_URL""",
+  "title": os.environ["RESOURCE_TITLE"],
+  "type": os.environ["RESOURCE_TYPE"],
+  "url": os.environ["RESOURCE_URL"],
   "preview": "Auto-logged from heartbeat progress",
-  "projectId": """$PROJECT_ID"""
+  "projectId": os.environ["PROJECT_ID"]
 }))
 PY
 )
@@ -99,26 +100,48 @@ PY
   RESOURCE_ID=$(printf '%s' "$RES_JSON" | python3 -c 'import sys,json; obj=json.load(sys.stdin); print(obj.get("id",""))')
 fi
 
-TASK_PAYLOAD=$(python3 - <<PY
-import json
+# Upsert task by title+owner to avoid duplicate task spam on every heartbeat.
+EXISTING_ID=$(curl -sS \
+  -H "x-api-token: $TOKEN" \
+  "$BASE_URL/api/tasks?owner=OpenClaw" \
+  | TASK="$TASK" python3 -c 'import os,sys,json; rows=json.load(sys.stdin); t=os.environ["TASK"]; print(next((r.get("id","") for r in rows if r.get("title")==t and r.get("owner")=="OpenClaw"), ""))')
+
+if [[ -n "$EXISTING_ID" ]]; then
+  TASK_PAYLOAD=$(WHY="$WHY" TASK_STATUS="$TASK_STATUS" python3 - <<'PY'
+import json, os
 print(json.dumps({
-  "title": """$TASK""",
-  "description": """$WHY""",
-  "owner": "OpenClaw",
-  "status": "In Progress",
-  "priority": "High",
-  "projectId": """$PROJECT_ID"""
+  "description": os.environ["WHY"],
+  "status": os.environ["TASK_STATUS"],
+  "priority": "High"
 }))
 PY
 )
-
-TASK_JSON=$(curl -sS -X POST \
-  -H "x-api-token: $TOKEN" \
-  -H 'content-type: application/json' \
-  "$BASE_URL/api/tasks" \
-  -d "$TASK_PAYLOAD")
-
-TASK_ID=$(printf '%s' "$TASK_JSON" | python3 -c 'import sys,json; obj=json.load(sys.stdin); print(obj.get("id",""))')
+  TASK_JSON=$(curl -sS -X PUT \
+    -H "x-api-token: $TOKEN" \
+    -H 'content-type: application/json' \
+    "$BASE_URL/api/tasks/$EXISTING_ID" \
+    -d "$TASK_PAYLOAD")
+  TASK_ID="$EXISTING_ID"
+else
+  TASK_PAYLOAD=$(TASK="$TASK" WHY="$WHY" TASK_STATUS="$TASK_STATUS" PROJECT_ID="$PROJECT_ID" python3 - <<'PY'
+import json, os
+print(json.dumps({
+  "title": os.environ["TASK"],
+  "description": os.environ["WHY"],
+  "owner": "OpenClaw",
+  "status": os.environ["TASK_STATUS"],
+  "priority": "High",
+  "projectId": os.environ["PROJECT_ID"]
+}))
+PY
+)
+  TASK_JSON=$(curl -sS -X POST \
+    -H "x-api-token: $TOKEN" \
+    -H 'content-type: application/json' \
+    "$BASE_URL/api/tasks" \
+    -d "$TASK_PAYLOAD")
+  TASK_ID=$(printf '%s' "$TASK_JSON" | python3 -c 'import sys,json; obj=json.load(sys.stdin); print(obj.get("id",""))')
+fi
 
 echo "NOTE_ID=${NOTE_ID}"
 echo "RESOURCE_ID=${RESOURCE_ID}"
