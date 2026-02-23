@@ -8,8 +8,33 @@
     "wakeMode": "now",
     "message": "Read HEARTBEAT.md and execute only Mission Control work. If concrete progress exists, respond in format: Task / Changed files / What changed / Why it helps / Next. If no concrete progress exists, reply HEARTBEAT_OK."
   },
+  "openclawCron": {
+    "storePath": "~/.openclaw/cron/jobs.json",
+    "sourceOfTruth": true,
+    "jobs": [
+      {
+        "name": "Mission Control heartbeat every 30m (hard lock)",
+        "schedule": "every 30m"
+      },
+      {
+        "name": "Mission Control heartbeat watchdog (offset +15m)",
+        "schedule": "every 30m (+15m offset)"
+      }
+    ]
+  },
   "rules": {
-    "allowOnly": ["code", "copy", "mission-control"],
-    "forbid": ["non-mission proactive loops", "image generation", "audio generation", "video generation", "outreach", "account creation"]
+    "allowOnly": [
+      "code",
+      "copy",
+      "mission-control"
+    ],
+    "forbid": [
+      "non-mission proactive loops",
+      "image generation",
+      "audio generation",
+      "video generation",
+      "outreach",
+      "account creation"
+    ]
   }
 }
