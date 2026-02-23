@@ -30,4 +30,6 @@
 - [x] `npm run smoke` passes
 
 ## Status
-Phase 1 implementation complete and operational. Remaining work is incremental polish, not blockers.
+Phase 1 implementation complete, polished, and operational.
+Final handoff verified on 2026-02-23 (`npm run start:bg`, `npm run status:bg`, `npm run smoke` => `SMOKE_OK`).
+See `PHASE1_HANDOFF.md` for release summary and ops commands.
