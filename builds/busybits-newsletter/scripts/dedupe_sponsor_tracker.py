@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -29,6 +30,14 @@ def norm(s: str) -> str:
     return " ".join((s or "").strip().lower().split())
 
 
+def company_key(s: str) -> str:
+    s = norm(s)
+    s = re.sub(r"[\.,'&()/-]", " ", s)
+    s = re.sub(r"\b(inc|llc|ltd|limited|corp|corporation|co|company)\b", "", s)
+    s = " ".join(s.split())
+    return s
+
+
 def parse_date(value: str) -> int:
     value = (value or "").strip()
     if not value:
@@ -41,11 +50,23 @@ def parse_date(value: str) -> int:
     return 0
 
 
+def recency_score(row: dict[str, str]) -> int:
+    explicit = parse_date(row.get("last_contacted", ""))
+    if explicit:
+        return explicit
+
+    notes = row.get("notes", "")
+    m = re.search(r"\b(20\d{2}-\d{2}-\d{2})\b", notes)
+    if m:
+        return parse_date(m.group(1))
+    return 0
+
+
 def row_score(row: dict[str, str]) -> tuple[int, int, int]:
     status = norm(row.get("status", ""))
     status_score = STATUS_SCORE.get(status, 10)
     completeness = sum(1 for k, v in row.items() if (v or "").strip())
-    recency = parse_date(row.get("last_contacted", ""))
+    recency = recency_score(row)
     has_email = 1 if (row.get("contact_email", "").strip()) else 0
     # tuple order matters for max()
     return (status_score + has_email * 5, completeness, recency)
@@ -66,7 +87,7 @@ def main() -> None:
 
     groups: dict[str, list[dict[str, str]]] = {}
     for r in rows:
-        key = norm(r.get("company", "")) or f"__row_{len(groups)}"
+        key = company_key(r.get("company", "")) or f"__row_{len(groups)}"
         groups.setdefault(key, []).append(r)
 
     deduped: list[dict[str, str]] = []
