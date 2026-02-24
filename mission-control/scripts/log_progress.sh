@@ -10,7 +10,8 @@ set -euo pipefail
 #     --next "Do Z" \
 #     [--files "a.md, b.md"] \
 #     [--resource-title "Doc"] [--resource-type "doc"] [--resource-url "file://..."] \
-#     [--task-status "In Progress|Blocked|Done"]
+#     [--task-status "In Progress|Blocked|Done"] \
+#     [--impact-type "Revenue|Time Saving|System|Other"] [--impact-score 0..10]
 #
 # Or parse heartbeat summary text automatically:
 #   ./scripts/log_progress.sh --summary-file /tmp/heartbeat.txt
@@ -32,6 +33,8 @@ RESOURCE_TITLE=""
 RESOURCE_TYPE="doc"
 RESOURCE_URL=""
 TASK_STATUS="In Progress"
+IMPACT_TYPE="System"
+IMPACT_SCORE="8"
 SUMMARY_FILE=""
 SUMMARY_TEXT=""
 
@@ -46,6 +49,8 @@ while [[ $# -gt 0 ]]; do
     --resource-type) RESOURCE_TYPE="$2"; shift 2;;
     --resource-url) RESOURCE_URL="$2"; shift 2;;
     --task-status) TASK_STATUS="$2"; shift 2;;
+    --impact-type) IMPACT_TYPE="$2"; shift 2;;
+    --impact-score) IMPACT_SCORE="$2"; shift 2;;
     --summary-file) SUMMARY_FILE="$2"; shift 2;;
     --summary-text) SUMMARY_TEXT="$2"; shift 2;;
     *) echo "Unknown arg: $1" >&2; exit 1;;
@@ -103,7 +108,43 @@ if [[ -z "$TOKEN" ]]; then
   exit 1
 fi
 
+if ! [[ "$IMPACT_SCORE" =~ ^([0-9]|10)$ ]]; then
+  echo "Invalid --impact-score '$IMPACT_SCORE' (must be integer 0..10)" >&2
+  exit 1
+fi
+
 CONTENT="Task: ${TASK}\nChanged files: ${FILES:-n/a}\nWhat changed: ${WHAT}\nWhy it helps: ${WHY}\nNext: ${NEXT}"
+
+mc_request() {
+  local method="$1"; shift
+  local path="$1"; shift
+  local payload="${1:-}"
+
+  local response http body
+  if [[ -n "$payload" ]]; then
+    response=$(curl -sS -X "$method" \
+      -H "x-api-token: $TOKEN" \
+      -H 'content-type: application/json' \
+      "$BASE_URL$path" \
+      -d "$payload" \
+      -w $'\n%{http_code}')
+  else
+    response=$(curl -sS -X "$method" \
+      -H "x-api-token: $TOKEN" \
+      "$BASE_URL$path" \
+      -w $'\n%{http_code}')
+  fi
+
+  http="${response##*$'\n'}"
+  body="${response%$'\n'*}"
+
+  if [[ "$http" -lt 200 || "$http" -ge 300 ]]; then
+    echo "Mission Control API error ${http} on ${method} ${path}: ${body}" >&2
+    exit 1
+  fi
+
+  printf '%s' "$body"
+}
 
 NOTE_PAYLOAD=$(TASK="$TASK" CONTENT="$CONTENT" PROJECT_ID="$PROJECT_ID" python3 - <<'PY'
 import json, os
@@ -116,12 +157,7 @@ print(json.dumps({
 PY
 )
 
-NOTE_JSON=$(curl -sS -X POST \
-  -H "x-api-token: $TOKEN" \
-  -H 'content-type: application/json' \
-  "$BASE_URL/api/notes" \
-  -d "$NOTE_PAYLOAD")
-
+NOTE_JSON=$(mc_request POST "/api/notes" "$NOTE_PAYLOAD")
 NOTE_ID=$(printf '%s' "$NOTE_JSON" | python3 -c 'import sys,json; obj=json.load(sys.stdin); print(obj.get("id",""))')
 
 RESOURCE_ID=""
@@ -137,38 +173,29 @@ print(json.dumps({
 }))
 PY
 )
-  RES_JSON=$(curl -sS -X POST \
-    -H "x-api-token: $TOKEN" \
-    -H 'content-type: application/json' \
-    "$BASE_URL/api/resources" \
-    -d "$RES_PAYLOAD")
+  RES_JSON=$(mc_request POST "/api/resources" "$RES_PAYLOAD")
   RESOURCE_ID=$(printf '%s' "$RES_JSON" | python3 -c 'import sys,json; obj=json.load(sys.stdin); print(obj.get("id",""))')
 fi
 
 # Upsert task by title+owner to avoid duplicate task spam on every heartbeat.
-EXISTING_ID=$(curl -sS \
-  -H "x-api-token: $TOKEN" \
-  "$BASE_URL/api/tasks?owner=OpenClaw" \
-  | TASK="$TASK" python3 -c 'import os,sys,json; rows=json.load(sys.stdin); t=os.environ["TASK"]; print(next((r.get("id","") for r in rows if r.get("title")==t and r.get("owner")=="OpenClaw"), ""))')
+EXISTING_ID=$(mc_request GET "/api/tasks?owner=OpenClaw" | TASK="$TASK" python3 -c 'import os,sys,json; rows=json.load(sys.stdin); t=os.environ["TASK"]; print(next((r.get("id","") for r in rows if r.get("title")==t and r.get("owner")=="OpenClaw"), ""))')
 
 if [[ -n "$EXISTING_ID" ]]; then
-  TASK_PAYLOAD=$(WHY="$WHY" TASK_STATUS="$TASK_STATUS" python3 - <<'PY'
+  TASK_PAYLOAD=$(WHY="$WHY" TASK_STATUS="$TASK_STATUS" IMPACT_TYPE="$IMPACT_TYPE" IMPACT_SCORE="$IMPACT_SCORE" python3 - <<'PY'
 import json, os
 print(json.dumps({
   "description": os.environ["WHY"],
   "status": os.environ["TASK_STATUS"],
-  "priority": "High"
+  "priority": "High",
+  "impactType": os.environ["IMPACT_TYPE"],
+  "impactScore": int(os.environ["IMPACT_SCORE"])
 }))
 PY
 )
-  TASK_JSON=$(curl -sS -X PUT \
-    -H "x-api-token: $TOKEN" \
-    -H 'content-type: application/json' \
-    "$BASE_URL/api/tasks/$EXISTING_ID" \
-    -d "$TASK_PAYLOAD")
+  TASK_JSON=$(mc_request PUT "/api/tasks/$EXISTING_ID" "$TASK_PAYLOAD")
   TASK_ID="$EXISTING_ID"
 else
-  TASK_PAYLOAD=$(TASK="$TASK" WHY="$WHY" TASK_STATUS="$TASK_STATUS" PROJECT_ID="$PROJECT_ID" python3 - <<'PY'
+  TASK_PAYLOAD=$(TASK="$TASK" WHY="$WHY" TASK_STATUS="$TASK_STATUS" PROJECT_ID="$PROJECT_ID" IMPACT_TYPE="$IMPACT_TYPE" IMPACT_SCORE="$IMPACT_SCORE" python3 - <<'PY'
 import json, os
 print(json.dumps({
   "title": os.environ["TASK"],
@@ -176,16 +203,19 @@ print(json.dumps({
   "owner": "OpenClaw",
   "status": os.environ["TASK_STATUS"],
   "priority": "High",
+  "impactType": os.environ["IMPACT_TYPE"],
+  "impactScore": int(os.environ["IMPACT_SCORE"]),
   "projectId": os.environ["PROJECT_ID"]
 }))
 PY
 )
-  TASK_JSON=$(curl -sS -X POST \
-    -H "x-api-token: $TOKEN" \
-    -H 'content-type: application/json' \
-    "$BASE_URL/api/tasks" \
-    -d "$TASK_PAYLOAD")
+  TASK_JSON=$(mc_request POST "/api/tasks" "$TASK_PAYLOAD")
   TASK_ID=$(printf '%s' "$TASK_JSON" | python3 -c 'import sys,json; obj=json.load(sys.stdin); print(obj.get("id",""))')
+fi
+
+if [[ -z "$NOTE_ID" || -z "$TASK_ID" ]]; then
+  echo "Mission Control log failed: missing NOTE_ID or TASK_ID" >&2
+  exit 1
 fi
 
 echo "NOTE_ID=${NOTE_ID}"
