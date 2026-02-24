@@ -410,7 +410,11 @@ async function loadFocus() {
           <label class='muted'><input id='focus_include_done' type='checkbox' ${includeDone === 'true' ? 'checked' : ''}> Include done</label>
         </div>
       </div>
-      ${data.top ? `<p class='muted'>Top recommendation: <strong>${esc(data.top.title)}</strong> · score ${Number(data.top.score || 0).toFixed(1)} · ${esc(data.top.recommendation || '')}</p>` : `<p class='muted'>No tasks in queue.</p>`}
+      ${data.top ? `<p class='muted'>Top recommendation: <strong>${esc(data.top.title)}</strong> · score ${Number(data.top.score || 0).toFixed(1)} · ${esc(data.top.recommendation || '')}</p>
+      <div class='row focus-top-actions'>
+        <button class='primary' id='focus_start_top' data-task-id='${data.top.id}'>Start top task</button>
+        <button id='focus_open_top' data-task-id='${data.top.id}'>Open top in Tasks</button>
+      </div>` : `<p class='muted'>No tasks in queue.</p>`}
       <div class='list'>${queue.map(t => `
         <div class='item'>
           <div class='row between'><strong>${esc(t.title)}</strong>${badge(`score ${Number(t.score || 0).toFixed(1)}`, 'info')}</div>
@@ -427,6 +431,22 @@ async function loadFocus() {
 
   document.getElementById('focus_owner').onchange = () => loadFocus().catch(renderError);
   document.getElementById('focus_include_done').onchange = () => loadFocus().catch(renderError);
+
+  const startTopBtn = document.getElementById('focus_start_top');
+  if (startTopBtn) startTopBtn.onclick = async () => {
+    const taskId = startTopBtn.dataset.taskId;
+    if (!taskId) return;
+    await api(`/api/tasks/${taskId}`, { method: 'PUT', body: JSON.stringify({ status: 'In Progress' }) });
+    loadFocus().catch(renderError);
+  };
+
+  const openTopBtn = document.getElementById('focus_open_top');
+  if (openTopBtn) openTopBtn.onclick = async () => {
+    setActiveView('tasks');
+    renderLoading('Opening Tasks...');
+    await loadTasks();
+  };
+
   document.querySelectorAll('[data-focus-action]').forEach(btn => btn.onclick = async () => {
     const taskId = btn.dataset.taskId;
     const action = btn.dataset.focusAction;

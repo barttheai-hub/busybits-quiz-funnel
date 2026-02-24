@@ -85,6 +85,8 @@ button.danger{border-color:color-mix(in oklab,var(--danger) 50%, var(--line));co
 
 .tab-btn{background:transparent;border:1px solid transparent;color:var(--muted);padding:10px 8px;border-radius:10px;min-width:0;font-size:12px}
 .tab-btn.active{color:var(--text);background:var(--accent-soft);border-color:color-mix(in oklab,var(--accent) 30%, var(--line))}
+.focus-top-actions{margin:-2px 0 8px}
+.focus-top-actions button{min-height:40px}
 
 @media (max-width:900px){
   .app{grid-template-columns:1fr}
