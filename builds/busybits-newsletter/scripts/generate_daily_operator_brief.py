@@ -65,12 +65,21 @@ def main() -> None:
     lines: list[str] = []
     lines.append(f"# BusyBits Sponsor Operator Brief — {args.date}")
     lines.append("")
+    def kpi_get(*keys: str, default: int = 0) -> int:
+        for key in keys:
+            if key in kpi:
+                try:
+                    return int(kpi.get(key, default) or 0)
+                except (TypeError, ValueError):
+                    return default
+        return default
+
     lines.append("## KPI Snapshot")
-    lines.append(f"- Today actions: {kpi.get('today_actions_total', 0)}")
-    lines.append(f"- Overdue actions: {kpi.get('overdue_actions', 0)}")
-    lines.append(f"- Ready-to-send total: {kpi.get('ready_to_send_total', 0)}")
-    lines.append(f"- Ready-to-send with contact: {kpi.get('ready_to_send_with_contact', 0)}")
-    lines.append(f"- Missing contact (ready): {kpi.get('ready_to_send_missing_contact', 0)}")
+    lines.append(f"- Today actions: {kpi_get('today_action_total', 'today_actions_total')}")
+    lines.append(f"- Overdue actions: {kpi_get('today_overdue_actions', 'overdue_actions')}")
+    lines.append(f"- Ready-to-send total: {kpi_get('ready_to_send_total')}")
+    lines.append(f"- Ready-to-send with contact: {kpi_get('ready_to_send_with_contact')}")
+    lines.append(f"- Missing contact (ready): {kpi_get('ready_to_send_missing_contact')}")
     lines.append("")
 
     lines.append("## Top 5 Actions to Execute Now")
