@@ -39,11 +39,12 @@ focus_json=$(curl -sS \
   -H "x-api-token: $TOKEN" \
   "$BASE_URL/api/focus?owner=${OWNER}&includeBlocked=false&limit=5")
 
-heartbeat_text=$(printf '%s' "$focus_json" | python3 - <<'PY'
-import json, sys
+heartbeat_text=$(FOCUS_JSON="$focus_json" python3 - <<'PY'
+import json, os
 
+raw = os.environ.get("FOCUS_JSON", "")
 try:
-    obj = json.load(sys.stdin)
+    obj = json.loads(raw)
 except Exception:
     print("HEARTBEAT_OK")
     raise SystemExit(0)
