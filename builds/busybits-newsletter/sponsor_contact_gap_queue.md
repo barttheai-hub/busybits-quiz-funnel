@@ -4,31 +4,31 @@ Generated from: `builds/busybits-newsletter/sponsor_outreach_execution_board.csv
 Rows requiring contact enrichment: **15**
 
 1. **Apollo Neuro** (P1 · send 2026-02-24)
-   - Missing: contact_name, contact_email, contact_linkedin
+   - Missing: contact_name, contact_linkedin
    - Role target: Partnerships
    - Search query: `Apollo Neuro Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Apollo+Neuro+Partnerships+partnerships+email+linkedin
 
 2. **Eight Sleep** (P1 · send 2026-02-24)
-   - Missing: contact_name, contact_email, contact_linkedin
+   - Missing: contact_name, contact_linkedin
    - Role target: CEO or Partnerships
    - Search query: `Eight Sleep CEO or Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Eight+Sleep+CEO+or+Partnerships+partnerships+email+linkedin
 
 3. **Levels** (P1 · send 2026-02-24)
-   - Missing: contact_name, contact_email, contact_linkedin
+   - Missing: contact_name, contact_linkedin
    - Role target: Growth or Partnerships
    - Search query: `Levels Growth or Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Levels+Growth+or+Partnerships+partnerships+email+linkedin
 
 4. **Oura** (P1 · send 2026-02-24)
-   - Missing: contact_name, contact_email, contact_linkedin
+   - Missing: contact_name, contact_linkedin
    - Role target: Partnerships
    - Search query: `Oura Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Oura+Partnerships+partnerships+email+linkedin
 
 5. **Whoop** (P1 · send 2026-02-24)
-   - Missing: contact_name, contact_email, contact_linkedin
+   - Missing: contact_name, contact_linkedin
    - Role target: Partnerships or Marketing
    - Search query: `Whoop Partnerships or Marketing partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Whoop+Partnerships+or+Marketing+partnerships+email+linkedin

@@ -1,14 +1,14 @@
 # Sponsor Outreach Actions — 2026-02-24
 
 Generated from: `builds/busybits-newsletter/sponsor_outreach_execution_board.csv`
-Actions due: **5** (with contact ready: **0**, overdue included: **0**) 
+Actions due: **5** (with contact ready: **5**, overdue included: **0**) 
 
 ## Queue + Drafts
 
 1. **Apollo Neuro** — send_initial (P1, due_today)
-   - Contact ready: no | Email: n/a
+   - Contact ready: yes | Email: partnerships@apolloneuro.com
    - Subject: BusyBits x Apollo Neuro (pilot sponsor slot)
-   - Next: Research contact + send intro email
+   - Next: Send intro email
 
    Draft:
 
@@ -26,9 +26,9 @@ Open to a quick test?
 ```
 
 2. **Eight Sleep** — send_initial (P1, due_today)
-   - Contact ready: no | Email: n/a
+   - Contact ready: yes | Email: partnerships@eightsleep.com
    - Subject: BusyBits x Eight Sleep (pilot sponsor slot)
-   - Next: Research contact + send intro email
+   - Next: Send intro email
 
    Draft:
 
@@ -46,9 +46,9 @@ Open to a quick test?
 ```
 
 3. **Levels** — send_initial (P1, due_today)
-   - Contact ready: no | Email: n/a
+   - Contact ready: yes | Email: partnerships@levelshealth.com
    - Subject: BusyBits x Levels (pilot sponsor slot)
-   - Next: Research contact + send intro email
+   - Next: Send intro email
 
    Draft:
 
@@ -66,9 +66,9 @@ Open to a quick test?
 ```
 
 4. **Oura** — send_initial (P1, due_today)
-   - Contact ready: no | Email: n/a
+   - Contact ready: yes | Email: partnerships@ouraring.com
    - Subject: BusyBits x Oura (pilot sponsor slot)
-   - Next: Research contact + send intro email
+   - Next: Send intro email
 
    Draft:
 
@@ -86,9 +86,9 @@ Open to a quick test?
 ```
 
 5. **Whoop** — send_initial (P1, due_today)
-   - Contact ready: no | Email: n/a
+   - Contact ready: yes | Email: partnerships@whoop.com
    - Subject: BusyBits x Whoop (pilot sponsor slot)
-   - Next: Research contact + send intro email
+   - Next: Send intro email
 
    Draft:
 

@@ -87,6 +87,8 @@ def main() -> None:
     actions_md = root / f"sponsor_outreach_actions_{run_date}.md"
     contact_gap_csv = root / "sponsor_contact_gap_queue.csv"
     contact_gap_md = root / "sponsor_contact_gap_queue.md"
+    contact_candidates_csv = root / f"sponsor_contact_candidates_{run_date}.csv"
+    contact_candidates_md = root / f"sponsor_contact_candidates_{run_date}.md"
     kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
     kpi_json = root / "sponsor_outreach_kpi_snapshot.json"
     operator_brief_md = root / f"sponsor_operator_brief_{run_date}.md"
@@ -154,6 +156,17 @@ def main() -> None:
 
     run([
         "python3",
+        str(scripts / "generate_contact_candidates.py"),
+        "--tracker",
+        str(tracker),
+        "--date",
+        run_date,
+        "--out-dir",
+        str(root),
+    ])
+
+    run([
+        "python3",
         str(scripts / "generate_outreach_kpi_snapshot.py"),
         "--tracker",
         str(tracker),
@@ -194,6 +207,8 @@ def main() -> None:
             actions_md,
             contact_gap_csv,
             contact_gap_md,
+            contact_candidates_csv,
+            contact_candidates_md,
             kpi_md,
             kpi_json,
             operator_brief_md,
@@ -208,6 +223,7 @@ def main() -> None:
     print(f"Generated execution board: {board_csv}")
     print(f"Generated action queue: {actions_csv}")
     print(f"Generated contact gap queue: {contact_gap_csv}")
+    print(f"Generated contact candidates: {contact_candidates_csv}")
     print(f"Generated KPI snapshot: {kpi_md}")
     print(f"Generated operator brief: {operator_brief_md}")
 
