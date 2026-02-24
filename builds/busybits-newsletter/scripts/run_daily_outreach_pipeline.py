@@ -78,6 +78,9 @@ def main() -> None:
     run_date = args.date or datetime.now().strftime("%Y-%m-%d")
 
     tracker = root / "sponsorship_outreach_tracker.csv"
+    deduped_tracker = root / "sponsorship_outreach_tracker_deduped.csv"
+    dedupe_report_csv = root / f"sponsor_tracker_dedupe_report_{run_date}.csv"
+    dedupe_report_md = root / f"sponsor_tracker_dedupe_report_{run_date}.md"
     day_queue_csv = root / "sponsor_outreach_day_queue.csv"
     day_queue_md = root / "sponsor_outreach_day_queue.md"
     send_pack_md = root / "sponsor_outreach_send_pack.md"
@@ -113,9 +116,22 @@ def main() -> None:
 
     run([
         "python3",
-        str(scripts / "generate_daily_outreach_queue.py"),
+        str(scripts / "dedupe_sponsor_tracker.py"),
         "--input",
         str(tracker),
+        "--output",
+        str(deduped_tracker),
+        "--report-csv",
+        str(dedupe_report_csv),
+        "--report-md",
+        str(dedupe_report_md),
+    ])
+
+    run([
+        "python3",
+        str(scripts / "generate_daily_outreach_queue.py"),
+        "--input",
+        str(deduped_tracker),
         "--output-csv",
         str(day_queue_csv),
         "--output-md",
@@ -176,7 +192,7 @@ def main() -> None:
         "python3",
         str(scripts / "generate_contact_candidates.py"),
         "--tracker",
-        str(tracker),
+        str(deduped_tracker),
         "--date",
         run_date,
         "--out-dir",
@@ -228,7 +244,7 @@ def main() -> None:
         "python3",
         str(scripts / "generate_followup_calendar.py"),
         "--tracker",
-        str(tracker),
+        str(deduped_tracker),
         "--date",
         run_date,
         "--days",
@@ -306,7 +322,7 @@ def main() -> None:
         "python3",
         str(scripts / "generate_outreach_kpi_snapshot.py"),
         "--tracker",
-        str(tracker),
+        str(deduped_tracker),
         "--actions",
         str(actions_csv),
         "--board",
@@ -335,6 +351,9 @@ def main() -> None:
     maybe_log_progress(
         root=root,
         generated_files=[
+            deduped_tracker,
+            dedupe_report_csv,
+            dedupe_report_md,
             day_queue_csv,
             day_queue_md,
             send_pack_md,
