@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BusyBits: The Operating System for High Performers</title>
+  <meta name="description" content="Join 105,243 founders, executives, and investors optimizing their health, wealth, and time." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .email-input:focus { outline: none; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2); }
+  </style>
+</head>
+<body class="bg-white text-slate-900 antialiased flex flex-col min-h-screen">
+
+  <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 md:py-24 text-center">
+    <div class="mb-8 inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-500">
+      <span class="mr-2 h-2 w-2 rounded-full bg-green-500"></span>
+      Join 105,243 subscribers
+    </div>
+
+    <h1 class="mx-auto mb-6 max-w-4xl text-4xl font-extrabold tracking-tight text-slate-900 md:text-6xl lg:text-7xl">
+      The Operating System for the <span class="text-blue-600">Modern High-Performer</span>.
+    </h1>
+
+    <p class="mx-auto mb-10 max-w-2xl text-lg text-slate-600 md:text-xl leading-relaxed">
+      Steal the exact protocols used by 50+ Unicorn Founders to optimize sleep, focus, and energy. <br class="hidden md:block">
+      <strong>Get the "High-Performance OS" (CEO Edition) PDF instantly when you join.</strong>
+    </p>
+
+    <div class="mx-auto w-full max-w-md">
+      <form id="subscribe-form" class="flex flex-col gap-3 md:flex-row">
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email..."
+          class="email-input h-14 w-full rounded-lg border border-slate-300 bg-white px-4 text-lg text-slate-900 placeholder-slate-400 shadow-sm transition hover:border-slate-400 focus:border-blue-500 md:flex-1"
+          required
+        />
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+        <button
+          id="submit-btn"
+          type="submit"
+          class="h-14 w-full rounded-lg bg-slate-900 px-6 text-lg font-bold text-white shadow-lg transition hover:bg-slate-800 hover:shadow-xl md:w-auto"
+        >
+          Join Free
+        </button>
+      </form>
+      <p id="form-status" class="mt-4 text-xs text-slate-400">Read in 4 minutes. 100% Free. No spam. Unsubscribe anytime.</p>
+    </div>
+
+    <div class="mt-16 border-t border-slate-100 pt-12">
+      <p class="mb-6 text-xs font-semibold uppercase tracking-widest text-slate-400">Trusted by leaders at</p>
+      <div class="flex flex-wrap justify-center gap-8 grayscale opacity-50 md:gap-16">
+        <svg class="h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
+        <svg class="h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <svg class="h-6" viewBox="0 0 24 24" fill="currentColor"><rect width="24" height="24" fill="#F0652F"/><path d="M12.025 14.881l-4.15-8.156h2.244l2.906 6.306 2.925-6.306h2.156l-4.162 8.163v4.381h-1.919v-4.388z" fill="white"/></svg>
+        <svg class="h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.893-1.352 1.938-1.352 1.81 0 2.481.933 2.532 2.077h3.804c-.179-2.905-2.252-4.996-6.289-4.996-4.088 0-6.262 2.409-6.262 5.56 0 4.14 5.648 4.676 5.648 7.029 0 1.074-1.074 1.56-2.429 1.56-2.404 0-3.146-1.303-3.274-2.71h-3.931c.153 3.697 2.812 5.589 7.152 5.589 4.318 0 6.671-2.127 6.671-5.713-.052-4.14-5.699-4.894-5.699-7.258.076-.807.844-1.378 1.495-1.378zm-3.83-8.326h-4.246v3.175h4.246v-3.175z"/></svg>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-100 bg-white py-8 text-center text-sm text-slate-400">
+    <p>&copy; 2026 BusyBits. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const WEBHOOK_URL = ""; // paste n8n/Make/Zapier endpoint
+    const SOURCE = "busybits_lead_magnet_v1";
+
+    const form = document.getElementById('subscribe-form');
+    const statusEl = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function goToThankYou(email) {
+      const params = new URLSearchParams({ email: email || '' });
+      window.location.href = `thank-you.html?${params.toString()}`;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const email = String(formData.get('email') || '').trim().toLowerCase();
+      const trap = String(formData.get('company') || '').trim();
+
+      if (!email || !email.includes('@') || trap) {
+        statusEl.textContent = 'Please enter a valid email.';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Joining...';
+      statusEl.textContent = 'Saving your spot...';
+
+      localStorage.setItem('busybits_email', email);
+
+      if (!WEBHOOK_URL) {
+        goToThankYou(email);
+        return;
+      }
+
+      const payload = { email, source: SOURCE, timestamp: new Date().toISOString() };
+
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+      } catch (_) {
+        // fail-open so lead magnet delivery is never blocked by webhook downtime
+      }
+
+      goToThankYou(email);
+    });
+  </script>
+</body>
+</html>
