@@ -1,0 +1,51 @@
+company,domain,contact_candidate,source,source_url,confidence,reason
+Apollo Neuro,apolloneuro.com,partnerships@apolloneuro.com,alias_pattern,https://apolloneuro.com/contact,0.9,most common partner inbox
+Apollo Neuro,apolloneuro.com,partners@apolloneuro.com,alias_pattern,https://apolloneuro.com/contact,0.85,common partner inbox
+Apollo Neuro,apolloneuro.com,(check page),manual_page,https://apolloneuro.com/contact,0.8,primary contact page
+Apollo Neuro,apolloneuro.com,sponsorships@apolloneuro.com,alias_pattern,https://apolloneuro.com/contact,0.8,common sponsorship inbox
+Apollo Neuro,apolloneuro.com,(check page),manual_page,https://apolloneuro.com/partners,0.75,possible partnerships page
+Apollo Neuro,apolloneuro.com,(check page),manual_page,https://apolloneuro.com/pages/contact,0.7,alternate contact page
+Apollo Neuro,apolloneuro.com,partnership@apolloneuro.com,alias_pattern,https://apolloneuro.com/contact,0.65,less common singular alias
+Apollo Neuro,apolloneuro.com,(check page),manual_page,https://apolloneuro.com/affiliate,0.6,possible partner program page
+Apollo Neuro,apolloneuro.com,hello@apolloneuro.com,alias_pattern,https://apolloneuro.com/contact,0.45,generic inbox fallback
+Apollo Neuro,apolloneuro.com,press@apolloneuro.com,alias_pattern,https://apolloneuro.com/contact,0.35,media inbox fallback
+Eight Sleep,eightsleep.com,partnerships@eightsleep.com,alias_pattern,https://eightsleep.com/contact,0.9,most common partner inbox
+Eight Sleep,eightsleep.com,partners@eightsleep.com,alias_pattern,https://eightsleep.com/contact,0.85,common partner inbox
+Eight Sleep,eightsleep.com,(check page),manual_page,https://eightsleep.com/contact,0.8,primary contact page
+Eight Sleep,eightsleep.com,sponsorships@eightsleep.com,alias_pattern,https://eightsleep.com/contact,0.8,common sponsorship inbox
+Eight Sleep,eightsleep.com,(check page),manual_page,https://eightsleep.com/partners,0.75,possible partnerships page
+Eight Sleep,eightsleep.com,(check page),manual_page,https://eightsleep.com/pages/contact,0.7,alternate contact page
+Eight Sleep,eightsleep.com,partnership@eightsleep.com,alias_pattern,https://eightsleep.com/contact,0.65,less common singular alias
+Eight Sleep,eightsleep.com,(check page),manual_page,https://eightsleep.com/affiliate,0.6,possible partner program page
+Eight Sleep,eightsleep.com,hello@eightsleep.com,alias_pattern,https://eightsleep.com/contact,0.45,generic inbox fallback
+Eight Sleep,eightsleep.com,press@eightsleep.com,alias_pattern,https://eightsleep.com/contact,0.35,media inbox fallback
+Levels,levelshealth.com,partnerships@levelshealth.com,alias_pattern,https://levelshealth.com/contact,0.9,most common partner inbox
+Levels,levelshealth.com,partners@levelshealth.com,alias_pattern,https://levelshealth.com/contact,0.85,common partner inbox
+Levels,levelshealth.com,(check page),manual_page,https://levelshealth.com/contact,0.8,primary contact page
+Levels,levelshealth.com,sponsorships@levelshealth.com,alias_pattern,https://levelshealth.com/contact,0.8,common sponsorship inbox
+Levels,levelshealth.com,(check page),manual_page,https://levelshealth.com/partners,0.75,possible partnerships page
+Levels,levelshealth.com,(check page),manual_page,https://levelshealth.com/pages/contact,0.7,alternate contact page
+Levels,levelshealth.com,partnership@levelshealth.com,alias_pattern,https://levelshealth.com/contact,0.65,less common singular alias
+Levels,levelshealth.com,(check page),manual_page,https://levelshealth.com/affiliate,0.6,possible partner program page
+Levels,levelshealth.com,hello@levelshealth.com,alias_pattern,https://levelshealth.com/contact,0.45,generic inbox fallback
+Levels,levelshealth.com,press@levelshealth.com,alias_pattern,https://levelshealth.com/contact,0.35,media inbox fallback
+Oura,ouraring.com,partnerships@ouraring.com,alias_pattern,https://ouraring.com/contact,0.9,most common partner inbox
+Oura,ouraring.com,partners@ouraring.com,alias_pattern,https://ouraring.com/contact,0.85,common partner inbox
+Oura,ouraring.com,(check page),manual_page,https://ouraring.com/contact,0.8,primary contact page
+Oura,ouraring.com,sponsorships@ouraring.com,alias_pattern,https://ouraring.com/contact,0.8,common sponsorship inbox
+Oura,ouraring.com,(check page),manual_page,https://ouraring.com/partners,0.75,possible partnerships page
+Oura,ouraring.com,(check page),manual_page,https://ouraring.com/pages/contact,0.7,alternate contact page
+Oura,ouraring.com,partnership@ouraring.com,alias_pattern,https://ouraring.com/contact,0.65,less common singular alias
+Oura,ouraring.com,(check page),manual_page,https://ouraring.com/affiliate,0.6,possible partner program page
+Oura,ouraring.com,hello@ouraring.com,alias_pattern,https://ouraring.com/contact,0.45,generic inbox fallback
+Oura,ouraring.com,press@ouraring.com,alias_pattern,https://ouraring.com/contact,0.35,media inbox fallback
+Whoop,whoop.com,partnerships@whoop.com,alias_pattern,https://whoop.com/contact,0.9,most common partner inbox
+Whoop,whoop.com,partners@whoop.com,alias_pattern,https://whoop.com/contact,0.85,common partner inbox
+Whoop,whoop.com,(check page),manual_page,https://whoop.com/contact,0.8,primary contact page
+Whoop,whoop.com,sponsorships@whoop.com,alias_pattern,https://whoop.com/contact,0.8,common sponsorship inbox
+Whoop,whoop.com,(check page),manual_page,https://whoop.com/partners,0.75,possible partnerships page
+Whoop,whoop.com,(check page),manual_page,https://whoop.com/pages/contact,0.7,alternate contact page
+Whoop,whoop.com,partnership@whoop.com,alias_pattern,https://whoop.com/contact,0.65,less common singular alias
+Whoop,whoop.com,(check page),manual_page,https://whoop.com/affiliate,0.6,possible partner program page
+Whoop,whoop.com,hello@whoop.com,alias_pattern,https://whoop.com/contact,0.45,generic inbox fallback
+Whoop,whoop.com,press@whoop.com,alias_pattern,https://whoop.com/contact,0.35,media inbox fallback
