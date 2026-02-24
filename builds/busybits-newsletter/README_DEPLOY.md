@@ -18,7 +18,7 @@ The lead magnet is delivered directly on `thank-you.html` so conversions are not
   - Default currently points to `assets/High_Performance_OS_CEO_Edition.pdf` (already included in this folder).
 
 ## 3. Optional Webhook Payload
-When configured, `index.html` sends this JSON (with attribution fields when present in URL params):
+When configured, `index.html` sends this JSON (with UTM + click-id attribution fields when present in URL params, and persisted first/last-touch metadata):
 
 ```json
 {
@@ -31,7 +31,12 @@ When configured, `index.html` sends this JSON (with attribution fields when pres
   "utm_medium": "paid_social",
   "utm_campaign": "quiz",
   "utm_content": "video_1",
-  "utm_term": "founder_sleep"
+  "utm_term": "founder_sleep",
+  "fbclid": "fb.1.123456789",
+  "first_touch_at": "2026-02-24T09:45:00.000Z",
+  "first_touch_url": "https://yourdomain.com/?utm_source=meta&utm_campaign=quiz",
+  "last_touch_at": "2026-02-24T10:00:00.000Z",
+  "last_touch_url": "https://yourdomain.com/?utm_source=meta&utm_campaign=quiz&utm_content=video_1"
 }
 ```
 

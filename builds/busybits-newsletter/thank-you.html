@@ -40,7 +40,11 @@
     const downloadLink = document.getElementById('download-link');
     const emailLine = document.getElementById('email-line');
 
-    const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const attributionKeys = [
+      'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+      'fbclid', 'gclid', 'ttclid',
+      'first_touch_at', 'first_touch_url', 'last_touch_at', 'last_touch_url'
+    ];
     const dlParams = new URLSearchParams();
     for (const key of attributionKeys) {
       const value = params.get(key);

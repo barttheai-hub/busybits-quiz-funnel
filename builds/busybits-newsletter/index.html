@@ -75,13 +75,39 @@
 
     function pickAttributionParams() {
       const urlParams = new URLSearchParams(window.location.search);
-      const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      const keys = [
+        'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+        'fbclid', 'gclid', 'ttclid'
+      ];
       const picked = {};
       for (const key of keys) {
         const value = urlParams.get(key);
         if (value) picked[key] = value;
       }
       return picked;
+    }
+
+    function readStoredAttribution() {
+      try {
+        const raw = localStorage.getItem('busybits_attribution');
+        return raw ? JSON.parse(raw) : {};
+      } catch (_) {
+        return {};
+      }
+    }
+
+    function mergeAttributionForSession(current = {}) {
+      const stored = readStoredAttribution();
+      const merged = { ...stored, ...current };
+      const firstTouch = stored.first_touch_at || new Date().toISOString();
+      if (!stored.first_touch_url) {
+        merged.first_touch_url = window.location.href;
+      }
+      merged.first_touch_at = firstTouch;
+      merged.last_touch_at = new Date().toISOString();
+      merged.last_touch_url = window.location.href;
+      localStorage.setItem('busybits_attribution', JSON.stringify(merged));
+      return merged;
     }
 
     function goToThankYou(email, attribution = {}) {
@@ -106,7 +132,7 @@
 
       localStorage.setItem('busybits_email', email);
 
-      const attribution = pickAttributionParams();
+      const attribution = mergeAttributionForSession(pickAttributionParams());
 
       if (!WEBHOOK_URL) {
         goToThankYou(email, attribution);
