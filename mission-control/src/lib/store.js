@@ -24,6 +24,8 @@ export function parseRow(row) {
   if ('created_at' in out) { out.createdAt = out.created_at; delete out.created_at; }
   if ('updated_at' in out) { out.updatedAt = out.updated_at; delete out.updated_at; }
   if ('due_date' in out) { out.dueDate = out.due_date; delete out.due_date; }
+  if ('impact_type' in out) { out.impactType = out.impact_type; delete out.impact_type; }
+  if ('impact_score' in out) { out.impactScore = out.impact_score; delete out.impact_score; }
   if ('project_id' in out) { out.projectId = out.project_id; delete out.project_id; }
   if ('tags_json' in out) { out.tags = JSON.parse(out.tags_json || '[]'); delete out.tags_json; }
   if ('payload_json' in out) { out.payload = JSON.parse(out.payload_json || '{}'); delete out.payload_json; }

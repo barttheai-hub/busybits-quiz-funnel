@@ -48,6 +48,19 @@ function stalenessScore(updatedAt, status) {
   return 0;
 }
 
+function impactTypeScore(impactType) {
+  if (impactType === 'Revenue') return 4;
+  if (impactType === 'Time Saving') return 3;
+  if (impactType === 'System') return 2;
+  return 1;
+}
+
+function impactScoreValue(impactScore) {
+  const n = Number(impactScore);
+  if (!Number.isFinite(n)) return 0;
+  return Math.max(0, Math.min(10, n));
+}
+
 router.get('/', (req, res) => {
   const owner = typeof req.query.owner === 'string' ? req.query.owner.trim() : '';
   const includeDone = req.query.includeDone === 'true';
@@ -69,6 +82,8 @@ router.get('/', (req, res) => {
         statusScore(task.status) * 2 +
         dueDateScore(task.dueDate) * 3 +
         healthScore(project?.health) +
+        impactTypeScore(task.impactType || 'Other') * 5 +
+        impactScoreValue(task.impactScore) * 2 +
         stale * 2;
 
       return {
@@ -79,6 +94,8 @@ router.get('/', (req, res) => {
           status: statusScore(task.status) * 2,
           dueDate: dueDateScore(task.dueDate) * 3,
           projectHealth: healthScore(project?.health),
+          impactType: impactTypeScore(task.impactType || 'Other') * 5,
+          impactScore: impactScoreValue(task.impactScore) * 2,
           stale: stale * 2
         },
         project: project

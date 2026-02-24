@@ -13,7 +13,7 @@ Supports token map via `API_TOKENS_JSON` in `.env` for role-based identities.
 - `GET /api/dashboard`
 
 ## Focus (Autonomous Prioritization)
-- `GET /api/focus` → returns top recommended task + ranked queue (uses task priority/status/due date, linked project health [Green/Yellow/Red], and task staleness)
+- `GET /api/focus` → returns top recommended task + ranked queue (uses task priority/status/due date, linked project health [Green/Yellow/Red], impact type/impact score, and task staleness)
 - Query params:
   - `owner=<name>` (optional): only rank tasks for a specific owner (e.g., `OpenClaw`)
   - `includeDone=true|false` (optional, default false)
@@ -27,7 +27,9 @@ Supports token map via `API_TOKENS_JSON` in `.env` for role-based identities.
 
 ## Tasks
 - `GET /api/tasks?owner=&status=`
-- `POST /api/tasks` `{ title, description?, owner?, status?, priority?, dueDate?, projectId? }`
+- `POST /api/tasks` `{ title, description?, owner?, status?, priority?, impactType?, impactScore?, dueDate?, projectId? }`
+  - `impactType`: `Revenue | Time Saving | System | Other` (default `Other`)
+  - `impactScore`: integer `0..10` (default `0`)
 - `PUT /api/tasks/:id` `{ ...fields }`
 - `DELETE /api/tasks/:id`
 

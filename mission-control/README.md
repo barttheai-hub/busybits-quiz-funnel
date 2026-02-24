@@ -34,6 +34,10 @@ Heartbeat logging helper:
 - Optional: `--resource-title`, `--resource-type`, `--resource-url`
 - Uses `API_TOKEN` from `mission-control/.env` automatically (or `MISSION_CONTROL_API_TOKEN`).
 
+Focus scoring tip (Phase 2): set task impact metadata so autonomous ranking prefers money-making work first.
+Example task payload:
+- `{ "title":"Launch paid quiz ads", "owner":"OpenClaw", "priority":"High", "impactType":"Revenue", "impactScore":9 }`
+
 Use a token from `.env` in the web UI top bar.
 
 Recommended auth config:

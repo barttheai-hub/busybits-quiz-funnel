@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { db } from '../lib/db.js';
 import { addActivity, nowIso, parseRow, parseRows, uid } from '../lib/store.js';
-import { dateYmd, oneOf, optionalId, str } from '../lib/validate.js';
+import { dateYmd, intInRange, oneOf, optionalId, str } from '../lib/validate.js';
 
 const router = Router();
 
@@ -23,13 +23,15 @@ router.post('/', (req, res, next) => {
       owner: oneOf(req.body.owner || 'Me', ['Me', 'OpenClaw'], { field: 'owner', required: true }),
       status: oneOf(req.body.status || 'To Do', ['To Do', 'In Progress', 'Done'], { field: 'status', required: true }),
       priority: oneOf(req.body.priority || 'Medium', ['High', 'Medium', 'Low'], { field: 'priority', required: true }),
+      impactType: oneOf(req.body.impactType || 'Other', ['Revenue', 'Time Saving', 'System', 'Other'], { field: 'impactType', required: true }),
+      impactScore: intInRange(req.body.impactScore ?? 0, { field: 'impactScore', min: 0, max: 10, required: true }),
       dueDate: dateYmd(req.body.dueDate, { field: 'dueDate' }),
       projectId: optionalId(req.body.projectId, { field: 'projectId' }),
       createdAt: nowIso(),
       updatedAt: nowIso()
     };
-    db.prepare(`INSERT INTO tasks (id,title,description,owner,status,priority,due_date,project_id,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?)`)
-      .run(task.id, task.title, task.description, task.owner, task.status, task.priority, task.dueDate, task.projectId, task.createdAt, task.updatedAt);
+    db.prepare(`INSERT INTO tasks (id,title,description,owner,status,priority,impact_type,impact_score,due_date,project_id,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`)
+      .run(task.id, task.title, task.description, task.owner, task.status, task.priority, task.impactType, task.impactScore, task.dueDate, task.projectId, task.createdAt, task.updatedAt);
     addActivity('task.created', `Created task: ${task.title}`, { taskId: task.id });
     res.status(201).json(task);
   } catch (e) { next(e); }
@@ -47,12 +49,14 @@ router.put('/:id', (req, res, next) => {
       ...(req.body.owner !== undefined ? { owner: oneOf(req.body.owner, ['Me', 'OpenClaw'], { field: 'owner', required: true }) } : {}),
       ...(req.body.status !== undefined ? { status: oneOf(req.body.status, ['To Do', 'In Progress', 'Done'], { field: 'status', required: true }) } : {}),
       ...(req.body.priority !== undefined ? { priority: oneOf(req.body.priority, ['High', 'Medium', 'Low'], { field: 'priority', required: true }) } : {}),
+      ...(req.body.impactType !== undefined ? { impactType: oneOf(req.body.impactType, ['Revenue', 'Time Saving', 'System', 'Other'], { field: 'impactType', required: true }) } : {}),
+      ...(req.body.impactScore !== undefined ? { impactScore: intInRange(req.body.impactScore, { field: 'impactScore', min: 0, max: 10, required: true }) } : {}),
       ...(req.body.dueDate !== undefined ? { dueDate: dateYmd(req.body.dueDate, { field: 'dueDate' }) } : {}),
       ...(req.body.projectId !== undefined ? { projectId: optionalId(req.body.projectId, { field: 'projectId' }) } : {}),
       updatedAt: nowIso()
     };
-    db.prepare(`UPDATE tasks SET title=?,description=?,owner=?,status=?,priority=?,due_date=?,project_id=?,updated_at=? WHERE id=?`)
-      .run(updated.title, updated.description, updated.owner, updated.status, updated.priority, updated.dueDate, updated.projectId, updated.updatedAt, req.params.id);
+    db.prepare(`UPDATE tasks SET title=?,description=?,owner=?,status=?,priority=?,impact_type=?,impact_score=?,due_date=?,project_id=?,updated_at=? WHERE id=?`)
+      .run(updated.title, updated.description, updated.owner, updated.status, updated.priority, updated.impactType || 'Other', updated.impactScore ?? 0, updated.dueDate, updated.projectId, updated.updatedAt, req.params.id);
     if (prev.status !== updated.status) addActivity('task.status', `Task moved: ${updated.title} -> ${updated.status}`, { taskId: updated.id });
     else addActivity('task.updated', `Updated task: ${updated.title}`, { taskId: updated.id });
     res.json(updated);

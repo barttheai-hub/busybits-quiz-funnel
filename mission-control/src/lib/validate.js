@@ -32,6 +32,14 @@ export function optionalId(v, { field = 'id' } = {}) {
   return v;
 }
 
+export function intInRange(v, { field = 'value', min = 0, max = 10, required = false } = {}) {
+  if ((v === undefined || v === null || v === '') && !required) return null;
+  const n = Number(v);
+  if (!Number.isInteger(n)) throw bad(`${field} must be an integer`);
+  if (n < min || n > max) throw bad(`${field} must be between ${min} and ${max}`);
+  return n;
+}
+
 export function bad(message) {
   const err = new Error(message);
   err.status = 400;

@@ -42,6 +42,8 @@ export function migrate() {
       owner TEXT NOT NULL,
       status TEXT NOT NULL,
       priority TEXT NOT NULL,
+      impact_type TEXT NOT NULL DEFAULT 'Other',
+      impact_score INTEGER NOT NULL DEFAULT 0,
       due_date TEXT,
       project_id TEXT,
       created_at TEXT NOT NULL,
@@ -67,4 +69,13 @@ export function migrate() {
       created_at TEXT NOT NULL
     );
   `);
+
+  const taskColumns = db.prepare(`PRAGMA table_info(tasks)`).all().map(c => c.name);
+  if (!taskColumns.includes('impact_type')) {
+    db.exec(`ALTER TABLE tasks ADD COLUMN impact_type TEXT NOT NULL DEFAULT 'Other'`);
+  }
+  if (!taskColumns.includes('impact_score')) {
+    db.exec(`ALTER TABLE tasks ADD COLUMN impact_score INTEGER NOT NULL DEFAULT 0`);
+  }
 }
+
