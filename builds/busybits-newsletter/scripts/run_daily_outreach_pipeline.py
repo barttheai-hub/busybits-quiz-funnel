@@ -108,6 +108,8 @@ def main() -> None:
     kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
     kpi_json = root / "sponsor_outreach_kpi_snapshot.json"
     operator_brief_md = root / f"sponsor_operator_brief_{run_date}.md"
+    contact_sprint_csv = root / f"sponsor_contact_research_sprint_{run_date}.csv"
+    contact_sprint_md = root / f"sponsor_contact_research_sprint_{run_date}.md"
 
     run([
         "python3",
@@ -179,6 +181,25 @@ def main() -> None:
         run_date,
         "--out-dir",
         str(root),
+    ])
+
+    run([
+        "python3",
+        str(scripts / "generate_contact_research_sprint.py"),
+        "--actions",
+        str(actions_csv),
+        "--candidates",
+        str(contact_candidates_csv),
+        "--date",
+        run_date,
+        "--days",
+        "2",
+        "--limit",
+        str(args.limit),
+        "--output-csv",
+        str(contact_sprint_csv),
+        "--output-md",
+        str(contact_sprint_md),
     ])
 
     run([
@@ -325,6 +346,8 @@ def main() -> None:
             contact_gap_md,
             contact_candidates_csv,
             contact_candidates_md,
+            contact_sprint_csv,
+            contact_sprint_md,
             send_now_csv,
             send_now_md,
             send_now_copy_csv,
@@ -356,6 +379,7 @@ def main() -> None:
     print(f"Generated action queue: {actions_csv}")
     print(f"Generated contact gap queue: {contact_gap_csv}")
     print(f"Generated contact candidates: {contact_candidates_csv}")
+    print(f"Generated contact research sprint: {contact_sprint_csv}")
     print(f"Generated send-now batch: {send_now_csv}")
     print(f"Generated send-now copy batch: {send_now_copy_csv}")
     print(f"Generated follow-up calendar: {followup_calendar_csv}")
