@@ -89,6 +89,7 @@ def main() -> None:
     contact_gap_md = root / "sponsor_contact_gap_queue.md"
     kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
     kpi_json = root / "sponsor_outreach_kpi_snapshot.json"
+    operator_brief_md = root / f"sponsor_operator_brief_{run_date}.md"
 
     run([
         "python3",
@@ -166,6 +167,21 @@ def main() -> None:
         str(kpi_json),
     ])
 
+    run([
+        "python3",
+        str(scripts / "generate_daily_operator_brief.py"),
+        "--kpi-json",
+        str(kpi_json),
+        "--actions-csv",
+        str(actions_csv),
+        "--contact-gap-csv",
+        str(contact_gap_csv),
+        "--date",
+        run_date,
+        "--output",
+        str(operator_brief_md),
+    ])
+
     maybe_log_progress(
         root=root,
         generated_files=[
@@ -180,6 +196,7 @@ def main() -> None:
             contact_gap_md,
             kpi_md,
             kpi_json,
+            operator_brief_md,
         ],
         run_date=run_date,
         should_log=args.log_progress,
@@ -192,6 +209,7 @@ def main() -> None:
     print(f"Generated action queue: {actions_csv}")
     print(f"Generated contact gap queue: {contact_gap_csv}")
     print(f"Generated KPI snapshot: {kpi_md}")
+    print(f"Generated operator brief: {operator_brief_md}")
 
 
 if __name__ == "__main__":
