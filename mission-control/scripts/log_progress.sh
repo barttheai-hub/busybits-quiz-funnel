@@ -16,6 +16,7 @@ set -euo pipefail
 # Or parse heartbeat summary text automatically:
 #   ./scripts/log_progress.sh --summary-file /tmp/heartbeat.txt
 #   ./scripts/log_progress.sh --summary-text "Task: ...\nChanged files: ...\nWhat changed: ...\nWhy it helps: ...\nNext: ..."
+#   cat heartbeat_update.txt | ./scripts/log_progress.sh --summary-stdin
 
 BASE_URL="${MISSION_CONTROL_BASE_URL:-http://localhost:8787}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -37,6 +38,7 @@ IMPACT_TYPE="System"
 IMPACT_SCORE="8"
 SUMMARY_FILE=""
 SUMMARY_TEXT=""
+SUMMARY_STDIN=false
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -53,6 +55,7 @@ while [[ $# -gt 0 ]]; do
     --impact-score) IMPACT_SCORE="$2"; shift 2;;
     --summary-file) SUMMARY_FILE="$2"; shift 2;;
     --summary-text) SUMMARY_TEXT="$2"; shift 2;;
+    --summary-stdin) SUMMARY_STDIN=true; shift 1;;
     *) echo "Unknown arg: $1" >&2; exit 1;;
   esac
 done
@@ -76,6 +79,10 @@ print(json.dumps({
 }))
 PY
 }
+
+if [[ "$SUMMARY_STDIN" == true ]]; then
+  SUMMARY_TEXT="$(cat)"
+fi
 
 if [[ -n "$SUMMARY_FILE" || -n "$SUMMARY_TEXT" ]]; then
   if [[ -n "$SUMMARY_FILE" ]]; then
