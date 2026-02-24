@@ -19,6 +19,24 @@ const FORM_DRAFT_KEYS = {
   create_proj: 'mc_draft_create_proj'
 };
 
+function hasPersistedDraft(storageKey) {
+  const raw = localStorage.getItem(storageKey);
+  if (!raw) return false;
+  try {
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return false;
+    return Object.values(parsed).some(value => String(value || '').trim().length > 0);
+  } catch {
+    return false;
+  }
+}
+
+function hasUnsavedInput() {
+  const quickDraft = (quickTaskInput?.value || localStorage.getItem(QUICK_TASK_DRAFT_KEY) || '').trim();
+  if (quickDraft.length > 0) return true;
+  return Object.values(FORM_DRAFT_KEYS).some(hasPersistedDraft);
+}
+
 function autosizeQuickTaskInput() {
   if (!quickTaskInput) return;
   quickTaskInput.style.height = 'auto';
@@ -656,6 +674,12 @@ window.addEventListener('resize', () => {
     setTokenWrapOpen(false);
     document.body.style.overflow = '';
   }
+});
+
+window.addEventListener('beforeunload', e => {
+  if (!hasUnsavedInput()) return;
+  e.preventDefault();
+  e.returnValue = '';
 });
 
 setActiveView('dashboard');
