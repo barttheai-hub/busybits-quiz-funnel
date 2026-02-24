@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate send-ready follow-up copy batch from upcoming follow-up rows."""
+"""Generate send-ready follow-up copy batch from follow-up rows."""
 
 from __future__ import annotations
 
@@ -88,12 +88,12 @@ def write_md(path: Path, rows: list[dict[str, str]]) -> None:
 
 def main() -> None:
     p = argparse.ArgumentParser()
-    p.add_argument("--upcoming", required=True, help="CSV from generate_followup_upcoming_batch.py")
+    p.add_argument("--input", required=True, help="CSV from follow-up queue generator (due or upcoming)")
     p.add_argument("--output-csv", required=True)
     p.add_argument("--output-md", required=True)
     args = p.parse_args()
 
-    rows = load_rows(Path(args.upcoming))
+    rows = load_rows(Path(args.input))
     out_rows: list[dict[str, str]] = []
 
     for row in rows:
