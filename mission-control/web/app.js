@@ -31,10 +31,40 @@ function hasPersistedDraft(storageKey) {
   }
 }
 
+function snapshotFormState(form) {
+  const data = {};
+  Array.from(form?.elements || []).forEach(el => {
+    if (!el.name || el.disabled) return;
+    data[el.name] = el.value;
+  });
+  return JSON.stringify(data);
+}
+
+function watchUnsavedForm(form) {
+  if (!form || form.dataset.unsavedWatch === 'true') return;
+  form.dataset.unsavedWatch = 'true';
+  form.dataset.initialState = snapshotFormState(form);
+
+  const syncDirtyState = () => {
+    const initial = form.dataset.initialState || '{}';
+    const current = snapshotFormState(form);
+    form.dataset.dirty = current === initial ? 'false' : 'true';
+  };
+
+  form.addEventListener('input', syncDirtyState);
+  form.addEventListener('change', syncDirtyState);
+}
+
+function hasTransientUnsavedInput() {
+  return Array.from(document.querySelectorAll('form[data-unsaved-watch="true"]'))
+    .some(form => form.dataset.dirty === 'true');
+}
+
 function hasUnsavedInput() {
   const quickDraft = (quickTaskInput?.value || localStorage.getItem(QUICK_TASK_DRAFT_KEY) || '').trim();
   if (quickDraft.length > 0) return true;
-  return Object.values(FORM_DRAFT_KEYS).some(hasPersistedDraft);
+  if (Object.values(FORM_DRAFT_KEYS).some(hasPersistedDraft)) return true;
+  return hasTransientUnsavedInput();
 }
 
 function autosizeQuickTaskInput() {
@@ -286,9 +316,12 @@ function sortByMode(items, mode, type) {
 function bindSubmit(formId, handler) {
   const form = document.getElementById(formId);
   if (!form) return;
-  form.addEventListener('submit', e => {
+  watchUnsavedForm(form);
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    handler(new FormData(form));
+    await handler(new FormData(form));
+    form.dataset.initialState = snapshotFormState(form);
+    form.dataset.dirty = 'false';
   });
 }
 
@@ -649,6 +682,11 @@ function setActiveView(viewName) {
 document.querySelectorAll('[data-view]').forEach(btn => {
   btn.onclick = () => {
     const nextView = btn.dataset.view;
+    const currentView = document.querySelector('[data-view].active')?.dataset.view;
+    if (currentView && nextView !== currentView && hasUnsavedInput()) {
+      const confirmed = confirm('You have unsaved changes. Leave this view?');
+      if (!confirmed) return;
+    }
     setActiveView(nextView);
     if (window.innerWidth < 900) toggleMobileMenu(false);
     renderLoading(`Opening ${btn.textContent.trim()}...`);
