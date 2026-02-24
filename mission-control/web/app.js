@@ -330,6 +330,14 @@ function sortByMode(items, mode, type) {
       return arr.sort((a, b) => (rank[a.priority] ?? 9) - (rank[b.priority] ?? 9));
     }
     if (mode === 'updated') return byDateDesc('updatedAt');
+    if (mode === 'impact') {
+      return arr.sort((a, b) => {
+        const scoreDiff = Number(b.impactScore || 0) - Number(a.impactScore || 0);
+        if (scoreDiff !== 0) return scoreDiff;
+        const rank = { Revenue: 0, 'Time Saving': 1, System: 2, Other: 3 };
+        return (rank[a.impactType] ?? 9) - (rank[b.impactType] ?? 9);
+      });
+    }
     return byDateAsc('dueDate');
   }
   if (type === 'resources') {
@@ -471,6 +479,10 @@ async function loadTasks() {
         <select name='priority'><option>High</option><option selected>Medium</option><option>Low</option></select>
       </div>
       <div class='row'><input name='dueDate' type='date'><select name='projectId'>${projectOptions('')}</select></div>
+      <div class='row'>
+        <select name='impactType'><option>Revenue</option><option>Time Saving</option><option>System</option><option selected>Other</option></select>
+        <input name='impactScore' type='number' min='0' max='10' step='1' value='0' placeholder='Impact 0-10'>
+      </div>
       <button class='primary' type='submit'>Save task</button>
     </form>
   </div>
@@ -480,13 +492,13 @@ async function loadTasks() {
       <div class='row'>
         <select id='tasks_owner'><option value=''>All owners</option><option ${owner === 'Me' ? 'selected' : ''}>Me</option><option ${owner === 'OpenClaw' ? 'selected' : ''}>OpenClaw</option></select>
         <select id='tasks_status'><option value=''>All status</option><option ${status === 'To Do' ? 'selected' : ''}>To Do</option><option ${status === 'In Progress' ? 'selected' : ''}>In Progress</option><option ${status === 'Done' ? 'selected' : ''}>Done</option></select>
-        <select id='tasks_sort'><option value='due' ${sort==='due'?'selected':''}>Sort: Due date</option><option value='priority' ${sort==='priority'?'selected':''}>Sort: Priority</option><option value='updated' ${sort==='updated'?'selected':''}>Sort: Updated</option></select>
+        <select id='tasks_sort'><option value='due' ${sort==='due'?'selected':''}>Sort: Due date</option><option value='priority' ${sort==='priority'?'selected':''}>Sort: Priority</option><option value='impact' ${sort==='impact'?'selected':''}>Sort: Impact</option><option value='updated' ${sort==='updated'?'selected':''}>Sort: Updated</option></select>
       </div>
     </div>
     <div class='list'>${tasks.map(t => `
       <div class='item'>
         <div class='row between'><strong>${esc(t.title)}</strong>${badge(t.priority, t.priority === 'High' ? 'danger' : t.priority === 'Medium' ? 'warn' : 'ok')}</div>
-        <div class='muted'>${badge(t.owner, 'neutral')} ${badge(t.status, t.status === 'Done' ? 'ok' : t.status === 'In Progress' ? 'info' : 'neutral')}${t.dueDate ? ` ${badge(`due ${t.dueDate}`, 'neutral')}` : ''}</div>
+        <div class='muted'>${badge(t.owner, 'neutral')} ${badge(t.status, t.status === 'Done' ? 'ok' : t.status === 'In Progress' ? 'info' : 'neutral')}${t.dueDate ? ` ${badge(`due ${t.dueDate}`, 'neutral')}` : ''}${t.impactType ? ` ${badge(t.impactType, t.impactType === 'Revenue' ? 'ok' : t.impactType === 'Time Saving' ? 'info' : t.impactType === 'System' ? 'warn' : 'neutral')}` : ''}${typeof t.impactScore === 'number' ? ` ${badge(`impact ${t.impactScore}/10`, 'neutral')}` : ''}</div>
         ${t.description ? `<p>${esc(t.description)}</p>` : ''}
         <div class='row'>
           <button data-status-task='${t.id}' data-next='To Do'>To Do</button>
@@ -504,6 +516,10 @@ async function loadTasks() {
             <select name='priority'><option ${t.priority==='High'?'selected':''}>High</option><option ${t.priority==='Medium'?'selected':''}>Medium</option><option ${t.priority==='Low'?'selected':''}>Low</option></select>
           </div>
           <div class='row'><input name='dueDate' type='date' value='${esc(t.dueDate || '')}'><select name='projectId'>${projectOptions(t.projectId || '')}</select></div>
+          <div class='row'>
+            <select name='impactType'><option ${t.impactType==='Revenue'?'selected':''}>Revenue</option><option ${t.impactType==='Time Saving'?'selected':''}>Time Saving</option><option ${t.impactType==='System'?'selected':''}>System</option><option ${!t.impactType || t.impactType==='Other'?'selected':''}>Other</option></select>
+            <input name='impactScore' type='number' min='0' max='10' step='1' value='${Number(t.impactScore ?? 0)}'>
+          </div>
           <div class='row'><button class='primary' type='submit'>Save</button></div>
         </form>
       </div>`).join('') || '<div class="muted">No tasks yet.</div>'}
@@ -516,7 +532,9 @@ async function loadTasks() {
   bindSubmit('create_task', async fd => {
     await api('/api/tasks', { method: 'POST', body: JSON.stringify({
       title: fd.get('title'), description: fd.get('description'), owner: fd.get('owner'), status: fd.get('status'),
-      priority: fd.get('priority'), dueDate: fd.get('dueDate') || null, projectId: fd.get('projectId') || null
+      priority: fd.get('priority'), dueDate: fd.get('dueDate') || null, projectId: fd.get('projectId') || null,
+      impactType: fd.get('impactType') || 'Other',
+      impactScore: Math.max(0, Math.min(10, Number(fd.get('impactScore') || 0)))
     })});
     localStorage.removeItem(FORM_DRAFT_KEYS.create_task);
     loadTasks().catch(renderError);
@@ -547,7 +565,9 @@ async function loadTasks() {
         status: fd.get('status'),
         priority: fd.get('priority'),
         dueDate: fd.get('dueDate') || null,
-        projectId: fd.get('projectId') || null
+        projectId: fd.get('projectId') || null,
+        impactType: fd.get('impactType') || 'Other',
+        impactScore: Math.max(0, Math.min(10, Number(fd.get('impactScore') || 0)))
       })});
       loadTasks().catch(renderError);
     });
