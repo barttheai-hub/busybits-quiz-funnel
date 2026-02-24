@@ -64,10 +64,12 @@ function impactScoreValue(impactScore) {
 router.get('/', (req, res) => {
   const owner = typeof req.query.owner === 'string' ? req.query.owner.trim() : '';
   const includeDone = req.query.includeDone === 'true';
+  const includeBlocked = req.query.includeBlocked === 'true';
   const limit = Number.isFinite(Number(req.query.limit)) ? Math.min(Math.max(Number(req.query.limit), 1), 50) : 10;
 
   const tasks = parseRows(db.prepare(`SELECT * FROM tasks ORDER BY updated_at DESC`).all())
     .filter(t => includeDone || t.status !== 'Done')
+    .filter(t => includeBlocked || t.status !== 'Blocked')
     .filter(t => !owner || t.owner === owner);
   const projects = parseRows(db.prepare(`SELECT * FROM projects`).all());
 
@@ -118,7 +120,7 @@ router.get('/', (req, res) => {
 
   res.json({
     generatedAt: new Date().toISOString(),
-    filters: { owner: owner || null, includeDone, limit },
+    filters: { owner: owner || null, includeDone, includeBlocked, limit },
     top: ranked[0] || null,
     queue: ranked.slice(0, limit)
   });

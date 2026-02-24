@@ -17,6 +17,7 @@ Supports token map via `API_TOKENS_JSON` in `.env` for role-based identities.
 - Query params:
   - `owner=<name>` (optional): only rank tasks for a specific owner (e.g., `OpenClaw`)
   - `includeDone=true|false` (optional, default false)
+  - `includeBlocked=true|false` (optional, default false; blocked tasks are excluded from ranking unless true)
   - `limit=1..50` (optional, default 10)
 
 ## Notes
