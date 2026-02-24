@@ -390,6 +390,59 @@ async function loadDashboard() {
   `;
 }
 
+async function loadFocus() {
+  const owner = document.getElementById('focus_owner')?.value || '';
+  const includeDone = document.getElementById('focus_include_done')?.checked ? 'true' : 'false';
+  const qs = new URLSearchParams({ owner, includeDone, limit: '12' });
+  const data = await api(`/api/focus?${qs}`);
+  const queue = Array.isArray(data.queue) ? data.queue : [];
+
+  view.innerHTML = `
+    <div class='card'>
+      <div class='row between'>
+        <h3>Focus Queue</h3>
+        <div class='row'>
+          <select id='focus_owner'>
+            <option value='' ${owner === '' ? 'selected' : ''}>All owners</option>
+            <option value='Me' ${owner === 'Me' ? 'selected' : ''}>Me</option>
+            <option value='OpenClaw' ${owner === 'OpenClaw' ? 'selected' : ''}>OpenClaw</option>
+          </select>
+          <label class='muted'><input id='focus_include_done' type='checkbox' ${includeDone === 'true' ? 'checked' : ''}> Include done</label>
+        </div>
+      </div>
+      ${data.top ? `<p class='muted'>Top recommendation: <strong>${esc(data.top.title)}</strong> · score ${Number(data.top.score || 0).toFixed(1)} · ${esc(data.top.recommendation || '')}</p>` : `<p class='muted'>No tasks in queue.</p>`}
+      <div class='list'>${queue.map(t => `
+        <div class='item'>
+          <div class='row between'><strong>${esc(t.title)}</strong>${badge(`score ${Number(t.score || 0).toFixed(1)}`, 'info')}</div>
+          <div class='muted'>${badge(t.owner, 'neutral')} ${badge(t.status, t.status === 'Done' ? 'ok' : t.status === 'In Progress' ? 'info' : 'neutral')} ${badge(t.impactType || 'Other', t.impactType === 'Revenue' ? 'ok' : t.impactType === 'Time Saving' ? 'info' : t.impactType === 'System' ? 'warn' : 'neutral')} ${badge(`impact ${Number(t.impactScore || 0)}/10`, 'neutral')}</div>
+          <div class='row'>
+            <button data-focus-action='start' data-task-id='${t.id}'>Start now</button>
+            <button data-focus-action='done' data-task-id='${t.id}'>Mark done</button>
+            <button data-focus-action='open' data-task-id='${t.id}'>Open in Tasks</button>
+          </div>
+        </div>
+      `).join('') || '<div class="muted">No ranked items yet.</div>'}</div>
+    </div>
+  `;
+
+  document.getElementById('focus_owner').onchange = () => loadFocus().catch(renderError);
+  document.getElementById('focus_include_done').onchange = () => loadFocus().catch(renderError);
+  document.querySelectorAll('[data-focus-action]').forEach(btn => btn.onclick = async () => {
+    const taskId = btn.dataset.taskId;
+    const action = btn.dataset.focusAction;
+    if (!taskId || !action) return;
+    if (action === 'open') {
+      setActiveView('tasks');
+      renderLoading('Opening Tasks...');
+      await loadTasks();
+      return;
+    }
+    const status = action === 'done' ? 'Done' : 'In Progress';
+    await api(`/api/tasks/${taskId}`, { method: 'PUT', body: JSON.stringify({ status }) });
+    loadFocus().catch(renderError);
+  });
+}
+
 async function loadNotes() {
   await loadProjectsCache();
   const q = document.getElementById('notes_q')?.value || '';
@@ -717,7 +770,7 @@ async function loadActivity() {
   view.innerHTML = `<div class='card'><h3>Activity Feed</h3><div class='list'>${acts.map(a => `<div class='item'><strong>${esc(a.message)}</strong><div class='muted'>${new Date(a.createdAt).toLocaleString()} · ${esc(a.type)}</div></div>`).join('') || '<div class="muted">No activity yet.</div>'}</div></div>`;
 }
 
-const handlers = { dashboard: loadDashboard, notes: loadNotes, tasks: loadTasks, resources: loadResources, projects: loadProjects, activity: loadActivity };
+const handlers = { dashboard: loadDashboard, focus: loadFocus, notes: loadNotes, tasks: loadTasks, resources: loadResources, projects: loadProjects, activity: loadActivity };
 
 function setActiveView(viewName) {
   document.querySelectorAll('[data-view]').forEach(el => {
