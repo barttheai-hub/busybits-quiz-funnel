@@ -1,0 +1,6 @@
+bucket,due_date,priority,company,action_type,has_contact,contact_email,next_action,subject
+next_48h,2026-02-24,P1,Apollo Neuro,send_initial,no,,Research contact + send intro email,BusyBits x Apollo Neuro (pilot sponsor slot)
+next_48h,2026-02-24,P1,Eight Sleep,send_initial,no,,Research contact + send intro email,BusyBits x Eight Sleep (pilot sponsor slot)
+next_48h,2026-02-24,P1,Levels,send_initial,no,,Research contact + send intro email,BusyBits x Levels (pilot sponsor slot)
+next_48h,2026-02-24,P1,Oura,send_initial,no,,Research contact + send intro email,BusyBits x Oura (pilot sponsor slot)
+next_48h,2026-02-24,P1,Whoop,send_initial,no,,Research contact + send intro email,BusyBits x Whoop (pilot sponsor slot)
