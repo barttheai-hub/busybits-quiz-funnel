@@ -85,6 +85,8 @@ def main() -> None:
     board_md = root / "sponsor_outreach_execution_board.md"
     actions_csv = root / f"sponsor_outreach_actions_{run_date}.csv"
     actions_md = root / f"sponsor_outreach_actions_{run_date}.md"
+    contact_gap_csv = root / "sponsor_contact_gap_queue.csv"
+    contact_gap_md = root / "sponsor_contact_gap_queue.md"
 
     run([
         "python3",
@@ -134,9 +136,32 @@ def main() -> None:
         str(actions_md),
     ])
 
+    run([
+        "python3",
+        str(scripts / "generate_contact_gap_queue.py"),
+        "--input",
+        str(board_csv),
+        "--output-csv",
+        str(contact_gap_csv),
+        "--output-md",
+        str(contact_gap_md),
+        "--limit",
+        str(args.limit),
+    ])
+
     maybe_log_progress(
         root=root,
-        generated_files=[day_queue_csv, day_queue_md, send_pack_md, board_csv, board_md, actions_csv, actions_md],
+        generated_files=[
+            day_queue_csv,
+            day_queue_md,
+            send_pack_md,
+            board_csv,
+            board_md,
+            actions_csv,
+            actions_md,
+            contact_gap_csv,
+            contact_gap_md,
+        ],
         run_date=run_date,
         should_log=args.log_progress,
     )
@@ -146,6 +171,7 @@ def main() -> None:
     print(f"Generated send pack: {send_pack_md}")
     print(f"Generated execution board: {board_csv}")
     print(f"Generated action queue: {actions_csv}")
+    print(f"Generated contact gap queue: {contact_gap_csv}")
 
 
 if __name__ == "__main__":
