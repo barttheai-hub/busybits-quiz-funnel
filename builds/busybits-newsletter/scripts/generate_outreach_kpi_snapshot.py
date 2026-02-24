@@ -22,21 +22,41 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def pick(row: dict[str, str], *keys: str) -> str:
+    for k in keys:
+        if k in row and row[k] is not None:
+            return str(row[k]).strip()
+    return ""
+
+
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--tracker", default="builds/busybits-newsletter/sponsorship_outreach_tracker.csv")
     p.add_argument("--actions", default="builds/busybits-newsletter/sponsor_outreach_actions_today.csv")
+    p.add_argument("--board", default="builds/busybits-newsletter/sponsor_outreach_execution_board.csv")
     p.add_argument("--output-md", default="builds/busybits-newsletter/sponsor_outreach_kpi_snapshot.md")
     p.add_argument("--output-json", default="builds/busybits-newsletter/sponsor_outreach_kpi_snapshot.json")
     args = p.parse_args()
 
     tracker = read_csv(Path(args.tracker))
     actions = read_csv(Path(args.actions))
+    board = read_csv(Path(args.board))
 
-    status_counter = Counter((r.get("Status") or "Unknown").strip() for r in tracker)
-    tier_counter = Counter((r.get("Tier") or "Unknown").strip() for r in tracker)
-    action_counter = Counter((r.get("Action") or "Unknown").strip() for r in actions)
-    p1_actions = [r for r in actions if (r.get("Priority") or "").strip().upper() == "P1"]
+    status_counter = Counter((pick(r, "status", "Status") or "Unknown") for r in tracker)
+    tier_counter = Counter((pick(r, "tier", "Tier") or "Unknown") for r in tracker)
+    action_counter = Counter((pick(r, "action_type", "Action") or "Unknown") for r in actions)
+    p1_actions = [r for r in actions if pick(r, "priority", "Priority").upper() == "P1"]
+    overdue_actions = [
+        r for r in actions
+        if pick(r, "status", "Status").lower() != "done"
+        and pick(r, "due_date", "Due Date")
+        and pick(r, "due_date", "Due Date") < datetime.now().strftime("%Y-%m-%d")
+    ]
+
+    ready_missing_contact = [
+        r for r in board
+        if pick(r, "status", "Status").lower() == "ready to send" and not pick(r, "contact_email", "Contact Email")
+    ]
 
     snapshot = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
@@ -46,6 +66,8 @@ def main() -> None:
         "today_action_total": len(actions),
         "today_actions_by_type": dict(action_counter),
         "today_p1_actions": len(p1_actions),
+        "today_overdue_actions": len(overdue_actions),
+        "ready_to_send_missing_contact": len(ready_missing_contact),
     }
 
     Path(args.output_json).write_text(json.dumps(snapshot, indent=2), encoding="utf-8")
@@ -73,6 +95,8 @@ def main() -> None:
         "## Today Action Queue",
         f"- Total actions due: **{snapshot['today_action_total']}**",
         f"- P1 actions due: **{snapshot['today_p1_actions']}**",
+        f"- Overdue actions: **{snapshot['today_overdue_actions']}**",
+        f"- Ready-to-send rows missing contact email: **{snapshot['ready_to_send_missing_contact']}**",
         "- Action mix:",
     ])
 
@@ -84,6 +108,14 @@ def main() -> None:
         "## Immediate Focus",
         "- Clear all P1 `send_initial` first.",
         "- Then execute `followup_1` items to recover warm leads.",
+    ])
+
+    if snapshot["ready_to_send_missing_contact"] > 0:
+        lines.append("- Resolve missing contact emails on ready-to-send rows before drafting.")
+    if snapshot["today_overdue_actions"] > 0:
+        lines.append("- Clear overdue actions first to avoid compounding follow-up slippage.")
+
+    lines.extend([
         "- Update tracker statuses same day to keep next queue accurate.",
         "",
     ])
