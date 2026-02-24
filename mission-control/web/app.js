@@ -169,8 +169,10 @@ function parseQuickTask(raw = '') {
   let owner = 'OpenClaw';
   let priority = 'High';
   let dueDate = null;
+  let impactType = 'Other';
+  let impactScore = 0;
 
-  if (!text) return { title: '', owner, priority, dueDate };
+  if (!text) return { title: '', owner, priority, dueDate, impactType, impactScore };
 
   text = text.replace(/\s@me\b/gi, () => {
     owner = 'Me';
@@ -206,8 +208,30 @@ function parseQuickTask(raw = '') {
     return '';
   });
 
+  text = text.replace(/\s\$(rev|revenue)\b/gi, () => {
+    impactType = 'Revenue';
+    if (impactScore < 8) impactScore = 8;
+    return '';
+  });
+  text = text.replace(/\s\$(time|timesave|time-saving)\b/gi, () => {
+    impactType = 'Time Saving';
+    if (impactScore < 6) impactScore = 6;
+    return '';
+  });
+  text = text.replace(/\s\$(sys|system)\b/gi, () => {
+    impactType = 'System';
+    if (impactScore < 6) impactScore = 6;
+    return '';
+  });
+
+  text = text.replace(/\s#s([0-9]|10)\b/gi, (_, score) => {
+    impactScore = Math.max(0, Math.min(10, Number(score)));
+    if (impactScore > 0 && impactType === 'Other') impactType = 'System';
+    return '';
+  });
+
   const title = text.replace(/\s{2,}/g, ' ').trim();
-  return { title, owner, priority, dueDate };
+  return { title, owner, priority, dueDate, impactType, impactScore };
 }
 
 quickTaskInput?.addEventListener('input', () => {
@@ -264,7 +288,9 @@ quickTaskForm?.addEventListener('submit', async e => {
         owner: task.owner,
         status: 'To Do',
         priority: task.priority,
-        dueDate: task.dueDate
+        dueDate: task.dueDate,
+        impactType: task.impactType,
+        impactScore: task.impactScore
       })
     })));
 
