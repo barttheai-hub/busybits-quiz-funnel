@@ -1,6 +1,6 @@
 # Sponsor Follow-up Calendar (2026-02-24 → 2026-03-06)
 
-Generated from: `builds/busybits-newsletter/sponsorship_outreach_tracker.csv`
+Generated from: `builds/busybits-newsletter/sponsorship_outreach_tracker_deduped.csv`
 Upcoming follow-ups: **10**
 
 ## Queue

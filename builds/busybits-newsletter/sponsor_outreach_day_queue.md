@@ -1,6 +1,6 @@
 # BusyBits Daily Sponsor Queue (2026-02-24)
 
-Generated from: `builds/busybits-newsletter/sponsorship_outreach_tracker.csv`
+Generated from: `builds/busybits-newsletter/sponsorship_outreach_tracker_deduped.csv`
 Total queued today: **15**
 
 ## Queue

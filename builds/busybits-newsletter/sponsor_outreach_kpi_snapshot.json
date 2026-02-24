@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-02-24T14:35:30",
+  "generated_at": "2026-02-24T16:06:01",
   "tracker_total_companies": 51,
   "tracker_by_status": {
-    "Sent": 5,
-    "Research contact": 46
+    "Research contact": 46,
+    "Sent": 5
   },
   "tracker_by_tier": {
     "Tier 1": 10,
-    "Tier 2": 13,
-    "Tier 3": 28
+    "Tier 3": 28,
+    "Tier 2": 13
   },
   "today_action_total": 0,
   "today_actions_by_type": {},
