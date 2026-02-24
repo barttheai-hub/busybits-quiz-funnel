@@ -376,8 +376,25 @@ function projectOptions(selected) {
 }
 
 async function loadDashboard() {
-  const d = await api('/api/dashboard');
+  const [d, focus] = await Promise.all([
+    api('/api/dashboard'),
+    api('/api/focus?owner=OpenClaw&limit=1').catch(() => ({ top: null }))
+  ]);
+  const top = focus?.top || null;
   view.innerHTML = `
+    ${top ? `<div class="card priority-strip">
+      <div class="row between">
+        <div>
+          <div class="muted">Top priority now</div>
+          <strong>${esc(top.title)}</strong>
+          <div class="muted">${esc(top.impactType || 'Other')} · impact ${Number(top.impactScore || 0)}/10 · score ${Number(top.score || 0).toFixed(1)}</div>
+        </div>
+        <div class="row">
+          <button class="primary" id="dash_start_top" data-task-id="${top.id}">Start now</button>
+          <button id="dash_open_focus">Open focus</button>
+        </div>
+      </div>
+    </div>` : ''}
     <div class="kpi-grid">
       <div class="card"><div class="muted">Active Tasks</div><div class="kpi">${d.metrics.activeTasks}</div></div>
       <div class="card"><div class="muted">Overdue</div><div class="kpi">${d.metrics.overdueTasks}</div></div>
@@ -388,6 +405,21 @@ async function loadDashboard() {
     <div class="card"><h3>Workload by Owner</h3><div>Me: ${d.byOwner.Me} · OpenClaw: ${d.byOwner.OpenClaw}</div></div>
     <div class="card"><h3>Today Queue</h3><div class="list">${d.todayTasks.map(t => `<div class='item'><strong>${esc(t.title)}</strong><div class='muted'>${esc(t.owner)} · ${esc(t.status)}${t.dueDate ? ` · due ${esc(t.dueDate)}` : ''}</div></div>`).join('') || '<div class="muted">No tasks yet. Add one in Tasks.</div>'}</div></div>
   `;
+
+  const startTopBtn = document.getElementById('dash_start_top');
+  if (startTopBtn) startTopBtn.onclick = async () => {
+    const taskId = startTopBtn.dataset.taskId;
+    if (!taskId) return;
+    await api(`/api/tasks/${taskId}`, { method: 'PUT', body: JSON.stringify({ status: 'In Progress' }) });
+    loadDashboard().catch(renderError);
+  };
+
+  const openFocusBtn = document.getElementById('dash_open_focus');
+  if (openFocusBtn) openFocusBtn.onclick = async () => {
+    setActiveView('focus');
+    renderLoading('Opening Focus Queue...');
+    await loadFocus();
+  };
 }
 
 async function loadFocus() {
