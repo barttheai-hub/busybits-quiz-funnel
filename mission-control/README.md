@@ -46,6 +46,10 @@ Recommended auth config:
 ## API
 See `API.md`.
 
+## Autonomous loop helper
+- `scripts/autonomous_tick.sh` fetches the top ranked task from `/api/focus` and emits heartbeat-format output.
+- Add `--log` to auto-log the summary back into Mission Control via `scripts/log_progress.sh`.
+
 ## File Structure
 - `src/server.js` - API + static web host
 - `src/routes/*` - route modules
