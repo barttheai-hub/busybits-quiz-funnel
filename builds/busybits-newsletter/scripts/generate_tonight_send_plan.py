@@ -7,6 +7,7 @@ Inputs:
 
 Output:
 - sponsor_tonight_send_plan_<date>.md
+- sponsor_tonight_contact_fill_<date>.csv
 """
 
 from __future__ import annotations
@@ -26,7 +27,8 @@ def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--date", default=date.today().isoformat(), help="Run date (YYYY-MM-DD)")
     p.add_argument("--limit", type=int, default=10, help="Max companies to include")
-    p.add_argument("--out", default="", help="Optional output path")
+    p.add_argument("--out", default="", help="Optional markdown output path")
+    p.add_argument("--csv-out", default="", help="Optional CSV output path")
     return p.parse_args()
 
 
@@ -91,7 +93,45 @@ def main():
 
     out_path = Path(args.out) if args.out else (root / f"sponsor_tonight_send_plan_{args.date}.md")
     out_path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+    csv_out_path = Path(args.csv_out) if args.csv_out else (root / f"sponsor_tonight_contact_fill_{args.date}.csv")
+    csv_fields = [
+        "company",
+        "priority",
+        "send_date",
+        "target_role",
+        "search_query",
+        "google_search_url",
+        "contact_name",
+        "contact_email",
+        "contact_linkedin",
+        "status",
+        "notes",
+    ]
+    with csv_out_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=csv_fields)
+        writer.writeheader()
+        for row in selected:
+            company = row.get("company", "")
+            gap = gap_by_company.get(company, {})
+            writer.writerow(
+                {
+                    "company": company,
+                    "priority": row.get("priority", "P3"),
+                    "send_date": row.get("send_date", ""),
+                    "target_role": row.get("contact_role", "Partnerships"),
+                    "search_query": gap.get("search_query", ""),
+                    "google_search_url": gap.get("google_search_url", ""),
+                    "contact_name": "",
+                    "contact_email": "",
+                    "contact_linkedin": "",
+                    "status": "to_research",
+                    "notes": "",
+                }
+            )
+
     print(out_path)
+    print(csv_out_path)
 
 
 if __name__ == "__main__":
