@@ -11,6 +11,10 @@ set -euo pipefail
 #     [--files "a.md, b.md"] \
 #     [--resource-title "Doc"] [--resource-type "doc"] [--resource-url "file://..."] \
 #     [--task-status "In Progress|Blocked|Done"]
+#
+# Or parse heartbeat summary text automatically:
+#   ./scripts/log_progress.sh --summary-file /tmp/heartbeat.txt
+#   ./scripts/log_progress.sh --summary-text "Task: ...\nChanged files: ...\nWhat changed: ...\nWhy it helps: ...\nNext: ..."
 
 BASE_URL="${MISSION_CONTROL_BASE_URL:-http://localhost:8787}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -28,6 +32,8 @@ RESOURCE_TITLE=""
 RESOURCE_TYPE="doc"
 RESOURCE_URL=""
 TASK_STATUS="In Progress"
+SUMMARY_FILE=""
+SUMMARY_TEXT=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -40,12 +46,51 @@ while [[ $# -gt 0 ]]; do
     --resource-type) RESOURCE_TYPE="$2"; shift 2;;
     --resource-url) RESOURCE_URL="$2"; shift 2;;
     --task-status) TASK_STATUS="$2"; shift 2;;
+    --summary-file) SUMMARY_FILE="$2"; shift 2;;
+    --summary-text) SUMMARY_TEXT="$2"; shift 2;;
     *) echo "Unknown arg: $1" >&2; exit 1;;
   esac
 done
 
+parse_summary() {
+  local summary="$1"
+  python3 - "$summary" <<'PY'
+import json, re, sys
+text = sys.argv[1]
+
+def pick(label):
+    m = re.search(rf'(?im)^\s*{re.escape(label)}\s*:\s*(.+)$', text)
+    return (m.group(1).strip() if m else "")
+
+print(json.dumps({
+    "task": pick("Task"),
+    "files": pick("Changed files"),
+    "what": pick("What changed"),
+    "why": pick("Why it helps"),
+    "next": pick("Next")
+}))
+PY
+}
+
+if [[ -n "$SUMMARY_FILE" || -n "$SUMMARY_TEXT" ]]; then
+  if [[ -n "$SUMMARY_FILE" ]]; then
+    if [[ ! -f "$SUMMARY_FILE" ]]; then
+      echo "Summary file not found: $SUMMARY_FILE" >&2
+      exit 1
+    fi
+    SUMMARY_TEXT="$(cat "$SUMMARY_FILE")"
+  fi
+
+  PARSED=$(parse_summary "$SUMMARY_TEXT")
+  TASK="${TASK:-$(printf '%s' "$PARSED" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("task",""))')}"
+  FILES="${FILES:-$(printf '%s' "$PARSED" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("files",""))')}"
+  WHAT="${WHAT:-$(printf '%s' "$PARSED" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("what",""))')}"
+  WHY="${WHY:-$(printf '%s' "$PARSED" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("why",""))')}"
+  NEXT="${NEXT:-$(printf '%s' "$PARSED" | python3 -c 'import json,sys; print(json.load(sys.stdin).get("next",""))')}"
+fi
+
 if [[ -z "$TASK" || -z "$WHAT" || -z "$WHY" || -z "$NEXT" ]]; then
-  echo "Missing required flags: --task --what --why --next" >&2
+  echo "Missing required flags: --task --what --why --next (or provide --summary-file/--summary-text with Task/What changed/Why it helps/Next)" >&2
   exit 1
 fi
 
