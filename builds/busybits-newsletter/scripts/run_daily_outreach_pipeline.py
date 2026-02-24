@@ -91,6 +91,8 @@ def main() -> None:
     contact_candidates_md = root / f"sponsor_contact_candidates_{run_date}.md"
     send_now_csv = root / f"sponsor_send_now_batch_{run_date}.csv"
     send_now_md = root / f"sponsor_send_now_batch_{run_date}.md"
+    send_now_copy_csv = root / f"sponsor_send_now_copy_batch_{run_date}.csv"
+    send_now_copy_md = root / f"sponsor_send_now_copy_batch_{run_date}.md"
     followup_calendar_csv = root / f"sponsor_followup_calendar_{run_date}.csv"
     followup_calendar_md = root / f"sponsor_followup_calendar_{run_date}.md"
     followup_due_csv = root / f"sponsor_followup_due_batch_{run_date}.csv"
@@ -186,6 +188,17 @@ def main() -> None:
         str(send_now_csv),
         "--output-md",
         str(send_now_md),
+    ])
+
+    run([
+        "python3",
+        str(scripts / "generate_send_now_copy_batch.py"),
+        "--send-now",
+        str(send_now_csv),
+        "--output-csv",
+        str(send_now_copy_csv),
+        "--output-md",
+        str(send_now_copy_md),
     ])
 
     run([
@@ -301,6 +314,8 @@ def main() -> None:
             contact_candidates_md,
             send_now_csv,
             send_now_md,
+            send_now_copy_csv,
+            send_now_copy_md,
             followup_calendar_csv,
             followup_calendar_md,
             followup_due_csv,
@@ -327,6 +342,7 @@ def main() -> None:
     print(f"Generated contact gap queue: {contact_gap_csv}")
     print(f"Generated contact candidates: {contact_candidates_csv}")
     print(f"Generated send-now batch: {send_now_csv}")
+    print(f"Generated send-now copy batch: {send_now_copy_csv}")
     print(f"Generated follow-up calendar: {followup_calendar_csv}")
     print(f"Generated follow-up due batch: {followup_due_csv}")
     print(f"Generated follow-up upcoming batch: {followup_upcoming_csv}")
