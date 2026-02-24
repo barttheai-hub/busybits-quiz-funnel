@@ -99,6 +99,8 @@ def main() -> None:
     followup_upcoming_md = root / f"sponsor_followup_upcoming_batch_{run_date}.md"
     followup_copy_csv = root / f"sponsor_followup_copy_batch_{run_date}.csv"
     followup_copy_md = root / f"sponsor_followup_copy_batch_{run_date}.md"
+    tonight_plan_md = root / f"sponsor_tonight_send_plan_{run_date}.md"
+    tonight_fill_csv = root / f"sponsor_tonight_contact_fill_{run_date}.csv"
     kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
     kpi_json = root / "sponsor_outreach_kpi_snapshot.json"
     operator_brief_md = root / f"sponsor_operator_brief_{run_date}.md"
@@ -242,6 +244,19 @@ def main() -> None:
 
     run([
         "python3",
+        str(scripts / "generate_tonight_send_plan.py"),
+        "--date",
+        run_date,
+        "--limit",
+        str(args.limit),
+        "--out",
+        str(tonight_plan_md),
+        "--csv-out",
+        str(tonight_fill_csv),
+    ])
+
+    run([
+        "python3",
         str(scripts / "generate_outreach_kpi_snapshot.py"),
         "--tracker",
         str(tracker),
@@ -294,6 +309,8 @@ def main() -> None:
             followup_upcoming_md,
             followup_copy_csv,
             followup_copy_md,
+            tonight_plan_md,
+            tonight_fill_csv,
             kpi_md,
             kpi_json,
             operator_brief_md,
@@ -314,6 +331,8 @@ def main() -> None:
     print(f"Generated follow-up due batch: {followup_due_csv}")
     print(f"Generated follow-up upcoming batch: {followup_upcoming_csv}")
     print(f"Generated follow-up copy batch: {followup_copy_csv}")
+    print(f"Generated tonight send plan: {tonight_plan_md}")
+    print(f"Generated tonight contact fill sheet: {tonight_fill_csv}")
     print(f"Generated KPI snapshot: {kpi_md}")
     print(f"Generated operator brief: {operator_brief_md}")
 
