@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate deterministic sponsor contact candidates + page checks for P1 ready-to-send rows.
+"""Generate deterministic sponsor contact candidates + page checks for outreach rows missing contacts.
 
 This is a no-API fallback when live web search is unavailable.
 """
@@ -34,10 +34,28 @@ def slug_domain(company: str) -> str:
 
 def load_companies(tracker_csv: Path):
     rows = list(csv.DictReader(tracker_csv.open()))
-    picked = [r for r in rows if r.get("status") == "Ready to send" and r.get("priority") == "P1"]
+    picked = []
+    for r in rows:
+        status = (r.get("status") or "").strip().lower()
+        priority = (r.get("priority") or "").strip().upper()
+        contact_email = (r.get("contact_email") or "").strip()
+
+        # Focus only on near-term outreach rows where contact discovery is still the blocker.
+        if status not in {"research contact", "ready to send"}:
+            continue
+        if priority not in {"P1", "P2"}:
+            continue
+        if contact_email:
+            continue
+        picked.append(r)
+
     out = []
+    seen = set()
     for r in picked:
         company = r["company"].strip()
+        if company in seen:
+            continue
+        seen.add(company)
         domain = DOMAIN_OVERRIDES.get(company, slug_domain(company))
         out.append((company, domain))
     return out
