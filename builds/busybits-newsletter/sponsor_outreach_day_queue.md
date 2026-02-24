@@ -5,52 +5,7 @@ Total queued today: **15**
 
 ## Queue
 
-1. **Apollo Neuro** (P1 · Health Tech)
-   - Status: Ready to send
-   - Template: Template A
-   - Target day: Tue
-   - Angle: Stress switch for founders
-   - Next action: Send personalized Template A
-   - Research prompt: Find Apollo Neuro Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
-   - Follow-up plan: Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
-2. **Eight Sleep** (P1 · Health Tech)
-   - Status: Ready to send
-   - Template: Template A
-   - Target day: Tue
-   - Angle: Super-user sleep ROI story
-   - Next action: Send personalized Template A
-   - Research prompt: Find Eight Sleep CEO or Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
-   - Follow-up plan: Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
-3. **Levels** (P1 · Health Tech)
-   - Status: Ready to send
-   - Template: Template A
-   - Target day: Tue
-   - Angle: Metabolic focus and afternoon crash
-   - Next action: Send personalized Template A
-   - Research prompt: Find Levels Growth or Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
-   - Follow-up plan: Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
-4. **Oura** (P1 · Health Tech)
-   - Status: Ready to send
-   - Template: Template A
-   - Target day: Tue
-   - Angle: Gamified readiness + deep work planning
-   - Next action: Send personalized Template A
-   - Research prompt: Find Oura Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
-   - Follow-up plan: Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
-5. **Whoop** (P1 · Health Tech)
-   - Status: Ready to send
-   - Template: Template A
-   - Target day: Tue
-   - Angle: Sustainable output + burnout prevention
-   - Next action: Send personalized Template A
-   - Research prompt: Find Whoop Partnerships or Marketing decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
-   - Follow-up plan: Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
-6. **AG1** (P1 · Consumables)
+1. **AG1** (P1 · Consumables)
    - Status: Research contact
    - Template: Template A
    - Target day: Wed
@@ -59,7 +14,7 @@ Total queued today: **15**
    - Research prompt: Find AG1 Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Wed; Follow-up #2: +7 days after Wed
 
-7. **Joovv** (P1 · Health Tech)
+2. **Joovv** (P1 · Health Tech)
    - Status: Research contact
    - Template: Template A
    - Target day: Wed
@@ -68,7 +23,7 @@ Total queued today: **15**
    - Research prompt: Find Joovv Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Wed; Follow-up #2: +7 days after Wed
 
-8. **LMNT** (P1 · Consumables)
+3. **LMNT** (P1 · Consumables)
    - Status: Research contact
    - Template: Template A
    - Target day: Wed
@@ -77,7 +32,7 @@ Total queued today: **15**
    - Research prompt: Find LMNT Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Wed; Follow-up #2: +7 days after Wed
 
-9. **Plunge** (P1 · Health Tech)
+4. **Plunge** (P1 · Health Tech)
    - Status: Research contact
    - Template: Template A
    - Target day: Wed
@@ -86,7 +41,7 @@ Total queued today: **15**
    - Research prompt: Find Plunge Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Wed; Follow-up #2: +7 days after Wed
 
-10. **SaunaSpace** (P1 · Health Tech)
+5. **SaunaSpace** (P1 · Health Tech)
    - Status: Research contact
    - Template: Template A
    - Target day: Wed
@@ -95,7 +50,7 @@ Total queued today: **15**
    - Research prompt: Find SaunaSpace Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Wed; Follow-up #2: +7 days after Wed
 
-11. **Clay** (P2 · Productivity SaaS)
+6. **Clay** (P2 · Productivity SaaS)
    - Status: Research contact
    - Template: Template B
    - Target day: Thu
@@ -104,7 +59,7 @@ Total queued today: **15**
    - Research prompt: Find Clay Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
 
-12. **Motion** (P2 · Productivity SaaS)
+7. **Motion** (P2 · Productivity SaaS)
    - Status: Research contact
    - Template: Template B
    - Target day: Thu
@@ -113,7 +68,7 @@ Total queued today: **15**
    - Research prompt: Find Motion Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
 
-13. **Notion** (P2 · Productivity SaaS)
+8. **Notion** (P2 · Productivity SaaS)
    - Status: Research contact
    - Template: Template B
    - Target day: Thu
@@ -122,7 +77,7 @@ Total queued today: **15**
    - Research prompt: Find Notion Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
 
-14. **Opal** (P2 · Productivity SaaS)
+9. **Opal** (P2 · Productivity SaaS)
    - Status: Research contact
    - Template: Template B
    - Target day: Thu
@@ -131,7 +86,7 @@ Total queued today: **15**
    - Research prompt: Find Opal Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
 
-15. **Readwise** (P2 · Productivity SaaS)
+10. **Readwise** (P2 · Productivity SaaS)
    - Status: Research contact
    - Template: Template B
    - Target day: Thu
@@ -139,3 +94,48 @@ Total queued today: **15**
    - Next action: Find partnerships lead + prep Template B
    - Research prompt: Find Readwise Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+11. **Sunsama** (P2 · Productivity SaaS)
+   - Status: Research contact
+   - Template: Template B
+   - Target day: Thu
+   - Angle: Daily planning for reduced burnout
+   - Next action: Find partnerships lead + prep Template B
+   - Research prompt: Find Sunsama Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+12. **Superhuman** (P2 · Productivity SaaS)
+   - Status: Research contact
+   - Template: Template B
+   - Target day: Thu
+   - Angle: Inbox throughput for founders
+   - Next action: Find partnerships lead + prep Template A
+   - Research prompt: Find Superhuman Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+13. **TextExpander** (P2 · Productivity SaaS)
+   - Status: Research contact
+   - Template: Template B
+   - Target day: Thu
+   - Angle: 10x communication throughput
+   - Next action: Find partnerships lead + prep Template B
+   - Research prompt: Find TextExpander Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+14. **Four Sigmatic** (P2 · Consumables)
+   - Status: Research contact
+   - Template: Template A
+   - Target day: Fri
+   - Angle: Functional beverage for work blocks
+   - Next action: Find partnerships lead + prep Template A
+   - Research prompt: Find Four Sigmatic Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Fri; Follow-up #2: +7 days after Fri
+
+15. **Huel** (P2 · Consumables)
+   - Status: Research contact
+   - Template: Template A
+   - Target day: Fri
+   - Angle: Convenience nutrition for builders
+   - Next action: Find partnerships lead + prep Template A
+   - Research prompt: Find Huel Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Fri; Follow-up #2: +7 days after Fri

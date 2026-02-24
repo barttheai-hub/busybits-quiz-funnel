@@ -8,147 +8,7 @@ Execution-ready draft emails generated from today's prioritized queue.
 - Pilot: 1 issue test
 - CTA: "Open to a quick test?"
 
-## 1) Apollo Neuro
-- Priority: P1
-- Category: Health Tech
-- Target send day: Tue
-- Angle: Stress switch for founders
-
-**Subject options**
-- BusyBits x Apollo Neuro (pilot sponsor slot)
-- Quick idea: Stress switch for founders for founder/operators
-
-**Email draft**
-Hey Apollo Neuro team —
-
-I run BusyBits, a high-performance newsletter for founders/operators.
-
-I think there’s a clean pilot sponsor fit around this angle: Stress switch for founders.
-We can run a single-issue test with clear delivery timing and a concise sponsor block.
-
-If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
-
-Open to a quick test?
-
-— Ziga
-
-**Follow-up plan:** Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
----
-
-## 2) Eight Sleep
-- Priority: P1
-- Category: Health Tech
-- Target send day: Tue
-- Angle: Super-user sleep ROI story
-
-**Subject options**
-- BusyBits x Eight Sleep (pilot sponsor slot)
-- Quick idea: Super-user sleep ROI story for founder/operators
-
-**Email draft**
-Hey Eight Sleep team —
-
-I run BusyBits, a high-performance newsletter for founders/operators.
-
-I think there’s a clean pilot sponsor fit around this angle: Super-user sleep ROI story.
-We can run a single-issue test with clear delivery timing and a concise sponsor block.
-
-If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
-
-Open to a quick test?
-
-— Ziga
-
-**Follow-up plan:** Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
----
-
-## 3) Levels
-- Priority: P1
-- Category: Health Tech
-- Target send day: Tue
-- Angle: Metabolic focus and afternoon crash
-
-**Subject options**
-- BusyBits x Levels (pilot sponsor slot)
-- Quick idea: Metabolic focus and afternoon crash for founder/operators
-
-**Email draft**
-Hey Levels team —
-
-I run BusyBits, a high-performance newsletter for founders/operators.
-
-I think there’s a clean pilot sponsor fit around this angle: Metabolic focus and afternoon crash.
-We can run a single-issue test with clear delivery timing and a concise sponsor block.
-
-If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
-
-Open to a quick test?
-
-— Ziga
-
-**Follow-up plan:** Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
----
-
-## 4) Oura
-- Priority: P1
-- Category: Health Tech
-- Target send day: Tue
-- Angle: Gamified readiness + deep work planning
-
-**Subject options**
-- BusyBits x Oura (pilot sponsor slot)
-- Quick idea: Gamified readiness + deep work planning for founder/operators
-
-**Email draft**
-Hey Oura team —
-
-I run BusyBits, a high-performance newsletter for founders/operators.
-
-I think there’s a clean pilot sponsor fit around this angle: Gamified readiness + deep work planning.
-We can run a single-issue test with clear delivery timing and a concise sponsor block.
-
-If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
-
-Open to a quick test?
-
-— Ziga
-
-**Follow-up plan:** Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
----
-
-## 5) Whoop
-- Priority: P1
-- Category: Health Tech
-- Target send day: Tue
-- Angle: Sustainable output + burnout prevention
-
-**Subject options**
-- BusyBits x Whoop (pilot sponsor slot)
-- Quick idea: Sustainable output + burnout prevention for founder/operators
-
-**Email draft**
-Hey Whoop team —
-
-I run BusyBits, a high-performance newsletter for founders/operators.
-
-I think there’s a clean pilot sponsor fit around this angle: Sustainable output + burnout prevention.
-We can run a single-issue test with clear delivery timing and a concise sponsor block.
-
-If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
-
-Open to a quick test?
-
-— Ziga
-
-**Follow-up plan:** Follow-up #1: +3 days after Tue; Follow-up #2: +7 days after Tue
-
----
-
-## 6) AG1
+## 1) AG1
 - Priority: P1
 - Category: Consumables
 - Target send day: Wed
@@ -176,7 +36,7 @@ Open to a quick test?
 
 ---
 
-## 7) Joovv
+## 2) Joovv
 - Priority: P1
 - Category: Health Tech
 - Target send day: Wed
@@ -204,7 +64,7 @@ Open to a quick test?
 
 ---
 
-## 8) LMNT
+## 3) LMNT
 - Priority: P1
 - Category: Consumables
 - Target send day: Wed
@@ -232,7 +92,7 @@ Open to a quick test?
 
 ---
 
-## 9) Plunge
+## 4) Plunge
 - Priority: P1
 - Category: Health Tech
 - Target send day: Wed
@@ -260,7 +120,7 @@ Open to a quick test?
 
 ---
 
-## 10) SaunaSpace
+## 5) SaunaSpace
 - Priority: P1
 - Category: Health Tech
 - Target send day: Wed
@@ -285,6 +145,146 @@ Open to a quick test?
 — Ziga
 
 **Follow-up plan:** Follow-up #1: +3 days after Wed; Follow-up #2: +7 days after Wed
+
+---
+
+## 6) Clay
+- Priority: P2
+- Category: Productivity SaaS
+- Target send day: Thu
+- Angle: Relationship leverage system
+
+**Subject options**
+- BusyBits x Clay (pilot sponsor slot)
+- Quick idea: Relationship leverage system for founder/operators
+
+**Email draft**
+Hey Clay team —
+
+I run BusyBits, a high-performance newsletter for founders/operators.
+
+I think there’s a clean pilot sponsor fit around this angle: Relationship leverage system.
+We can run a single-issue test with clear delivery timing and a concise sponsor block.
+
+If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
+
+Open to a quick test?
+
+— Ziga
+
+**Follow-up plan:** Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+---
+
+## 7) Motion
+- Priority: P2
+- Category: Productivity SaaS
+- Target send day: Thu
+- Angle: Calendar autopilot for focus
+
+**Subject options**
+- BusyBits x Motion (pilot sponsor slot)
+- Quick idea: Calendar autopilot for focus for founder/operators
+
+**Email draft**
+Hey Motion team —
+
+I run BusyBits, a high-performance newsletter for founders/operators.
+
+I think there’s a clean pilot sponsor fit around this angle: Calendar autopilot for focus.
+We can run a single-issue test with clear delivery timing and a concise sponsor block.
+
+If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
+
+Open to a quick test?
+
+— Ziga
+
+**Follow-up plan:** Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+---
+
+## 8) Notion
+- Priority: P2
+- Category: Productivity SaaS
+- Target send day: Thu
+- Angle: Operator knowledge OS
+
+**Subject options**
+- BusyBits x Notion (pilot sponsor slot)
+- Quick idea: Operator knowledge OS for founder/operators
+
+**Email draft**
+Hey Notion team —
+
+I run BusyBits, a high-performance newsletter for founders/operators.
+
+I think there’s a clean pilot sponsor fit around this angle: Operator knowledge OS.
+We can run a single-issue test with clear delivery timing and a concise sponsor block.
+
+If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
+
+Open to a quick test?
+
+— Ziga
+
+**Follow-up plan:** Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+---
+
+## 9) Opal
+- Priority: P2
+- Category: Productivity SaaS
+- Target send day: Thu
+- Angle: Attention defense for creators
+
+**Subject options**
+- BusyBits x Opal (pilot sponsor slot)
+- Quick idea: Attention defense for creators for founder/operators
+
+**Email draft**
+Hey Opal team —
+
+I run BusyBits, a high-performance newsletter for founders/operators.
+
+I think there’s a clean pilot sponsor fit around this angle: Attention defense for creators.
+We can run a single-issue test with clear delivery timing and a concise sponsor block.
+
+If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
+
+Open to a quick test?
+
+— Ziga
+
+**Follow-up plan:** Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
+
+---
+
+## 10) Readwise
+- Priority: P2
+- Category: Productivity SaaS
+- Target send day: Thu
+- Angle: Learning retention for founders
+
+**Subject options**
+- BusyBits x Readwise (pilot sponsor slot)
+- Quick idea: Learning retention for founders for founder/operators
+
+**Email draft**
+Hey Readwise team —
+
+I run BusyBits, a high-performance newsletter for founders/operators.
+
+I think there’s a clean pilot sponsor fit around this angle: Learning retention for founders.
+We can run a single-issue test with clear delivery timing and a concise sponsor block.
+
+If useful, I can send the one-issue pilot details (placement + timing + rate) in one short message.
+
+Open to a quick test?
+
+— Ziga
+
+**Follow-up plan:** Follow-up #1: +3 days after Thu; Follow-up #2: +7 days after Thu
 
 ---
 

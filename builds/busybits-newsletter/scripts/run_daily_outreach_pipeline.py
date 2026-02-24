@@ -93,6 +93,8 @@ def main() -> None:
     send_now_md = root / f"sponsor_send_now_batch_{run_date}.md"
     followup_calendar_csv = root / f"sponsor_followup_calendar_{run_date}.csv"
     followup_calendar_md = root / f"sponsor_followup_calendar_{run_date}.md"
+    followup_due_csv = root / f"sponsor_followup_due_batch_{run_date}.csv"
+    followup_due_md = root / f"sponsor_followup_due_batch_{run_date}.md"
     kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
     kpi_json = root / "sponsor_outreach_kpi_snapshot.json"
     operator_brief_md = root / f"sponsor_operator_brief_{run_date}.md"
@@ -197,6 +199,19 @@ def main() -> None:
 
     run([
         "python3",
+        str(scripts / "generate_followup_due_batch.py"),
+        "--calendar",
+        str(followup_calendar_csv),
+        "--date",
+        run_date,
+        "--output-csv",
+        str(followup_due_csv),
+        "--output-md",
+        str(followup_due_md),
+    ])
+
+    run([
+        "python3",
         str(scripts / "generate_outreach_kpi_snapshot.py"),
         "--tracker",
         str(tracker),
@@ -243,6 +258,8 @@ def main() -> None:
             send_now_md,
             followup_calendar_csv,
             followup_calendar_md,
+            followup_due_csv,
+            followup_due_md,
             kpi_md,
             kpi_json,
             operator_brief_md,
@@ -260,6 +277,7 @@ def main() -> None:
     print(f"Generated contact candidates: {contact_candidates_csv}")
     print(f"Generated send-now batch: {send_now_csv}")
     print(f"Generated follow-up calendar: {followup_calendar_csv}")
+    print(f"Generated follow-up due batch: {followup_due_csv}")
     print(f"Generated KPI snapshot: {kpi_md}")
     print(f"Generated operator brief: {operator_brief_md}")
 
