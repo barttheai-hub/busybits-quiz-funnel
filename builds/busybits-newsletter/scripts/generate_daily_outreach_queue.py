@@ -89,6 +89,7 @@ def main() -> None:
                 "target_send_day": send_day,
                 "outreach_angle": (r.get("outreach_angle") or "").strip(),
                 "next_action": (r.get("next_action") or "").strip(),
+                "contact_email": (r.get("contact_email") or "").strip(),
                 "contact_research_prompt": build_contact_research_prompt(company, role),
                 "followup_plan": build_followup_plan(send_day),
             }
@@ -107,6 +108,7 @@ def main() -> None:
             "target_send_day",
             "outreach_angle",
             "next_action",
+            "contact_email",
             "contact_research_prompt",
             "followup_plan",
         ]
