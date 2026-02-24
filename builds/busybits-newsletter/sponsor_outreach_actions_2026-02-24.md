@@ -1,11 +1,11 @@
 # Sponsor Outreach Actions — 2026-02-24
 
 Generated from: `builds/busybits-newsletter/sponsor_outreach_execution_board.csv`
-Actions due: **5** (with contact ready: **0**) 
+Actions due: **5** (with contact ready: **0**, overdue included: **0**) 
 
 ## Queue + Drafts
 
-1. **Apollo Neuro** — send_initial (P1)
+1. **Apollo Neuro** — send_initial (P1, due_today)
    - Contact ready: no | Email: n/a
    - Subject: BusyBits x Apollo Neuro (pilot sponsor slot)
    - Next: Research contact + send intro email
@@ -25,7 +25,7 @@ Open to a quick test?
 — Ziga
 ```
 
-2. **Eight Sleep** — send_initial (P1)
+2. **Eight Sleep** — send_initial (P1, due_today)
    - Contact ready: no | Email: n/a
    - Subject: BusyBits x Eight Sleep (pilot sponsor slot)
    - Next: Research contact + send intro email
@@ -45,7 +45,7 @@ Open to a quick test?
 — Ziga
 ```
 
-3. **Levels** — send_initial (P1)
+3. **Levels** — send_initial (P1, due_today)
    - Contact ready: no | Email: n/a
    - Subject: BusyBits x Levels (pilot sponsor slot)
    - Next: Research contact + send intro email
@@ -65,7 +65,7 @@ Open to a quick test?
 — Ziga
 ```
 
-4. **Oura** — send_initial (P1)
+4. **Oura** — send_initial (P1, due_today)
    - Contact ready: no | Email: n/a
    - Subject: BusyBits x Oura (pilot sponsor slot)
    - Next: Research contact + send intro email
@@ -85,7 +85,7 @@ Open to a quick test?
 — Ziga
 ```
 
-5. **Whoop** — send_initial (P1)
+5. **Whoop** — send_initial (P1, due_today)
    - Contact ready: no | Email: n/a
    - Subject: BusyBits x Whoop (pilot sponsor slot)
    - Next: Research contact + send intro email

@@ -1,6 +1,6 @@
-action_type,company,priority,status,due_date,has_contact,contact_email,subject,angle,next_action
-send_initial,Apollo Neuro,P1,Ready to send,2026-02-24,no,,BusyBits x Apollo Neuro (pilot sponsor slot),Stress switch for founders,Research contact + send intro email
-send_initial,Eight Sleep,P1,Ready to send,2026-02-24,no,,BusyBits x Eight Sleep (pilot sponsor slot),Super-user sleep ROI story,Research contact + send intro email
-send_initial,Levels,P1,Ready to send,2026-02-24,no,,BusyBits x Levels (pilot sponsor slot),Metabolic focus and afternoon crash,Research contact + send intro email
-send_initial,Oura,P1,Ready to send,2026-02-24,no,,BusyBits x Oura (pilot sponsor slot),Gamified readiness + deep work planning,Research contact + send intro email
-send_initial,Whoop,P1,Ready to send,2026-02-24,no,,BusyBits x Whoop (pilot sponsor slot),Sustainable output + burnout prevention,Research contact + send intro email
+action_type,company,priority,status,due_date,days_overdue,urgency,has_contact,contact_email,subject,angle,next_action
+send_initial,Apollo Neuro,P1,Ready to send,2026-02-24,0,due_today,no,,BusyBits x Apollo Neuro (pilot sponsor slot),Stress switch for founders,Research contact + send intro email
+send_initial,Eight Sleep,P1,Ready to send,2026-02-24,0,due_today,no,,BusyBits x Eight Sleep (pilot sponsor slot),Super-user sleep ROI story,Research contact + send intro email
+send_initial,Levels,P1,Ready to send,2026-02-24,0,due_today,no,,BusyBits x Levels (pilot sponsor slot),Metabolic focus and afternoon crash,Research contact + send intro email
+send_initial,Oura,P1,Ready to send,2026-02-24,0,due_today,no,,BusyBits x Oura (pilot sponsor slot),Gamified readiness + deep work planning,Research contact + send intro email
+send_initial,Whoop,P1,Ready to send,2026-02-24,0,due_today,no,,BusyBits x Whoop (pilot sponsor slot),Sustainable output + burnout prevention,Research contact + send intro email

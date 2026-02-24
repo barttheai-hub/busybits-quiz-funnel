@@ -1,4 +1,4 @@
-# Sponsor Outreach Execution Board (2026-02-23)
+# Sponsor Outreach Execution Board (2026-02-24)
 
 Generated from: `builds/busybits-newsletter/sponsor_outreach_day_queue.csv`
 Rows: **15** (Ready: **5**, Research needed: **10**)
