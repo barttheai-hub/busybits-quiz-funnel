@@ -87,6 +87,8 @@ def main() -> None:
     actions_md = root / f"sponsor_outreach_actions_{run_date}.md"
     contact_gap_csv = root / "sponsor_contact_gap_queue.csv"
     contact_gap_md = root / "sponsor_contact_gap_queue.md"
+    kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
+    kpi_json = root / "sponsor_outreach_kpi_snapshot.json"
 
     run([
         "python3",
@@ -149,6 +151,21 @@ def main() -> None:
         str(args.limit),
     ])
 
+    run([
+        "python3",
+        str(scripts / "generate_outreach_kpi_snapshot.py"),
+        "--tracker",
+        str(tracker),
+        "--actions",
+        str(actions_csv),
+        "--board",
+        str(board_csv),
+        "--output-md",
+        str(kpi_md),
+        "--output-json",
+        str(kpi_json),
+    ])
+
     maybe_log_progress(
         root=root,
         generated_files=[
@@ -161,6 +178,8 @@ def main() -> None:
             actions_md,
             contact_gap_csv,
             contact_gap_md,
+            kpi_md,
+            kpi_json,
         ],
         run_date=run_date,
         should_log=args.log_progress,
@@ -172,6 +191,7 @@ def main() -> None:
     print(f"Generated execution board: {board_csv}")
     print(f"Generated action queue: {actions_csv}")
     print(f"Generated contact gap queue: {contact_gap_csv}")
+    print(f"Generated KPI snapshot: {kpi_md}")
 
 
 if __name__ == "__main__":

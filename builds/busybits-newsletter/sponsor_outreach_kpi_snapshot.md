@@ -1,6 +1,6 @@
 # BusyBits Sponsor Outreach KPI Snapshot
 
-Generated: 2026-02-23T17:06:43
+Generated: 2026-02-23T18:36:25
 
 ## Tracker Health
 - Total companies in tracker: **51**
@@ -13,12 +13,11 @@ Generated: 2026-02-23T17:06:43
   - Tier 3: 28
 
 ## Today Action Queue
-- Total actions due: **5**
-- P1 actions due: **5**
+- Total actions due: **0**
+- P1 actions due: **0**
 - Overdue actions: **0**
 - Ready-to-send rows missing contact email: **5**
 - Action mix:
-  - send_initial: 5
 
 ## Immediate Focus
 - Clear all P1 `send_initial` first.

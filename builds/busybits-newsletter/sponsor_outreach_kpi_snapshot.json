@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T17:06:43",
+  "generated_at": "2026-02-23T18:36:25",
   "tracker_total_companies": 51,
   "tracker_by_status": {
     "Ready to send": 5,
@@ -10,11 +10,9 @@
     "Tier 2": 13,
     "Tier 3": 28
   },
-  "today_action_total": 5,
-  "today_actions_by_type": {
-    "send_initial": 5
-  },
-  "today_p1_actions": 5,
+  "today_action_total": 0,
+  "today_actions_by_type": {},
+  "today_p1_actions": 0,
   "today_overdue_actions": 0,
   "ready_to_send_missing_contact": 5
 }
