@@ -73,8 +73,19 @@
     const statusEl = document.getElementById('form-status');
     const submitBtn = document.getElementById('submit-btn');
 
-    function goToThankYou(email) {
-      const params = new URLSearchParams({ email: email || '' });
+    function pickAttributionParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      const picked = {};
+      for (const key of keys) {
+        const value = urlParams.get(key);
+        if (value) picked[key] = value;
+      }
+      return picked;
+    }
+
+    function goToThankYou(email, attribution = {}) {
+      const params = new URLSearchParams({ email: email || '', ...attribution });
       window.location.href = `thank-you.html?${params.toString()}`;
     }
 
@@ -95,12 +106,20 @@
 
       localStorage.setItem('busybits_email', email);
 
+      const attribution = pickAttributionParams();
+
       if (!WEBHOOK_URL) {
-        goToThankYou(email);
+        goToThankYou(email, attribution);
         return;
       }
-
-      const payload = { email, source: SOURCE, timestamp: new Date().toISOString() };
+      const payload = {
+        email,
+        source: SOURCE,
+        timestamp: new Date().toISOString(),
+        page_url: window.location.href,
+        referrer: document.referrer || '',
+        ...attribution
+      };
 
       try {
         await fetch(WEBHOOK_URL, {
@@ -113,7 +132,7 @@
         // fail-open so lead magnet delivery is never blocked by webhook downtime
       }
 
-      goToThankYou(email);
+      goToThankYou(email, attribution);
     });
   </script>
 </body>

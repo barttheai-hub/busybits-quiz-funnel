@@ -40,7 +40,14 @@
     const downloadLink = document.getElementById('download-link');
     const emailLine = document.getElementById('email-line');
 
-    downloadLink.href = ASSET_URL;
+    const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    const dlParams = new URLSearchParams();
+    for (const key of attributionKeys) {
+      const value = params.get(key);
+      if (value) dlParams.set(key, value);
+    }
+
+    downloadLink.href = dlParams.toString() ? `${ASSET_URL}?${dlParams.toString()}` : ASSET_URL;
     if (email) {
       emailLine.textContent = `A backup copy is being sent to ${email}.`;
     } else {

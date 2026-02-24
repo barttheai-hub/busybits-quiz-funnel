@@ -18,15 +18,24 @@ The lead magnet is delivered directly on `thank-you.html` so conversions are not
   - Default currently points to `assets/High_Performance_OS_CEO_Edition.pdf` (already included in this folder).
 
 ## 3. Optional Webhook Payload
-When configured, `index.html` sends this JSON:
+When configured, `index.html` sends this JSON (with attribution fields when present in URL params):
 
 ```json
 {
   "email": "user@example.com",
   "source": "busybits_lead_magnet_v1",
-  "timestamp": "2026-02-24T10:00:00.000Z"
+  "timestamp": "2026-02-24T10:00:00.000Z",
+  "page_url": "https://yourdomain.com/?utm_source=meta&utm_campaign=quiz",
+  "referrer": "https://m.facebook.com/",
+  "utm_source": "meta",
+  "utm_medium": "paid_social",
+  "utm_campaign": "quiz",
+  "utm_content": "video_1",
+  "utm_term": "founder_sleep"
 }
 ```
+
+`thank-you.html` also preserves UTM params on the PDF download URL for cleaner ad-platform attribution.
 
 ## 4. Automation Workflow (n8n/Make)
 1. **Trigger:** Webhook (receive JSON).
