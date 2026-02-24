@@ -36,6 +36,7 @@
     const ASSET_URL = 'assets/High_Performance_OS_CEO_Edition.pdf';
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email') || localStorage.getItem('busybits_email') || '';
+    const delivery = params.get('delivery') || 'download-only';
 
     const downloadLink = document.getElementById('download-link');
     const emailLine = document.getElementById('email-line');
@@ -52,8 +53,12 @@
     }
 
     downloadLink.href = dlParams.toString() ? `${ASSET_URL}?${dlParams.toString()}` : ASSET_URL;
-    if (email) {
+    if (email && delivery === 'webhook-ok') {
       emailLine.textContent = `A backup copy is being sent to ${email}.`;
+    } else if (email && delivery === 'queued-retry') {
+      emailLine.textContent = `Download is ready now. Backup email to ${email} is queued for retry.`;
+    } else if (email) {
+      emailLine.textContent = `Download is ready now. Configure webhook to auto-email a backup copy to ${email}.`;
     } else {
       emailLine.textContent = 'Tip: if the download does not open, disable popup blocking for this page.';
     }

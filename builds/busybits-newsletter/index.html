@@ -66,8 +66,64 @@
   </footer>
 
   <script>
-    const WEBHOOK_URL = ""; // paste n8n/Make/Zapier endpoint
+    const STATIC_WEBHOOK_URL = ""; // optional hardcoded n8n/Make/Zapier endpoint
     const SOURCE = "busybits_lead_magnet_v1";
+    const PENDING_LEADS_KEY = "busybits_pending_leads";
+
+    function resolveWebhookUrl() {
+      const query = new URLSearchParams(window.location.search).get("webhook");
+      const local = localStorage.getItem("busybits_webhook_url") || "";
+      const runtime = window.BUSYBITS_WEBHOOK_URL || "";
+      return (query || runtime || local || STATIC_WEBHOOK_URL || "").trim();
+    }
+
+    function loadPendingLeads() {
+      try {
+        const raw = localStorage.getItem(PENDING_LEADS_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function savePendingLeads(items) {
+      localStorage.setItem(PENDING_LEADS_KEY, JSON.stringify(items.slice(-25)));
+    }
+
+    function queuePendingLead(payload) {
+      const items = loadPendingLeads();
+      items.push(payload);
+      savePendingLeads(items);
+    }
+
+    async function postLead(webhookUrl, payload) {
+      if (!webhookUrl) return false;
+      try {
+        const res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true,
+          mode: "cors"
+        });
+        return res.ok;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    async function flushPendingLeads(webhookUrl) {
+      if (!webhookUrl) return;
+      const pending = loadPendingLeads();
+      if (!pending.length) return;
+      const remaining = [];
+      for (const payload of pending) {
+        const ok = await postLead(webhookUrl, payload);
+        if (!ok) remaining.push(payload);
+      }
+      savePendingLeads(remaining);
+    }
 
     const form = document.getElementById('subscribe-form');
     const statusEl = document.getElementById('form-status');
@@ -110,9 +166,16 @@
       return merged;
     }
 
-    function goToThankYou(email, attribution = {}) {
-      const params = new URLSearchParams({ email: email || '', ...attribution });
+    function goToThankYou(email, attribution = {}, delivery = "download-only") {
+      const params = new URLSearchParams({ email: email || "", delivery, ...attribution });
       window.location.href = `thank-you.html?${params.toString()}`;
+    }
+
+
+    // Best-effort queue flush on page load when connectivity recovers.
+    const initialWebhookUrl = resolveWebhookUrl();
+    if (initialWebhookUrl) {
+      flushPendingLeads(initialWebhookUrl);
     }
 
     form.addEventListener('submit', async (event) => {
@@ -133,11 +196,9 @@
       localStorage.setItem('busybits_email', email);
 
       const attribution = mergeAttributionForSession(pickAttributionParams());
+      const webhookUrl = resolveWebhookUrl();
+      await flushPendingLeads(webhookUrl);
 
-      if (!WEBHOOK_URL) {
-        goToThankYou(email, attribution);
-        return;
-      }
       const payload = {
         email,
         source: SOURCE,
@@ -147,18 +208,18 @@
         ...attribution
       };
 
-      try {
-        await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          keepalive: true
-        });
-      } catch (_) {
-        // fail-open so lead magnet delivery is never blocked by webhook downtime
+      let delivery = 'download-only';
+      if (webhookUrl) {
+        const sent = await postLead(webhookUrl, payload);
+        if (!sent) {
+          queuePendingLead(payload);
+          delivery = 'queued-retry';
+        } else {
+          delivery = 'webhook-ok';
+        }
       }
 
-      goToThankYou(email, attribution);
+      goToThankYou(email, attribution, delivery);
     });
   </script>
 </body>
