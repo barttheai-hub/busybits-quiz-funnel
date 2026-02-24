@@ -53,10 +53,22 @@ def main() -> None:
         and pick(r, "due_date", "Due Date") < datetime.now().strftime("%Y-%m-%d")
     ]
 
-    ready_missing_contact = [
-        r for r in board
-        if pick(r, "status", "Status").lower() == "ready to send" and not pick(r, "contact_email", "Contact Email")
+    p1_send_initial = [
+        r for r in actions
+        if pick(r, "priority", "Priority").upper() == "P1"
+        and pick(r, "action_type", "Action").lower() == "send_initial"
+        and pick(r, "status", "Status").lower() != "done"
     ]
+    p1_followup_1 = [
+        r for r in actions
+        if pick(r, "priority", "Priority").upper() == "P1"
+        and pick(r, "action_type", "Action").lower() == "followup_1"
+        and pick(r, "status", "Status").lower() != "done"
+    ]
+
+    ready_rows = [r for r in board if pick(r, "status", "Status").lower() == "ready to send"]
+    ready_missing_contact = [r for r in ready_rows if not pick(r, "contact_email", "Contact Email")]
+    ready_with_contact = [r for r in ready_rows if pick(r, "contact_email", "Contact Email")]
 
     snapshot = {
         "generated_at": datetime.now().isoformat(timespec="seconds"),
@@ -67,6 +79,10 @@ def main() -> None:
         "today_actions_by_type": dict(action_counter),
         "today_p1_actions": len(p1_actions),
         "today_overdue_actions": len(overdue_actions),
+        "today_p1_send_initial": len(p1_send_initial),
+        "today_p1_followup_1": len(p1_followup_1),
+        "ready_to_send_total": len(ready_rows),
+        "ready_to_send_with_contact": len(ready_with_contact),
         "ready_to_send_missing_contact": len(ready_missing_contact),
     }
 
@@ -95,8 +111,12 @@ def main() -> None:
         "## Today Action Queue",
         f"- Total actions due: **{snapshot['today_action_total']}**",
         f"- P1 actions due: **{snapshot['today_p1_actions']}**",
+        f"- P1 send_initial due: **{snapshot['today_p1_send_initial']}**",
+        f"- P1 followup_1 due: **{snapshot['today_p1_followup_1']}**",
         f"- Overdue actions: **{snapshot['today_overdue_actions']}**",
-        f"- Ready-to-send rows missing contact email: **{snapshot['ready_to_send_missing_contact']}**",
+        f"- Ready-to-send rows: **{snapshot['ready_to_send_total']}**",
+        f"- Ready-to-send with contact email: **{snapshot['ready_to_send_with_contact']}**",
+        f"- Ready-to-send missing contact email: **{snapshot['ready_to_send_missing_contact']}**",
         "- Action mix:",
     ])
 
@@ -107,7 +127,8 @@ def main() -> None:
         "",
         "## Immediate Focus",
         "- Clear all P1 `send_initial` first.",
-        "- Then execute `followup_1` items to recover warm leads.",
+        "- Then execute P1 `followup_1` items to recover warm leads.",
+        f"- Tonight's send capacity (ready + contactable): **{snapshot['ready_to_send_with_contact']}**.",
     ])
 
     if snapshot["ready_to_send_missing_contact"] > 0:

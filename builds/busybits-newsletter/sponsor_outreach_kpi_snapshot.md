@@ -1,6 +1,6 @@
 # BusyBits Sponsor Outreach KPI Snapshot
 
-Generated: 2026-02-23T18:36:25
+Generated: 2026-02-23T21:06:17
 
 ## Tracker Health
 - Total companies in tracker: **51**
@@ -15,12 +15,17 @@ Generated: 2026-02-23T18:36:25
 ## Today Action Queue
 - Total actions due: **0**
 - P1 actions due: **0**
+- P1 send_initial due: **0**
+- P1 followup_1 due: **0**
 - Overdue actions: **0**
-- Ready-to-send rows missing contact email: **5**
+- Ready-to-send rows: **5**
+- Ready-to-send with contact email: **0**
+- Ready-to-send missing contact email: **5**
 - Action mix:
 
 ## Immediate Focus
 - Clear all P1 `send_initial` first.
-- Then execute `followup_1` items to recover warm leads.
+- Then execute P1 `followup_1` items to recover warm leads.
+- Tonight's send capacity (ready + contactable): **0**.
 - Resolve missing contact emails on ready-to-send rows before drafting.
 - Update tracker statuses same day to keep next queue accurate.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T18:36:25",
+  "generated_at": "2026-02-23T21:06:17",
   "tracker_total_companies": 51,
   "tracker_by_status": {
     "Ready to send": 5,
@@ -14,5 +14,9 @@
   "today_actions_by_type": {},
   "today_p1_actions": 0,
   "today_overdue_actions": 0,
+  "today_p1_send_initial": 0,
+  "today_p1_followup_1": 0,
+  "ready_to_send_total": 5,
+  "ready_to_send_with_contact": 0,
   "ready_to_send_missing_contact": 5
 }
