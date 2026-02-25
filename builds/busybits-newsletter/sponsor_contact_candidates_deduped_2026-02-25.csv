@@ -1,0 +1,110 @@
+company,domain,contact_candidate,source,source_url,confidence,reason
+AG1,ag1.com,partnerships@ag1.com,alias_pattern,https://ag1.com/contact,0.9,most common partner inbox
+AG1,ag1.com,partners@ag1.com,alias_pattern,https://ag1.com/contact,0.85,common partner inbox
+AG1,ag1.com,(check page),manual_page,https://ag1.com/contact,0.8,primary contact page
+AG1,ag1.com,sponsorships@ag1.com,alias_pattern,https://ag1.com/contact,0.8,common sponsorship inbox
+AG1,ag1.com,partnership@ag1.com,alias_pattern,https://ag1.com/contact,0.65,less common singular alias
+AG1,ag1.com,hello@ag1.com,alias_pattern,https://ag1.com/contact,0.45,generic inbox fallback
+AG1,ag1.com,press@ag1.com,alias_pattern,https://ag1.com/contact,0.35,media inbox fallback
+Clay,clay.com,partnerships@clay.com,alias_pattern,https://clay.com/contact,0.9,most common partner inbox
+Clay,clay.com,partners@clay.com,alias_pattern,https://clay.com/contact,0.85,common partner inbox
+Clay,clay.com,sponsorships@clay.com,alias_pattern,https://clay.com/contact,0.8,common sponsorship inbox
+Clay,clay.com,partnership@clay.com,alias_pattern,https://clay.com/contact,0.65,less common singular alias
+Clay,clay.com,hello@clay.com,alias_pattern,https://clay.com/contact,0.45,generic inbox fallback
+Clay,clay.com,press@clay.com,alias_pattern,https://clay.com/contact,0.35,media inbox fallback
+Four Sigmatic,foursigmatic.com,partnerships@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.9,most common partner inbox
+Four Sigmatic,foursigmatic.com,partners@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.85,common partner inbox
+Four Sigmatic,foursigmatic.com,sponsorships@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.8,common sponsorship inbox
+Four Sigmatic,foursigmatic.com,partnership@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.65,less common singular alias
+Four Sigmatic,foursigmatic.com,hello@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.45,generic inbox fallback
+Four Sigmatic,foursigmatic.com,press@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.35,media inbox fallback
+Huel,huel.com,partnerships@huel.com,alias_pattern,https://huel.com/contact,0.9,most common partner inbox
+Huel,huel.com,partners@huel.com,alias_pattern,https://huel.com/contact,0.85,common partner inbox
+Huel,huel.com,sponsorships@huel.com,alias_pattern,https://huel.com/contact,0.8,common sponsorship inbox
+Huel,huel.com,partnership@huel.com,alias_pattern,https://huel.com/contact,0.65,less common singular alias
+Huel,huel.com,hello@huel.com,alias_pattern,https://huel.com/contact,0.45,generic inbox fallback
+Huel,huel.com,press@huel.com,alias_pattern,https://huel.com/contact,0.35,media inbox fallback
+Joovv,joovv.com,partnerships@joovv.com,alias_pattern,https://joovv.com/contact,0.9,most common partner inbox
+Joovv,joovv.com,partners@joovv.com,alias_pattern,https://joovv.com/contact,0.85,common partner inbox
+Joovv,joovv.com,sponsorships@joovv.com,alias_pattern,https://joovv.com/contact,0.8,common sponsorship inbox
+Joovv,joovv.com,partnership@joovv.com,alias_pattern,https://joovv.com/contact,0.65,less common singular alias
+Joovv,joovv.com,hello@joovv.com,alias_pattern,https://joovv.com/contact,0.45,generic inbox fallback
+Joovv,joovv.com,press@joovv.com,alias_pattern,https://joovv.com/contact,0.35,media inbox fallback
+Ketone-IQ,ketoneiq.com,partnerships@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.9,most common partner inbox
+Ketone-IQ,ketoneiq.com,partners@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.85,common partner inbox
+Ketone-IQ,ketoneiq.com,sponsorships@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.8,common sponsorship inbox
+Ketone-IQ,ketoneiq.com,partnership@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.65,less common singular alias
+Ketone-IQ,ketoneiq.com,hello@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.45,generic inbox fallback
+Ketone-IQ,ketoneiq.com,press@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.35,media inbox fallback
+LMNT,lmnt.com,partnerships@lmnt.com,alias_pattern,https://lmnt.com/contact,0.9,most common partner inbox
+LMNT,lmnt.com,partners@lmnt.com,alias_pattern,https://lmnt.com/contact,0.85,common partner inbox
+LMNT,lmnt.com,sponsorships@lmnt.com,alias_pattern,https://lmnt.com/contact,0.8,common sponsorship inbox
+LMNT,lmnt.com,partnership@lmnt.com,alias_pattern,https://lmnt.com/contact,0.65,less common singular alias
+LMNT,lmnt.com,hello@lmnt.com,alias_pattern,https://lmnt.com/contact,0.45,generic inbox fallback
+LMNT,lmnt.com,press@lmnt.com,alias_pattern,https://lmnt.com/contact,0.35,media inbox fallback
+Magic Spoon,magicspoon.com,partnerships@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.9,most common partner inbox
+Magic Spoon,magicspoon.com,partners@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.85,common partner inbox
+Magic Spoon,magicspoon.com,sponsorships@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.8,common sponsorship inbox
+Magic Spoon,magicspoon.com,partnership@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.65,less common singular alias
+Magic Spoon,magicspoon.com,hello@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.45,generic inbox fallback
+Magic Spoon,magicspoon.com,press@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.35,media inbox fallback
+Motion,motion.com,partnerships@motion.com,alias_pattern,https://motion.com/contact,0.9,most common partner inbox
+Motion,motion.com,partners@motion.com,alias_pattern,https://motion.com/contact,0.85,common partner inbox
+Motion,motion.com,sponsorships@motion.com,alias_pattern,https://motion.com/contact,0.8,common sponsorship inbox
+Motion,motion.com,partnership@motion.com,alias_pattern,https://motion.com/contact,0.65,less common singular alias
+Motion,motion.com,hello@motion.com,alias_pattern,https://motion.com/contact,0.45,generic inbox fallback
+Motion,motion.com,press@motion.com,alias_pattern,https://motion.com/contact,0.35,media inbox fallback
+MudWtr,mudwtr.com,partnerships@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.9,most common partner inbox
+MudWtr,mudwtr.com,partners@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.85,common partner inbox
+MudWtr,mudwtr.com,sponsorships@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.8,common sponsorship inbox
+MudWtr,mudwtr.com,partnership@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.65,less common singular alias
+MudWtr,mudwtr.com,hello@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.45,generic inbox fallback
+MudWtr,mudwtr.com,press@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.35,media inbox fallback
+Notion,notion.com,partnerships@notion.com,alias_pattern,https://notion.com/contact,0.9,most common partner inbox
+Notion,notion.com,partners@notion.com,alias_pattern,https://notion.com/contact,0.85,common partner inbox
+Notion,notion.com,sponsorships@notion.com,alias_pattern,https://notion.com/contact,0.8,common sponsorship inbox
+Notion,notion.com,partnership@notion.com,alias_pattern,https://notion.com/contact,0.65,less common singular alias
+Notion,notion.com,hello@notion.com,alias_pattern,https://notion.com/contact,0.45,generic inbox fallback
+Notion,notion.com,press@notion.com,alias_pattern,https://notion.com/contact,0.35,media inbox fallback
+Opal,opal.com,partnerships@opal.com,alias_pattern,https://opal.com/contact,0.9,most common partner inbox
+Opal,opal.com,partners@opal.com,alias_pattern,https://opal.com/contact,0.85,common partner inbox
+Opal,opal.com,sponsorships@opal.com,alias_pattern,https://opal.com/contact,0.8,common sponsorship inbox
+Opal,opal.com,partnership@opal.com,alias_pattern,https://opal.com/contact,0.65,less common singular alias
+Opal,opal.com,hello@opal.com,alias_pattern,https://opal.com/contact,0.45,generic inbox fallback
+Opal,opal.com,press@opal.com,alias_pattern,https://opal.com/contact,0.35,media inbox fallback
+Plunge,plunge.com,partnerships@plunge.com,alias_pattern,https://plunge.com/contact,0.9,most common partner inbox
+Plunge,plunge.com,partners@plunge.com,alias_pattern,https://plunge.com/contact,0.85,common partner inbox
+Plunge,plunge.com,sponsorships@plunge.com,alias_pattern,https://plunge.com/contact,0.8,common sponsorship inbox
+Plunge,plunge.com,partnership@plunge.com,alias_pattern,https://plunge.com/contact,0.65,less common singular alias
+Plunge,plunge.com,hello@plunge.com,alias_pattern,https://plunge.com/contact,0.45,generic inbox fallback
+Plunge,plunge.com,press@plunge.com,alias_pattern,https://plunge.com/contact,0.35,media inbox fallback
+Readwise,readwise.com,partnerships@readwise.com,alias_pattern,https://readwise.com/contact,0.9,most common partner inbox
+Readwise,readwise.com,partners@readwise.com,alias_pattern,https://readwise.com/contact,0.85,common partner inbox
+Readwise,readwise.com,sponsorships@readwise.com,alias_pattern,https://readwise.com/contact,0.8,common sponsorship inbox
+Readwise,readwise.com,partnership@readwise.com,alias_pattern,https://readwise.com/contact,0.65,less common singular alias
+Readwise,readwise.com,hello@readwise.com,alias_pattern,https://readwise.com/contact,0.45,generic inbox fallback
+Readwise,readwise.com,press@readwise.com,alias_pattern,https://readwise.com/contact,0.35,media inbox fallback
+SaunaSpace,saunaspace.com,partnerships@saunaspace.com,alias_pattern,https://saunaspace.com/contact,0.9,most common partner inbox
+SaunaSpace,saunaspace.com,partners@saunaspace.com,alias_pattern,https://saunaspace.com/contact,0.85,common partner inbox
+SaunaSpace,saunaspace.com,sponsorships@saunaspace.com,alias_pattern,https://saunaspace.com/contact,0.8,common sponsorship inbox
+SaunaSpace,saunaspace.com,partnership@saunaspace.com,alias_pattern,https://saunaspace.com/contact,0.65,less common singular alias
+SaunaSpace,saunaspace.com,hello@saunaspace.com,alias_pattern,https://saunaspace.com/contact,0.45,generic inbox fallback
+SaunaSpace,saunaspace.com,press@saunaspace.com,alias_pattern,https://saunaspace.com/contact,0.35,media inbox fallback
+Sunsama,sunsama.com,partnerships@sunsama.com,alias_pattern,https://sunsama.com/contact,0.9,most common partner inbox
+Sunsama,sunsama.com,partners@sunsama.com,alias_pattern,https://sunsama.com/contact,0.85,common partner inbox
+Sunsama,sunsama.com,sponsorships@sunsama.com,alias_pattern,https://sunsama.com/contact,0.8,common sponsorship inbox
+Sunsama,sunsama.com,partnership@sunsama.com,alias_pattern,https://sunsama.com/contact,0.65,less common singular alias
+Sunsama,sunsama.com,hello@sunsama.com,alias_pattern,https://sunsama.com/contact,0.45,generic inbox fallback
+Sunsama,sunsama.com,press@sunsama.com,alias_pattern,https://sunsama.com/contact,0.35,media inbox fallback
+Superhuman,superhuman.com,partnerships@superhuman.com,alias_pattern,https://superhuman.com/contact,0.9,most common partner inbox
+Superhuman,superhuman.com,partners@superhuman.com,alias_pattern,https://superhuman.com/contact,0.85,common partner inbox
+Superhuman,superhuman.com,sponsorships@superhuman.com,alias_pattern,https://superhuman.com/contact,0.8,common sponsorship inbox
+Superhuman,superhuman.com,partnership@superhuman.com,alias_pattern,https://superhuman.com/contact,0.65,less common singular alias
+Superhuman,superhuman.com,hello@superhuman.com,alias_pattern,https://superhuman.com/contact,0.45,generic inbox fallback
+Superhuman,superhuman.com,press@superhuman.com,alias_pattern,https://superhuman.com/contact,0.35,media inbox fallback
+TextExpander,textexpander.com,partnerships@textexpander.com,alias_pattern,https://textexpander.com/contact,0.9,most common partner inbox
+TextExpander,textexpander.com,partners@textexpander.com,alias_pattern,https://textexpander.com/contact,0.85,common partner inbox
+TextExpander,textexpander.com,sponsorships@textexpander.com,alias_pattern,https://textexpander.com/contact,0.8,common sponsorship inbox
+TextExpander,textexpander.com,partnership@textexpander.com,alias_pattern,https://textexpander.com/contact,0.65,less common singular alias
+TextExpander,textexpander.com,hello@textexpander.com,alias_pattern,https://textexpander.com/contact,0.45,generic inbox fallback
+TextExpander,textexpander.com,press@textexpander.com,alias_pattern,https://textexpander.com/contact,0.35,media inbox fallback
