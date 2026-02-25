@@ -37,40 +37,52 @@ def write_combined_send_runner(
     run_date: str,
     send_now_script: Path,
     followup_due_script: Path,
+    contact_research_script: Path,
     output_script: Path,
     output_md: Path,
 ) -> None:
     send_now_count = count_script_emails(send_now_script)
     followup_count = count_script_emails(followup_due_script)
-    total = send_now_count + followup_count
+    contact_research_count = count_script_emails(contact_research_script)
+    total = send_now_count + followup_count + contact_research_count
 
     script_lines = [
         "#!/usr/bin/env bash",
         "set -euo pipefail",
         "",
         f"echo \"BusyBits combined sponsor send run — {run_date}\"",
-        f"echo \"Queued emails: send-now={send_now_count}, follow-up-due={followup_count}, total={total}\"",
+        f"echo \"Queued emails: send-now={send_now_count}, follow-up-due={followup_count}, contact-research={contact_research_count}, total={total}\"",
         "",
     ]
 
     if send_now_count > 0:
         script_lines.extend([
-            f"echo \"[1/2] Sending send-now batch ({send_now_count})\"",
+            f"echo \"[1/3] Sending send-now batch ({send_now_count})\"",
             f"bash {send_now_script.as_posix()}",
             "",
         ])
     else:
-        script_lines.append('echo "[1/2] Send-now batch empty — skipping."')
+        script_lines.append('echo "[1/3] Send-now batch empty — skipping."')
         script_lines.append("")
 
     if followup_count > 0:
         script_lines.extend([
-            f"echo \"[2/2] Sending follow-up due batch ({followup_count})\"",
+            f"echo \"[2/3] Sending follow-up due batch ({followup_count})\"",
             f"bash {followup_due_script.as_posix()}",
             "",
         ])
     else:
-        script_lines.append('echo "[2/2] Follow-up due batch empty — skipping."')
+        script_lines.append('echo "[2/3] Follow-up due batch empty — skipping."')
+        script_lines.append("")
+
+    if contact_research_count > 0:
+        script_lines.extend([
+            f"echo \"[3/3] Sending contact-research batch ({contact_research_count})\"",
+            f"bash {contact_research_script.as_posix()}",
+            "",
+        ])
+    else:
+        script_lines.append('echo "[3/3] Contact-research batch empty — skipping."')
         script_lines.append("")
 
     script_lines.append('echo "Combined sponsor send run complete."')
@@ -84,6 +96,7 @@ def write_combined_send_runner(
         f"Total queued emails: **{total}**",
         f"- Send-now: **{send_now_count}**",
         f"- Follow-up due: **{followup_count}**",
+        f"- Contact-research: **{contact_research_count}**",
         "",
         "## Execution",
         "```bash",
@@ -435,6 +448,7 @@ def main() -> None:
         run_date=run_date,
         send_now_script=send_now_exec_sh,
         followup_due_script=followup_due_exec_sh,
+        contact_research_script=contact_research_exec_sh,
         output_script=send_all_exec_sh,
         output_md=send_all_exec_md,
     )
