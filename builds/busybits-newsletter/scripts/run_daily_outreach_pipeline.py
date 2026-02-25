@@ -106,6 +106,10 @@ def main() -> None:
     followup_due_copy_md = root / f"sponsor_followup_due_copy_batch_{run_date}.md"
     followup_copy_csv = root / f"sponsor_followup_copy_batch_{run_date}.csv"
     followup_copy_md = root / f"sponsor_followup_copy_batch_{run_date}.md"
+    send_now_exec_sh = root / f"sponsor_send_now_exec_{run_date}.sh"
+    send_now_exec_md = root / f"sponsor_send_now_exec_{run_date}.md"
+    followup_due_exec_sh = root / f"sponsor_followup_due_exec_{run_date}.sh"
+    followup_due_exec_md = root / f"sponsor_followup_due_exec_{run_date}.md"
     tonight_plan_md = root / f"sponsor_tonight_send_plan_{run_date}.md"
     tonight_fill_csv = root / f"sponsor_tonight_contact_fill_{run_date}.csv"
     kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
@@ -320,6 +324,28 @@ def main() -> None:
 
     run([
         "python3",
+        str(scripts / "generate_send_execution_script.py"),
+        "--input",
+        str(send_now_copy_csv),
+        "--output-script",
+        str(send_now_exec_sh),
+        "--output-md",
+        str(send_now_exec_md),
+    ])
+
+    run([
+        "python3",
+        str(scripts / "generate_send_execution_script.py"),
+        "--input",
+        str(followup_due_copy_csv),
+        "--output-script",
+        str(followup_due_exec_sh),
+        "--output-md",
+        str(followup_due_exec_md),
+    ])
+
+    run([
+        "python3",
         str(scripts / "generate_tonight_send_plan.py"),
         "--date",
         run_date,
@@ -396,6 +422,10 @@ def main() -> None:
             followup_due_copy_md,
             followup_copy_csv,
             followup_copy_md,
+            send_now_exec_sh,
+            send_now_exec_md,
+            followup_due_exec_sh,
+            followup_due_exec_md,
             tonight_plan_md,
             tonight_fill_csv,
             kpi_md,
@@ -422,6 +452,8 @@ def main() -> None:
     print(f"Generated follow-up upcoming batch: {followup_upcoming_csv}")
     print(f"Generated follow-up due copy batch: {followup_due_copy_csv}")
     print(f"Generated follow-up copy batch: {followup_copy_csv}")
+    print(f"Generated send-now execution script: {send_now_exec_sh}")
+    print(f"Generated follow-up due execution script: {followup_due_exec_sh}")
     print(f"Generated tonight send plan: {tonight_plan_md}")
     print(f"Generated tonight contact fill sheet: {tonight_fill_csv}")
     print(f"Generated KPI snapshot: {kpi_md}")
