@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "skills": {
+    "capability-evolver": {
+      "version": "1.1.0",
+      "installedAt": 1770228038349
+    },
+    "byterover": {
+      "version": "1.2.2",
+      "installedAt": 1770228344557
+    },
+    "self-improving-agent": {
+      "version": "1.0.5",
+      "installedAt": 1770228346837
+    },
+    "proactive-agent": {
+      "version": "3.0.0",
+      "installedAt": 1770228348214
+    },
+    "bird": {
+      "version": "1.0.0",
+      "installedAt": 1770228349613
+    },
+    "auto-updater": {
+      "version": "1.0.0",
+      "installedAt": 1770228351435
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1770228353053
+    },
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1770228354528
+    },
+    "gog": {
+      "version": "1.0.0",
+      "installedAt": 1770228355902
+    },
+    "deep-research": {
+      "version": "1.0.1",
+      "installedAt": 1770229064097
+    },
+    "youtube-watcher": {
+      "version": "1.0.0",
+      "installedAt": 1770229065460
+    },
+    "marketing-mode": {
+      "version": "1.0.0",
+      "installedAt": 1770229066961
+    },
+    "api-gateway": {
+      "version": "1.0.6",
+      "installedAt": 1770229069942
+    },
+    "frontend-design": {
+      "version": "1.0.0",
+      "installedAt": 1770229071276
+    },
+    "stock-analysis": {
+      "version": "6.2.0",
+      "installedAt": 1770229073689
+    },
+    "superdesign": {
+      "version": "1.0.0",
+      "installedAt": 1770229075444
+    },
+    "memory-setup": {
+      "version": "1.0.0",
+      "installedAt": 1770229076773
+    },
+    "peekaboo": {
+      "version": "1.0.0",
+      "installedAt": 1770229078102
+    },
+    "youtube-transcript": {
+      "version": "1.0.1",
+      "installedAt": 1770229079804
+    },
+    "n8n-workflow-automation": {
+      "version": "1.0.0",
+      "installedAt": 1770229081230
+    },
+    "fast-browser-use": {
+      "version": "1.0.5",
+      "installedAt": 1770229086145
+    },
+    "reddit": {
+      "version": "1.0.0",
+      "installedAt": 1770229087655
+    },
+    "ui-ux-pro-max": {
+      "version": "0.1.0",
+      "installedAt": 1770229093092
+    },
+    "linkedin": {
+      "version": "1.0.0",
+      "installedAt": 1770229094688
+    },
+    "twitter": {
+      "version": "1.1.0",
+      "installedAt": 1770229096350
+    },
+    "notion": {
+      "version": "1.0.0",
+      "installedAt": 1771308665611
+    }
+  }
+}

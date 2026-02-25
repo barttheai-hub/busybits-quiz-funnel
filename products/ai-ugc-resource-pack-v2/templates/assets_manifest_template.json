@@ -1,0 +1,36 @@
+{
+  "project_name": "HairLoss_Hook_01",
+  "project_id": "HL_001",
+  "date_generated": "2026-02-16",
+  "target_avatar": "Men 30-45 (Thinning Crown)",
+  "assets": {
+    "script": "script.txt",
+    "voiceover": "vo_take_01.mp3",
+    "visuals": [
+      {
+        "scene_id": "01",
+        "type": "video",
+        "filename": "scene_01_hook.mp4",
+        "prompt_used": "..."
+      },
+      {
+        "scene_id": "02",
+        "type": "image",
+        "filename": "scene_02_problem.png",
+        "prompt_used": "..."
+      },
+      {
+        "scene_id": "03",
+        "type": "video",
+        "filename": "scene_03_solution.mp4",
+        "prompt_used": "..."
+      }
+    ],
+    "captions": "subtitles.srt",
+    "metadata": {
+      "hook_type": "Pattern Interrupt",
+      "voice_tone": "Urgent/Empathetic"
+    }
+  },
+  "qc_status": "PENDING"
+}

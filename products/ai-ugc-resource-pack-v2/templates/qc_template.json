@@ -1,0 +1,14 @@
+{
+  "job_id": "{{job_id}}",
+  "checks": {
+    "hook_clarity": false,
+    "mechanism_clear": false,
+    "cta_present": false,
+    "subtitles_safe_zone": false,
+    "no_absolute_claims": false,
+    "disclaimer_present": false,
+    "human_approval": false
+  },
+  "issues": [],
+  "status": "pending"
+}

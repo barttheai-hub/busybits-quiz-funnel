@@ -1,0 +1,97 @@
+{
+  "name": "08_QC_and_Compliance",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "qc-check",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notes": "Receives Final Video Link or Script"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo",
+        "prompt": "Act as a Meta Ads Policy Reviewer. Check for: 1. Personal Attributes (Directly addressing user's disability/condition), 2. Misleading Claims (Time-bound guarantees), 3. Non-existent Functionality (Fake play buttons). Output Pass/Fail + Reasons.",
+        "text": "={{$json.body.content}}"
+      },
+      "name": "Policy Reviewer",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": "ENTER_YOUR_SHEET_ID",
+        "sheetName": "QC_Log",
+        "columns": {
+          "Project": "={{$json.body.project_name}}",
+          "Status": "={{$json.qc_status}}",
+          "Notes": "={{$json.reason}}"
+        }
+      },
+      "name": "Log Result",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.qc_status}}",
+              "value2": "FAIL"
+            }
+          ]
+        }
+      },
+      "name": "If Fail",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "channel": "={{$json.body.slack_channel}}",
+        "text": "🚨 **QC FAILED**\nProject: {{$json.body.project_name}}\nReason: {{$json.reason}}\nAction: Revise immediately."
+      },
+      "name": "Alert Team",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "channel": "={{$json.body.slack_channel}}",
+        "text": "✅ **QC PASSED**\nProject: {{$json.body.project_name}}\nReady for Launch."
+      },
+      "name": "Notify Launch",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [900, 400]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Policy Reviewer", "type": "main", "index": 0 }]]
+    },
+    "Policy Reviewer": {
+      "main": [[{ "node": "Log Result", "type": "main", "index": 0 }]]
+    },
+    "Log Result": {
+      "main": [[{ "node": "If Fail", "type": "main", "index": 0 }]]
+    },
+    "If Fail": {
+      "main": [
+        [{ "node": "Alert Team", "type": "main", "index": 0 }],
+        [{ "node": "Notify Launch", "type": "main", "index": 0 }]
+      ]
+    }
+  }
+}

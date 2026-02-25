@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Cause Hair Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .slide { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .slide.active { display: flex; opacity: 1; }
+        .progress-bar { transition: width 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-2 bg-gray-200">
+        <div id="progress" class="h-full bg-blue-600 w-0 progress-bar"></div>
+    </div>
+
+    <!-- Quiz Container -->
+    <div class="max-w-xl w-full bg-white rounded-2xl shadow-xl p-8 relative overflow-hidden min-h-[400px] flex flex-col justify-center">
+
+        <!-- Slide 0: Start -->
+        <div class="slide active flex-col items-center text-center" id="slide-0">
+            <h1 class="text-3xl md:text-4xl font-black mb-4">Is Your Hair Loss Genetic or <span class="text-red-600">Mechanical</span>?</h1>
+            <p class="text-gray-600 text-lg mb-8">Take this 60-second analysis to find out exactly why your follicles are shrinking (and if you can save them).</p>
+            <button onclick="nextSlide(1)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg transform transition hover:-translate-y-1 w-full md:w-auto">
+                Start Analysis &rarr;
+            </button>
+            <p class="mt-4 text-xs text-gray-400">100% Free & Private</p>
+        </div>
+
+        <!-- Q1: Pattern -->
+        <div class="slide flex-col" id="slide-1">
+            <h2 class="text-2xl font-bold mb-6">Where did you notice thinning first?</h2>
+            <div class="space-y-3 w-full">
+                <button onclick="recordAnswer('pattern', 'receding'); nextSlide(2)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Receding Hairline (McDonald's Arches)</button>
+                <button onclick="recordAnswer('pattern', 'crown'); nextSlide(2)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Crown / Bald Spot (Monk's Cap)</button>
+                <button onclick="recordAnswer('pattern', 'diffuse'); nextSlide(2)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Overall Thinning (Diffuse)</button>
+                <button onclick="recordAnswer('pattern', 'shedding'); nextSlide(2)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Just Shedding (Shower/Pillow)</button>
+            </div>
+        </div>
+
+        <!-- Q2: Pinch Test -->
+        <div class="slide flex-col" id="slide-2">
+            <h2 class="text-2xl font-bold mb-2">The "Pinch Test"</h2>
+            <p class="text-gray-500 mb-6 text-sm">Try to pinch the skin on the very top of your head. How does it feel?</p>
+            <div class="space-y-3 w-full">
+                <button onclick="recordAnswer('pinch', 'tight'); nextSlide(3)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Tight (Like a drum / Can't pinch)</button>
+                <button onclick="recordAnswer('pinch', 'loose'); nextSlide(3)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Loose (Like skin above ear)</button>
+                <button onclick="recordAnswer('pinch', 'medium'); nextSlide(3)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Somewhere in between</button>
+            </div>
+        </div>
+
+        <!-- Q3: Itch -->
+        <div class="slide flex-col" id="slide-3">
+            <h2 class="text-2xl font-bold mb-6">Do you feel an "itch" or "tingle" in thinning areas?</h2>
+            <div class="space-y-3 w-full">
+                <button onclick="recordAnswer('itch', 'yes'); nextSlide(4)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Yes, frequently</button>
+                <button onclick="recordAnswer('itch', 'sometimes'); nextSlide(4)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Sometimes</button>
+                <button onclick="recordAnswer('itch', 'no'); nextSlide(4)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">No, never</button>
+            </div>
+        </div>
+
+        <!-- Q4: Family -->
+        <div class="slide flex-col" id="slide-4">
+            <h2 class="text-2xl font-bold mb-6">Is your mother's father bald?</h2>
+            <div class="space-y-3 w-full">
+                <button onclick="recordAnswer('family', 'yes'); nextSlide(5)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Yes</button>
+                <button onclick="recordAnswer('family', 'no'); nextSlide(5)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">No</button>
+                <button onclick="recordAnswer('family', 'unsure'); nextSlide(5)" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Unsure</button>
+            </div>
+        </div>
+
+        <!-- Q5: Stress -->
+        <div class="slide flex-col" id="slide-5">
+            <h2 class="text-2xl font-bold mb-6">Stress level over last 6 months?</h2>
+            <div class="space-y-3 w-full">
+                <button onclick="recordAnswer('stress', 'high'); calculateResult()" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">High</button>
+                <button onclick="recordAnswer('stress', 'medium'); calculateResult()" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Moderate</button>
+                <button onclick="recordAnswer('stress', 'low'); calculateResult()" class="w-full text-left p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition font-semibold text-gray-700">Low</button>
+            </div>
+        </div>
+
+        <!-- Calculating -->
+        <div class="slide flex-col items-center text-center" id="slide-calc">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600 mb-6"></div>
+            <h2 class="text-2xl font-bold">Analyzing Scalp Tension...</h2>
+            <p class="text-gray-500 mt-2">Comparing against 10,000 profiles.</p>
+        </div>
+
+        <!-- Result: Tension -->
+        <div class="slide flex-col" id="result-tension">
+            <div class="bg-red-100 text-red-700 font-bold px-4 py-2 rounded-full self-start mb-4 text-sm">Diagnosis Complete</div>
+            <h2 class="text-3xl font-black mb-2">Profile: <span class="text-red-600">Mechanical Tension</span></h2>
+            <p class="text-gray-600 mb-6 font-medium">Your "Pinch Test" results indicate Galeal Fibrosis.</p>
+            
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 mb-6 text-sm">
+                <p class="mb-2"><strong>Why you are losing hair:</strong></p>
+                <p>Your scalp muscles are physically tightening, "choking" blood flow to the follicles. This is why pills/foams haven't worked—they don't fix the tension.</p>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 text-center">
+                <p class="text-sm text-gray-500 mb-2">Recommended Protocol:</p>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">The Dormancy Protocol</h3>
+                <a href="/vsl?discount=QUIZ20" class="block bg-blue-600 text-white font-bold py-3 rounded-lg shadow hover:bg-blue-700 w-full mb-2">
+                    Claim $20 Off Your First Month &rarr;
+                </a>
+                <p class="text-xs text-gray-400">Coupon applied automatically.</p>
+            </div>
+        </div>
+
+        <!-- Result: DHT -->
+        <div class="slide flex-col" id="result-dht">
+            <div class="bg-yellow-100 text-yellow-700 font-bold px-4 py-2 rounded-full self-start mb-4 text-sm">Diagnosis Complete</div>
+            <h2 class="text-3xl font-black mb-2">Profile: <span class="text-yellow-600">DHT Sensitivity</span></h2>
+            <p class="text-gray-600 mb-6 font-medium">Your genetics are fighting your follicles.</p>
+            
+            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 mb-6 text-sm">
+                <p class="mb-2"><strong>The Strategy:</strong></p>
+                <p>You need to block DHT, but systemic pills can ruin your hormones. You need a <strong>Local Shield</strong> that stays on the scalp.</p>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 text-center">
+                <p class="text-sm text-gray-500 mb-2">Recommended Solution:</p>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">The Dormancy Protocol</h3>
+                <a href="/vsl?discount=QUIZ20" class="block bg-blue-600 text-white font-bold py-3 rounded-lg shadow hover:bg-blue-700 w-full mb-2">
+                    Claim $20 Off Your First Month &rarr;
+                </a>
+                <p class="text-xs text-gray-400">Coupon applied automatically.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const answers = {};
+        const totalSlides = 5;
+
+        function nextSlide(n) {
+            // Hide current
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            // Show next
+            document.getElementById(`slide-${n}`).classList.add('active');
+            
+            currentSlide = n;
+            updateProgress();
+        }
+
+        function recordAnswer(key, value) {
+            answers[key] = value;
+        }
+
+        function updateProgress() {
+            const percent = (currentSlide / totalSlides) * 100;
+            document.getElementById('progress').style.width = `${percent}%`;
+        }
+
+        function calculateResult() {
+            // Hide last question
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            // Show calculating
+            document.getElementById('slide-calc').classList.add('active');
+
+            // Simulate "thinking"
+            setTimeout(() => {
+                document.getElementById('slide-calc').classList.remove('active');
+                
+                // Logic: If Pinch is Tight OR Itch is Yes -> Tension. Else -> DHT.
+                if (answers.pinch === 'tight' || answers.pinch === 'medium' || answers.itch === 'yes') {
+                    document.getElementById('result-tension').classList.add('active');
+                } else {
+                    document.getElementById('result-dht').classList.add('active');
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

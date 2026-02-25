@@ -1,0 +1,63 @@
+{
+  "name": "06_Generate_Voiceover",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-voice",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notes": "Receives Script Text + Voice ID"
+    },
+    {
+      "parameters": {
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/{{$json.body.voice_id}}",
+        "method": "POST",
+        "headerParameters": {
+          "parameters": [
+            { "name": "xi-api-key", "value": "YOUR_KEY" }
+          ]
+        },
+        "bodyParameters": {
+          "parameters": [
+            { "name": "text", "value": "={{$json.body.text}}" },
+            { "name": "model_id", "value": "eleven_multilingual_v2" },
+            { "name": "voice_settings", "value": { "stability": 0.35, "similarity_boost": 0.8 } }
+          ]
+        },
+        "options": {
+          "responseFormat": "file"
+        }
+      },
+      "name": "ElevenLabs API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "fileContent": "={{$binary.data}}",
+        "driveId": "ENTER_DRIVE_ID",
+        "parentId": "ENTER_FOLDER_ID",
+        "name": "voiceover.mp3"
+      },
+      "name": "Save to Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [500, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "ElevenLabs API", "type": "main", "index": 0 }]]
+    },
+    "ElevenLabs API": {
+      "main": [[{ "node": "Save to Drive", "type": "main", "index": 0 }]]
+    }
+  }
+}

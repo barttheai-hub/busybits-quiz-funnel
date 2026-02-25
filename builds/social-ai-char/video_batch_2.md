@@ -1,71 +1,63 @@
-# Social AI Character - Video Batch 2 (Trends & Skits)
+# Social AI Character ("Mark" - Hair Loss) - Video Production Batch 2
 
-**Objective:** Expand the content library for @MarkRegrows with relatable, shareable skits.
-**Focus:** Relatability (Pillar A) & Emotional Payoff (Pillar B).
+**Objective:** Scale content output for "Sprint Week 1".
+**Focus:** High-Frequency, Short-Form Science & Rants.
 
 ---
 
-## Video 4: "POV: You Use Minoxidil" (Skit)
-**Concept:** Satirizing the "messy liquid" experience vs. the clean peptide experience.
-**Visual Style:** Split screen or quick cuts. Frantic vs. Calm.
+## Video 4: "The 3 Levels of Hair Loss" (Educational Pillar)
+**Concept:** Explaining the Norwood Scale simply.
+**Format:** Green Screen (Mark pointing at a Norwood Chart).
+
+**Visual:**
+*   Norwood Chart graphic (1-7 scale).
+*   Mark in corner.
 
 **Script:**
-(Fast, annoyed tone)
-"POV: It's 2023. You're using the liquid stuff.
-It drips down your forehead. It smells like vodka. Your hair looks greasy immediately.
-You go to bed, it gets on your pillow. Your cat tries to lick it—STOP!
-(Calm, relaxed tone)
-POV: It's 2026. You switched to the Protocol.
-Three drops. Water-based. Absorbs in 30 seconds. No grease. No smell.
-And... it actually works.
-Stop living in the dark ages, man."
-
-**Prompts (Midjourney):**
--   **Scene A (Messy):** `Close up of a 32 year old man looking frustrated, liquid dripping down forehead, wet messy hair, holding a blue dropper bottle, bathroom lighting --cref [URL_OF_BASE_MARK] --cw 100 --ar 9:16`
--   **Scene B (Clean):** `Close up of a 32 year old man looking fresh and calm, dry styled hair, smiling slightly, holding a sleek black dropper bottle, morning sunlight --cref [URL_OF_BASE_MARK] --cw 100 --ar 9:16`
+**(0:00)** "What level are you? Be honest."
+**(0:02)** "Level 1: Mature hairline. Normal. Don't panic."
+**(0:04)** "Level 2: The 'M' shape. The widow's peak deepens. This is the danger zone."
+**(0:08)** "Level 3: The crown thins. If you are here, you have 12 months to save it without surgery."
+**(0:12)** "Level 4+: You're cooked. Buy a ticket to Turkey or shave it."
+**(0:15)** "If you're a Level 2 or 3, start the Protocol today. Link in bio."
 
 ---
 
-## Video 5: "The 5 Stages of Balding" (Relatable)
-**Concept:** Walking through the emotional journey every guy knows.
-**Visual Style:** Montage of 5 different emotions.
+## Video 5: "Finasteride Fearmongering" (Controversial Pillar)
+**Concept:** Addressing side-effect fears (PFS).
+**Format:** Close-up / Serious Tone.
+
+**Visual:**
+*   Mark looking directly at camera.
+*   Text Overlay: "Will it break my 🍆?"
 
 **Script:**
-"Every guy goes through the 5 Stages of Balding. Which one are you?
-1. **Denial:** 'I'm just shedding because of stress.' (No you're not).
-2. **Anger:** You see a photo of the back of your head. You want to throw your phone.
-3. **Bargaining:** You buy the caffeinated shampoo. You buy the rosemary oil. You pray to the hair gods.
-4. **Depression:** The Hat Phase. You don't leave the house without it.
-5. **The Protocol:** You stop guessing. You start fixing the root cause. You get your confidence back.
-I lived in Stage 4 for three years. Don't be me."
-
-**Prompts (Midjourney):**
--   **Stage 1 (Denial):** `32 year old man looking in bathroom mirror, pulling hair back to check hairline, looking worried but dismissive --cref [URL_OF_BASE_MARK] --cw 100 --ar 9:16`
--   **Stage 2 (Anger):** `32 year old man looking at smartphone screen, shocked and angry expression, holding phone up --cref [URL_OF_BASE_MARK] --cw 100 --ar 9:16`
--   **Stage 4 (Hat):** `32 year old man wearing a baseball cap pulled low, looking down, moody lighting --cref [URL_OF_BASE_MARK] --cw 100 --ar 9:16`
+**(0:00)** "The number one reason guys go bald is fear of their own biology."
+**(0:04)** "You read one Reddit thread about side effects and decided to lose your hair."
+**(0:08)** "Here is the data: Less than 2% experience sides. And they are reversible."
+**(0:12)** "But if you are still scared of pills, use TOPICAL peptides. They stay in the scalp. They don't go systemic."
+**(0:16)** "No excuses. Save your hair."
 
 ---
 
-## Video 6: "My GF's Reaction" (Emotional Payoff)
-**Concept:** The moment others notice. Social validation.
-**Visual Style:** Selfie-style, happy, candid.
+## Video 6: "The Dermaroller Demo" (How-To Pillar)
+**Concept:** Showing the mechanism of action.
+**Format:** Hands-on Demo (AI Generated Hands/Scalp).
+
+**Visual:**
+*   Close up of a dermaroller rolling on a scalp (CGI/AI).
+*   Redness appearing (blood flow).
 
 **Script:**
-"I didn't tell my girlfriend I started the Protocol.
-I just did it quietly for 3 months.
-Yesterday, we were at dinner. She reaches over, touches my hair, and stops.
-She goes, 'Wait... is your hair thicker?'
-I tried to play it cool. I was like, 'I don't know, maybe?'
-Inside? I was doing backflips.
-That's the moment, guys. When *other people* notice without you asking.
-That's when you know you won."
-
-**Prompts (Midjourney):**
--   **Scene (Dinner):** `32 year old man sitting at a restaurant table, smiling genuinely, looking at someone off-camera, warm ambient lighting, glass of wine in foreground --cref [URL_OF_BASE_MARK] --cw 100 --ar 9:16`
+**(0:00)** "This $10 tool makes your serum work 300% better."
+**(0:03)** "It's called Micro-Needling. You are poking tiny holes in the stratum corneum."
+**(0:07)** "Why? Because your skin is designed to KEEP things out. The roller lets the peptide IN."
+**(0:11)** "Roll once a week. Apply serum immediately after. Watch the baby hairs pop."
+**(0:15)** "Get the roller for free in the Growth Kit. Link in bio."
 
 ---
 
-## Action Plan
-1.  **Generate Visuals:** Run prompts in Midjourney (use consistent seed).
-2.  **Generate Audio:** Run scripts in ElevenLabs (Adam/Antony).
-3.  **Animate:** Use Hedra for lip-sync on the "Talking Head" portions.
+## Production Notes
+*   **Voice:** Keep the "Dry/Sarcastic" tone consistent.
+*   **Captions:** Use "The Bold Font" (Yellow/White).
+*   **Music:** Low-volume "Phonk" or "Dark Synth" (Authority vibe).

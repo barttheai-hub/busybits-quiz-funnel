@@ -1,0 +1,66 @@
+{
+  "name": "03_Generate_Shotlist",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-shotlist",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notes": "Receives Script JSON"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo",
+        "prompt": "Convert the script into a visual shotlist. For each scene, describe: 1. Subject (Seed Character), 2. Action, 3. Camera Angle, 4. Lighting. Output JSON array.",
+        "text": "={{$json.body.script}}"
+      },
+      "name": "Visual Planner",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo",
+        "prompt": "Apply the 'Visual Consistency' rules. Append '--cref [URL] --cw 100' to character shots. Append '--style raw' for realism. Output final Midjourney prompts.",
+        "text": "={{$json.shotlist}}"
+      },
+      "name": "Prompt Engineer",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": "ENTER_YOUR_SHEET_ID",
+        "sheetName": "Shotlist",
+        "columns": {
+          "Scene": "={{$json.scene_number}}",
+          "Prompt": "={{$json.midjourney_prompt}}",
+          "Type": "Image"
+        }
+      },
+      "name": "Save to Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [700, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Visual Planner", "type": "main", "index": 0 }]]
+    },
+    "Visual Planner": {
+      "main": [[{ "node": "Prompt Engineer", "type": "main", "index": 0 }]]
+    },
+    "Prompt Engineer": {
+      "main": [[{ "node": "Save to Sheets", "type": "main", "index": 0 }]]
+    }
+  }
+}

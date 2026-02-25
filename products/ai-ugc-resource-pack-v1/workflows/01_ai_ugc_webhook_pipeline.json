@@ -1,0 +1,207 @@
+{
+  "name": "AI UGC Pack - Webhook Pipeline v1",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ai-ugc-pack-v1",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "Webhook_Trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Setup Instructions\n1) Send POST JSON to `/webhook/ai-ugc-pack-v1` (test URL first).\n2) Required body fields: `product_name`, `product_description`, `audience`.\n3) Optional: `request_id`, `pain_points` (array), `mechanism`, `guarantee`.\n4) This starter workflow is deterministic and runnable without external APIs.\n5) To upgrade quality, replace `Generate Hooks` + `Build Script` Code nodes with your LLM nodes.",
+        "height": 360,
+        "width": 420,
+        "color": 7
+      },
+      "id": "Sticky_Setup",
+      "name": "Sticky - Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        40,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json;\nconst required = ['product_name','product_description','audience'];\nconst missing = required.filter(k => !body[k] || String(body[k]).trim() === '');\nif (missing.length) {\n  throw new Error(`Missing required fields: ${missing.join(', ')}`);\n}\n\nconst run_id = body.request_id || `run_${Date.now()}`;\nconst dedup_key = `${body.product_name}::${body.audience}::${body.request_id || 'no_request_id'}`;\n\nreturn [{\n  json: {\n    run_id,\n    dedup_key,\n    received_at: new Date().toISOString(),\n    product_name: body.product_name,\n    product_description: body.product_description,\n    audience: body.audience,\n    awareness_level: body.awareness_level || 'cold',\n    pain_points: Array.isArray(body.pain_points) ? body.pain_points : [],\n    mechanism: body.mechanism || 'specific mechanism not provided',\n    guarantee: body.guarantee || 'satisfaction guarantee',\n    compliance_note: 'Review claims for platform and legal compliance before launch.'\n  }\n}];"
+      },
+      "id": "Validate_Normalize",
+      "name": "Validate + Normalize Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $json;\nconst basePain = d.pain_points.length ? d.pain_points : [\n  'current solutions feel inconvenient',\n  'results feel inconsistent',\n  'hard to know what actually works'\n];\n\nconst hooks = [\n  {\n    hook_type: 'Pattern Interrupt',\n    audio_hook: `Stop guessing with ${d.product_name}.`,\n    visual_open: 'Quick close-up showing the exact before state/problem.',\n    pain_targeted: basePain[0],\n    objection_handled: 'I tried similar products before',\n    why_it_works: 'Fast pattern break + specificity',\n    risk: 'Low'\n  },\n  {\n    hook_type: 'Us vs Them',\n    audio_hook: `Most options mask it. ${d.product_name} targets the root.`,\n    visual_open: 'Split-screen old method vs new method.',\n    pain_targeted: basePain[1] || basePain[0],\n    objection_handled: 'How is this different?',\n    why_it_works: 'Clear contrast creates belief quickly',\n    risk: 'Medium'\n  },\n  {\n    hook_type: 'Proof First',\n    audio_hook: 'Look closely — this is measurable progress.',\n    visual_open: 'Zoomed proof visual with callout labels.',\n    pain_targeted: basePain[2] || basePain[0],\n    objection_handled: 'I need evidence',\n    why_it_works: 'Evidence before claims lowers resistance',\n    risk: 'Medium'\n  }\n];\n\nreturn [{ json: { ...d, hooks } }];"
+      },
+      "id": "Generate_Hooks",
+      "name": "Generate Hooks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        760,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $json;\nconst selected = d.hooks[0];\nconst script = {\n  hook: selected.audio_hook,\n  agitation: `If you've tried other fixes but still struggle, it's usually because they only treat symptoms — not the root issue.`,\n  mechanism: `${d.product_name} works differently: ${d.mechanism}.`,\n  proof: `Show a concrete demo moment tied to ${d.audience} and a believable timeframe.`,\n  cta: `Tap Shop Now to try ${d.product_name} with ${d.guarantee}.`\n};\n\nreturn [{ json: { ...d, selected_hook: selected, script } }];"
+      },
+      "id": "Build_Script",
+      "name": "Build Script",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $json;\nconst scenes = [\n  { section: '0:00-0:03', prompt: `${d.audience} facing the core problem, handheld UGC framing, vertical 9:16` },\n  { section: '0:03-0:12', prompt: `show frustrating status-quo method failing in realistic bathroom setting, 9:16` },\n  { section: '0:12-0:25', prompt: `introduce ${d.product_name} application close-up, clean lighting, texture detail, 9:16` },\n  { section: '0:25-0:35', prompt: `proof-style shot with visual labels and believable progress framing, 9:16` },\n  { section: '0:35-0:45', prompt: `confident result shot plus product and guarantee badge, 9:16` }\n];\n\nreturn [{ json: { ...d, scenes } }];"
+      },
+      "id": "Scene_Prompts",
+      "name": "Generate Scene Prompts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $json;\nreturn [{\n  json: {\n    status: 'ok',\n    run_id: d.run_id,\n    dedup_key: d.dedup_key,\n    product_name: d.product_name,\n    audience: d.audience,\n    selected_hook: d.selected_hook,\n    hooks: d.hooks,\n    script: d.script,\n    scenes: d.scenes,\n    instructions: [\n      'If this output quality is too generic, replace Generate Hooks + Build Script with an LLM node.',\n      'Keep a datastore keyed by dedup_key to enforce idempotency across retries.',\n      'Store all outputs to Sheets/Notion/Airtable before ad launch.'\n    ],\n    compliance_note: d.compliance_note\n  }\n}];"
+      },
+      "id": "Package_Output",
+      "name": "Package Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{$json}}",
+        "options": {}
+      },
+      "id": "Respond_Webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Production Upgrade Instructions\n- Add a Data Store / DB check after validation using `dedup_key` to prevent duplicates.\n- Add an Error Trigger workflow to log failed runs and alert Slack/Discord.\n- Add a review queue (Sheet/DB) for human approval before publishing.\n- Add per-node retries where available and keep logs of prompt + output.",
+        "height": 300,
+        "width": 420,
+        "color": 5
+      },
+      "id": "Sticky_Prod",
+      "name": "Sticky - Production Hardening",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        40
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Validate + Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate + Normalize Input": {
+      "main": [
+        [
+          {
+            "node": "Generate Hooks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Hooks": {
+      "main": [
+        [
+          {
+            "node": "Build Script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Script": {
+      "main": [
+        [
+          {
+            "node": "Generate Scene Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Scene Prompts": {
+      "main": [
+        [
+          {
+            "node": "Package Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Package Output": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "active": false,
+  "versionId": "00000000-0000-0000-0000-000000000001"
+}

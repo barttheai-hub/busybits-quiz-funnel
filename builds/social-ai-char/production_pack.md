@@ -1,70 +1,53 @@
-# Social AI Character ("Mark") - Production Asset Pack (v1.0)
+# Social AI Character ("Mark" - Hair Loss) - Production Pack
 
-## Overview
-**Character:** Mark (32, Software Engineer, Hair Loss Journey).
-**Platform:** TikTok / IG Reels.
-**Goal:** Consistent visual/audio identity across 100+ videos.
+**Status:** Ready for Assembly.
+**Tools Used:** Midjourney, ElevenLabs, D-ID/Hedra.
 
 ---
 
-## 1. Visual Prompts (Midjourney v6.1)
-
-### The "Master" Character (Seed Image)
-**Prompt:** `Portrait of a 32 year old man named Mark, friendly but skeptical expression, short beard, messy dark hair with slight recession at temples, wearing a grey hoodie, sitting in a modern minimalist apartment with natural window light, shot on 35mm film, Kodak Portra 400, high texture --ar 9:16 --stylize 250`
-**Usage:** Generate 1 perfect image. Use its URL as `--cref` for everything else.
-
-### Scene: The Car (Confessionals)
-**Prompt:** `A 32 year old man wearing a baseball cap sitting in the driver's seat of a parked car, looking at the camera nervously, daytime, natural lighting coming through windshield, shot on iPhone style --cref [URL] --cw 100 --ar 9:16`
-
-### Scene: The Bathroom (Routine)
-**Prompt:** `A 32 year old man standing in a modern bathroom looking in the mirror, holding a small glass dropper bottle, applying serum to his hairline, cinematic lighting, shot on 35mm --cref [URL] --cw 100 --ar 9:16`
-
-### Scene: The Gym (Lifestyle)
-**Prompt:** `A 32 year old man at the gym, wearing workout clothes, sweating slightly, drinking water, gym background blurred, neon lights --cref [URL] --cw 0 --ar 9:16`
-*(Note: `--cw 0` changes his outfit but keeps his face).*
+## 1. Character Reference (CREF)
+**Prompt:** `Portrait of a 32 year old man, buzz cut, sharp jawline, wearing a black t-shirt, neutral grey studio background, cinematic lighting, ultra realistic, 8k --ar 9:16 --cref [URL_OF_BASE_MARK]`
+**Tone:** Stoic, Analytical, Trustworthy.
 
 ---
 
-## 2. Voice Specifications (ElevenLabs)
-
-**Voice ID:** `Adam` (Premade) or `Antony` (Premade).
+## 2. Voice ID (ElevenLabs)
 **Settings:**
--   **Stability:** 45% (Allows for more emotional range/inflection).
--   **Similarity:** 80% (Keeps the tone consistent).
--   **Style Exaggeration:** 15% (Slightly punchy for social media).
--   **Speaker Boost:** ON.
-
-**Audio Engineering SOP:**
-1.  Generate VO.
-2.  Import to CapCut.
-3.  Add **"Room Tone"** (Sound effect: "Quiet Apartment" or "Car Interior" at 10% volume).
-4.  This makes the AI voice sound recorded in a real space, not a vacuum.
+*   **Voice:** "Marcus" (Deep, American, Authoritative).
+*   **Stability:** 40% (More expression).
+*   **Clarity:** 85%.
+*   **Style Exaggeration:** 15% (Slightly punchy).
 
 ---
 
-## 3. Animation Settings (Hedra / HeyGen)
+## 3. B-Roll & Visuals (Midjourney)
 
-**Tool:** Hedra (Better for expressive talking heads).
-**Input:** Midjourney Image + ElevenLabs Audio.
-**Aspect Ratio:** 9:16 (Vertical).
-**Emotion Setting:** "Conversational" (Not "News Anchor").
-**Zoom:** 1.1x (Add a slow zoom in CapCut, not in generation, for higher quality).
+### For Video 1 (Hatfish):
+*   `A man nervously taking off a baseball cap, revealing a receding hairline, looking into a mirror, moody lighting --ar 9:16`
+*   `Anatomical diagram of scalp blood vessels being constricted by a tight band --ar 9:16`
+
+### For Video 2 (Rosemary Oil):
+*   `A generic amber bottle labeled "Rosemary Oil" sitting on a cluttered bathroom sink, cinematic depth of field --ar 9:16`
+*   `Close up of a dry, cracked desert ground texture (Metaphor for dormant scalp) --ar 9:16`
+
+### For Video 3 (Barber):
+*   `POV shot from a barber chair looking into a mirror, a barber holding a second mirror behind showing a thinning crown --ar 9:16 --style raw`
+*   `A microscopic view of a hair follicle shrinking and miniaturizing --ar 9:16`
 
 ---
 
-## 4. Editing Style Guide (CapCut)
+## 4. Audio Files (Generated)
+*   `hatfish_rant_v1.mp3`
+*   `rosemary_myth_v1.mp3`
+*   `barber_anxiety_v1.mp3`
 
-**Captions:**
--   **Font:** "The Bold Font" or "Komika Axis".
--   **Color:** Yellow text with black stroke (Hex: #FFD700).
--   **Animation:** Pop-in word by word.
--   **Position:** Center screen (Safe Zone).
+---
 
-**Music:**
--   **Educational:** "Lofi Study" (Volume: 10%).
--   **Skit/Stress:** "Phonk" or "Vine Boom" (Volume: 15%).
-
-**Pacing:**
--   Cut dead air.
--   Change visual every 3-5 seconds (Zoom, B-roll, or Text Overlay).
--   Loop the end back to the start if possible.
+## 5. Editing Instructions (CapCut)
+1.  **Sync:** Match the AI Avatar lip-sync to the audio first.
+2.  **Overlay:** Place B-Roll on top of the avatar every 3-5 seconds (Pattern Interrupt).
+3.  **Captions:** Use the "Spring" or "Bold" preset. Color: Yellow/White/Red.
+4.  **Music:**
+    *   *Video 1:* "Sigma Phonk" (Low volume).
+    *   *Video 2:* "Investigative News" (Tense).
+    *   *Video 3:* "Sad Piano" -> transitions to -> "Hopeful Synth" at the end.

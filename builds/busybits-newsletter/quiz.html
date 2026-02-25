@@ -116,6 +116,10 @@
     </div>
 
     <script>
+        // CONFIGURATION: Replace with your automation webhook (n8n, Zapier, Make)
+        // or a serverless function endpoint.
+        const WEBHOOK_URL = "https://hook.us1.make.com/YOUR_WEBHOOK_ID"; 
+
         let scores = { time: 0, energy: 0, focus: 0 };
         let currentStep = 0;
         const totalSteps = 4; // Start + 3 Qs
@@ -129,13 +133,23 @@
             next.classList.remove('hidden');
             next.classList.add('slide-enter');
             
-            currentStep++;
+            // If going to result, update progress to 100%
+            if (id === 'result') {
+                currentStep = totalSteps;
+            } else {
+                currentStep++;
+            }
             updateProgress();
         }
 
         function recordAnswer(type, nextId) {
             scores[type]++;
-            nextScreen(nextId);
+            // If next is email, calculate winner first
+            if (nextId === 'email') {
+                nextScreen('email');
+            } else {
+                nextScreen(nextId);
+            }
         }
 
         function updateProgress() {
@@ -144,40 +158,92 @@
         }
 
         function getWinner() {
+            // Returns key with highest score
             return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
         }
 
-        function submitQuiz(e) {
+        async function submitQuiz(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
+            const emailInput = document.getElementById('email');
+            const submitBtn = e.target.querySelector('button');
+            const originalBtnText = submitBtn.innerText;
+
+            const email = emailInput.value;
             const winner = getWinner();
             
-            // In production: Send email + winner tag to ESP via API
-            console.log(`Subscribing ${email} with tag: segment:${winner}`);
+            // UX: Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Analyzing...";
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
 
-            // Show Result
-            showResult(winner);
+            try {
+                // Prepare Payload
+                const payload = {
+                    email: email,
+                    segment: winner, // time, energy, focus
+                    source: "quiz_funnel_v1",
+                    timestamp: new Date().toISOString()
+                };
+
+                // Send to Webhook (if configured)
+                if (WEBHOOK_URL && !WEBHOOK_URL.includes("YOUR_WEBHOOK_ID")) {
+                    const response = await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error('Subscription failed');
+                } else {
+                    // Simulate delay for demo if no webhook configured
+                    console.warn("No Webhook URL configured. Simulating success.");
+                    await new Promise(r => setTimeout(r, 1500)); 
+                }
+
+                // Success
+                showResult(winner);
+
+            } catch (error) {
+                console.error(error);
+                alert("Something went wrong. Please try again.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+                submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
         }
 
         function showResult(winner) {
-            nextScreen('result');
             const title = document.getElementById('result-title');
             const desc = document.getElementById('result-desc');
             const link = document.getElementById('result-link');
 
-            if (winner === 'time') {
-                title.innerText = "The Time Starved Founder";
-                desc.innerText = "You have high output but low leverage. You need to delete, delegate, and automate.";
-                link.href = "assets/quiz-protocols/Time_Protocol.html";
-            } else if (winner === 'energy') {
-                title.innerText = "The Energy Crasher";
-                desc.innerText = "You suffer from burnout cycles. You need to fix your circadian rhythm and nutrition.";
-                link.href = "assets/quiz-protocols/Energy_Protocol.html";
-            } else {
-                title.innerText = "The Monkey Mind";
-                desc.innerText = "You start 10 things and finish 0. You need environment design and deep work.";
-                link.href = "assets/quiz-protocols/Focus_Protocol.html";
-            }
+            // Map winner to content
+            const content = {
+                time: {
+                    title: "The Time Starved Founder",
+                    desc: "You have high output but low leverage. You need to delete, delegate, and automate.",
+                    url: "assets/quiz-protocols/Time_Protocol.html"
+                },
+                energy: {
+                    title: "The Energy Crasher",
+                    desc: "You suffer from burnout cycles. You need to fix your circadian rhythm and nutrition.",
+                    url: "assets/quiz-protocols/Energy_Protocol.html"
+                },
+                focus: {
+                    title: "The Monkey Mind",
+                    desc: "You start 10 things and finish 0. You need environment design and deep work.",
+                    url: "assets/quiz-protocols/Focus_Protocol.html"
+                }
+            };
+
+            const data = content[winner] || content.time; // Fallback
+
+            title.innerText = data.title;
+            desc.innerText = data.desc;
+            link.href = data.url;
+
+            // Transition to result screen
+            nextScreen('result');
         }
     </script>
 </body>

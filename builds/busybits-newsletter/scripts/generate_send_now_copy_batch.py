@@ -13,14 +13,30 @@ def load_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def extract_name(contact_email: str) -> str:
+    """Extract name from 'Name <email>' format, or return empty string."""
+    contact_email = contact_email.strip()
+    if "<" in contact_email and ">" in contact_email:
+        name_part = contact_email.split("<")[0].strip()
+        # Take first name only
+        if " " in name_part:
+            return name_part.split(" ")[0]
+        return name_part
+    return ""
+
+
 def build_copy(row: dict[str, str]) -> tuple[str, str]:
     company = (row.get("company") or "your team").strip() or "your team"
     action_type = (row.get("action_type") or "send_initial").strip()
+    contact_email = (row.get("contact_email") or "").strip()
+    
+    first_name = extract_name(contact_email)
+    greeting = f"Hi {first_name}," if first_name else "Hi there,"
 
     if action_type == "followup_2":
         subject = f"Last ping — BusyBits x {company}"
         body = (
-            "Hi there,\n\n"
+            f"{greeting}\n\n"
             "Last ping from me in case this got buried. If sponsorships are handled by someone else on your side, "
             "happy to route this correctly.\n\n"
             "If timing is better next month, I can also circle back then.\n\n"
@@ -29,7 +45,7 @@ def build_copy(row: dict[str, str]) -> tuple[str, str]:
     elif action_type == "followup_1":
         subject = f"Quick follow-up — BusyBits x {company}"
         body = (
-            "Hi there,\n\n"
+            f"{greeting}\n\n"
             "Quick follow-up on the BusyBits sponsorship note I sent earlier this week. "
             "We reach a high-intent health/performance audience and have upcoming slots open.\n\n"
             "If useful, I can send over a 2-minute fit + pricing snapshot and a few recent partner outcomes.\n\n"
@@ -38,12 +54,12 @@ def build_copy(row: dict[str, str]) -> tuple[str, str]:
     else:
         subject = f"Partnership idea — BusyBits x {company}"
         body = (
-            "Hi there,\n\n"
+            f"{greeting}\n\n"
             "I run BusyBits, a fitness/performance newsletter with an engaged audience of builders and operators. "
-            "I think a {company} sponsorship slot could be a strong fit.\n\n"
+            f"I think a {company} sponsorship slot could be a strong fit.\n\n"
             "If useful, I can send a short audience + pricing snapshot and 2 suggested integration angles.\n\n"
             "Best,\nZiga"
-        ).format(company=company)
+        )
 
     return subject, body
 

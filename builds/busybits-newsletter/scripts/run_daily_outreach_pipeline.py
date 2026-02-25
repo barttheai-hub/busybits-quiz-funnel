@@ -223,7 +223,7 @@ def main() -> None:
     followup_due_csv = root / f"sponsor_followup_due_batch_{run_date}.csv"
     followup_due_md = root / f"sponsor_followup_due_batch_{run_date}.md"
     followup_upcoming_csv = root / f"sponsor_followup_upcoming_batch_{run_date}.csv"
-    followup_upcoming_md = root / f"sponsor_followup_upcoming_batch_{run_date}.md"
+    followup_upcoming_md = root / f"sponsor_followup_upcoming_copy_batch_{run_date}.md"
     followup_due_copy_csv = root / f"sponsor_followup_due_copy_batch_{run_date}.csv"
     followup_due_copy_md = root / f"sponsor_followup_due_copy_batch_{run_date}.md"
     followup_copy_csv = root / f"sponsor_followup_copy_batch_{run_date}.csv"
@@ -418,17 +418,15 @@ def main() -> None:
 
     run([
         "python3",
-        str(scripts / "generate_followup_upcoming_batch.py"),
-        "--calendar",
-        str(followup_calendar_csv),
-        "--date",
+        str(scripts / "generate_sponsor_upcoming_followups.py"),
+        "--tracker",
+        str(deduped_tracker),
+        "--anchor-date",
         run_date,
-        "--days",
+        "--horizon-days",
         "3",
-        "--output-csv",
-        str(followup_upcoming_csv),
-        "--output-md",
-        str(followup_upcoming_md),
+        "--out-dir",
+        str(root),
     ])
 
     run([

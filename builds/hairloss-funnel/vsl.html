@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Protocol — Watch Now</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    /* Pulsing button animation */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    .btn-pulse { animation: pulse-ring 2s infinite; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+
+  <!-- VSL Container -->
+  <main class="mx-auto max-w-4xl px-4 py-8 md:py-16">
+    
+    <!-- Headline -->
+    <div class="mb-8 text-center">
+      <div class="mb-4 inline-block rounded-full bg-red-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-red-500">
+        Do Not Close This Window
+      </div>
+      <h1 class="mx-auto max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
+        How To "Wake Up" Dormant Follicles Without Drugs or Surgery
+      </h1>
+      <p class="mt-4 text-lg text-slate-400">
+        Watch the short presentation below before it's taken down.
+      </p>
+    </div>
+
+    <!-- Video Placeholder -->
+    <div class="relative mx-auto mb-12 aspect-video w-full overflow-hidden rounded-2xl border border-slate-800 bg-black shadow-2xl shadow-blue-500/10">
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+        <svg class="h-20 w-20 text-white opacity-80" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+        </svg>
+        <span class="mt-4 text-sm font-medium tracking-widest uppercase">Video Loading...</span>
+      </div>
+    </div>
+
+    <!-- CTA Section (Usually hidden until X minutes) -->
+    <div id="offer-section" class="mx-auto max-w-2xl rounded-2xl bg-slate-900 border border-slate-800 p-8 text-center ring-1 ring-white/5">
+      <h2 class="mb-2 text-2xl font-bold text-white">The Peptide Regrowth Protocol</h2>
+      <div class="mb-6 flex justify-center gap-2 text-sm text-yellow-400">
+        ★★★★★ <span class="text-slate-400">(4,821 Reviews)</span>
+      </div>
+
+      <div class="mb-8 grid gap-4 text-left md:grid-cols-2">
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Blocks DHT Topically
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Reduces Scalp Tension
+          </li>
+        </ul>
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Visible Results in 90 Days
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            No Hormonal Side Effects
+          </li>
+        </ul>
+      </div>
+
+      <!-- Price Stack -->
+      <div class="mb-8 flex items-baseline justify-center gap-2">
+        <span class="text-4xl font-black text-white">$49</span>
+        <span class="text-lg text-slate-500 line-through">$89</span>
+        <span class="rounded bg-green-500/20 px-2 py-1 text-xs font-bold text-green-400">SAVE 45%</span>
+      </div>
+
+      <!-- Big Button -->
+      <button class="btn-pulse w-full rounded-xl bg-blue-600 px-8 py-5 text-xl font-bold text-white shadow-xl hover:bg-blue-500 hover:shadow-blue-500/40 transition-all">
+        Yes! I Want To Wake Up My Hair &rarr;
+      </button>
+      
+      <p class="mt-4 text-xs text-slate-500">
+        Secured by Stripe • 90-Day "Growth or Competitor Pays" Guarantee
+      </p>
+
+      <!-- Guarantee Badge -->
+      <div class="mt-8 flex items-center justify-center gap-4 rounded-lg bg-slate-800/50 p-4 border border-slate-800">
+        <div class="h-12 w-12 flex-shrink-0 rounded-full bg-yellow-500/10 flex items-center justify-center text-2xl">🛡️</div>
+        <div class="text-left">
+          <div class="font-bold text-white text-sm">Iron-Clad Guarantee</div>
+          <div class="text-xs text-slate-400">Try it for 90 days. If you don't see growth, we refund you AND buy you a competitor's product.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mx-auto mt-16 max-w-2xl border-t border-slate-800 pt-12">
+      <h3 class="mb-8 text-center text-2xl font-bold">Frequently Asked Questions</h3>
+      <div class="space-y-4">
+        <details class="group rounded-lg bg-slate-900 border border-slate-800 open:ring-1 open:ring-blue-500/50">
+          <summary class="flex cursor-pointer list-none items-center justify-between p-4 font-medium text-slate-200">
+            <span>Does this work for a receding hairline?</span>
+            <span class="transition group-open:rotate-180">▼</span>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-slate-400 leading-relaxed border-t border-slate-800/50 pt-4">
+            Yes. The receding hairline is often the first sign of DHT sensitivity and scalp tension. Our peptide complex targets both root causes to halt recession and encourage regrowth in dormant follicles.
+          </div>
+        </details>
+        
+        <details class="group rounded-lg bg-slate-900 border border-slate-800 open:ring-1 open:ring-blue-500/50">
+          <summary class="flex cursor-pointer list-none items-center justify-between p-4 font-medium text-slate-200">
+            <span>Will I lose my hair if I stop using it?</span>
+            <span class="transition group-open:rotate-180">▼</span>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-slate-400 leading-relaxed border-t border-slate-800/50 pt-4">
+            Unlike Minoxidil, which creates a dependency, our protocol improves the *health* of the scalp environment. While maintenance is recommended, many users find they can reduce frequency once their follicles are "awake" and healthy.
+          </div>
+        </details>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="mt-12 border-t border-slate-900 bg-black py-8 text-center text-xs text-slate-600">
+    <div class="mx-auto max-w-2xl px-6">
+      <p>&copy; 2026 Men's Follicle Science.</p>
+      <div class="mt-4 flex justify-center gap-4">
+        <a href="#" class="hover:text-slate-400">Privacy</a>
+        <a href="#" class="hover:text-slate-400">Terms</a>
+        <a href="#" class="hover:text-slate-400">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

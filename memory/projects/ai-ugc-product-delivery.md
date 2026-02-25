@@ -1,53 +1,59 @@
-# AI UGC Resource Pack - Product Delivery & Access Page
+# AI UGC Funnel - Product Delivery Page (Post-Purchase)
 
-**Goal:** Provide a frictionless onboarding experience for the $7 buyers.
-**Hosting:** Private Page (e.g., `aiugcpack.com/access-v92ka`).
-
----
-
-## 1. The "Welcome" Video Script (60 Seconds)
-**Visual:** Screen recording of Ziga.
-**Script:**
-"You made it. You now have the exact system I use to generate 20 ads a week.
-Below this video, you'll find your assets.
-**Do not skip Step 1.**
-You need to set up your n8n account first, or the rest won't make sense.
-I've also included a bonus 'visual consistency' guide that I didn't mention on the sales page.
-Let's build some ads."
+**Objective:** Onboard customers to the $7 pack and upsell backend offers.
+**URL:** `aiugc.com/access` (Gated).
 
 ---
 
-## 2. Asset Download Section (Links)
-
-### A. The Prompts (Text Files)
--   [Download] `Research_Agent_Prompt_v2.txt`
--   [Download] `Script_Writer_Prompt_v1.txt`
--   [Download] `Visual_Consistency_CheatSheet.pdf`
-
-### B. The Automation (JSON)
--   [Download] `AI_UGC_Pipeline_n8n_Workflow.json`
--   [Video] "How to Import this into n8n in 30 seconds" (Loom Link).
-
-### C. The Bonuses
--   [Access] "The Hook Vault" (Airtable Database of 50 viral hooks).
--   [Access] "Private Discord Community" (Optional).
+## 1. Header (The Win)
+**Headline:** "You're In. Check Your Inbox."
+**Subhead:** "Your receipt and login details have been sent to {{email}}."
 
 ---
 
-## 3. The "Quick Win" Tutorial (SOP)
-**Title:** "Your First Ad in 15 Minutes"
-**Step 1:** Copy the Research Prompt. Paste into ChatGPT.
-**Step 2:** Paste your Product URL.
-**Step 3:** Copy the output (Script).
-**Step 4:** Paste into the Script Writer Prompt.
-**Step 5:** Generate Scenes in Midjourney using the SOP.
-**Step 6:** Stitch in CapCut.
+## 2. Step 1: Download The Assets (The Product)
+*   **Button 1:** [Download The Resource Pack (ZIP)]
+*   **Button 2:** [Access The n8n Workflow (JSON)]
+*   **Button 3:** [Join The Discord Community (Free)]
 
 ---
 
-## 4. The Upsell Wall (Soft Pitch)
-*At the bottom of the page.*
+## 3. Step 2: The "Fast Track" Video (Onboarding)
+**Video Embed (Loom):** "How to generate your first ad in 5 minutes."
+**Content:**
+1.  Import the JSON into n8n.
+2.  Add your OpenAI API Key.
+3.  Paste a URL.
+4.  Hit "Run".
 
-**Headline:** Want more templates?
-**Body:** "I release 10 new script templates every month in my private 'Template Vault'. It's $27/mo. No pressure, but if you want to scale faster, this is the cheat code."
-**[Button: Join The Vault]**
+---
+
+## 4. Step 3: The "Done-For-You" Upsell (High Ticket)
+**Headline:** "Want me to build your entire AI Creative Engine?"
+**Copy:**
+"The pack you just bought gives you the tools.
+But setting up the servers, fine-tuning the models, and integrating with Facebook Ads Manager takes time.
+
+If you are spending >$50k/mo on ads, you don't have time to tinker.
+My agency can install a **Custom AI Creative Pipeline** inside your Slack.
+*   Auto-generate ads daily.
+*   Auto-post to Facebook.
+*   Auto-kill losers.
+
+**Offer:** 'The AI Ad Engine' Implementation.
+**Price:** $5,000 (One-Time Setup).
+**CTA:** [Book A Demo Call] (Calendly Embed)."
+
+---
+
+## 5. Technical Delivery (Email)
+**Subject:** Access: The AI UGC Resource Pack
+**Body:**
+"Hey,
+Here is the link to access your purchase:
+[Access Link]
+
+If you have any trouble importing the n8n workflow, reply to this email.
+
+Cheers,
+Ziga"

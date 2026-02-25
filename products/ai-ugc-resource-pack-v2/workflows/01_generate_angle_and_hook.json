@@ -1,0 +1,80 @@
+{
+  "name": "01_Generate_Angle_and_Hook",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-hook",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notesInFlow": true,
+      "notes": "Receives Product URL + Target Avatar"
+    },
+    {
+      "parameters": {
+        "url": "={{$json.body.product_url}}",
+        "options": {}
+      },
+      "name": "Fetch Product Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo",
+        "prompt": "Analyze the following landing page content and extract: 1. Core Pain Point, 2. The Unique Mechanism, 3. The 'Old Way' vs 'New Way'. Output as JSON.",
+        "text": "={{$json.body}}"
+      },
+      "name": "Research Agent",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo",
+        "prompt": "Generate 5 viral video hooks based on the research. Use these patterns: 'The 3 Mistakes', 'The Secret', 'Stop Doing This', 'I Fired My...', 'The $7 Solution'. Output strict JSON array.",
+        "text": "={{$json.result}}"
+      },
+      "name": "Hook Generator",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": "ENTER_YOUR_SHEET_ID",
+        "sheetName": "Hooks",
+        "columns": {
+          "Hook": "={{$json.hook_text}}",
+          "Type": "={{$json.pattern_type}}",
+          "Status": "Generated"
+        }
+      },
+      "name": "Save to Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Fetch Product Page", "type": "main", "index": 0 }]]
+    },
+    "Fetch Product Page": {
+      "main": [[{ "node": "Research Agent", "type": "main", "index": 0 }]]
+    },
+    "Research Agent": {
+      "main": [[{ "node": "Hook Generator", "type": "main", "index": 0 }]]
+    },
+    "Hook Generator": {
+      "main": [[{ "node": "Save to Sheets", "type": "main", "index": 0 }]]
+    }
+  }
+}

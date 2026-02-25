@@ -1,0 +1,76 @@
+{
+  "name": "07_Export_Job_Folder",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "export-job",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notes": "Receives Project ID"
+    },
+    {
+      "parameters": {
+        "operation": "list",
+        "driveId": "ENTER_DRIVE_ID",
+        "folderId": "={{$json.body.project_folder_id}}",
+        "returnAll": true
+      },
+      "name": "List Files",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "compress",
+        "fileName": "={{$json.body.project_name}}_ASSETS.zip"
+      },
+      "name": "Zip Files",
+      "type": "n8n-nodes-base.compression",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "fileContent": "={{$binary.data}}",
+        "driveId": "ENTER_DRIVE_ID",
+        "parentId": "ENTER_DELIVERY_FOLDER_ID",
+        "name": "={{$json.body.project_name}}_READY_FOR_EDIT.zip"
+      },
+      "name": "Save Zip",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "channel": "={{$json.body.slack_channel}}",
+        "text": "📦 **New Asset Pack Ready**\nProject: {{$json.body.project_name}}\nLink: {{$json.drive_link}}"
+      },
+      "name": "Notify Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "List Files", "type": "main", "index": 0 }]]
+    },
+    "List Files": {
+      "main": [[{ "node": "Zip Files", "type": "main", "index": 0 }]]
+    },
+    "Zip Files": {
+      "main": [[{ "node": "Save Zip", "type": "main", "index": 0 }]]
+    },
+    "Save Zip": {
+      "main": [[{ "node": "Notify Slack", "type": "main", "index": 0 }]]
+    }
+  }
+}

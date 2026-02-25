@@ -1,0 +1,73 @@
+{
+  "name": "04_Generate_Prompts_NanoBanana",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-images",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notes": "Receives Shotlist Prompts"
+    },
+    {
+      "parameters": {
+        "url": "https://api.midjourney-api.com/v2/imagine",
+        "method": "POST",
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer YOUR_KEY" }
+          ]
+        },
+        "bodyParameters": {
+          "parameters": [
+            { "name": "prompt", "value": "={{$json.body.prompt}}" }
+          ]
+        }
+      },
+      "name": "Midjourney API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.result.image_url}}",
+        "options": {
+          "responseFormat": "file"
+        }
+      },
+      "name": "Download Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "fileContent": "={{$binary.data}}",
+        "driveId": "ENTER_DRIVE_ID",
+        "parentId": "ENTER_FOLDER_ID",
+        "name": "={{$json.body.scene_id}}.png"
+      },
+      "name": "Save to Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [700, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Midjourney API", "type": "main", "index": 0 }]]
+    },
+    "Midjourney API": {
+      "main": [[{ "node": "Download Image", "type": "main", "index": 0 }]]
+    },
+    "Download Image": {
+      "main": [[{ "node": "Save to Drive", "type": "main", "index": 0 }]]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "name": "05_Generate_Prompts_Sora_Kling",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-video",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300],
+      "notes": "Receives Image URL (Last/First Frame) + Prompt"
+    },
+    {
+      "parameters": {
+        "url": "https://api.kling.ai/v1/videos/image2video",
+        "method": "POST",
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer YOUR_KEY" }
+          ]
+        },
+        "bodyParameters": {
+          "parameters": [
+            { "name": "image_url", "value": "={{$json.body.image_url}}" },
+            { "name": "prompt", "value": "={{$json.body.motion_prompt}}" }
+          ]
+        }
+      },
+      "name": "Kling API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.result.video_url}}",
+        "options": {
+          "responseFormat": "file"
+        }
+      },
+      "name": "Download Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "fileContent": "={{$binary.data}}",
+        "driveId": "ENTER_DRIVE_ID",
+        "parentId": "ENTER_FOLDER_ID",
+        "name": "={{$json.body.scene_id}}.mp4"
+      },
+      "name": "Save to Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [700, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Kling API", "type": "main", "index": 0 }]]
+    },
+    "Kling API": {
+      "main": [[{ "node": "Download Video", "type": "main", "index": 0 }]]
+    },
+    "Download Video": {
+      "main": [[{ "node": "Save to Drive", "type": "main", "index": 0 }]]
+    }
+  }
+}

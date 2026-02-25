@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Checkout — Men's Follicle Science</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .selected-ring { ring: 2px solid #3b82f6; background-color: #eff6ff; }
+    /* Custom Radio Appearance */
+    input[type="radio"]:checked + div { border-color: #3b82f6; background-color: #eff6ff; }
+    input[type="radio"]:checked + div .radio-circle { border-color: #3b82f6; background-color: #3b82f6; }
+    input[type="radio"]:checked + div .radio-circle::after { content: ''; display: block; width: 8px; height: 8px; background: white; border-radius: 50%; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+  <!-- Minimal Header -->
+  <header class="border-b border-slate-200 bg-white py-4">
+    <div class="mx-auto flex max-w-xl items-center justify-between px-6">
+      <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
+        <span class="h-6 w-6 rounded bg-slate-900"></span> MFS Protocol
+      </div>
+      <div class="text-xs font-medium text-slate-400">
+        <span class="text-green-600">🔒 256-Bit SSL Secure</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-xl px-4 py-8">
+    
+    <!-- Progress -->
+    <div class="mb-8 flex items-center justify-between text-xs font-medium text-slate-400">
+      <span>1. Video</span>
+      <span>2. Information</span>
+      <span class="font-bold text-blue-600">3. Secure Checkout</span>
+    </div>
+
+    <h1 class="mb-2 text-2xl font-black text-slate-900">Select Your Supply</h1>
+    <p class="mb-6 text-sm text-slate-500">
+      High demand. Limit 6 bottles per household.
+    </p>
+
+    <!-- Product Selection Form -->
+    <form class="space-y-4">
+      
+      <!-- Option 1: Best Value (6 Bottles) -->
+      <label class="cursor-pointer block relative">
+        <input type="radio" name="bundle" class="peer sr-only" checked>
+        <div class="relative rounded-xl border-2 border-slate-200 bg-white p-4 shadow-sm transition hover:border-blue-400 peer-checked:border-blue-600 peer-checked:bg-blue-50">
+          <!-- Badge -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+            Best Value (Save $235)
+          </div>
+
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <!-- Radio Circle -->
+              <div class="radio-circle flex h-6 w-6 items-center justify-center rounded-full border-2 border-slate-300 bg-white"></div>
+              <div>
+                <div class="font-bold text-slate-900">The Transformation Kit</div>
+                <div class="text-xs text-slate-500">6 Month Supply + <span class="text-green-600 font-bold">Free Gifts</span></div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-bold text-slate-900">$199</div>
+              <div class="text-xs text-slate-400 line-through">$434</div>
+            </div>
+          </div>
+
+          <!-- Bonuses List -->
+          <ul class="mt-4 space-y-1 rounded-lg bg-blue-100/50 p-3 text-xs text-blue-800">
+            <li class="flex items-center gap-2">✅ <strong>Free Scalp Massager</strong> ($20 Value)</li>
+            <li class="flex items-center gap-2">✅ <strong>Free "Unkink" Guide</strong> ($27 Value)</li>
+            <li class="flex items-center gap-2">✅ <strong>Free Shipping</strong></li>
+            <li class="flex items-center gap-2">🔥 <strong>Price: Only $1.10 / Day</strong></li>
+          </ul>
+        </div>
+      </label>
+
+      <!-- Option 2: Most Popular (3 Bottles) -->
+      <label class="cursor-pointer block relative">
+        <input type="radio" name="bundle" class="peer sr-only">
+        <div class="relative rounded-xl border-2 border-slate-200 bg-white p-4 shadow-sm transition hover:border-blue-400 peer-checked:border-blue-600 peer-checked:bg-blue-50">
+           <!-- Badge -->
+           <div class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-slate-900 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+            Most Popular
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="radio-circle flex h-6 w-6 items-center justify-center rounded-full border-2 border-slate-300 bg-white"></div>
+              <div>
+                <div class="font-bold text-slate-900">The Growth Kit</div>
+                <div class="text-xs text-slate-500">3 Month Supply</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-bold text-slate-900">$129</div>
+              <div class="text-xs text-slate-400 line-through">$217</div>
+            </div>
+          </div>
+          <div class="mt-3 text-xs text-slate-500">
+            <span class="text-green-600 font-bold">Free Shipping</span> included.
+          </div>
+        </div>
+      </label>
+
+      <!-- Option 3: Starter (1 Bottle) -->
+      <label class="cursor-pointer block relative">
+        <input type="radio" name="bundle" class="peer sr-only">
+        <div class="relative rounded-xl border-2 border-slate-200 bg-white p-4 shadow-sm transition hover:border-blue-400 peer-checked:border-blue-600 peer-checked:bg-blue-50">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="radio-circle flex h-6 w-6 items-center justify-center rounded-full border-2 border-slate-300 bg-white"></div>
+              <div>
+                <div class="font-bold text-slate-900">Starter Kit</div>
+                <div class="text-xs text-slate-500">1 Month Supply</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-bold text-slate-900">$49</div>
+              <div class="text-xs text-slate-400">+ Shipping</div>
+            </div>
+          </div>
+        </div>
+      </label>
+
+      <!-- Order Bump -->
+      <div class="mt-6 rounded-lg border-2 border-dashed border-yellow-300 bg-yellow-50 p-4">
+        <div class="flex items-start gap-3">
+          <input type="checkbox" class="mt-1 h-5 w-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+          <div>
+            <div class="font-bold text-slate-900 text-sm">Yes, Add "Priority Processing" (+$4.95)</div>
+            <p class="text-xs text-slate-600 leading-snug mt-1">
+              Skip the line! Your order is moved to the front of the queue and ships within 12 hours. Protected by shipping insurance.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button class="mt-8 w-full rounded-xl bg-green-600 py-4 text-xl font-bold text-white shadow-lg transition hover:bg-green-500 hover:shadow-green-500/25">
+        Proceed to Payment &rarr;
+      </button>
+
+      <!-- Guarantee Snippet -->
+      <div class="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500">
+        <svg class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        90-Day "Growth or Competitor Pays" Guarantee
+      </div>
+
+    </form>
+
+    <!-- Social Proof Footer -->
+    <div class="mt-12 border-t border-slate-200 pt-8 text-center">
+      <div class="mx-auto mb-4 flex w-fit -space-x-2">
+        <img class="h-8 w-8 rounded-full ring-2 ring-white" src="https://via.placeholder.com/32" alt=""/>
+        <img class="h-8 w-8 rounded-full ring-2 ring-white" src="https://via.placeholder.com/32" alt=""/>
+        <img class="h-8 w-8 rounded-full ring-2 ring-white" src="https://via.placeholder.com/32" alt=""/>
+      </div>
+      <p class="text-sm font-medium text-slate-900">"My crown filled in by month 3."</p>
+      <p class="text-xs text-slate-500">— Verified Buyer</p>
+    </div>
+
+  </main>
+
+  <footer class="mt-8 border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400">
+    <p>&copy; 2026 Men's Follicle Science.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+# BusyBody App Influencer Outreach\n\n## Status\nInitial setup complete: 20 micro-influencers curated, personalized scripts ready.\n\nFiles:\n- influencers.csv\n- outreach-scripts.md\n\nNext: Generate exec pack & dispatch.
