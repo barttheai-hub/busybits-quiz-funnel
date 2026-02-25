@@ -8,5 +8,6 @@ Queued emails: **0**
 
 ## Execute
 ```bash
-bash builds/busybits-newsletter/sponsor_followup_due_exec_2026-02-24.sh
+DRY_RUN=1 bash builds/busybits-newsletter/sponsor_followup_due_exec_2026-02-24.sh   # preview recipients/subjects only
+bash builds/busybits-newsletter/sponsor_followup_due_exec_2026-02-24.sh             # send for real
 ```

@@ -11,4 +11,4 @@ Total queued emails: **0**
 bash builds/busybits-newsletter/sponsor_send_all_exec_2026-02-24.sh
 ```
 
-This runs both generated scripts in order and skips empty batches automatically.
+This runs all generated send scripts in order (send-now, follow-up-due, contact-research) and skips empty batches automatically.

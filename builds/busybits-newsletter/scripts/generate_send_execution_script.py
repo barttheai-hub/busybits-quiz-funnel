@@ -78,11 +78,16 @@ def write_script(rows: list[dict[str, str]], output: Path, from_identity: str) -
     lines.append("set -euo pipefail")
     lines.append("")
     lines.append(f"FROM={make_bash_string(from_identity)}")
+    lines.append('DRY_RUN=${DRY_RUN:-0}')
     lines.append("")
     lines.append("send_email() {")
     lines.append("  local to=\"$1\"")
     lines.append("  local subject=\"$2\"")
     lines.append("  local body=\"$3\"")
+    lines.append("  if [[ \"$DRY_RUN\" == \"1\" ]]; then")
+    lines.append("    echo \"[DRY RUN] $to | $subject\"")
+    lines.append("    return 0")
+    lines.append("  fi")
     lines.append("  echo \"Sending to $to ...\"")
     lines.append("  cat <<EOF | himalaya message send")
     lines.append("From: $FROM")
@@ -134,7 +139,8 @@ def write_runbook(rows: list[dict[str, str]], output: Path, script_path: Path) -
             "",
             "## Execute",
             "```bash",
-            f"bash {script_path.as_posix()}",
+            f"DRY_RUN=1 bash {script_path.as_posix()}   # preview recipients/subjects only",
+            f"bash {script_path.as_posix()}             # send for real",
             "```",
         ]
     )

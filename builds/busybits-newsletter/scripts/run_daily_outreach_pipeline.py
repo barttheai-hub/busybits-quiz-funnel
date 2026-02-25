@@ -103,7 +103,7 @@ def write_combined_send_runner(
         f"bash {output_script.as_posix()}",
         "```",
         "",
-        "This runs both generated scripts in order and skips empty batches automatically.",
+        "This runs all generated send scripts in order (send-now, follow-up-due, contact-research) and skips empty batches automatically.",
     ]
     output_md.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
 
