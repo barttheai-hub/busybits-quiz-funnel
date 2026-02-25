@@ -13,6 +13,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import subprocess
 from pathlib import Path
 from datetime import datetime
@@ -31,6 +32,36 @@ def count_script_emails(path: Path) -> int:
         if line.strip().startswith("send_email "):
             count += 1
     return count
+
+
+def should_skip_unchanged(state_file: Path, tracker: Path, run_date: str, limit: int) -> bool:
+    if not state_file.exists() or not tracker.exists():
+        return False
+    try:
+        state = json.loads(state_file.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return False
+
+    prev_tracker_mtime_ns = int(state.get("tracker_mtime_ns", 0))
+    prev_run_date = state.get("run_date")
+    prev_limit = int(state.get("limit", -1))
+    current_mtime_ns = tracker.stat().st_mtime_ns
+
+    return (
+        prev_tracker_mtime_ns == current_mtime_ns
+        and prev_run_date == run_date
+        and prev_limit == limit
+    )
+
+
+def write_state(state_file: Path, tracker: Path, run_date: str, limit: int) -> None:
+    payload = {
+        "tracker_mtime_ns": tracker.stat().st_mtime_ns if tracker.exists() else 0,
+        "run_date": run_date,
+        "limit": limit,
+        "updated_at": datetime.now().isoformat(timespec="seconds"),
+    }
+    state_file.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
 def write_combined_send_runner(
@@ -156,6 +187,11 @@ def main() -> None:
         action="store_true",
         help="Log a progress note/task/resource to Mission Control after successful pipeline run.",
     )
+    p.add_argument(
+        "--skip-if-unchanged",
+        action="store_true",
+        help="Skip regeneration when tracker mtime + run-date + limit are unchanged from last run.",
+    )
     args = p.parse_args()
 
     root = Path(args.root)
@@ -163,6 +199,7 @@ def main() -> None:
     run_date = args.date or datetime.now().strftime("%Y-%m-%d")
 
     tracker = root / "sponsorship_outreach_tracker.csv"
+    state_file = root / ".daily_outreach_pipeline_state.json"
     deduped_tracker = root / "sponsorship_outreach_tracker_deduped.csv"
     dedupe_report_csv = root / f"sponsor_tracker_dedupe_report_{run_date}.csv"
     dedupe_report_md = root / f"sponsor_tracker_dedupe_report_{run_date}.md"
@@ -208,6 +245,11 @@ def main() -> None:
     contact_sprint_md = root / f"sponsor_contact_research_sprint_{run_date}.md"
     contact_sprint_copy_csv = root / f"sponsor_contact_research_copy_batch_{run_date}.csv"
     contact_sprint_copy_md = root / f"sponsor_contact_research_copy_batch_{run_date}.md"
+
+    if args.skip_if_unchanged and should_skip_unchanged(state_file, tracker, run_date, args.limit):
+        print("PIPELINE_SKIPPED")
+        print("No changes detected in sponsorship_outreach_tracker.csv for current run date/limit.")
+        return
 
     run([
         "python3",
@@ -496,6 +538,8 @@ def main() -> None:
         str(operator_brief_md),
     ])
 
+    write_state(state_file, tracker, run_date, args.limit)
+
     maybe_log_progress(
         root=root,
         generated_files=[
@@ -544,6 +588,7 @@ def main() -> None:
             kpi_md,
             kpi_json,
             operator_brief_md,
+            state_file,
         ],
         run_date=run_date,
         should_log=args.log_progress,
