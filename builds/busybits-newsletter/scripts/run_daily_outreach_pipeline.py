@@ -113,6 +113,8 @@ def main() -> None:
     operator_brief_md = root / f"sponsor_operator_brief_{run_date}.md"
     contact_sprint_csv = root / f"sponsor_contact_research_sprint_{run_date}.csv"
     contact_sprint_md = root / f"sponsor_contact_research_sprint_{run_date}.md"
+    contact_sprint_copy_csv = root / f"sponsor_contact_research_copy_batch_{run_date}.csv"
+    contact_sprint_copy_md = root / f"sponsor_contact_research_copy_batch_{run_date}.md"
 
     run([
         "python3",
@@ -216,6 +218,17 @@ def main() -> None:
         str(contact_sprint_csv),
         "--output-md",
         str(contact_sprint_md),
+    ])
+
+    run([
+        "python3",
+        str(scripts / "generate_contact_research_copy_batch.py"),
+        "--input",
+        str(contact_sprint_csv),
+        "--output-csv",
+        str(contact_sprint_copy_csv),
+        "--output-md",
+        str(contact_sprint_copy_md),
     ])
 
     run([
@@ -367,6 +380,8 @@ def main() -> None:
             contact_candidates_md,
             contact_sprint_csv,
             contact_sprint_md,
+            contact_sprint_copy_csv,
+            contact_sprint_copy_md,
             send_now_csv,
             send_now_md,
             send_now_copy_csv,
@@ -399,6 +414,7 @@ def main() -> None:
     print(f"Generated contact gap queue: {contact_gap_csv}")
     print(f"Generated contact candidates: {contact_candidates_csv}")
     print(f"Generated contact research sprint: {contact_sprint_csv}")
+    print(f"Generated contact research copy batch: {contact_sprint_copy_csv}")
     print(f"Generated send-now batch: {send_now_csv}")
     print(f"Generated send-now copy batch: {send_now_copy_csv}")
     print(f"Generated follow-up calendar: {followup_calendar_csv}")
