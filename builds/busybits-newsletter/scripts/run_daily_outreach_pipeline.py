@@ -182,6 +182,8 @@ def main() -> None:
     send_now_exec_md = root / f"sponsor_send_now_exec_{run_date}.md"
     followup_due_exec_sh = root / f"sponsor_followup_due_exec_{run_date}.sh"
     followup_due_exec_md = root / f"sponsor_followup_due_exec_{run_date}.md"
+    contact_research_exec_sh = root / f"sponsor_contact_research_exec_{run_date}.sh"
+    contact_research_exec_md = root / f"sponsor_contact_research_exec_{run_date}.md"
     send_all_exec_sh = root / f"sponsor_send_all_exec_{run_date}.sh"
     send_all_exec_md = root / f"sponsor_send_all_exec_{run_date}.md"
     tonight_plan_md = root / f"sponsor_tonight_send_plan_{run_date}.md"
@@ -418,6 +420,17 @@ def main() -> None:
         str(followup_due_exec_md),
     ])
 
+    run([
+        "python3",
+        str(scripts / "generate_send_execution_script.py"),
+        "--input",
+        str(contact_sprint_copy_csv),
+        "--output-script",
+        str(contact_research_exec_sh),
+        "--output-md",
+        str(contact_research_exec_md),
+    ])
+
     write_combined_send_runner(
         run_date=run_date,
         send_now_script=send_now_exec_sh,
@@ -508,6 +521,8 @@ def main() -> None:
             send_now_exec_md,
             followup_due_exec_sh,
             followup_due_exec_md,
+            contact_research_exec_sh,
+            contact_research_exec_md,
             send_all_exec_sh,
             send_all_exec_md,
             tonight_plan_md,
@@ -538,6 +553,7 @@ def main() -> None:
     print(f"Generated follow-up copy batch: {followup_copy_csv}")
     print(f"Generated send-now execution script: {send_now_exec_sh}")
     print(f"Generated follow-up due execution script: {followup_due_exec_sh}")
+    print(f"Generated contact-research execution script: {contact_research_exec_sh}")
     print(f"Generated combined execution script: {send_all_exec_sh}")
     print(f"Generated tonight send plan: {tonight_plan_md}")
     print(f"Generated tonight contact fill sheet: {tonight_fill_csv}")
