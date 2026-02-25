@@ -23,6 +23,78 @@ def run(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True)
 
 
+def count_script_emails(path: Path) -> int:
+    if not path.exists():
+        return 0
+    count = 0
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip().startswith("send_email "):
+            count += 1
+    return count
+
+
+def write_combined_send_runner(
+    run_date: str,
+    send_now_script: Path,
+    followup_due_script: Path,
+    output_script: Path,
+    output_md: Path,
+) -> None:
+    send_now_count = count_script_emails(send_now_script)
+    followup_count = count_script_emails(followup_due_script)
+    total = send_now_count + followup_count
+
+    script_lines = [
+        "#!/usr/bin/env bash",
+        "set -euo pipefail",
+        "",
+        f"echo \"BusyBits combined sponsor send run — {run_date}\"",
+        f"echo \"Queued emails: send-now={send_now_count}, follow-up-due={followup_count}, total={total}\"",
+        "",
+    ]
+
+    if send_now_count > 0:
+        script_lines.extend([
+            f"echo \"[1/2] Sending send-now batch ({send_now_count})\"",
+            f"bash {send_now_script.as_posix()}",
+            "",
+        ])
+    else:
+        script_lines.append('echo "[1/2] Send-now batch empty — skipping."')
+        script_lines.append("")
+
+    if followup_count > 0:
+        script_lines.extend([
+            f"echo \"[2/2] Sending follow-up due batch ({followup_count})\"",
+            f"bash {followup_due_script.as_posix()}",
+            "",
+        ])
+    else:
+        script_lines.append('echo "[2/2] Follow-up due batch empty — skipping."')
+        script_lines.append("")
+
+    script_lines.append('echo "Combined sponsor send run complete."')
+    output_script.write_text("\n".join(script_lines) + "\n", encoding="utf-8")
+    output_script.chmod(0o755)
+
+    md_lines = [
+        "# Sponsor Combined Send Runbook",
+        "",
+        f"Date: **{run_date}**",
+        f"Total queued emails: **{total}**",
+        f"- Send-now: **{send_now_count}**",
+        f"- Follow-up due: **{followup_count}**",
+        "",
+        "## Execution",
+        "```bash",
+        f"bash {output_script.as_posix()}",
+        "```",
+        "",
+        "This runs both generated scripts in order and skips empty batches automatically.",
+    ]
+    output_md.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
+
+
 def maybe_log_progress(root: Path, generated_files: list[Path], run_date: str, should_log: bool) -> None:
     if not should_log:
         return
@@ -110,6 +182,8 @@ def main() -> None:
     send_now_exec_md = root / f"sponsor_send_now_exec_{run_date}.md"
     followup_due_exec_sh = root / f"sponsor_followup_due_exec_{run_date}.sh"
     followup_due_exec_md = root / f"sponsor_followup_due_exec_{run_date}.md"
+    send_all_exec_sh = root / f"sponsor_send_all_exec_{run_date}.sh"
+    send_all_exec_md = root / f"sponsor_send_all_exec_{run_date}.md"
     tonight_plan_md = root / f"sponsor_tonight_send_plan_{run_date}.md"
     tonight_fill_csv = root / f"sponsor_tonight_contact_fill_{run_date}.csv"
     kpi_md = root / "sponsor_outreach_kpi_snapshot.md"
@@ -344,6 +418,14 @@ def main() -> None:
         str(followup_due_exec_md),
     ])
 
+    write_combined_send_runner(
+        run_date=run_date,
+        send_now_script=send_now_exec_sh,
+        followup_due_script=followup_due_exec_sh,
+        output_script=send_all_exec_sh,
+        output_md=send_all_exec_md,
+    )
+
     run([
         "python3",
         str(scripts / "generate_tonight_send_plan.py"),
@@ -426,6 +508,8 @@ def main() -> None:
             send_now_exec_md,
             followup_due_exec_sh,
             followup_due_exec_md,
+            send_all_exec_sh,
+            send_all_exec_md,
             tonight_plan_md,
             tonight_fill_csv,
             kpi_md,
@@ -454,6 +538,7 @@ def main() -> None:
     print(f"Generated follow-up copy batch: {followup_copy_csv}")
     print(f"Generated send-now execution script: {send_now_exec_sh}")
     print(f"Generated follow-up due execution script: {followup_due_exec_sh}")
+    print(f"Generated combined execution script: {send_all_exec_sh}")
     print(f"Generated tonight send plan: {tonight_plan_md}")
     print(f"Generated tonight contact fill sheet: {tonight_fill_csv}")
     print(f"Generated KPI snapshot: {kpi_md}")
