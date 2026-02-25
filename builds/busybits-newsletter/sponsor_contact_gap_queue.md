@@ -1,7 +1,7 @@
 # Sponsor Contact Gap Queue (2026-02-24)
 
 Generated from: `builds/busybits-newsletter/sponsor_outreach_execution_board.csv`
-Rows requiring contact enrichment: **15**
+Rows requiring contact enrichment: **20**
 
 1. **AG1** (P1 · send 2026-02-25)
    - Missing: contact_name, contact_email, contact_linkedin
@@ -92,3 +92,33 @@ Rows requiring contact enrichment: **15**
    - Role target: Partnerships
    - Search query: `Huel Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Huel+Partnerships+partnerships+email+linkedin
+
+16. **Ketone-IQ** (P2 · send 2026-02-27)
+   - Missing: contact_name, contact_email, contact_linkedin
+   - Role target: Partnerships
+   - Search query: `Ketone-IQ Partnerships partnerships email linkedin`
+   - Search URL: https://www.google.com/search?q=Ketone-IQ+Partnerships+partnerships+email+linkedin
+
+17. **Magic Spoon** (P2 · send 2026-02-27)
+   - Missing: contact_name, contact_email, contact_linkedin
+   - Role target: Partnerships
+   - Search query: `Magic Spoon Partnerships partnerships email linkedin`
+   - Search URL: https://www.google.com/search?q=Magic+Spoon+Partnerships+partnerships+email+linkedin
+
+18. **MudWtr** (P2 · send 2026-02-27)
+   - Missing: contact_name, contact_email, contact_linkedin
+   - Role target: Partnerships
+   - Search query: `MudWtr Partnerships partnerships email linkedin`
+   - Search URL: https://www.google.com/search?q=MudWtr+Partnerships+partnerships+email+linkedin
+
+19. **Arc** (P3 · send 2026-03-03)
+   - Missing: contact_name, contact_email, contact_linkedin
+   - Role target: Partnerships
+   - Search query: `Arc Partnerships partnerships email linkedin`
+   - Search URL: https://www.google.com/search?q=Arc+Partnerships+partnerships+email+linkedin
+
+20. **Brex** (P3 · send 2026-03-03)
+   - Missing: contact_name, contact_email, contact_linkedin
+   - Role target: Partnerships
+   - Search query: `Brex Partnerships partnerships email linkedin`
+   - Search URL: https://www.google.com/search?q=Brex+Partnerships+partnerships+email+linkedin

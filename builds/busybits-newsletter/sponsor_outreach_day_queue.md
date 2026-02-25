@@ -1,7 +1,7 @@
 # BusyBits Daily Sponsor Queue (2026-02-24)
 
 Generated from: `builds/busybits-newsletter/sponsorship_outreach_tracker_deduped.csv`
-Total queued today: **15**
+Total queued today: **20**
 
 ## Queue
 
@@ -139,3 +139,48 @@ Total queued today: **15**
    - Next action: Find partnerships lead + prep Template A
    - Research prompt: Find Huel Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
    - Follow-up plan: Follow-up #1: +3 days after Fri; Follow-up #2: +7 days after Fri
+
+16. **Ketone-IQ** (P2 · Consumables)
+   - Status: Research contact
+   - Template: Template A
+   - Target day: Fri
+   - Angle: Cognitive performance stack
+   - Next action: Find partnerships lead + prep Template A
+   - Research prompt: Find Ketone-IQ Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Fri; Follow-up #2: +7 days after Fri
+
+17. **Magic Spoon** (P2 · Consumables)
+   - Status: Research contact
+   - Template: Template A
+   - Target day: Fri
+   - Angle: High-protein convenience breakfast
+   - Next action: Find partnerships lead + prep Template A
+   - Research prompt: Find Magic Spoon Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Fri; Follow-up #2: +7 days after Fri
+
+18. **MudWtr** (P2 · Consumables)
+   - Status: Research contact
+   - Template: Template A
+   - Target day: Fri
+   - Angle: Focus without caffeine crash
+   - Next action: Find partnerships lead + prep Template A
+   - Research prompt: Find MudWtr Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Fri; Follow-up #2: +7 days after Fri
+
+19. **Arc** (P3 · Fintech)
+   - Status: Research contact
+   - Template: Template B
+   - Target day: Next Tue
+   - Angle: Cash yield + runway management
+   - Next action: Find partnerships lead + prep Template B
+   - Research prompt: Find Arc Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Next Tue; Follow-up #2: +7 days after Next Tue
+
+20. **Brex** (P3 · Fintech)
+   - Status: Research contact
+   - Template: Template B
+   - Target day: Next Tue
+   - Angle: Startup card + treasury stack
+   - Next action: Find partnerships lead + prep Template B
+   - Research prompt: Find Brex Partnerships decision-maker (name + work email + LinkedIn). Prioritize Head/Director of Partnerships, then Growth Marketing.
+   - Follow-up plan: Follow-up #1: +3 days after Next Tue; Follow-up #2: +7 days after Next Tue

@@ -1,7 +1,7 @@
 # Sponsor Outreach Execution Board (2026-02-24)
 
 Generated from: `builds/busybits-newsletter/sponsor_outreach_day_queue.csv`
-Rows: **15** (Ready: **0**, Research needed: **15**)
+Rows: **20** (Ready: **0**, Research needed: **20**)
 
 ## How to use
 1. Fill contact_name/contact_email/contact_linkedin for research rows.
@@ -85,3 +85,28 @@ Rows: **15** (Ready: **0**, Research needed: **15**)
    - Send: 2026-02-27 | F/U1: 2026-03-02 | F/U2: 2026-03-06
    - Angle: Convenience nutrition for builders
    - Next action: Find partnerships lead + prep Template A
+
+16. **Ketone-IQ** (P2 · Research contact)
+   - Send: 2026-02-27 | F/U1: 2026-03-02 | F/U2: 2026-03-06
+   - Angle: Cognitive performance stack
+   - Next action: Find partnerships lead + prep Template A
+
+17. **Magic Spoon** (P2 · Research contact)
+   - Send: 2026-02-27 | F/U1: 2026-03-02 | F/U2: 2026-03-06
+   - Angle: High-protein convenience breakfast
+   - Next action: Find partnerships lead + prep Template A
+
+18. **MudWtr** (P2 · Research contact)
+   - Send: 2026-02-27 | F/U1: 2026-03-02 | F/U2: 2026-03-06
+   - Angle: Focus without caffeine crash
+   - Next action: Find partnerships lead + prep Template A
+
+19. **Arc** (P3 · Research contact)
+   - Send: 2026-03-03 | F/U1: 2026-03-06 | F/U2: 2026-03-10
+   - Angle: Cash yield + runway management
+   - Next action: Find partnerships lead + prep Template B
+
+20. **Brex** (P3 · Research contact)
+   - Send: 2026-03-03 | F/U1: 2026-03-06 | F/U2: 2026-03-10
+   - Angle: Startup card + treasury stack
+   - Next action: Find partnerships lead + prep Template B
