@@ -5,23 +5,23 @@ Outputs:
 1) Unique contact candidates CSV (deduped by company+email and email globally)
 2) Net-new fill queue CSV for tracker rows with status=Research Contact and missing contact_email
 3) Markdown summary report with counts
+
+Default behavior is date-aware:
+- Input candidates defaults to latest `sponsor_contact_candidates_*.csv`
+- Output filenames use `--date` (default: today)
 """
 
 from __future__ import annotations
 
+import argparse
 import csv
+import datetime as dt
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "builds" / "busybits-newsletter"
-
-CANDIDATES_IN = BUILD / "sponsor_contact_candidates_2026-02-24.csv"
-TRACKER_IN = BUILD / "sponsorship_outreach_tracker.csv"
-
-CANDIDATES_OUT = BUILD / "sponsor_contact_candidates_deduped_2026-02-25.csv"
-FILL_QUEUE_OUT = BUILD / "sponsor_tonight_contact_fill_2026-02-25.csv"
-REPORT_OUT = BUILD / "sponsor_contact_dedupe_summary_2026-02-25.md"
+TRACKER_IN_DEFAULT = BUILD / "sponsorship_outreach_tracker.csv"
 
 
 def norm(s: str) -> str:
@@ -52,15 +52,49 @@ def write_csv(path: Path, rows: list[dict[str, str]], fieldnames: list[str]) -> 
         w.writerows(rows)
 
 
+def safe_float(value: str) -> float:
+    try:
+        return float((value or "").strip())
+    except Exception:
+        return 0.0
+
+
+def pick_latest_candidates_csv() -> Path:
+    files = sorted(BUILD.glob("sponsor_contact_candidates_*.csv"))
+    if not files:
+        raise FileNotFoundError("No sponsor_contact_candidates_*.csv found in builds/busybits-newsletter")
+    return files[-1]
+
+
+def parse_args() -> argparse.Namespace:
+    today = dt.date.today().isoformat()
+    p = argparse.ArgumentParser(description="Deduplicate sponsor contacts + build fill queue")
+    p.add_argument("--date", default=today, help="Date tag for output files (YYYY-MM-DD). Default: today")
+    p.add_argument("--candidates-in", default="", help="Input candidates CSV. Default: latest sponsor_contact_candidates_*.csv")
+    p.add_argument("--tracker-in", default=str(TRACKER_IN_DEFAULT), help="Input tracker CSV")
+    p.add_argument("--out-dir", default=str(BUILD), help="Output directory")
+    return p.parse_args()
+
+
 def main() -> None:
-    candidates = read_csv(CANDIDATES_IN)
-    tracker = read_csv(TRACKER_IN)
+    args = parse_args()
 
-    tracker_by_company: dict[str, dict[str, str]] = {
-        company_key(r.get("company", "")): r for r in tracker
+    out_dir = Path(args.out_dir)
+    candidates_in = Path(args.candidates_in) if args.candidates_in else pick_latest_candidates_csv()
+    tracker_in = Path(args.tracker_in)
+
+    candidates_out = out_dir / f"sponsor_contact_candidates_deduped_{args.date}.csv"
+    fill_queue_out = out_dir / f"sponsor_tonight_contact_fill_{args.date}.csv"
+    report_out = out_dir / f"sponsor_contact_dedupe_summary_{args.date}.md"
+
+    candidates = read_csv(candidates_in)
+    tracker = read_csv(tracker_in)
+
+    tracker_emails = {
+        email_key(r.get("contact_email", ""))
+        for r in tracker
+        if r.get("contact_email", "").strip()
     }
-
-    tracker_emails = {email_key(r.get("contact_email", "")) for r in tracker if r.get("contact_email", "").strip()}
 
     # Deduplicate candidates: first by company+email, then by global email reuse.
     seen_pair: set[tuple[str, str]] = set()
@@ -106,11 +140,7 @@ def main() -> None:
             continue
 
         # Prefer highest confidence if numeric.
-        options = sorted(
-            options,
-            key=lambda x: float(x.get("confidence", "0") or 0),
-            reverse=True,
-        )
+        options = sorted(options, key=lambda x: safe_float(x.get("confidence", "0")), reverse=True)
         pick = options[0]
         candidate_email = email_key(pick.get("contact_candidate", ""))
 
@@ -132,16 +162,17 @@ def main() -> None:
         )
 
     # Sort for operator execution speed.
-    fill_queue.sort(key=lambda r: (norm(r.get("priority", "")), norm(r.get("company", ""))))
+    priority_rank = {"high": 0, "medium": 1, "low": 2}
+    fill_queue.sort(key=lambda r: (priority_rank.get(norm(r.get("priority", "")), 9), norm(r.get("company", ""))))
 
     write_csv(
-        CANDIDATES_OUT,
+        candidates_out,
         deduped_candidates,
         ["company", "domain", "contact_candidate", "source", "source_url", "confidence", "reason"],
     )
 
     write_csv(
-        FILL_QUEUE_OUT,
+        fill_queue_out,
         fill_queue,
         [
             "company",
@@ -156,19 +187,22 @@ def main() -> None:
         ],
     )
 
-    with REPORT_OUT.open("w", encoding="utf-8") as f:
+    with report_out.open("w", encoding="utf-8") as f:
         f.write("# Sponsor Contact Deduplication Summary\n\n")
+        f.write(f"- Run date tag: {args.date}\n")
+        f.write(f"- Candidate input file: `{candidates_in.name}`\n")
+        f.write(f"- Tracker input file: `{tracker_in.name}`\n")
         f.write(f"- Candidate input rows: {len(candidates)}\n")
         f.write(f"- Candidate rows after dedupe: {len(deduped_candidates)}\n")
         f.write(f"- Dropped duplicate company+email rows: {dropped_pair}\n")
         f.write(f"- Dropped duplicate global email rows: {dropped_email_global}\n")
         f.write(f"- Tracker rows eligible for contact fill queue: {len(fill_queue)}\n")
-        f.write(f"- Output candidates: `{CANDIDATES_OUT.name}`\n")
-        f.write(f"- Output fill queue: `{FILL_QUEUE_OUT.name}`\n")
+        f.write(f"- Output candidates: `{candidates_out.name}`\n")
+        f.write(f"- Output fill queue: `{fill_queue_out.name}`\n")
 
-    print(str(CANDIDATES_OUT))
-    print(str(FILL_QUEUE_OUT))
-    print(str(REPORT_OUT))
+    print(str(candidates_out))
+    print(str(fill_queue_out))
+    print(str(report_out))
 
 
 if __name__ == "__main__":
