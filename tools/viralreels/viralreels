@@ -1,0 +1,584 @@
+#!/usr/bin/env python3
+"""
+ViralReels Analyzer CLI
+Scrapes and analyzes viral TikTok/Instagram Reels content.
+"""
+
+import argparse
+import json
+import os
+import re
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
+import yaml
+
+# Configuration
+DEFAULT_CONFIG = {
+    "platforms": {
+        "tiktok": {
+            "enabled": True,
+            "max_results": 50,
+        },
+        "instagram": {
+            "enabled": True,
+            "max_results": 50,
+        }
+    },
+    "analysis": {
+        "hooks": True,
+        "visuals": True,
+        "ideas": True,
+        "format": True,
+        "conversions": True,
+    },
+    "output": {
+        "format": "json",
+        "directory": "./output"
+    }
+}
+
+
+class ViralReelsAnalyzer:
+    """Main analyzer class for viral video content."""
+    
+    def __init__(self, config_path: Optional[str] = None):
+        self.config = self._load_config(config_path)
+        self.results = []
+        
+    def _load_config(self, config_path: Optional[str]) -> dict:
+        """Load configuration from file or use defaults."""
+        if config_path and Path(config_path).exists():
+            with open(config_path, 'r') as f:
+                return yaml.safe_load(f)
+        return DEFAULT_CONFIG
+    
+    def scrape_tiktok(self, niche: str, limit: int = 50) -> List[Dict]:
+        """Scrape TikTok videos by hashtag using yt-dlp."""
+        print(f"🔍 Scraping TikTok for niche: '{niche}' (limit: {limit})")
+        
+        videos = []
+        try:
+            # Use yt-dlp to search and extract metadata
+            cmd = [
+                "yt-dlp",
+                f"https://www.tiktok.com/tag/{niche.replace(' ', '')}",
+                "--flat-playlist",
+                "--playlist-end", str(limit),
+                "--dump-json",
+                "--quiet"
+            ]
+            
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            
+            if result.returncode == 0:
+                # Parse JSON lines
+                for line in result.stdout.strip().split('\n'):
+                    if line:
+                        try:
+                            data = json.loads(line)
+                            video = {
+                                "platform": "tiktok",
+                                "id": data.get("id"),
+                                "url": data.get("webpage_url"),
+                                "title": data.get("title", ""),
+                                "description": data.get("description", ""),
+                                "view_count": data.get("view_count", 0),
+                                "like_count": data.get("like_count", 0),
+                                "comment_count": data.get("comment_count", 0),
+                                "share_count": data.get("repost_count", 0),
+                                "duration": data.get("duration", 0),
+                                "uploader": data.get("uploader", ""),
+                                "upload_date": data.get("upload_date", ""),
+                                "hashtags": self._extract_hashtags(data.get("description", ""))
+                            }
+                            videos.append(video)
+                        except json.JSONDecodeError:
+                            continue
+                            
+            print(f"✅ Scraped {len(videos)} TikTok videos")
+            
+        except subprocess.TimeoutExpired:
+            print("⚠️ TikTok scraping timed out")
+        except FileNotFoundError:
+            print("⚠️ yt-dlp not installed. Run: pip install yt-dlp")
+        except Exception as e:
+            print(f"⚠️ TikTok scraping error: {e}")
+            
+        return videos
+    
+    def scrape_instagram(self, niche: str, limit: int = 50) -> List[Dict]:
+        """Scrape Instagram Reels by hashtag using instaloader."""
+        print(f"🔍 Scraping Instagram for niche: '{niche}' (limit: {limit})")
+        
+        videos = []
+        try:
+            # Use instaloader to get reels by hashtag
+            # Note: This requires instaloader to be installed
+            import instaloader
+            
+            L = instaloader.Instaloader(
+                quiet=True,
+                download_pictures=False,
+                download_videos=False,
+                download_video_thumbnails=False,
+                download_geotags=False,
+                download_comments=False,
+                save_metadata=False,
+                compress_json=False
+            )
+            
+            # Get hashtag posts
+            hashtag = instaloader.Hashtag.from_name(L.context, niche.replace(' ', ''))
+            
+            count = 0
+            for post in hashtag.get_posts():
+                if count >= limit:
+                    break
+                    
+                # Only include reels (short videos)
+                if post.typename == "GraphVideo" and post.is_video:
+                    video = {
+                        "platform": "instagram",
+                        "id": post.shortcode,
+                        "url": f"https://instagram.com/reel/{post.shortcode}",
+                        "title": post.title or "",
+                        "description": post.caption or "",
+                        "view_count": post.video_view_count or 0,
+                        "like_count": post.likes,
+                        "comment_count": post.comments,
+                        "share_count": 0,  # Not available via instaloader
+                        "duration": post.video_duration or 0,
+                        "uploader": post.owner_username,
+                        "upload_date": post.date_local.isoformat() if post.date_local else "",
+                        "hashtags": post.caption_hashtags if post.caption else []
+                    }
+                    videos.append(video)
+                    count += 1
+                    
+            print(f"✅ Scraped {len(videos)} Instagram Reels")
+            
+        except ImportError:
+            print("⚠️ instaloader not installed. Run: pip install instaloader")
+        except Exception as e:
+            print(f"⚠️ Instagram scraping error: {e}")
+            
+        return videos
+    
+    def _extract_hashtags(self, text: str) -> List[str]:
+        """Extract hashtags from text."""
+        return re.findall(r'#(\w+)', text)
+    
+    def calculate_engagement_score(self, video: Dict) -> float:
+        """Calculate engagement score (rule-based, no AI)."""
+        views = video.get("view_count", 0)
+        likes = video.get("like_count", 0)
+        comments = video.get("comment_count", 0)
+        shares = video.get("share_count", 0)
+        
+        if views == 0:
+            return 0.0
+            
+        # Engagement rate formula: (likes + comments*2 + shares*3) / views * 100
+        engagement = (likes + comments * 2 + shares * 3) / views * 100
+        return round(engagement, 2)
+    
+    def analyze_hooks(self, video: Dict) -> Dict:
+        """Analyze video hooks/patterns in captions."""
+        description = video.get("description", "")
+        title = video.get("title", "")
+        text = f"{title} {description}".lower()
+        
+        # Hook patterns (rule-based detection)
+        patterns = {
+            "question": bool(re.search(r'^(what|why|how|when|where|who|is it|did you)', text)),
+            "number_list": bool(re.search(r'(\d+\s+ways|\d+\s+tips|\d+\s+things|\d+\s+reasons)', text)),
+            "story": bool(re.search(r'(story time| pov|day in the life|i was|my \w+ when)', text)),
+            "controversy": bool(re.search(r'(unpopular opinion|hot take|controversial|debate)', text)),
+            "transformation": bool(re.search(r'(before.*after|transformation|change|results)', text)),
+            "tutorial": bool(re.search(r'(how to|tutorial|learn|guide|steps to)', text)),
+            "reaction": bool(re.search(r'(reaction|respond|reply to|duet|stitch)', text)),
+        }
+        
+        # Detect if caption has strong CTA
+        has_cta = bool(re.search(r'(follow|like|comment|share|save|link in bio|shop|buy)', text))
+        
+        return {
+            "detected_patterns": [k for k, v in patterns.items() if v],
+            "has_cta": has_cta,
+            "caption_length": len(description),
+            "hook_score": sum(patterns.values()) + (1 if has_cta else 0)
+        }
+    
+    def analyze_format(self, video: Dict) -> Dict:
+        """Analyze video format characteristics."""
+        duration = video.get("duration", 0)
+        
+        # Categorize video length
+        if duration <= 15:
+            length_category = "short"
+        elif duration <= 30:
+            length_category = "medium"
+        elif duration <= 60:
+            length_category = "long"
+        else:
+            length_category = "very_long"
+            
+        # Optimal length for engagement (15-30s typically performs best)
+        optimal_length = 15 <= duration <= 30
+        
+        return {
+            "duration_seconds": duration,
+            "length_category": length_category,
+            "optimal_length": optimal_length,
+            "format_score": 3 if optimal_length else (2 if length_category == "short" else 1)
+        }
+    
+    def analyze_conversions(self, video: Dict) -> Dict:
+        """Analyze conversion potential (shop links, CTAs, etc)."""
+        description = video.get("description", "")
+        text = description.lower()
+        
+        # Check for conversion signals
+        signals = {
+            "shop_link": bool(re.search(r'(shop.*link|link.*shop|shop now)', text)),
+            "bio_link": bool(re.search(r'(link in bio|bio.*link)', text)),
+            "product_mention": bool(re.search(r'(product|item|get yours|available)', text)),
+            "price_mention": bool(re.search(r'([$£€]\d+|\d+\s*(usd|gbp|eur))', text)),
+            "discount": bool(re.search(r'(discount|sale|%\s*off|code|coupon)', text)),
+            "urgency": bool(re.search(r'(limited|hurry|before.*gone|last chance)', text)),
+        }
+        
+        return {
+            "conversion_signals": {k: v for k, v in signals.items()},
+            "conversion_score": sum(signals.values()),
+            "has_monetization_intent": sum(signals.values()) >= 2
+        }
+    
+    def analyze_ideas(self, video: Dict) -> Dict:
+        """Extract content ideas and structure."""
+        description = video.get("description", "")
+        hashtags = video.get("hashtags", [])
+        
+        # Extract main topic from hashtags
+        main_topics = hashtags[:5] if hashtags else []
+        
+        # Detect content type
+        content_types = []
+        text = description.lower()
+        
+        if any(x in text for x in ["tutorial", "how to", "steps", "guide"]):
+            content_types.append("educational")
+        if any(x in text for x in ["story", "pov", "day in", "my life"]):
+            content_types.append("lifestyle")
+        if any(x in text for x in ["review", "honest", "opinion", "vs", "compare"]):
+            content_types.append("review")
+        if any(x in text for x in ["funny", "lol", "haha", "comedy", "meme"]):
+            content_types.append("entertainment")
+        if any(x in text for x in ["asmr", "satisfying", "oddly", "relaxing"]):
+            content_types.append("sensory")
+            
+        return {
+            "main_topics": main_topics,
+            "content_types": content_types or ["general"],
+            "hashtag_count": len(hashtags),
+            "idea_score": len(content_types) + len(main_topics)
+        }
+    
+    def analyze_visuals(self, video: Dict) -> Dict:
+        """Analyze visual elements (text-based heuristics)."""
+        description = video.get("description", "")
+        title = video.get("title", "")
+        text = f"{title} {description}".lower()
+        
+        # Detect visual patterns mentioned in captions
+        visual_elements = {
+            "text_overlay": bool(re.search(r'(text on screen|caption|subtitle|on screen text)', text)),
+            "close_up": bool(re.search(r'(close up|macro|detail shot)', text)),
+            "transformation": bool(re.search(r'(before.*after|transformation|reveal)', text)),
+            "process": bool(re.search(r'(process|making of|behind the scenes|bts)', text)),
+            "reaction": bool(re.search(r'(reaction face|facial|expression)', text)),
+            "greenscreen": bool(re.search(r'(green screen|greenscreen|chromakey)', text)),
+        }
+        
+        return {
+            "visual_elements": {k: v for k, v in visual_elements.items()},
+            "visual_score": sum(visual_elements.values())
+        }
+    
+    def analyze_videos(self, videos: List[Dict], analysis_types: List[str]) -> List[Dict]:
+        """Run analysis on all videos."""
+        analyzed = []
+        
+        for video in videos:
+            result = video.copy()
+            
+            # Always calculate engagement score
+            result["engagement_score"] = self.calculate_engagement_score(video)
+            result["analysis"] = {}
+            
+            if "hooks" in analysis_types:
+                result["analysis"]["hooks"] = self.analyze_hooks(video)
+            if "format" in analysis_types:
+                result["analysis"]["format"] = self.analyze_format(video)
+            if "conversions" in analysis_types:
+                result["analysis"]["conversions"] = self.analyze_conversions(video)
+            if "ideas" in analysis_types:
+                result["analysis"]["ideas"] = self.analyze_ideas(video)
+            if "visuals" in analysis_types:
+                result["analysis"]["visuals"] = self.analyze_visuals(video)
+            
+            # Calculate overall virality score (0-100)
+            scores = [
+                result["engagement_score"] * 2,  # Weight engagement heavily
+            ]
+            
+            if "hooks" in analysis_types:
+                scores.append(result["analysis"]["hooks"].get("hook_score", 0) * 5)
+            if "format" in analysis_types:
+                scores.append(result["analysis"]["format"].get("format_score", 0) * 5)
+            if "conversions" in analysis_types:
+                scores.append(result["analysis"]["conversions"].get("conversion_score", 0) * 3)
+            if "ideas" in analysis_types:
+                scores.append(result["analysis"]["ideas"].get("idea_score", 0) * 2)
+            if "visuals" in analysis_types:
+                scores.append(result["analysis"]["visuals"].get("visual_score", 0) * 3)
+                
+            result["virality_score"] = min(100, round(sum(scores) / len(scores) if scores else 0, 1))
+            
+            analyzed.append(result)
+        
+        # Sort by virality score
+        analyzed.sort(key=lambda x: x["virality_score"], reverse=True)
+        return analyzed
+    
+    def generate_report(self, analyzed_videos: List[Dict], niche: str, platform: str) -> Dict:
+        """Generate analysis report."""
+        if not analyzed_videos:
+            return {"error": "No videos analyzed"}
+        
+        total_videos = len(analyzed_videos)
+        avg_engagement = sum(v["engagement_score"] for v in analyzed_videos) / total_videos
+        avg_virality = sum(v["virality_score"] for v in analyzed_videos) / total_videos
+        
+        # Aggregate patterns
+        all_hooks = []
+        all_formats = []
+        all_ideas = []
+        conversion_count = 0
+        
+        for v in analyzed_videos:
+            if "hooks" in v.get("analysis", {}):
+                all_hooks.extend(v["analysis"]["hooks"].get("detected_patterns", []))
+            if "format" in v.get("analysis", {}):
+                all_formats.append(v["analysis"]["format"].get("length_category"))
+            if "ideas" in v.get("analysis", {}):
+                all_ideas.extend(v["analysis"]["ideas"].get("content_types", []))
+            if "conversions" in v.get("analysis", {}):
+                if v["analysis"]["conversions"].get("has_monetization_intent"):
+                    conversion_count += 1
+        
+        from collections import Counter
+        
+        report = {
+            "generated_at": datetime.now().isoformat(),
+            "niche": niche,
+            "platform": platform,
+            "summary": {
+                "total_videos_analyzed": total_videos,
+                "average_engagement_rate": round(avg_engagement, 2),
+                "average_virality_score": round(avg_virality, 1),
+                "top_performer_url": analyzed_videos[0]["url"] if analyzed_videos else None,
+                "monetization_rate": round(conversion_count / total_videos * 100, 1)
+            },
+            "patterns": {
+                "top_hooks": Counter(all_hooks).most_common(5),
+                "optimal_formats": Counter(all_formats).most_common(3),
+                "content_types": Counter(all_ideas).most_common(5)
+            },
+            "top_videos": analyzed_videos[:10],
+            "insights": self._generate_insights(analyzed_videos, all_hooks, all_formats)
+        }
+        
+        return report
+    
+    def _generate_insights(self, videos: List[Dict], hooks: List[str], formats: List[str]) -> List[str]:
+        """Generate actionable insights from analysis."""
+        insights = []
+        
+        if not videos:
+            return insights
+        
+        # Hook insights
+        if hooks:
+            from collections import Counter
+            top_hook = Counter(hooks).most_common(1)[0][0]
+            insights.append(f"Most effective hook type: '{top_hook}' - incorporate this pattern in your content")
+        
+        # Format insights
+        short_count = sum(1 for v in videos if v.get("analysis", {}).get("format", {}).get("length_category") == "short")
+        if short_count / len(videos) > 0.5:
+            insights.append("Short-form content (≤15s) dominates this niche - keep videos concise")
+        
+        # Engagement insights
+        high_engagement = [v for v in videos if v["engagement_score"] > 5]
+        if high_engagement:
+            insights.append(f"{len(high_engagement)} videos achieved 5%+ engagement - study their hooks and CTAs")
+        
+        # Conversion insights
+        monetized = [v for v in videos if v.get("analysis", {}).get("conversions", {}).get("has_monetization_intent")]
+        if monetized:
+            insights.append(f"{len(monetized)} videos show monetization intent - opportunity for affiliate/promo content")
+        
+        return insights
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="ViralReels Analyzer - Scrape and analyze viral TikTok/IG Reels",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s --niche "fitness" --platform tiktok --analyze hooks --top 50
+  %(prog)s --niche "hair loss" --platform instagram --analyze all --top 100
+  %(prog)s --niche "productivity" --platform both --analyze conversions --output report.json
+        """
+    )
+    
+    parser.add_argument("--niche", "-n", required=True, help="Niche/topic to search for (e.g., 'fitness', 'hair loss')")
+    parser.add_argument("--platform", "-p", choices=["tiktok", "instagram", "both"], default="both",
+                       help="Platform to scrape (default: both)")
+    parser.add_argument("--analyze", "-a", 
+                       choices=["hooks", "visuals", "ideas", "format", "conversions", "all"],
+                       default="all", help="Analysis type (default: all)")
+    parser.add_argument("--top", "-t", type=int, default=50, help="Number of videos to analyze (default: 50)")
+    parser.add_argument("--output", "-o", help="Output file path (default: auto-generated)")
+    parser.add_argument("--config", "-c", help="Path to config.yaml file")
+    parser.add_argument("--format", "-f", choices=["json", "md"], default="json", help="Output format")
+    
+    args = parser.parse_args()
+    
+    print(f"🚀 ViralReels Analyzer")
+    print(f"   Niche: {args.niche}")
+    print(f"   Platform: {args.platform}")
+    print(f"   Analysis: {args.analyze}")
+    print(f"   Limit: {args.top}")
+    print()
+    
+    # Initialize analyzer
+    analyzer = ViralReelsAnalyzer(args.config)
+    
+    # Determine analysis types
+    if args.analyze == "all":
+        analysis_types = ["hooks", "visuals", "ideas", "format", "conversions"]
+    else:
+        analysis_types = [args.analyze]
+    
+    # Scrape videos
+    all_videos = []
+    
+    if args.platform in ["tiktok", "both"]:
+        videos = analyzer.scrape_tiktok(args.niche, args.top)
+        all_videos.extend(videos)
+    
+    if args.platform in ["instagram", "both"]:
+        videos = analyzer.scrape_instagram(args.niche, args.top)
+        all_videos.extend(videos)
+    
+    if not all_videos:
+        print("❌ No videos scraped. Check your internet connection and API access.")
+        sys.exit(1)
+    
+    print(f"📊 Analyzing {len(all_videos)} videos...")
+    
+    # Analyze videos
+    analyzed = analyzer.analyze_videos(all_videos, analysis_types)
+    
+    # Generate report
+    report = analyzer.generate_report(analyzed, args.niche, args.platform)
+    
+    # Determine output path
+    if args.output:
+        output_path = args.output
+    else:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = f"viralreels_{args.niche.replace(' ', '_')}_{timestamp}.{args.format}"
+    
+    # Save output
+    output_dir = Path("output")
+    output_dir.mkdir(exist_ok=True)
+    output_file = output_dir / output_path
+    
+    if args.format == "json":
+        with open(output_file, 'w') as f:
+            json.dump(report, f, indent=2)
+    else:  # markdown
+        with open(output_file, 'w') as f:
+            f.write(_generate_markdown(report))
+    
+    print(f"\n✅ Report saved to: {output_file}")
+    print(f"\n📈 Summary:")
+    print(f"   - Videos analyzed: {report['summary']['total_videos_analyzed']}")
+    print(f"   - Avg engagement: {report['summary']['average_engagement_rate']:.2f}%")
+    print(f"   - Avg virality score: {report['summary']['average_virality_score']}/100")
+    print(f"   - Top performer: {report['summary']['top_performer_url']}")
+    
+    if report.get("insights"):
+        print(f"\n💡 Key Insights:")
+        for i, insight in enumerate(report["insights"][:3], 1):
+            print(f"   {i}. {insight}")
+
+
+def _generate_markdown(report: Dict) -> str:
+    """Generate markdown report."""
+    md = f"""# ViralReels Analysis Report
+
+**Niche:** {report['niche']}  
+**Platform:** {report['platform']}  
+**Generated:** {report['generated_at']}
+
+## Summary
+
+| Metric | Value |
+|--------|-------|
+| Videos Analyzed | {report['summary']['total_videos_analyzed']} |
+| Avg Engagement Rate | {report['summary']['average_engagement_rate']:.2f}% |
+| Avg Virality Score | {report['summary']['average_virality_score']}/100 |
+| Monetization Rate | {report['summary']['monetization_rate']}% |
+| Top Performer | [{report['summary']['top_performer_url']}]({report['summary']['top_performer_url']}) |
+
+## Patterns
+
+### Top Hooks
+"""
+    
+    for hook, count in report['patterns']['top_hooks']:
+        md += f"- **{hook}**: {count} videos\n"
+    
+    md += "\n### Optimal Formats\n"
+    for fmt, count in report['patterns']['optimal_formats']:
+        md += f"- **{fmt}**: {count} videos\n"
+    
+    md += "\n### Content Types\n"
+    for ctype, count in report['patterns']['content_types']:
+        md += f"- **{ctype}**: {count} videos\n"
+    
+    md += "\n## Insights\n\n"
+    for i, insight in enumerate(report['insights'], 1):
+        md += f"{i}. {insight}\n"
+    
+    md += "\n## Top Videos\n\n"
+    for i, video in enumerate(report['top_videos'][:5], 1):
+        md += f"### {i}. [{video['uploader']}]({video['url']})\n\n"
+        md += f"- **Views:** {video['view_count']:,}\n"
+        md += f"- **Engagement:** {video['engagement_score']:.2f}%\n"
+        md += f"- **Virality Score:** {video['virality_score']}/100\n"
+        md += f"- **Description:** {video['description'][:100]}...\n\n"
+    
+    return md
+
+
+if __name__ == "__main__":
+    main()
