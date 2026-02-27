@@ -1,0 +1,275 @@
+{
+  "name": "AI UGC Resource Pack - Ad Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-ad",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "id": "e9b7f5a0-1234-4567-8901-234567890abc"
+    },
+    {
+      "parameters": {
+        "url": "={{$json.body.url}}",
+        "options": {}
+      },
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        450,
+        300
+      ],
+      "id": "f8a6e4b1-2345-5678-9012-345678901bcd"
+    },
+    {
+      "parameters": {
+        "operation": "htmlToText",
+        "options": {}
+      },
+      "name": "HTML to Text",
+      "type": "n8n-nodes-base.htmlToMarkdown",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ],
+      "id": "d7c5d3c2-3456-6789-0123-456789012cde"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4o"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a direct response copywriter. Analyze this product page text. Extract: Unique Selling Proposition (USP), Main Pain Points, Target Audience. Return ONLY JSON format."
+            },
+            {
+              "content": "={{$json.data}}"
+            }
+          ]
+        }
+      },
+      "name": "OpenAI (Research)",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "id": "c6b4c2d3-4567-7890-1234-567890123def",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4o"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Create 3 video ad scripts using the 'Problem-Agitate-Solve' (PAS) framework based on this analysis."
+            },
+            {
+              "content": "={{$json.content}}"
+            }
+          ]
+        }
+      },
+      "name": "OpenAI (Scripts)",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ],
+      "id": "b5a3b1e4-5678-8901-2345-678901234efg",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4o"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "Convert these scripts into Midjourney Prompts. Use the following format for each scene: `[Scene Description] --ar 9:16 --style raw`. Return a clean list."
+            },
+            {
+              "content": "={{$json.content}}"
+            }
+          ]
+        }
+      },
+      "name": "OpenAI (Visuals)",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        300
+      ],
+      "id": "a492a0f5-6789-9012-3456-789012345fgh",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "document",
+        "title": "=AI Ad Brief - {{$node[\"Webhook\"].json.body.url}}",
+        "content": "=RESEARCH:\n{{$node[\"OpenAI (Research)\"].json.content}}\n\nSCRIPTS:\n{{$node[\"OpenAI (Scripts)\"].json.content}}\n\nVISUAL PROMPTS:\n{{$json.content}}"
+      },
+      "name": "Google Docs",
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        300
+      ],
+      "id": "93819fe6-7890-0123-4567-890123456ghi",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "YOUR_GOOGLE_CREDENTIAL_ID",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@busybits.com",
+        "toEmail": "={{$node[\"Webhook\"].json.body.email}}",
+        "subject": "Your AI Ad Brief is Ready",
+        "text": "=Your brief has been generated.\n\nView it here: {{$json.webViewLink}}"
+      },
+      "name": "Email Notification",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        1650,
+        300
+      ],
+      "id": "82708ed7-8901-1234-5678-901234567hij",
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML to Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML to Text": {
+      "main": [
+        [
+          {
+            "node": "OpenAI (Research)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI (Research)": {
+      "main": [
+        [
+          {
+            "node": "OpenAI (Scripts)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI (Scripts)": {
+      "main": [
+        [
+          {
+            "node": "OpenAI (Visuals)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI (Visuals)": {
+      "main": [
+        [
+          {
+            "node": "Google Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Docs": {
+      "main": [
+        [
+          {
+            "node": "Email Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

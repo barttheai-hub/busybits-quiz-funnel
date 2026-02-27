@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-25T03:07:48",
+  "generated_at": "2026-02-26T00:06:01",
   "tracker_total_companies": 51,
   "tracker_by_status": {
     "Research contact": 46,
@@ -10,13 +10,13 @@
     "Tier 3": 28,
     "Tier 2": 13
   },
-  "today_action_total": 5,
+  "today_action_total": 8,
   "today_actions_by_type": {
-    "send_initial": 5
+    "send_initial": 8
   },
-  "today_p1_actions": 5,
+  "today_p1_actions": 0,
   "today_overdue_actions": 0,
-  "today_p1_send_initial": 5,
+  "today_p1_send_initial": 0,
   "today_p1_followup_1": 0,
   "ready_to_send_total": 0,
   "ready_to_send_with_contact": 0,

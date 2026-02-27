@@ -1,0 +1,179 @@
+{
+  "name": "AI UGC Script Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-script",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$json.body.url}}",
+        "options": {}
+      },
+      "name": "HTTP Request (Scrape)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const html = items[0].json.data;\n// Simple text extraction (in production use a better parser)\nconst text = html.replace(/<[^>]*>/g, ' ').replace(/\\s+/g, ' ').trim().substring(0, 10000);\nreturn [{json: {text}}];"
+      },
+      "name": "Extract Text",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4o"
+        },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a world-class Direct Response Copywriter. Analyze the product text provided. \nIdentify the top 3 Pain Points and top 3 Desires.\nThen, generate 5 Viral Video Hooks (0-3 seconds) and a full 30-second script for the best one.\nReturn JSON: { \"hooks\": [], \"script\": \"\" }"
+            },
+            {
+              "content": "={{$json.text}}"
+            }
+          ]
+        },
+        "jsonOutput": true
+      },
+      "name": "OpenAI (Generate)",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "YOUR_GOOGLE_SHEET_ID",
+        "range": "A:D",
+        "options": {}
+      },
+      "name": "Google Sheets (Log)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [
+        1050,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@busybits.com",
+        "toEmail": "={{$node[\"Webhook\"].json.body.email}}",
+        "subject": "Your AI-Generated Ad Scripts",
+        "text": "Here are your hooks:\n{{$json.hooks}}\n\nAnd your script:\n{{$json.script}}",
+        "options": {}
+      },
+      "name": "Email (Send)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1250,
+        300
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "YOUR_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request (Scrape)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request (Scrape)": {
+      "main": [
+        [
+          {
+            "node": "Extract Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Text": {
+      "main": [
+        [
+          {
+            "node": "OpenAI (Generate)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI (Generate)": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets (Log)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets (Log)": {
+      "main": [
+        [
+          {
+            "node": "Email (Send)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

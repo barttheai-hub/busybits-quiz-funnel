@@ -1,6 +1,6 @@
 action_type,company,priority,status,due_date,days_overdue,urgency,has_contact,contact_email,subject,angle,next_action
-send_initial,AG1,P1,Ready to send,2026-02-25,0,due_today,yes,Lisa Hassig <partnerships@ag1.com>,BusyBits x AG1 (pilot sponsor slot),Founder morning stack,Send intro email
-send_initial,Joovv,P1,Ready to send,2026-02-25,0,due_today,yes,Wesley Pfiffner <partnerships@joovv.com>,BusyBits x Joovv (pilot sponsor slot),Morning routine performance stack,Send intro email
-send_initial,LMNT,P1,Ready to send,2026-02-25,0,due_today,yes,Sarah Halejian <partnerships@lmnt.com>,BusyBits x LMNT (pilot sponsor slot),Hydration + cognitive performance,Send intro email
-send_initial,Plunge,P1,Ready to send,2026-02-25,0,due_today,yes,Ryan Duey <partnerships@plunge.com>,BusyBits x Plunge (pilot sponsor slot),Recovery ritual for high output,Send intro email
-send_initial,SaunaSpace,P1,Ready to send,2026-02-25,0,due_today,yes,Alexa Swenson <partnerships@saunaspace.com>,BusyBits x SaunaSpace (pilot sponsor slot),Recovery + evening wind-down,Send intro email
+send_initial,AG1,P1,Research contact,2026-02-25,0,due_today,yes,partnerships@ag1.com,BusyBits x AG1 (pilot sponsor slot),Founder morning stack,Send intro email
+send_initial,Joovv,P1,Research contact,2026-02-25,0,due_today,yes,partnerships@joovv.com,BusyBits x Joovv (pilot sponsor slot),Morning routine performance stack,Send intro email
+send_initial,LMNT,P1,Research contact,2026-02-25,0,due_today,yes,partnerships@lmnt.com,BusyBits x LMNT (pilot sponsor slot),Hydration + cognitive performance,Send intro email
+send_initial,Plunge,P1,Research contact,2026-02-25,0,due_today,yes,partnerships@plunge.com,BusyBits x Plunge (pilot sponsor slot),Recovery ritual for high output,Send intro email
+send_initial,SaunaSpace,P1,Research contact,2026-02-25,0,due_today,yes,partnerships@saunaspace.com,BusyBits x SaunaSpace (pilot sponsor slot),Recovery + evening wind-down,Send intro email

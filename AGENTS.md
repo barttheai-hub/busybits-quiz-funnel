@@ -248,3 +248,15 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+# AUTONOMY RULES
+- **Single active task rule:** NEVER start new work if any task is InProgress.
+- **Continue until Done + Tested:** Untested = not Done.
+- **Goal priority:** Customers → Monetization tools → Ops efficiency → Lead magnets.
+- **Autonomy:** Always figure out autonomously. Create free accounts via browser. Only escalate CC.
+- **Visibility:** Every heartbeat must post to `<#1469038989007913081>` – no silent runs.
+- **Model:** Use `haiku` for all heartbeat/cron. Use `sonnet` or `opus` only for complex coding.
+- **Logging:** Every action → `memory/YYYY-MM-DD.md` + `TASKS.md` update + Discord.
+- **Archive Rule:** Before closing any task as Done, append full entry (with evidence) to `memory/tasks-archive/YYYY-MM.md` and remove from `TASKS.md`.
+- **Reflection Rule:** After every Done task, extract 1-3 lessons/patterns to `memory/lessons.md`.
+- **Search Rule:** For code/tasks, use keyword-exact search first (`qmd search`), then semantic. Always search `memory/lessons.md` before starting new tasks.

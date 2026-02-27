@@ -8,6 +8,8 @@
 
 ## 1. The Asset Content (Notion/PDF Ready)
 
+**Update (2026-02-26):** HTML Asset generated at `builds/busybits-growth/assets/High_Performance_OS_CEO_Edition.html`. Print this file to PDF to create the final downloadable asset.
+
 # 🚀 The High-Performance OS (CEO Edition)
 *By Ziga | BusyBits Newsletter*
 

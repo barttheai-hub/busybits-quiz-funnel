@@ -1,0 +1,44 @@
+# Platform defaults
+default_platform: meta
+default_country: US
+
+# Search configurations
+search_presets:
+  hair_loss:
+    - "keeps"
+    - "hims"
+    - "roman"
+    - "nutrafol"
+    - "hair loss"
+  fitness:
+    - "workout"
+    - "fitness"
+    - "gym"
+    - "supplement"
+  supplements:
+    - "creatine"
+    - "protein"
+    - "pre workout"
+    - "vitamin"
+
+# Analysis settings
+analysis:
+  min_pattern_frequency: 2
+  top_patterns_limit: 20
+  default_days_back: 30
+
+# Watch list (advertisers to monitor)
+watch_list:
+  - name: "Keeps"
+    niche: "hair_loss"
+  - name: "Hims"
+    niche: "hair_loss"
+  - name: "Roman"
+    niche: "hair_loss"
+  - name: "Nutrafol"
+    niche: "hair_loss"
+
+# Output settings
+output:
+  default_format: sqlite
+  date_format: "%Y-%m-%d"

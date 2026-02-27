@@ -1,4 +1,4 @@
-# BusyBits Sponsor Outreach Send Pack (2026-02-25)
+# BusyBits Sponsor Outreach Send Pack (2026-02-26)
 
 Execution-ready draft emails generated from today's prioritized queue.
 

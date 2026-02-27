@@ -1,0 +1,233 @@
+#!/usr/bin/env python3
+"""
+AdIntel - Competitor Ad Intelligence Dashboard
+Scrapes Meta Ad Library and TikTok to track competitor ads and surface winning patterns.
+"""
+
+import argparse
+import json
+import sys
+import os
+from datetime import datetime
+
+from scraper import MetaAdLibraryScraper, TikTokScraper
+from database import AdDatabase
+from analyzer import AdAnalyzer
+from web import run_dashboard
+
+VERSION = "1.0.0"
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="AdIntel - Competitor Ad Intelligence Dashboard",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  adintel --platform meta --search "hair loss" --days 30
+  adintel --platform tiktok --search "fitness" --limit 50
+  adintel analyze --pattern hooks
+  adintel serve --port 8080
+        """
+    )
+    
+    parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
+    
+    subparsers = parser.add_subparsers(dest="command", help="Available commands")
+    
+    # Scrape command
+    scrape_parser = subparsers.add_parser("scrape", help="Scrape ads from platforms")
+    scrape_parser.add_argument("--platform", choices=["meta", "tiktok", "all"], 
+                               required=True, help="Platform to scrape")
+    scrape_parser.add_argument("--search", type=str, required=True, 
+                               help="Search term or advertiser name")
+    scrape_parser.add_argument("--days", type=int, default=30, 
+                               help="Days to look back (default: 30)")
+    scrape_parser.add_argument("--limit", type=int, default=100, 
+                               help="Max ads to fetch (default: 100)")
+    scrape_parser.add_argument("--country", type=str, default="US", 
+                               help="Country code (default: US)")
+    scrape_parser.add_argument("--output", choices=["json", "md", "sqlite"], 
+                               default="sqlite", help="Output format")
+    
+    # Analyze command
+    analyze_parser = subparsers.add_parser("analyze", help="Analyze stored ads for patterns")
+    analyze_parser.add_argument("--pattern", choices=["hooks", "ctas", "visuals", "all"], 
+                                default="all", help="Pattern type to analyze")
+    analyze_parser.add_argument("--niche", type=str, help="Filter by niche/category")
+    analyze_parser.add_argument("--min-views", type=int, help="Minimum view threshold")
+    analyze_parser.add_argument("--output", choices=["json", "md"], default="md")
+    
+    # Serve command
+    serve_parser = subparsers.add_parser("serve", help="Start web dashboard")
+    serve_parser.add_argument("--host", default="127.0.0.1", help="Host to bind")
+    serve_parser.add_argument("--port", type=int, default=8080, help="Port to listen on")
+    
+    # Watch command (for change detection)
+    watch_parser = subparsers.add_parser("watch", help="Watch for new competitor ads")
+    watch_parser.add_argument("--advertiser", type=str, required=True, 
+                              help="Advertiser name to watch")
+    watch_parser.add_argument("--interval", type=int, default=3600, 
+                              help="Check interval in seconds (default: 1 hour)")
+    
+    args = parser.parse_args()
+    
+    if not args.command:
+        parser.print_help()
+        sys.exit(1)
+    
+    db = AdDatabase()
+    
+    if args.command == "scrape":
+        handle_scrape(args, db)
+    elif args.command == "analyze":
+        handle_analyze(args, db)
+    elif args.command == "serve":
+        run_dashboard(host=args.host, port=args.port, db_path=db.db_path)
+    elif args.command == "watch":
+        handle_watch(args, db)
+
+def handle_scrape(args, db):
+    """Handle scrape command"""
+    print(f"🔍 Scraping {args.platform} for '{args.search}'...")
+    
+    results = []
+    
+    if args.platform in ["meta", "all"]:
+        scraper = MetaAdLibraryScraper()
+        meta_ads = scraper.search(
+            query=args.search,
+            days_back=args.days,
+            limit=args.limit,
+            country=args.country
+        )
+        results.extend(meta_ads)
+        print(f"  ✓ Found {len(meta_ads)} ads on Meta")
+    
+    if args.platform in ["tiktok", "all"]:
+        scraper = TikTokScraper()
+        tiktok_ads = scraper.search(
+            query=args.search,
+            days_back=args.days,
+            limit=args.limit
+        )
+        results.extend(tiktok_ads)
+        print(f"  ✓ Found {len(tiktok_ads)} ads on TikTok")
+    
+    # Store in database
+    stored = db.store_ads(results, niche=args.search)
+    print(f"  ✓ Stored {stored} new ads in database")
+    
+    if args.output == "json":
+        print(json.dumps(results, indent=2, default=str))
+    elif args.output == "md":
+        output_md(results, args.search)
+
+def handle_analyze(args, db):
+    """Handle analyze command"""
+    print(f"📊 Analyzing ads for '{args.pattern}' patterns...")
+    
+    analyzer = AdAnalyzer(db)
+    
+    filters = {}
+    if args.niche:
+        filters["niche"] = args.niche
+    if args.min_views:
+        filters["min_views"] = args.min_views
+    
+    if args.pattern == "hooks":
+        results = analyzer.analyze_hooks(filters)
+    elif args.pattern == "ctas":
+        results = analyzer.analyze_ctas(filters)
+    elif args.pattern == "visuals":
+        results = analyzer.analyze_visuals(filters)
+    else:
+        results = analyzer.analyze_all(filters)
+    
+    if args.output == "json":
+        print(json.dumps(results, indent=2, default=str))
+    else:
+        output_analysis_md(results, args.pattern)
+
+def handle_watch(args, db):
+    """Handle watch command for change detection"""
+    import time
+    
+    print(f"👁️  Watching {args.advertiser} for new ads (interval: {args.interval}s)...")
+    print("Press Ctrl+C to stop")
+    
+    scraper = MetaAdLibraryScraper()
+    known_ads = set()
+    
+    # Initial fetch
+    ads = scraper.search_by_advertiser(args.advertiser, limit=100)
+    known_ads.update(a["ad_id"] for a in ads)
+    print(f"  Initial: {len(known_ads)} ads tracked")
+    
+    try:
+        while True:
+            time.sleep(args.interval)
+            
+            new_ads = scraper.search_by_advertiser(args.advertiser, limit=100)
+            new_ids = set(a["ad_id"] for a in new_ads)
+            
+            added = new_ids - known_ads
+            if added:
+                print(f"\n🆕 {len(added)} new ad(s) detected!")
+                for ad in new_ads:
+                    if ad["ad_id"] in added:
+                        print(f"  - {ad.get('ad_creative_link_title', 'Untitled')}")
+                        db.store_ads([ad])
+                
+                # Could send notification here
+            
+            known_ads = new_ids
+            print(f"  [{datetime.now().strftime('%H:%M:%S')}] Checked - {len(known_ads)} total ads")
+            
+    except KeyboardInterrupt:
+        print("\n👋 Watch stopped")
+
+def output_md(ads, search_term):
+    """Output results as markdown"""
+    print(f"\n# AdIntel Report: {search_term}\n")
+    print(f"Generated: {datetime.now().isoformat()}\n")
+    print(f"Total Ads: {len(ads)}\n")
+    
+    for i, ad in enumerate(ads[:20], 1):  # Top 20
+        print(f"## {i}. {ad.get('ad_creative_link_title', 'Untitled')}\n")
+        print(f"- **Platform:** {ad.get('platform', 'unknown')}")
+        print(f"- **Advertiser:** {ad.get('page_name', 'Unknown')}")
+        print(f"- **First Seen:** {ad.get('ad_delivery_start_time', 'Unknown')}")
+        print(f"- **Status:** {ad.get('status', 'Unknown')}\n")
+        
+        body = ad.get('ad_creative_body', '')
+        if body:
+            print(f"**Copy:**\n```\n{body[:500]}...\n```\n")
+        
+        cta = ad.get('call_to_action', '')
+        if cta:
+            print(f"**CTA:** {cta}\n")
+        
+        print("---\n")
+
+def output_analysis_md(results, pattern_type):
+    """Output analysis as markdown"""
+    print(f"\n# AdIntel Analysis: {pattern_type.upper()}\n")
+    print(f"Generated: {datetime.now().isoformat()}\n")
+    
+    for key, data in results.items():
+        print(f"## {key.replace('_', ' ').title()}\n")
+        
+        if isinstance(data, list):
+            for item in data[:10]:
+                if isinstance(item, dict):
+                    print(f"- **{item.get('pattern', 'Unknown')}:** {item.get('count', 0)} occurrences")
+                else:
+                    print(f"- {item}")
+        elif isinstance(data, dict):
+            for k, v in list(data.items())[:10]:
+                print(f"- **{k}:** {v}")
+        
+        print()
+
+if __name__ == "__main__":
+    main()

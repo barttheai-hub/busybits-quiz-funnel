@@ -1,0 +1,51 @@
+company,domain,contact_candidate,source,source_url,confidence,reason
+Four Sigmatic,foursigmatic.com,partnerships@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.9,most common partner inbox
+Four Sigmatic,foursigmatic.com,partners@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.85,common partner inbox
+Four Sigmatic,foursigmatic.com,(check page),manual_page,https://foursigmatic.com/contact,0.8,primary contact page
+Four Sigmatic,foursigmatic.com,sponsorships@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.8,common sponsorship inbox
+Four Sigmatic,foursigmatic.com,(check page),manual_page,https://foursigmatic.com/partners,0.75,possible partnerships page
+Four Sigmatic,foursigmatic.com,(check page),manual_page,https://foursigmatic.com/pages/contact,0.7,alternate contact page
+Four Sigmatic,foursigmatic.com,partnership@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.65,less common singular alias
+Four Sigmatic,foursigmatic.com,(check page),manual_page,https://foursigmatic.com/affiliate,0.6,possible partner program page
+Four Sigmatic,foursigmatic.com,hello@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.45,generic inbox fallback
+Four Sigmatic,foursigmatic.com,press@foursigmatic.com,alias_pattern,https://foursigmatic.com/contact,0.35,media inbox fallback
+Huel,huel.com,partnerships@huel.com,alias_pattern,https://huel.com/contact,0.9,most common partner inbox
+Huel,huel.com,partners@huel.com,alias_pattern,https://huel.com/contact,0.85,common partner inbox
+Huel,huel.com,(check page),manual_page,https://huel.com/contact,0.8,primary contact page
+Huel,huel.com,sponsorships@huel.com,alias_pattern,https://huel.com/contact,0.8,common sponsorship inbox
+Huel,huel.com,(check page),manual_page,https://huel.com/partners,0.75,possible partnerships page
+Huel,huel.com,(check page),manual_page,https://huel.com/pages/contact,0.7,alternate contact page
+Huel,huel.com,partnership@huel.com,alias_pattern,https://huel.com/contact,0.65,less common singular alias
+Huel,huel.com,(check page),manual_page,https://huel.com/affiliate,0.6,possible partner program page
+Huel,huel.com,hello@huel.com,alias_pattern,https://huel.com/contact,0.45,generic inbox fallback
+Huel,huel.com,press@huel.com,alias_pattern,https://huel.com/contact,0.35,media inbox fallback
+Ketone-IQ,ketoneiq.com,partnerships@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.9,most common partner inbox
+Ketone-IQ,ketoneiq.com,partners@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.85,common partner inbox
+Ketone-IQ,ketoneiq.com,(check page),manual_page,https://ketoneiq.com/contact,0.8,primary contact page
+Ketone-IQ,ketoneiq.com,sponsorships@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.8,common sponsorship inbox
+Ketone-IQ,ketoneiq.com,(check page),manual_page,https://ketoneiq.com/partners,0.75,possible partnerships page
+Ketone-IQ,ketoneiq.com,(check page),manual_page,https://ketoneiq.com/pages/contact,0.7,alternate contact page
+Ketone-IQ,ketoneiq.com,partnership@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.65,less common singular alias
+Ketone-IQ,ketoneiq.com,(check page),manual_page,https://ketoneiq.com/affiliate,0.6,possible partner program page
+Ketone-IQ,ketoneiq.com,hello@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.45,generic inbox fallback
+Ketone-IQ,ketoneiq.com,press@ketoneiq.com,alias_pattern,https://ketoneiq.com/contact,0.35,media inbox fallback
+Magic Spoon,magicspoon.com,partnerships@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.9,most common partner inbox
+Magic Spoon,magicspoon.com,partners@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.85,common partner inbox
+Magic Spoon,magicspoon.com,(check page),manual_page,https://magicspoon.com/contact,0.8,primary contact page
+Magic Spoon,magicspoon.com,sponsorships@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.8,common sponsorship inbox
+Magic Spoon,magicspoon.com,(check page),manual_page,https://magicspoon.com/partners,0.75,possible partnerships page
+Magic Spoon,magicspoon.com,(check page),manual_page,https://magicspoon.com/pages/contact,0.7,alternate contact page
+Magic Spoon,magicspoon.com,partnership@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.65,less common singular alias
+Magic Spoon,magicspoon.com,(check page),manual_page,https://magicspoon.com/affiliate,0.6,possible partner program page
+Magic Spoon,magicspoon.com,hello@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.45,generic inbox fallback
+Magic Spoon,magicspoon.com,press@magicspoon.com,alias_pattern,https://magicspoon.com/contact,0.35,media inbox fallback
+MudWtr,mudwtr.com,partnerships@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.9,most common partner inbox
+MudWtr,mudwtr.com,partners@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.85,common partner inbox
+MudWtr,mudwtr.com,(check page),manual_page,https://mudwtr.com/contact,0.8,primary contact page
+MudWtr,mudwtr.com,sponsorships@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.8,common sponsorship inbox
+MudWtr,mudwtr.com,(check page),manual_page,https://mudwtr.com/partners,0.75,possible partnerships page
+MudWtr,mudwtr.com,(check page),manual_page,https://mudwtr.com/pages/contact,0.7,alternate contact page
+MudWtr,mudwtr.com,partnership@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.65,less common singular alias
+MudWtr,mudwtr.com,(check page),manual_page,https://mudwtr.com/affiliate,0.6,possible partner program page
+MudWtr,mudwtr.com,hello@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.45,generic inbox fallback
+MudWtr,mudwtr.com,press@mudwtr.com,alias_pattern,https://mudwtr.com/contact,0.35,media inbox fallback

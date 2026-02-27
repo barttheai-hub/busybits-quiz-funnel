@@ -4,11 +4,11 @@ Generated script: `builds/busybits-newsletter/sponsor_send_now_exec_2026-02-25.s
 Queued emails: **5**
 
 ## Companies in this run
-- **AG1** — Lisa Hassig <partnerships@ag1.com> — _Partnership idea — BusyBits x AG1_
-- **Joovv** — Wesley Pfiffner <partnerships@joovv.com> — _Partnership idea — BusyBits x Joovv_
-- **LMNT** — Sarah Halejian <partnerships@lmnt.com> — _Partnership idea — BusyBits x LMNT_
-- **Plunge** — Ryan Duey <partnerships@plunge.com> — _Partnership idea — BusyBits x Plunge_
-- **SaunaSpace** — Alexa Swenson <partnerships@saunaspace.com> — _Partnership idea — BusyBits x SaunaSpace_
+- **AG1** — partnerships@ag1.com — _Partnership idea — BusyBits x AG1_
+- **Joovv** — partnerships@joovv.com — _Partnership idea — BusyBits x Joovv_
+- **LMNT** — partnerships@lmnt.com — _Partnership idea — BusyBits x LMNT_
+- **Plunge** — partnerships@plunge.com — _Partnership idea — BusyBits x Plunge_
+- **SaunaSpace** — partnerships@saunaspace.com — _Partnership idea — BusyBits x SaunaSpace_
 
 ## Execute
 ```bash

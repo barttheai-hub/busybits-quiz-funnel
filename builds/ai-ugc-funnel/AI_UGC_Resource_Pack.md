@@ -62,15 +62,25 @@ Audio: "Try it risk-free for [Guarantee]. Link below."
 ---
 
 ## Part 4: The n8n Workflow (JSON)
-*(Note: This is a placeholder for the actual JSON export file)*
+**File Included:** `ai_ugc_pipeline.json`
+**How to Import:**
+1.  Open your [n8n](https://n8n.io) instance.
+2.  Go to **Workflows** > **Import from File**.
+3.  Select the `ai_ugc_pipeline.json` file included in this pack.
+4.  **Connect Your Accounts:**
+    *   **OpenAI:** Add your API Key.
+    *   **Google Sheets:** Authenticate and create a sheet with columns: `Date`, `Product URL`, `Hooks`, `Script`.
+    *   **Email (SMTP):** Add your SMTP credentials (or use Gmail node).
+5.  **Activate:** Turn the workflow switch to "Active".
+6.  **Test:** Send a POST request to your webhook URL with `{ "url": "https://example.com", "email": "you@example.com" }`.
 
-**Nodes Included:**
-1.  **Webhook:** Receives Product URL.
-2.  **HTTP Request:** Scrapes page text.
-3.  **OpenAI (GPT-4o):** Generates Research & Script.
-4.  **Midjourney (API):** Generates Scenes (optional integration).
-5.  **ElevenLabs:** Generates Voiceover.
-6.  **Email:** Sends assets to user.
+**Workflow Logic:**
+1.  **Webhook:** Receives Product URL + Email.
+2.  **Scraper:** Fetches page content.
+3.  **AI Analyst (GPT-4o):** Extracts Pain Points & Desires.
+4.  **Script Writer (GPT-4o):** Generates 5 Hooks + 1 Full Script.
+5.  **Logger:** Saves data to Google Sheets.
+6.  **Delivery:** Emails the scripts to you instantly.
 
 ---
 

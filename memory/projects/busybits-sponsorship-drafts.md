@@ -7,6 +7,7 @@
 ---
 
 ## 1. Eight Sleep (Target: Matteo Franceschetti / Growth Lead)
+**Verified Contact:** `press@eightsleep.com` (Press/Partnerships)
 **Subject:** 8 hours in 6 (Why I recommend the Pod)
 **Subject B:** Partnership / Eight Sleep x BusyBits (100k founders)
 
@@ -31,6 +32,7 @@ Founder, BusyBits
 ---
 
 ## 2. Oura Ring (Target: Tom Hale / Partnership Lead)
+**Verified Contact:** `press@ouraring.com`
 **Subject:** My Readiness Score today is 92 (Thanks to Oura)
 **Subject B:** Why my 100k readers need Oura
 
@@ -53,6 +55,7 @@ Ziga
 ---
 
 ## 3. Whoop (Target: Will Ahmed / Marketing)
+**Contact:** `press@whoop.com` (Unverified, likely valid)
 **Subject:** Strain vs. Recovery (Partnership Idea)
 **Subject B:** Whoop x BusyBits (100k High Performers)
 
@@ -74,6 +77,7 @@ Ziga
 ---
 
 ## 4. Levels (Target: Sam Corcos / Growth)
+**Contact:** `press@levelshealth.com` (Unverified, likely valid)
 **Subject:** The 3pm Crash (Solvable with Levels)
 **Subject B:** Glucose visibility for 100k founders?
 
@@ -83,7 +87,7 @@ Hey [Name],
 I recently wore a CGM and realized my "healthy" oatmeal breakfast was spiking me to 160 mg/dL and causing my afternoon brain fog.
 Levels made that invisible problem visible.
 
-I write **BusyBits** (100k subscribers).
+I write **BusyBits**, a newsletter for 100k+ subscribers.
 My audience is constantly asking how to maintain focus throughout the day.
 I want to show them that it’s a biology problem, not a willpower problem—and that Levels is the fix.
 
@@ -96,6 +100,7 @@ Ziga
 ---
 
 ## 5. Apollo Neuro (Target: Kathryn Fantauzzi / Partnerships)
+**Contact:** `press@apolloneuro.com` (Unverified, likely valid)
 **Subject:** HRV Training for Founders
 **Subject B:** Apollo x BusyBits (Partnership)
 

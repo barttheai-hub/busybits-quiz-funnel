@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusyBody - The 3-Second Calorie Counter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes ring-fill {
+            from { stroke-dashoffset: 100; }
+            to { stroke-dashoffset: 20; } /* 80% full */
+        }
+        .ring-animate {
+            animation: ring-fill 1.5s ease-out forwards;
+        }
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-slate-950 text-white font-sans antialiased h-screen flex justify-center items-center">
+
+    <!-- Mobile Frame -->
+    <div class="w-[375px] h-[812px] bg-black rounded-[40px] border-[8px] border-slate-800 relative overflow-hidden shadow-2xl">
+        
+        <!-- Status Bar -->
+        <div class="absolute top-0 w-full h-12 flex justify-between px-6 items-center text-xs font-bold z-50">
+            <span>9:41</span>
+            <div class="flex gap-1">
+                <div class="w-4 h-2.5 bg-white rounded-sm"></div>
+                <div class="w-0.5 h-2.5 bg-white rounded-sm"></div>
+            </div>
+        </div>
+
+        <!-- SCREEN 1: SPLASH -->
+        <section id="screen-splash" class="h-full flex flex-col justify-center items-center px-8 text-center bg-gradient-to-b from-blue-900/20 to-black">
+            <div class="w-20 h-20 bg-blue-600 rounded-2xl mb-6 flex items-center justify-center text-4xl font-bold shadow-lg shadow-blue-500/50">B</div>
+            <h1 class="text-3xl font-bold mb-2">BusyBody</h1>
+            <p class="text-slate-400 mb-12">The 3-Second Calorie Counter.</p>
+            <button onclick="nextScreen('screen-splash', 'screen-wizard-1')" class="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-slate-200 transition">
+                Start Tracking
+            </button>
+            <p class="mt-6 text-sm text-slate-600">Already have an account? <span class="text-blue-500">Log in</span></p>
+        </section>
+
+        <!-- SCREEN 2: WIZARD 1 (Basics) -->
+        <section id="screen-wizard-1" class="hidden h-full flex flex-col px-6 pt-24 pb-8">
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-8">Let's calibrate.</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-2">Gender</label>
+                        <div class="flex gap-4">
+                            <button class="flex-1 py-3 bg-slate-800 rounded-xl hover:bg-blue-600 transition">Male</button>
+                            <button class="flex-1 py-3 bg-slate-800 rounded-xl hover:bg-blue-600 transition">Female</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-2">Current Weight (lbs)</label>
+                        <input type="number" placeholder="185" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-xl focus:border-blue-500 outline-none">
+                    </div>
+                </div>
+            </div>
+            <button onclick="nextScreen('screen-wizard-1', 'screen-wizard-2')" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl">Next</button>
+        </section>
+
+        <!-- SCREEN 3: WIZARD 2 (Goal) -->
+        <section id="screen-wizard-2" class="hidden h-full flex flex-col px-6 pt-24 pb-8">
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-8">What's the mission?</h2>
+                <div class="space-y-4">
+                    <button class="w-full p-4 bg-slate-800 rounded-xl text-left hover:bg-blue-600 transition group">
+                        <div class="font-bold group-hover:text-white">Lose Fat</div>
+                        <div class="text-sm text-slate-400 group-hover:text-blue-100">Get lean, keep muscle.</div>
+                    </button>
+                    <button class="w-full p-4 bg-slate-800 rounded-xl text-left hover:bg-blue-600 transition group">
+                        <div class="font-bold group-hover:text-white">Build Muscle</div>
+                        <div class="text-sm text-slate-400 group-hover:text-blue-100">Get big, stay lean.</div>
+                    </button>
+                    <button class="w-full p-4 bg-slate-800 rounded-xl text-left hover:bg-blue-600 transition group">
+                        <div class="font-bold group-hover:text-white">Maintain</div>
+                        <div class="text-sm text-slate-400 group-hover:text-blue-100">Stay where I am.</div>
+                    </button>
+                </div>
+            </div>
+            <button onclick="calculateTDEE()" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl">Calculate Target</button>
+        </section>
+
+        <!-- SCREEN 4: LOADER -->
+        <section id="screen-loader" class="hidden h-full flex flex-col justify-center items-center px-6">
+            <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-8"></div>
+            <h2 id="loader-text" class="text-xl font-bold">Analyzing Metabolism...</h2>
+        </section>
+
+        <!-- SCREEN 5: RESULT -->
+        <section id="screen-result" class="hidden h-full flex flex-col justify-center items-center px-6 text-center fade-in">
+            <h2 class="text-slate-400 mb-2">Your Daily Target</h2>
+            <div class="text-6xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">2,150</div>
+            <div class="text-xl font-bold mb-12">calories</div>
+            
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 mb-12 w-full">
+                <p class="text-sm text-slate-400">Reach your goal weight by</p>
+                <p class="text-lg font-bold text-white">May 15, 2026</p>
+            </div>
+
+            <button onclick="nextScreen('screen-result', 'screen-log')" class="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-slate-200 transition">
+                Let's Eat
+            </button>
+        </section>
+
+        <!-- SCREEN 6: LOG FOOD (Activation) -->
+        <section id="screen-log" class="hidden h-full flex flex-col px-6 pt-24 pb-8">
+            <h2 class="text-2xl font-bold mb-6">What did you just eat?</h2>
+            <input type="text" id="food-input" placeholder="e.g. 2 eggs" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-xl mb-6 focus:border-blue-500 outline-none" oninput="showResults()">
+            
+            <div id="food-results" class="hidden space-y-2">
+                <button onclick="logFood('Oatmeal', 300)" class="w-full flex justify-between p-4 bg-slate-900 rounded-xl hover:bg-slate-800 transition">
+                    <span>🥣 Oatmeal (1 cup)</span>
+                    <span class="font-bold text-blue-400">300 cal</span>
+                </button>
+                <button onclick="logFood('Eggs', 140)" class="w-full flex justify-between p-4 bg-slate-900 rounded-xl hover:bg-slate-800 transition">
+                    <span>🥚 2 Large Eggs</span>
+                    <span class="font-bold text-blue-400">140 cal</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SCREEN 7: DASHBOARD (Aha Moment) -->
+        <section id="screen-dashboard" class="hidden h-full flex flex-col px-6 pt-16 pb-8 relative">
+            <div class="flex justify-between items-center mb-8">
+                <div class="text-xl font-bold">Today</div>
+                <div class="w-8 h-8 bg-slate-800 rounded-full"></div>
+            </div>
+
+            <!-- The Ring -->
+            <div class="flex justify-center mb-12 relative">
+                <svg width="240" height="240" viewBox="0 0 100 100" class="transform -rotate-90">
+                    <circle cx="50" cy="50" r="40" stroke="#1e293b" stroke-width="8" fill="none" />
+                    <circle id="calorie-ring" cx="50" cy="50" r="40" stroke="#2563eb" stroke-width="8" fill="none" stroke-dasharray="251" stroke-dashoffset="251" stroke-linecap="round" />
+                </svg>
+                <div class="absolute inset-0 flex flex-col justify-center items-center">
+                    <span class="text-4xl font-bold">1,850</span>
+                    <span class="text-xs text-slate-400 uppercase tracking-widest">Left</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex justify-between items-center">
+                <div>
+                    <div class="font-bold">Oatmeal (1 cup)</div>
+                    <div class="text-xs text-slate-400">Breakfast</div>
+                </div>
+                <div class="font-bold text-blue-400">300</div>
+            </div>
+
+            <!-- Paywall Modal Overlay -->
+            <div id="paywall-modal" class="absolute bottom-0 left-0 w-full bg-slate-900 rounded-t-3xl p-6 border-t border-slate-800 transform translate-y-full transition duration-500 ease-out">
+                <div class="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-6"></div>
+                <h3 class="text-xl font-bold mb-2 text-center">Save your streak?</h3>
+                <p class="text-slate-400 text-center mb-8 text-sm">You've started strong. Create a free account to back up your data.</p>
+                
+                <button class="w-full bg-white text-black font-bold py-4 rounded-xl mb-4 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.21-.8 3.64-.8 2.4.15 3.5.95 4.3 2.12-.13.08-.2.15-.22.21-1.42 1.25-1.12 3.86 1.05 4.75-.12.82-.41 1.7-.86 2.58-.59 1.16-1.55 2.57-2.99 3.37z"/></svg>
+                    Continue with Apple
+                </button>
+                <button class="w-full bg-slate-800 text-white font-bold py-4 rounded-xl mb-6 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
+                    Continue with Google
+                </button>
+                
+                <div class="text-center">
+                    <button class="text-xs text-slate-500 font-bold uppercase tracking-widest hover:text-white">Skip for now</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function nextScreen(current, next) {
+            document.getElementById(current).classList.add('hidden');
+            document.getElementById(next).classList.remove('hidden');
+        }
+
+        function calculateTDEE() {
+            nextScreen('screen-wizard-2', 'screen-loader');
+            const texts = ["Analyzing Metabolism...", "Optimizing Macros...", "Setting Deficit..."];
+            let i = 0;
+            const interval = setInterval(() => {
+                i++;
+                if (i < texts.length) {
+                    document.getElementById('loader-text').innerText = texts[i];
+                } else {
+                    clearInterval(interval);
+                    nextScreen('screen-loader', 'screen-result');
+                }
+            }, 800);
+        }
+
+        function showResults() {
+            const val = document.getElementById('food-input').value;
+            if (val.length > 2) {
+                document.getElementById('food-results').classList.remove('hidden');
+            }
+        }
+
+        function logFood(name, cals) {
+            nextScreen('screen-log', 'screen-dashboard');
+            
+            // Animate Ring
+            setTimeout(() => {
+                document.getElementById('calorie-ring').classList.add('ring-animate');
+            }, 500);
+
+            // Show Paywall
+            setTimeout(() => {
+                document.getElementById('paywall-modal').classList.remove('translate-y-full');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

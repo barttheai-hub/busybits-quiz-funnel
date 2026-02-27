@@ -16,6 +16,14 @@ Use QMD every time before answering:
 - If needed: `qmd search` for exact terms / IDs
 Then answer using retrieved context.
 
+# ACTIVE PROJECTS & GOALS (Agent will keep this updated)
+
+## Priority Coding Goals
+1.  **Customer Acquisition:** Tools/Ads/Funnels that bring in new users.
+2.  **Monetization:** Automation/Scrapers/Features that directly generate revenue.
+3.  **Ops Efficiency:** Dashboards, workflows, git automation.
+4.  **Lead Magnets:** Free resources (only after A-C are stable).
+
 ## Ziga — Goals / Constraints
 - Primary objective: reach ~$50–100k/month by July (otherwise likely return to hospital/residency).
 - Preferences: speed, creativity, resourcefulness; wants proactive progress without needing prompts.
@@ -76,7 +84,8 @@ Then answer using retrieved context.
 - 2026-02-21: **BusyBody App (CRO):**
   - **Onboarding:** Designed "Lazy Registration" flow (Calculate TDEE -> Log 1 Meal -> Then Register).
   - **Spec:** `memory/projects/busybody-onboarding-flow.md` (6-Screen Logic + Analytics Events).
-  - **Status:** CRO Spec Ready for Dev.
+  - **Implementation:** `builds/busybody-app/BusyBodyOnboarding.swift` (SwiftUI View) + `builds/busybody-app/README_IMPLEMENTATION.md`.
+  - **Status:** CRO Implementation Assets Ready (Dev Handover).
 
 - 2026-02-21: **BusyBits Newsletter (Quiz Funnel):**
   - **Frontend:** `builds/busybits-newsletter/quiz.html` (Optimized logic, Webhook-ready, Loading states).

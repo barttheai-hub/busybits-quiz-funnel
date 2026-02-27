@@ -3,12 +3,12 @@
 Count: **5**
 
 ## 1. AG1 (P1 · send_initial)
-- To: Lisa Hassig <partnerships@ag1.com>
+- To: partnerships@ag1.com
 - Due: 2026-02-25
 - Subject: Partnership idea — BusyBits x AG1
 
 ```text
-Hi Lisa,
+Hi there,
 
 I run BusyBits, a fitness/performance newsletter with an engaged audience of builders and operators. I think a AG1 sponsorship slot could be a strong fit.
 
@@ -19,12 +19,12 @@ Ziga
 ```
 
 ## 2. Joovv (P1 · send_initial)
-- To: Wesley Pfiffner <partnerships@joovv.com>
+- To: partnerships@joovv.com
 - Due: 2026-02-25
 - Subject: Partnership idea — BusyBits x Joovv
 
 ```text
-Hi Wesley,
+Hi there,
 
 I run BusyBits, a fitness/performance newsletter with an engaged audience of builders and operators. I think a Joovv sponsorship slot could be a strong fit.
 
@@ -35,12 +35,12 @@ Ziga
 ```
 
 ## 3. LMNT (P1 · send_initial)
-- To: Sarah Halejian <partnerships@lmnt.com>
+- To: partnerships@lmnt.com
 - Due: 2026-02-25
 - Subject: Partnership idea — BusyBits x LMNT
 
 ```text
-Hi Sarah,
+Hi there,
 
 I run BusyBits, a fitness/performance newsletter with an engaged audience of builders and operators. I think a LMNT sponsorship slot could be a strong fit.
 
@@ -51,12 +51,12 @@ Ziga
 ```
 
 ## 4. Plunge (P1 · send_initial)
-- To: Ryan Duey <partnerships@plunge.com>
+- To: partnerships@plunge.com
 - Due: 2026-02-25
 - Subject: Partnership idea — BusyBits x Plunge
 
 ```text
-Hi Ryan,
+Hi there,
 
 I run BusyBits, a fitness/performance newsletter with an engaged audience of builders and operators. I think a Plunge sponsorship slot could be a strong fit.
 
@@ -67,12 +67,12 @@ Ziga
 ```
 
 ## 5. SaunaSpace (P1 · send_initial)
-- To: Alexa Swenson <partnerships@saunaspace.com>
+- To: partnerships@saunaspace.com
 - Due: 2026-02-25
 - Subject: Partnership idea — BusyBits x SaunaSpace
 
 ```text
-Hi Alexa,
+Hi there,
 
 I run BusyBits, a fitness/performance newsletter with an engaged audience of builders and operators. I think a SaunaSpace sponsorship slot could be a strong fit.
 

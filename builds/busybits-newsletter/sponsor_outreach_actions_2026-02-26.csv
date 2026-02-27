@@ -1,0 +1,9 @@
+action_type,company,priority,status,due_date,days_overdue,urgency,has_contact,contact_email,subject,angle,next_action
+send_initial,Clay,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@clay.earth,BusyBits x Clay (pilot sponsor slot),Relationship leverage system,Send intro email
+send_initial,Motion,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@usemotion.com,BusyBits x Motion (pilot sponsor slot),Calendar autopilot for focus,Send intro email
+send_initial,Notion,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@makenotion.com,BusyBits x Notion (pilot sponsor slot),Operator knowledge OS,Send intro email
+send_initial,Opal,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@opal.so,BusyBits x Opal (pilot sponsor slot),Attention defense for creators,Send intro email
+send_initial,Readwise,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@readwise.io,BusyBits x Readwise (pilot sponsor slot),Learning retention for founders,Send intro email
+send_initial,Sunsama,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@sunsama.com,BusyBits x Sunsama (pilot sponsor slot),Daily planning for reduced burnout,Send intro email
+send_initial,Superhuman,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@superhuman.com,BusyBits x Superhuman (pilot sponsor slot),Inbox throughput for founders,Send intro email
+send_initial,TextExpander,P2,Research contact,2026-02-26,0,due_today,yes,partnerships@textexpander.com,BusyBits x TextExpander (pilot sponsor slot),10x communication throughput,Send intro email

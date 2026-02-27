@@ -1,33 +1,33 @@
-# Sponsor Contact Gap Queue (2026-02-25)
+# Sponsor Contact Gap Queue (2026-02-26)
 
 Generated from: `builds/busybits-newsletter/sponsor_outreach_execution_board.csv`
 Rows requiring contact enrichment: **20**
 
-1. **AG1** (P1 · send 2026-02-25)
+1. **AG1** (P1 · send 2026-03-04)
    - Missing: contact_name, contact_linkedin
    - Role target: Partnerships
    - Search query: `AG1 Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=AG1+Partnerships+partnerships+email+linkedin
 
-2. **Joovv** (P1 · send 2026-02-25)
+2. **Joovv** (P1 · send 2026-03-04)
    - Missing: contact_name, contact_linkedin
    - Role target: Partnerships
    - Search query: `Joovv Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Joovv+Partnerships+partnerships+email+linkedin
 
-3. **LMNT** (P1 · send 2026-02-25)
+3. **LMNT** (P1 · send 2026-03-04)
    - Missing: contact_name, contact_linkedin
    - Role target: Partnerships
    - Search query: `LMNT Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=LMNT+Partnerships+partnerships+email+linkedin
 
-4. **Plunge** (P1 · send 2026-02-25)
+4. **Plunge** (P1 · send 2026-03-04)
    - Missing: contact_name, contact_linkedin
    - Role target: Partnerships
    - Search query: `Plunge Partnerships partnerships email linkedin`
    - Search URL: https://www.google.com/search?q=Plunge+Partnerships+partnerships+email+linkedin
 
-5. **SaunaSpace** (P1 · send 2026-02-25)
+5. **SaunaSpace** (P1 · send 2026-03-04)
    - Missing: contact_name, contact_linkedin
    - Role target: Partnerships
    - Search query: `SaunaSpace Partnerships partnerships email linkedin`

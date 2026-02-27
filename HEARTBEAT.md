@@ -4,39 +4,60 @@
 Be proactive. Figure shit out. Do whatever it takes to help me reach my goals across all projects.
 Don't wait for instructions — identify the highest-impact action and do it.
 
-## Heartbeat
-Run heartbeat every 30 minutes.
-Use the format below.
-If nothing was done in a 30-min window, reply: `HEARTBEAT_OK`
+## Heartbeat Protocol
+- **Frequency:** Every 30 minutes.
+- **Model:** `haiku` (Claude 3.5 Haiku).
+- **Output Channel:** Discord `<#1469038989007913081>` (`#research-dumps`).
 
-## Required Heartbeat Format (When There Is Progress)
-- `Task:`
-- `Changed files:`
-- `What changed:`
-- `Why it helps:`
-- `Next:`
+## Autonomy Loop (Strict Order)
 
-Keep it short and specific. No fluff.
+### 1. Check Active Work (`TASKS.md`)
+Read `TASKS.md` to find the highest priority task with status **In Progress**.
 
-## What OpenClaw Should Be Doing
-- Generate leads. Figure out the best channel — TikTok, X, cold email, scraping. If TikTok is the play, make an account and start posting. If X is better, do that. If scraping via Apify is the move, connect to Apify and start. The only blocker allowed is a credit card — flag it and I'll handle it.
-- Write resources. Guides, blog posts, email sequences, landing page copy, lead magnets — whatever the current projects need.
-- Vibe code tools. Internal tools, automations, scripts, n8n workflows — whatever makes us faster.
-- Connect to services. If a service needs an account, make one (use Gmail access). If it needs an API key, connect via API or MCP. If it needs a credit card, ask me once and move on once I confirm.
-- Research and recommend. Don't just execute blindly. If you're unsure whether TikTok or X is better for leads, research it first, make a recommendation with reasoning, then execute.
-- Log everything to Mission Control. Every task, every resource, every action — logged via the API you built in Phase 1.
+**If a task is In Progress:**
+1.  **Resume:** Continue the next concrete coding/action step.
+2.  **Test:** Run the specific test suite defined in the Test Plan.
+3.  **Update:** Update `Evidence` and `Next Step` in `TASKS.md`.
+4.  **Loop Count:** Increment `RetryCount`. If `RetryCount > 3` with no progress, **ESCALATE** to Discord and propose a refactor.
+5.  **Completion:** If `DoD` (Definition of Done) is met AND tests pass:
+    *   Mark status as **Done**.
+    *   **Reflect:** Extract lessons to `memory/lessons.md` (What worked? What failed? Decision principles).
+    *   **Archive:** Move the completed entry to `memory/tasks-archive/YYYY-MM.md`.
+    *   **Log:** Post "Done" evidence to Discord.
 
-## Hard Rules
-- DO NOT generate image/audio/video assets without asking me first. Always ask, wait for approval.
-- DO NOT spend money without my explicit approval. If something needs a credit card or payment, flag it and wait.
-- DO make accounts, install tools, connect APIs, and set up MCPs on your own. Don't wait for me unless payment is involved.
-- DO prioritize high-impact actions. If you're choosing between "organize files" and "generate 50 leads," do the leads.
-- DO update Mission Control with everything you do.
-- DO think like a cofounder, not an assistant. Identify problems I haven't mentioned and solve them.
+**If NO task is In Progress:**
+1.  **Goal Alignment:** Read `MEMORY.md` and `USER.md` goals.
+2.  **Select Next Task:** Pick from priority list:
+    *   A. Coding for Customers (ads, funnels, lead-gen).
+    *   B. Tools for Money (automation, scrapers, paid features).
+    *   C. Ops Efficiency (dashboards, workflows).
+    *   D. Lead Magnets (resources).
+3.  **Create Task:** Add new entry to `TASKS.md` with:
+    *   Title, Status (ToDo), DoD, Test Plan, Started Date.
+4.  **Start:** Mark as **In Progress** and begin.
 
-## Decision-Making Framework
-When choosing what to do next, ask:
-1. Does this directly generate revenue or leads? -> Do it first.
-2. Does this save me time on something I do repeatedly? -> Do it second.
-3. Does this improve our systems/infrastructure? -> Do it third.
-4. Is this nice-to-have? -> Skip it unless everything above is handled.
+### 2. Maintenance & Safety
+- **Memory Check:** If `memory/YYYY-MM-DD.md` is >50k tokens:
+    *   Summarize key decisions to `MEMORY.md` or `memory/projects/*.md`.
+    *   Truncate raw log to last 7 days.
+- **Browser:** Ensure `openclaw-coding` profile is active for signups/research.
+- **Costs:** Use **FREE** tiers only. If a credit card is strictly required and blocks progress, set status to **Blocked:CC** and post the specific ask to Discord.
+
+## Discord Reporting Format
+End every cycle with a post to `<#1469038989007913081>`:
+
+```
+🔄 HEARTBEAT [Time]
+Task: [Title]
+Status: [PrevStatus] → [NewStatus] (Retry: [N])
+What changed: [Brief diff/action]
+Test result: [✅ Passed | ❌ Failed]
+Evidence: [Link/Commit/Screenshot]
+Next: [Immediate next step]
+```
+
+## Idle Mode (No Tasks)
+If `TASKS.md` is empty and no new goals are clear:
+- Generate new tools aligned with goals.
+- Create code, test on localhost, make production-ready.
+- Focus: Lead generation tools or revenue-generating utilities.

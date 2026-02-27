@@ -211,12 +211,12 @@
         Not ready to buy? No problem. <br>
         Download our free guide: <strong>"The Hair Hacker's Bible"</strong> and learn the 5 protocols dermatologists use (but don't prescribe).
       </p>
-      <div class="space-y-4">
-        <input type="email" placeholder="Enter your email address" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">
+      <form id="leadForm" class="space-y-4" onsubmit="handleLeadSubmit(event)">
+        <input type="email" id="email" name="email" required placeholder="Enter your email address" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">
           Send Me The Free Guide
         </button>
-      </div>
+      </form>
       <p class="mt-4 text-xs text-slate-400">
         We respect your privacy. No spam.
       </p>
@@ -229,6 +229,9 @@
 
     const showPopup = () => {
       if (popupShown) return;
+      // Check if user already subscribed (localStorage)
+      if (localStorage.getItem('hairloss_lead_captured')) return;
+      
       const popup = document.getElementById('exitPopup');
       popup.classList.add('visible');
       popupShown = true;
@@ -237,6 +240,50 @@
     const closePopup = () => {
       const popup = document.getElementById('exitPopup');
       popup.classList.remove('visible');
+    };
+
+    const handleLeadSubmit = (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const btn = e.target.querySelector('button');
+      const originalText = btn.innerText;
+
+      if (!email) return;
+
+      btn.innerText = "Sending...";
+      btn.disabled = true;
+
+      // TODO: Replace with your actual webhook URL (Zapier, n8n, Beehiiv)
+      // For now, we simulate success and deliver the asset.
+      const WEBHOOK_URL = "https://hook.us1.make.com/your-webhook-id"; 
+
+      // Simulate API call
+      setTimeout(() => {
+        console.log("Lead captured:", email);
+        localStorage.setItem('hairloss_lead_captured', 'true');
+        
+        // Success State
+        btn.innerText = "Sent! Check your inbox.";
+        btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+        btn.classList.add('bg-green-600', 'hover:bg-green-700');
+        
+        // Redirect to Asset (or auto-download)
+        // In production, email the PDF. Here we offer immediate download.
+        window.location.href = "assets/The_Hair_Hackers_Bible.html"; 
+        
+        setTimeout(() => {
+          closePopup();
+        }, 2000);
+      }, 1000);
+
+      // Example fetch for real implementation:
+      /*
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, source: 'advertorial_exit_popup' })
+      }).then(() => { ... }).catch(() => { ... });
+      */
     };
 
     // Trigger on mouse leaving the viewport (desktop)
