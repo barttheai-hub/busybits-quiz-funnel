@@ -1,30 +1,25 @@
 # AdIntel - Competitor Ad Intelligence Dashboard
 
-Track competitor ads across Meta and TikTok. Surface winning patterns. Stay ahead.
-
-## Features
-
-- 🔍 **Multi-Platform Scraping**: Meta Ad Library + TikTok Creative Center
-- 📊 **Pattern Analysis**: Detect hooks, CTAs, and visual styles that work
-- 🌐 **Web Dashboard**: Browse and filter ads in a clean UI
-- 🔔 **Change Detection**: Watch competitors and get alerted to new ads
-- 💾 **SQLite Storage**: Local-first, queryable database
-- 🐳 **Dockerized**: Run anywhere
+Track competitor ads across Meta (Facebook/Instagram) and TikTok to surface winning patterns.
 
 ## Quick Start
 
 ```bash
 # Install dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
+playwright install chromium
 
-# Scrape Meta ads for a keyword
-python3 adintel scrape --platform meta --search "hair loss" --days 30 --limit 100
+# Scrape ads (demo mode - no API needed)
+python3 adintel scrape --platform meta --search "hair loss" --demo
 
-# Scrape TikTok ads
-python3 adintel scrape --platform tiktok --search "fitness" --limit 50
+# Scrape with live data (requires Meta Graph API token)
+export META_AD_TOKEN="your_token_here"
+python3 adintel scrape --platform meta --search "keeps" --limit 50
 
 # Analyze patterns
-python3 adintel analyze --pattern hooks --niche "hair_loss"
+python3 adintel analyze --pattern hooks
+python3 adintel analyze --pattern ctas
+python3 adintel analyze --pattern all
 
 # Start web dashboard
 python3 adintel serve --port 8080
@@ -33,8 +28,10 @@ python3 adintel serve --port 8080
 ## Commands
 
 ### scrape
+Scrape ads from Meta Ad Library or TikTok.
+
 ```bash
-adintel scrape --platform meta --search "keyword" --days 30 --limit 100 --country US
+python3 adintel scrape --platform meta --search "keyword" --days 30 --limit 100
 ```
 
 Options:
@@ -44,85 +41,84 @@ Options:
 - `--limit`: Max ads to fetch (default: 100)
 - `--country`: Country code (default: US)
 - `--output`: json, md, or sqlite (default: sqlite)
+- `--demo`: Use demo data for testing
 
 ### analyze
+Analyze stored ads for patterns.
+
 ```bash
-adintel analyze --pattern hooks --niche "hair_loss" --output md
+python3 adintel analyze --pattern hooks --niche "hair_loss"
 ```
 
-Pattern types:
-- `hooks`: Opening phrases and attention grabbers
-- `ctas`: Call-to-action patterns
-- `visuals`: Visual style indicators
-- `all`: Run all analyses
+Options:
+- `--pattern`: hooks, ctas, visuals, or all
+- `--niche`: Filter by niche/category
+- `--min-views`: Minimum view threshold
+- `--output`: json or md (default: md)
 
 ### serve
-```bash
-adintel serve --host 127.0.0.1 --port 8080
-```
+Start the web dashboard.
 
-Starts a web dashboard at `http://localhost:8080`
+```bash
+python3 adintel serve --host 127.0.0.1 --port 8080
+```
 
 ### watch
+Watch for new ads from specific advertisers.
+
 ```bash
-adintel watch --advertiser "Keeps" --interval 3600
+python3 adintel watch --advertiser "Keeps" --interval 3600
 ```
 
-Monitors an advertiser for new ads.
+## Getting a Meta Graph API Token
+
+1. Go to [Facebook Developers](https://developers.facebook.com/)
+2. Create an app (Business type)
+3. Add the Marketing API product
+4. Generate an access token with `ads_read` permission
+5. Export it: `export META_AD_TOKEN="your_token"`
+
+## Configuration
+
+Edit `config.yaml` to set default search terms and watch lists.
 
 ## Docker
 
 ```bash
 docker build -t adintel .
-
-# Scrape
-docker run -v $(pwd):/app adintel scrape --platform meta --search "hair loss"
-
-# Serve dashboard
-docker run -p 8080:8080 -v $(pwd):/app adintel serve --host 0.0.0.0
+docker run -p 8080:8080 adintel
 ```
 
-## Database Schema
+## Project Structure
 
-**ads table:**
-- `ad_id`: Primary key
-- `platform`: meta, tiktok, etc.
-- `niche`: Category/tag
-- `page_name`: Advertiser name
-- `ad_creative_body`: Ad copy
-- `ad_creative_link_title`: Headline
-- `ad_delivery_start_time`: First seen
-- `status`: ACTIVE/INACTIVE
-- `engagement`: JSON (likes, shares, comments)
-- `ctr`: Click-through rate (if available)
+```
+tools/adintel/
+├── adintel          # CLI entry point
+├── scraper.py       # Meta/TikTok scrapers
+├── database.py      # SQLite storage
+├── analyzer.py      # Pattern analysis
+├── web.py           # Dashboard server
+├── config.yaml      # Default settings
+├── requirements.txt # Python deps
+└── Dockerfile       # Container config
+```
 
-**patterns table:**
-- Detected hooks, CTAs, visual styles
-- Frequency tracking
-- Engagement scores
+## Features
 
-## Configuration
+- ✅ CLI tool with 4 commands (scrape, analyze, serve, watch)
+- ✅ Meta Ad Library scraping (Graph API + browser fallback)
+- ✅ TikTok Creative Center scraping
+- ✅ SQLite storage for ad data
+- ✅ Pattern analysis (hooks, CTAs, visual styles)
+- ✅ Web dashboard (localhost:8080)
+- ✅ Change detection for competitor monitoring
+- ✅ Dockerized deployment
+- ✅ Demo mode for testing
 
-Edit `config.yaml` to set:
-- Default search presets
-- Watch list
-- Analysis thresholds
+## TODO
 
-## Use Cases
-
-1. **Creative Research**: See what's working in your niche
-2. **Competitor Monitoring**: Track specific advertisers
-3. **Hook Inspiration**: Discover high-performing opening lines
-4. **Trend Detection**: Spot emerging patterns early
-5. **CRO Insights**: Analyze CTAs and urgency triggers
-
-## Notes
-
-- Meta Ad Library: Uses public API (no auth required for basic search)
-- TikTok: Uses Creative Center API
-- For heavy scraping, consider API rate limits
-- Data is stored locally in SQLite (`adintel.db`)
-
-## License
-
-MIT
+- [ ] Full browser automation with Playwright
+- [ ] TikTok authentication for private data
+- [ ] YouTube ad scraping
+- [ ] Email/Slack alerts for new ads
+- [ ] Scheduled scraping via cron

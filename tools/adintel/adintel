@@ -48,6 +48,8 @@ Examples:
                                help="Country code (default: US)")
     scrape_parser.add_argument("--output", choices=["json", "md", "sqlite"], 
                                default="sqlite", help="Output format")
+    scrape_parser.add_argument("--demo", action="store_true",
+                               help="Use demo data (no API calls)")
     
     # Analyze command
     analyze_parser = subparsers.add_parser("analyze", help="Analyze stored ads for patterns")
@@ -88,7 +90,10 @@ Examples:
 
 def handle_scrape(args, db):
     """Handle scrape command"""
-    print(f"🔍 Scraping {args.platform} for '{args.search}'...")
+    if args.demo:
+        print(f"🔍 Generating demo data for '{args.search}'...")
+    else:
+        print(f"🔍 Scraping {args.platform} for '{args.search}'...")
     
     results = []
     
@@ -98,7 +103,8 @@ def handle_scrape(args, db):
             query=args.search,
             days_back=args.days,
             limit=args.limit,
-            country=args.country
+            country=args.country,
+            demo=args.demo
         )
         results.extend(meta_ads)
         print(f"  ✓ Found {len(meta_ads)} ads on Meta")

@@ -2,20 +2,20 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
+# Install Playwright dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install Playwright browsers
+RUN playwright install chromium
+
 COPY . .
-
-RUN chmod +x adintel
-
-ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8080
 
-ENTRYPOINT ["python3", "adintel"]
-CMD ["--help"]
+CMD ["python3", "adintel", "serve", "--host", "0.0.0.0"]
