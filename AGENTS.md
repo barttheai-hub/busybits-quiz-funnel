@@ -23,7 +23,7 @@ You wake up fresh each session. These files are your continuity:
   - **Current logs go here:** Always write new daily logs to `memory/YYYY-MM-DD.md` (root of memory folder)
   - **Archived logs:** Older logs are moved to `memory/archive/daily-logs/YYYY-MM-DD.md`
 - **Long-term:** `MEMORY.md` — your curated memories, like a human's long-term memory
-- **Search protocol:** See `CLAUDE.md` for how to search daily logs semantically via vector search
+- **Search protocol:** See `SOUL.md` "Memory Search Protocol" section for how to search daily logs semantically via vector search
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
