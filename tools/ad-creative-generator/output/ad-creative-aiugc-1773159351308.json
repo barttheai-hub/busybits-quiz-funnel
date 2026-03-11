@@ -1,0 +1,32 @@
+{
+  "product": "aiugc",
+  "angle": "solution-aware",
+  "generatedAt": "2026-03-10T16:15:51.307Z",
+  "headlines": [
+    "Build once. Generate forever.",
+    "The n8n workflow that replaced my agency",
+    "From script to screen in minutes",
+    "My AI character generates 6-figure ads",
+    "AI UGC > Real UGC? (Watch this)"
+  ],
+  "bodyCopies": [
+    {
+      "type": "short",
+      "text": "I packaged my entire AI workflow into a Resource Pack. Prompts, scripts, automation blueprint—all for $7. Less than a coffee."
+    },
+    {
+      "type": "medium",
+      "text": "I'm giving away the exact SOPs, prompts, and automation logic I use to generate 50+ ad variations weekly. Total cost? ~$17/mo. Time to ship? Minutes. Grab the AI UGC Resource Pack for just $7."
+    },
+    {
+      "type": "long",
+      "text": "I packaged my entire AI workflow into a simple Resource Pack. You get: The \"Research Agent\" Prompt (for viral hooks), The Direct Response Script Template, The Visual Consistency Guide (keep actors looking the same), and my n8n Automation Blueprint. It's not a course. It's a toolkit. And it's $7. If it doesn't save you 10+ hours this week, I'll refund you."
+    }
+  ],
+  "ctas": [
+    "Grab It Before Price Goes Up →",
+    "Get the $7 Pack →",
+    "Steal My Workflow →"
+  ],
+  "complianceViolations": []
+}

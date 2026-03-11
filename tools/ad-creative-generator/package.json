@@ -1,0 +1,13 @@
+{
+  "name": "meta-ads-creative-generator",
+  "version": "1.0.0",
+  "description": "Generate Meta ad creative variations with compliance checking",
+  "main": "bin/generate.js",
+  "scripts": {
+    "generate": "node bin/generate.js",
+    "test": "node test/test.js"
+  },
+  "keywords": ["meta", "ads", "facebook", "creative", "compliance"],
+  "author": "Ziga's Agent",
+  "license": "MIT"
+}

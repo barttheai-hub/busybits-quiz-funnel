@@ -1,0 +1,130 @@
+{
+  "sponsors": [
+    {
+      "id": "eight-sleep",
+      "name": "Eight Sleep",
+      "category": "Health Tech",
+      "tier": 1,
+      "contacts": [
+        {
+          "name": "Matteo Franceschetti",
+          "role": "CEO/Marketing",
+          "email": "press@eightsleep.com",
+          "verified": true
+        }
+      ],
+      "status": "Prospect",
+      "lastContact": null,
+      "nextFollowUp": null,
+      "touchCount": 0,
+      "notes": "Pod product - high-ROI sleep hardware. Super-user angle available.",
+      "template": "super-user",
+      "personalization": {
+        "product": "Pod",
+        "hook": "8 hours in 6 - buy back time through sleep efficiency"
+      }
+    },
+    {
+      "id": "oura-ring",
+      "name": "Oura Ring",
+      "category": "Health Tech",
+      "tier": 1,
+      "contacts": [
+        {
+          "name": "Tom Hale",
+          "role": "Partnership Lead",
+          "email": "press@ouraring.com",
+          "verified": true
+        }
+      ],
+      "status": "Prospect",
+      "lastContact": null,
+      "nextFollowUp": null,
+      "touchCount": 0,
+      "notes": "Readiness Score, sleep tracking. Data-driven energy management angle.",
+      "template": "super-user",
+      "personalization": {
+        "product": "Oura Ring",
+        "hook": "Data-Driven Energy Management - check readiness before email"
+      }
+    },
+    {
+      "id": "whoop",
+      "name": "Whoop",
+      "category": "Health Tech",
+      "tier": 1,
+      "contacts": [
+        {
+          "name": "Will Ahmed",
+          "role": "Marketing",
+          "email": "press@whoop.com",
+          "verified": false
+        }
+      ],
+      "status": "Prospect",
+      "lastContact": null,
+      "nextFollowUp": null,
+      "touchCount": 0,
+      "notes": "Strain vs Recovery. Burnout prevention angle. 4.0 hardware.",
+      "template": "competitor",
+      "personalization": {
+        "product": "Whoop 4.0",
+        "hook": "Burnout Prevention System for entrepreneurs"
+      }
+    },
+    {
+      "id": "levels",
+      "name": "Levels",
+      "category": "Health Tech",
+      "tier": 1,
+      "contacts": [
+        {
+          "name": "Sam Corcos",
+          "role": "Growth",
+          "email": "press@levelshealth.com",
+          "verified": false
+        }
+      ],
+      "status": "Prospect",
+      "lastContact": null,
+      "nextFollowUp": null,
+      "touchCount": 0,
+      "notes": "CGM, glucose visibility. Metabolic focus angle. Biology vs willpower.",
+      "template": "super-user",
+      "personalization": {
+        "product": "Levels",
+        "hook": "Metabolic Focus - make invisible problems visible"
+      }
+    },
+    {
+      "id": "apollo-neuro",
+      "name": "Apollo Neuro",
+      "category": "Health Tech",
+      "tier": 1,
+      "contacts": [
+        {
+          "name": "Kathryn Fantauzzi",
+          "role": "Partnerships",
+          "email": "press@apolloneuro.com",
+          "verified": false
+        }
+      ],
+      "status": "Prospect",
+      "lastContact": null,
+      "nextFollowUp": null,
+      "touchCount": 0,
+      "notes": "HRV training, Focus/Relax modes. Stress Switch for entrepreneurs.",
+      "template": "super-user",
+      "personalization": {
+        "product": "Apollo",
+        "hook": "Stress Switch for entrepreneurs - changes state, not just tracks"
+      }
+    }
+  ],
+  "metadata": {
+    "importedFrom": "tmp/busybits_send_kit.md",
+    "importDate": "2026-03-10",
+    "totalProspects": 5,
+    "version": "1.0"
+  }
+}

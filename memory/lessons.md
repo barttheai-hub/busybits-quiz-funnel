@@ -1,5 +1,10 @@
 # Lessons Learned
 
+## 2026-03-10: Meta Ads Creative Generator - Compliance-First Design
+- **Pattern:** Build compliance checking directly into the creative generation workflow, not as an afterthought.
+- **Why:** Health/fitness claims on Meta are high-risk for bans. Automated flagging at generation time prevents costly mistakes before they reach the platform. Red flag word lists should be paired with safe alternatives for instant fixing.
+- **Decision:** Use structured JSON output with compliance metadata for programmatic review; CLI formatting for human readability.
+
 ## 2026-03-01: AdIntel Dashboard - CLI Tool Architecture
 - **Pattern:** Build CLI tools as modular components (scraper.py, database.py, analyzer.py, web.py) + thin CLI wrapper (adintel).
 - **Why:** Enables testing individual components without the full stack. Demo mode (mock data) allows development without API keys/rate limits.

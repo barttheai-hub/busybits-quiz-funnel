@@ -1,0 +1,9 @@
+{
+  "name": "email-sequence-generator",
+  "version": "1.0.0",
+  "description": "Generate email sequences for BusyBits newsletter",
+  "main": "bin/generate.js",
+  "scripts": {
+    "test": "node test/test.js"
+  }
+}
